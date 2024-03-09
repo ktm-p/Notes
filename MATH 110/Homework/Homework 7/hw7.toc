@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Intersections and Annihilators}{3}{section.1}%
+\contentsline {section}{\numberline {2}Null and Range}{5}{section.2}%
+\contentsline {section}{\numberline {3}Primer on Lagrange Interpolation}{7}{section.3}%
+\contentsline {section}{\numberline {4}Lagrange Interpolation}{8}{section.4}%
+\contentsline {section}{\numberline {5}Roots}{9}{section.5}%

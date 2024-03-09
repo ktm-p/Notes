@@ -1,0 +1,734 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Homework 8}{Fall 2023}
+	
+	\section{Conjugates}
+	\begin{hw}
+		Let $p \in \mathscr{P}(\CC)$. Define $q : \CC \rightarrow \CC$ by the formula
+		\begin{equation*}
+			q(z) \coloneq p(z)\overline{p(\overline{z})}.
+		\end{equation*}
+	
+		Prove that $q \in \mathscr{P}(\RR)$. If $\deg p = n$, then what is $\deg q$? Explain.
+	\end{hw}
+	\begin{solution}
+		\begin{comment}
+			Let us first suppose that $p$ is a constant polynomial.
+		
+		Now, we observe that for $p(z) \in \CC$, we can rewrite it as the following:
+		\begin{equation*}
+			p(z) = c(z-\lambda_{1})\cdots(z- \lambda_n), 
+		\end{equation*}
+		where $c, \lambda_0, \ldots, \lambda_n \in \CC$.
+		
+		Now, we observe the following:
+		\begin{align*}
+			p(\overline{z}) &= c(\overline{z}-\lambda_{1})\cdots(\overline{z}- \lambda_n) \\
+			\overline{p(\overline{z})} &= \overline{c(\overline{z}-\lambda_{1})\cdots(\overline{z}- \lambda_n)} \\
+			&= \overline{c}\overline{(\overline{z} - \lambda_1)}\cdots\overline{(\overline z - \lambda_n)} \\
+			&= \overline{c}(z-\overline{\lambda_1})\cdots(z - \overline{\lambda_n})
+		\end{align*}
+	
+		Then, from here, we observe that:
+		\begin{align*}
+			p(z)\overline{p(\overline{z})}
+			&= \left[ c(z-\lambda_{1})\cdots(z- \lambda_n) \right]\left[ \overline{c}(z-\overline{\lambda_1})\cdots(z - \overline{\lambda_n})  \right] \\
+			&= c\overline{c}(z-\lambda_1)(z-\overline{\lambda_1})\cdots(z-\lambda_n)(z-\overline{\lambda_{n}}) \\
+			&= \lvert c \rvert^{2}(z-\lambda_1)(z-\overline{\lambda_1})\cdots(z-\lambda_n)(z-\overline{\lambda_n})
+		\end{align*}
+	
+		Then, we note that $\lvert c \rvert^2 \in \RR$. Furthermore, we observe that for each $\lambda_i$ which is a root of $p(z)\overline{p(\overline{z})}$, its conjugate $\overline{\lambda_i}$ is also a root. Then, there are two cases.
+		
+		First, if $\lambda_i = \overline{\lambda_i}$, then we see that, in fact, $\lambda_i \in \RR$ and we can combine the terms together to get $(z-\lambda_i)^{2}$.
+		
+		Meanwhile, if $\lambda_i\neq\overline{\lambda_i}$, then we see that these pairs of roots are the roots of some quadratic $z^{2} + b_{i}z + c_{i}$, where $b_{i}, c_{i} \in \RR$ and $b_{i}^{2} < 4c_{i}$.
+		
+		Then, we can rewrite our polynomial $q(z) = p(z)\overline{p(\overline{z})}$ to be as such:
+		\begin{equation*}
+			q(z) = \lvert c \rvert^{2}(z-\lambda_1)^{2}\cdots(z-\lambda_m)^{2}(z^{2}+b_{m+1}z+c_{m+1})\cdots(z^{2}+b_{n}z+c_{n}).
+		\end{equation*}
+	
+		And we observe that since $c, \lambda_1, \ldots, \lambda_m, b_{m+1}, c_{m+1}, \ldots, b_{n}, c_{n} \in \RR$, it follows then that $q(z) \in \mathscr{P}(\RR)$ as desired.
+		
+		In the case where $p$ is a constant polynomial, we observe that regardless of where we evaluate $p$ at, it's always going to be some constant $c \in \CC$.
+		
+		Then, we note that for $p(z) = c$, for $c \in \CC$, we have:
+		\begin{align*}
+			p(\overline{z}) &= c \\
+			\overline{p(\overline{z})} &= \overline{c}
+		\end{align*}
+	
+		So, $p(z)\overline{p(\overline{z})} = c\overline{c} = \lvert c \rvert^{2}$, which is in $\RR$. So, $q(z) \in \mathscr{P}(\RR)$ as desired.
+		\end{comment}
+		To begin with, we observe that we can rewrite any $p \in \mathscr{P}(\CC)$ by splitting it into a real and imaginary part as follows:
+		\begin{align*}
+			p(z) &= c_{0} + c_{1}z + \ldots + c_{n}z^{n} \\
+			&= (a_{0} + b_{0}i) + (a_{1} + b_{1}i)z + \ldots + (a_{n} + b_{n}i)z^{n} \\
+			&= (a_{0} + a_{1}z + \ldots + a_{n}z^{n}) + (b_{0}i + b_{1}i z + \ldots + b_{n}i z^{n})  \\
+			&= (a_{0} + a_{1}z + \ldots + a_{n}z^{n}) + i(b_{0} + b_{1}z + \ldots + b_{n}z^{n}) \\
+			&= p_{a}(z) + ip_{b}(z),
+		\end{align*}
+		where each $c_{i} \in \CC$, but $a_{i}, b_{i} \in \RR$.
+	
+		Now, with this in mind, we observe the following:
+		\begin{align*}
+			p(\overline{z}) &= p_{a}(\overline{z}) + ip_{b}(\overline{z}) \\
+			&= (a_{0} + a_{1}\overline{z} + \ldots + a_{n}\overline{z}^{n}) + i(b_{0} + b_{1}\overline{z} + \ldots + b_{n}\overline{z}^{n}) \\
+			\overline{p(\overline{z})} &= \overline{(a_{0} + a_{1}\overline{z} + \ldots + a_{n}\overline{z}^{n}) + i(b_{0} + b_{1}\overline{z} + \ldots + b_{n}\overline{z}^{n})} \\
+			&= \overline{(a_{0} + a_{1}\overline{z} + \ldots + a_{n}\overline{z}^{n})} -i\overline{(b_{0} + b_{1}\overline{z} + \ldots + b_{n}\overline{z}^{n})} \\
+			&= (\overline{a_{0}} + \overline{a_{1}\overline{z}} + \ldots + \overline{a_{n} \overline{z}^{n}}) - i(\overline{b_{0}} + \overline{b_{1}\overline{z}} + \ldots + \overline{b_{n} \overline{z}^{n}}) \\
+			&= (a_{0} + a_{1}z + \ldots + a_{n}z^{n}) - i(b_{0} + b_{1}z + \ldots + b_{n}z^{n}) \\
+			&= p_{a}(z) - ip_{b}(z)
+		\end{align*}
+		
+		This means then that we get the following:
+		\begin{align*}
+			q(z) &= p(z) \overline{p(\overline{z})} \\
+			&= (p_{a}(z) + ip_{b}(z))(p_{a}(z) - ip_{b}(z)) \\
+			&= (p_{a}(z))^{2} + (p_{b}(z))^{2}
+		\end{align*}
+	
+		We note that since $p_{a}$ and $p_{b}$ consists of only real coefficients, it follows then that we can conclude that $q(z) \in \mathscr{P}(\RR)$.
+		
+		Now, from this, we observe that if $\deg p = n$, then we see that $\deg q = 2n$.
+	\end{solution}
+
+	\newpage
+	
+	\section{Invariant Subspaces}
+	\begin{hw}
+		Let $V = \mathscr{P}_{3}(\RR)$ and let $D$ denote the differentiation operator on $V$. Determine, with proof, all subspaces of $V$ invariant under the action of $D$.
+	\end{hw}
+	\begin{solution}
+		To begin with, we note that the zero vector space $\left\{  0\right\}$ is invariant under $D$. To prove this claim, we note that if $u \in \left\{  0 \right\}$, then $u = 0$.
+		\begin{align*}
+			D(u) = 0 \in \left\{  0\right\}.
+		\end{align*}
+	
+		So, $\left\{   0\right\}$ is indeed invariant under $D$.
+	
+		From here, we claim that any invariant subspace $U$ of $V$ under $D$, other than $\left\{  0\right\}$, must be $P_{k}(\RR)$ for $k = 0, 1, 2, 3$. 
+		
+		To show this claim, let us suppose that we have a subspace $U$ of $V$ which is invariant under $D$. Furthermore, let the highest degree of any polynomial $p \in U$ be $n$, where $n \geq 0$.
+		
+		\begin{comment}
+			We will now break this into two cases.
+		
+		First, consider when $n = 0$. We note then that $U$ contains some $cx^{0} = c$, which is a constant. Note then that by the maximality of $n$, we know that there can't be any polynomial whose highest degree is greater than 0. Now, we observe that for any $c \in U$, $Dc = 0$. And we know that since $U$ is a subspace, it must contain the zero vector. So, $D(U) \subseteq U$. Additionally, since $U$ is a subspace and thus is closed under scalar multiplication, then $U = \vspan\left\{  c \right\} = \vspan\left\{  1 \right\}$. However, this is in fact $\mathscr{P}_{0}(\RR)$. So, we see that $\mathscr{P}_{0}(\RR)$ is invariant under $D$. 
+		\end{comment}
+		
+		\begin{comment}
+			Now, suppose that $n > 0$. Since $n$ is the highest degree of any polynomial $p \in U$, it follows that $x^{n} \in U$. Now, suppose for the sake of contradiction that $U$ does not contain at least one of $x^{n-1}, x^{n-2}, \ldots, x^{0}$. However, we note then that this implies that there exists a degree $0 < m \leq n$ such that while $x^{m} \in U$, $x^{m-1} \not\in U$. But, if this is the case, then we observe that $D(x^{m}) = mx^{m-1}$. Thus, $D(x^{m}) \not\in U$, which is a contradiction as we claimed earlier that $U$ must be invariant under $D$.
+			
+			Now, suppose that $n \geq 0$. Then, there exists some polynomial $p \in U$ whose greatest degree is $n$.
+		\end{comment}
+		Now, we note that since $U$ is invariant under $D$, it follows then that $Dp \in U$. However, observe that since $p$ is of degree $n$, then $Dp$ must be of degree $n-1$. And since $Dp \in U$, then we note that $D^{2}p = D(Dp) \in U$ as well, which has degree of $n-2$. And we can keep on iterating this $n$ times, yielding us the list:
+		\begin{equation*}
+			p, Dp, D^{2}p, \ldots, D^{n}p.
+		\end{equation*}
+	
+		We note from here that since each $p, Dp, \ldots, D^{n}p$ are polynomials of different degrees $n, n-1, \ldots, 0$ respectively, it follows that they are linearly independent. Furthermore, since there are $n + 1$ of these linearly independent polynomials, they in fact span -- and are a basis of -- $\mathscr{P}_{n}(\RR)$. Then, we note that for any $p \in \mathscr{P}_{n}(\RR)$, $p \in U$ as well. So, we have $\mathscr{P}_{n}(\RR) \subseteq U$.
+		
+		Now, to show the other inclusion, let us suppose that we have some $p \not\in \mathscr{P}_{n}(\RR)$. This means then that $\deg p \geq n + 1$. However, by the maximality of $n$, we can't have any polynomial of degree greater than $n$ in $U$; in other words, any $p \in U$ must also be in $\mathscr{P}_{n}(\RR)$. So, we observe that $U \subseteq \mathscr{P}_{n}(\RR)$.
+		
+		Thus, we can conclude that, indeed, $U = \mathscr{P}_{n}(\RR)$.
+		
+		Therefore, we can conclude then that the remaining invariant subspaces of $V = \mathscr{P}_{3}(\RR)$ under $D$ must be:
+		\begin{enumerate}
+			\item $\mathscr{P}_{0}(\RR)$,
+			\item $\mathscr{P}_{1}(\RR)$,
+			\item $\mathscr P_{2}(\RR)$,
+			\item $\mathscr{P}_{3}(\RR)$.
+		\end{enumerate}
+		
+	\end{solution}
+
+	\newpage
+	
+	\section{Limits? In an Algebra Class??}
+	\begin{hw}
+		Suppose $V$ is a finite-dimensional complex vector space and $T \in \mathcal L(V)$ satisfies the condition: For any $\varphi \in V'$, and any $v \in V$, $\lim\limits_{n \rightarrow \infty} \varphi(T^{n}v) = 0$. What does this imply about the eigenvalues of $T$? 
+	\end{hw}
+	\begin{solution}
+		\begin{comment}
+			We observe that since, for any $\varphi \in V'$ and $v \in V$, we have $\lim\limits_{n \rightarrow \infty} \varphi(T^{n} v) = 0$, this means that even when $\varphi \neq 0$, it still maps $T^{n}v$ to $0$, for all $v \in V$.
+		
+		Then, it must be that for $\lim\limits_{n\rightarrow\infty} \varphi(T^{n}v) = 0$, we must have
+		\begin{equation*}
+			\lim\limits_{n \rightarrow\infty} T^{n}v = 0,
+		\end{equation*}
+		as $\varphi(0) = 0$ for all $\varphi$.
+		\end{comment}
+		To begin with, we claim that the following is true:
+		\begin{lem}
+			If for any $\varphi \in V'$ and $v \in V$, $\lim\limits_{n \rightarrow \infty} \varphi (T^{n} v) = 0$, then it follows that $\lim\limits_{n \rightarrow \infty} T^{n}v = 0$.
+		\end{lem}
+		\begin{innerproof}
+			\begin{comment}
+				Since $V$ is a finite-dimensional vector space, then let us choose some basis $v_{1}, \ldots, v_{n}$ for $V$. Furthermore, let us denote $\varphi_1, \ldots, \varphi_{n}$ be the dual basis of $v_{1}, \ldots, v_{n}$.
+			
+			Now, let us denote $T^{n}v$ by the following vector:
+			\begin{equation*}
+				T^{n}v =
+				\begin{bmatrix}
+					a_{1} \\ a_{2} \\ \vdots \\ a_{n}
+				\end{bmatrix}
+			\end{equation*}
+		
+			Now, we note that for any $v \in V$, we can rewrite it as a linear combination of our basis vectors: $v = a_{1}v_{1} + \ldots + a_{n}v_{n}$.
+			\end{comment}
+			Let us suppose for the sake of contradiction that $\lim\limits_{n \rightarrow \infty} T^{n}v \neq 0$. Now, we note that since $V$ is a finite-dimensional vector space, we can let $v_{1}, \ldots, v_{n}$ be a basis for $V$. Furthermore, let $\varphi_1, \ldots, \varphi_n$ be the dual basis of $v_{1}, \ldots, v_{n}$.
+			
+			Now, we note that we can rewrite $T^{n}v$ as a vector as such:
+			\begin{equation*}
+				T^{n}v =
+				\begin{bmatrix}
+					a_{1} \\ \vdots \\ a_{n}
+				\end{bmatrix}
+			\end{equation*}
+		
+			Now, since we claim that $T^{n}v \neq 0$, then we know that at least one of $a_{1}, \ldots, a_{n} \neq 0$. Denote this non-zero entry as $a_{i}$. Then, we can pick a $\varphi_i$ that returns this $a_{i}$. However, this contradicts with our assumption that $\lim\limits_{n \rightarrow \infty} \varphi (T^{n}v) = 0$ for all $\varphi \in V'$ and $v \in V$.
+			
+			Thus, we can conclude that, in fact, we have $\lim\limits_{n \rightarrow \infty} T^{n}v = 0$.
+		\end{innerproof}
+		
+		Now, we note that since $V$ is some finite-dimensional vector space over $\CC$, it follows then that we can always find at least one eigenvalue-eigenvector pair for $V$. We note then that for each eigenvalue-eigenvector pair, we have the following:
+		\begin{equation*}
+			Tv = \lambda v.
+		\end{equation*}
+	
+		From here, let us introduce the following lemma:
+		\begin{lem}
+			Suppose $V$ is a finite-dimensional complex vector space, and let $T \in \mathcal L(V)$. Now, for an eigenvalue $\lambda$ and eigenvector $v$, we have:
+			\begin{equation*}
+				T^{n}v = \lambda^{n}v.
+			\end{equation*}
+		\end{lem}
+		\begin{innerproof}
+			We will prove this by induction.
+			
+			\textbf{\underline{Base Case}}: Suppose that $n = 1$. Then, by definition, we observe that $Tv = \lambda v$.
+			
+			\textbf{\underline{Induction Hypothesis}}: Suppose that our claim holds for $n = k$, for $1 \leq k$. That is, $T^{n}v = \lambda^{n}v$.
+			
+			\textbf{\underline{Inductive Step}}: Now, we observe that for $T^{n+1}v$, we have the following:
+			\begin{align*}
+				T^{n+1}v &= T(T^{n}v) \\
+				&= T(\lambda^{n} v) \\
+				&= \lambda^{n}T(v) \\
+				&= \lambda^{n}(\lambda v) \\
+				&= \lambda^{n+1}v.
+			\end{align*}
+		\end{innerproof}
+	
+		Then, we note that for each eigenvalue-eigenvector pair, we have the following:
+		\begin{align*}
+			\lim\limits_{n \rightarrow \infty} T^{n}v &= \lim\limits_{n \rightarrow \infty} \lambda^{n}v \\
+			&= 0
+		\end{align*}
+	
+		From here, we note that since $v$ is an eigenvector, it follows that $v \neq 0$. Then, we note then that since $\lambda$ is some scalar in $\CC$, for $\lim\limits_{n \rightarrow \infty} \lambda^{n} v$ to be true, it must follow then that $\lvert \lambda \rvert < 1$.
+	\end{solution}
+
+	\newpage
+	 
+	\section{Commutativity?}
+	\begin{hw}
+		Suppose that $V$ is finite-dimensional, $T \in \mathcal L(V)$ has $\dim V $ distinct eigenvalues, and let $S \in \mathcal L(V)$ having the same eigenvectors (but not necessarily the same eigenvalues) as $T$.
+		
+		Prove that $TS = ST$.
+	\end{hw}
+	\begin{solution}
+		Let $n = \dim V$.
+				
+		Now, to begin with, we note that since $T$ has $\dim V$ distinct eigenvalues, then the list of $\dim V$ eigenvectors $v_{1}, \ldots, v_{n}$ of $T$ corresponding to these distinct eigenvalues will be linearly independent. Furthermore, we note that since $v_{1}, \ldots, v_{n}$ are linearly independent and there are $n$ vectors, they in fact span $V$ and are a basis of $V$.
+		
+		Then, we note that any vector $v \in V$ can be expressed as a (unique) linear combination of $v_{1}, \ldots, v_{n}$. In particular, we can rewrite $v$ as:
+		\begin{equation*}
+			v = a_{1}v_{1} + \ldots + a_{n}v_{n}.
+		\end{equation*}
+	
+		Now, we note that $S,T$ have the same eigenvectors. Then, let us denote $Tv_{i} = \mu_{i} v_{i}$, and $Sv_{i} = \lambda_i v_{i}$. Then, we observe the following:
+		\begin{align*}
+			TS(v) &= TS(a_{1}v_{1} + \ldots + a_{n}v_{n}) \\
+			&= TS(a_{1}v_{1}) + \ldots + TS(a_{n}v_{n}) \\
+			&= a_{1}T(S(v_{1})) + \ldots + a_{n}T(S(v_{n})) \\
+			&= a_{1}T(\lambda_1(v_{1})) + \ldots + a_{n}T(\lambda_n(v_{n})) \\
+			&= a_{1}\lambda_1 T(v_{1}) + \ldots + a_{n}\lambda_n T(v_{n}) \\
+			&= a_{1}\lambda_1\mu_1v_{1} + \ldots + a_{n}\lambda_n \mu_n v_{n} \\
+			&= a_{1}\mu_1\lambda_1v_{1} + \ldots + a_{n}\mu_n \lambda_n v_{n} \\
+			&= a_{1}\mu_1S(v_{1}) + \ldots + a_{n}\mu_n S(v_{n}) \\
+			&= a_{1}S(\mu_1v_{1}) + \ldots + a_{n} S(\mu_n v_{n}) \\
+			&= a_{1}S(T(v_{1})) + \ldots + a_{n} S(T(v_{n})) \\
+			&= ST(a_{1}v_{1}) + \ldots + ST(a_{n}v_{n}) \\
+			&= ST(a_{1}v_{1} + \ldots + a_{n}v_{n}) \\
+			&= ST(v)
+		\end{align*}
+	
+		Thus, we have that $TS(v) = ST(v)$ for all $v \in V$. In other words, $TS = ST$, as desired.
+	\end{solution}
+
+	\begin{hw}
+		Give an example of such opeartors $T, S$ on $\RR^{2}$, neither of which is a multiple of the identity operator.
+	\end{hw}
+	\begin{solution}
+		We define $S,T$ to have the following matrix representations:
+		\begin{equation*}
+			\mathcal M(T) = \begin{bmatrix}
+				1 & 2 \\ 0 & 2
+			\end{bmatrix}, \quad \mathcal{M}(S) = \begin{bmatrix}
+			1 & -1 \\ 0 & \frac{1}{2}
+		\end{bmatrix}
+		\end{equation*}
+	
+		Now, we observe that the eigenvalues of $T$ are $2$ and $1$ by construction. Furthermore, we see that the eigenvectors are $(2,1)$ and $(1,0)$:
+		\begin{align*}
+			\begin{bmatrix}
+				1 & 2 \\ 0 & 2 
+			\end{bmatrix}
+			\begin{bmatrix}
+				2 \\ 1
+			\end{bmatrix} &= \begin{bmatrix}
+			4 \\ 2
+		\end{bmatrix} \\
+	&= 2\begin{bmatrix}
+		2 \\ 1
+	\end{bmatrix} \\
+	\begin{bmatrix}
+	1 & 2 \\ 0 & 2 
+\end{bmatrix}
+\begin{bmatrix}
+	1 \\ 0
+\end{bmatrix} &= \begin{bmatrix}
+	1 \\ 0
+\end{bmatrix} \\
+&= 1\begin{bmatrix}
+	1 \\ 0
+\end{bmatrix}
+		\end{align*}
+	
+		Meanwhile, we note that for $S$, we eigenvalues are $1, \frac{1}{2}$, and the eigenvectors are $(1,0)$ and $(2,1)$:
+		\begin{align*}
+			\begin{bmatrix}
+				1 & -1\\0&\frac{1}{2}
+			\end{bmatrix}\begin{bmatrix}
+			1 \\ 0
+		\end{bmatrix} &= \begin{bmatrix}
+		1 \\ 0
+	\end{bmatrix} \\
+&= 1 \begin{bmatrix}
+	1 \\ 0
+\end{bmatrix} \\
+\begin{bmatrix}
+	1 & -1\\0&\frac{1}{2}
+\end{bmatrix}\begin{bmatrix}
+	2 \\ 1
+\end{bmatrix} &= \begin{bmatrix}
+	1 \\ \frac{1}{2}
+\end{bmatrix} \\
+&= \frac{1}{2} \begin{bmatrix}
+	2 \\ 1
+\end{bmatrix}
+		\end{align*}
+	
+	And from here, we note that we have:
+	\begin{align*}
+		TS &= \begin{bmatrix}
+			1 & 2 \\ 0 & 2 
+		\end{bmatrix} \begin{bmatrix}
+		1 & -1 \\ 0 & \frac{1}{2}
+	\end{bmatrix} \\
+&= \begin{bmatrix}
+	1 & 0 \\ 0 & 1
+\end{bmatrix} \\
+&= \begin{bmatrix}
+	1 & - 1 \\ 0 & \frac{1}{2} 
+\end{bmatrix}
+\begin{bmatrix}
+	1 & 2 \\ 0 & 2 
+\end{bmatrix} \\
+&= ST
+	\end{align*}
+	\end{solution}
+
+	\newpage
+	
+	\section{Polynomials}
+	\begin{hw}
+		Let $S,T \in \mathcal L(V)$ and suppose $S$ in invertible. Prove that, for any polynomial $p \in \mathscr P(\mathbb{F})$, we have:
+		\begin{equation*}
+			p(STS^{-1}) = Sp(T)S^{-1}.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		First, we note that for some $p \in \mathscr{P}(\mathbb{F})$, we note then that it must be of degree $n$. Then, $p$ is in fact in $\mathscr{P}_{n}(\mathbb{F})$. Let us define $p(x)$ to be
+		\begin{equation*}
+			p(x) = a_{0} + a_{1}x + \ldots + a_{n}x^{n}.
+		\end{equation*}
+	
+		Then, we observe the following:
+		\begin{equation*}
+			p(STS^{-1}) = a_{0}I + a_{1}STS^{-1} + a_{2}(STS^{-1})^{2} + \ldots + a_{n} (STS^{-1})^{n}.
+		\end{equation*}
+	
+		Now, we observe the following for some $(STS^{-1})^{n}$:
+		\begin{align*}
+			(STS^{-1})^{n} &= (STS^{-1})(STS^{1})\cdots(STS^{-1}) \tag{n times}\\
+			&= ST^{n}S^{-1}.
+		\end{align*}
+	
+		Now, it follows then that we in fact have:
+		\begin{align*}
+			p(STS^{-1}) &= a_{0}I + a_{1}STS^{-1} + a_{2}(STS^{-1})^{2} + \ldots + a_{n} (STS^{-1})^{n} \\
+			&= a_{0}I + a_{1} STS^{-1} + a_{2} ST^{2}S^{-1} + \ldots + a_{n}ST^{n}S^{-1}
+		\end{align*}
+	
+		From here, we note that $I = SIS^{-1}$. Furthermore, since $S, T \in \mathcal L (V)$, then $\lambda STS^{-1} = S\lambda TS^{-1}$, for some $\lambda \in \mathbb{F}$.
+		
+		Then, with this in mind, we see that
+		\begin{align*}
+			a_{0}I + a_{1} STS^{-1} + a_{2} ST^{2}S^{-1} + \ldots + a_{n}ST^{n}S^{-1} &= Sa_{0}IS^{-1} + Sa_{1}TS^{-1} + Sa_{2}T^{2}S^{-1} + \ldots + Sa_{n}T^{n}S^{-1} \\
+			&= S(a_{0}I + a_{1}T + \ldots + a_{n}T^{n})S^{-1} \\
+			&= Sp(T)S^{-1}.
+		\end{align*}
+	
+		Thus, we have that $p(STS^{-1}) = Sp(T)S^{-1}$.
+	\end{solution}
+
+	\begin{hw}
+		How are the subspaces of $V$ invariant under $T$ related to the subspaces invariant under $STS^{-1}$.
+	\end{hw}
+	\begin{solution}
+	\begin{comment}
+			Let us suppose that for some subspace $U \subseteq V$, it is invariant under $STS^{-1}$. We claim then that $U$ is invariant under $T$ if and only if $U$ is invariant under $S$ as well.
+		
+		We will proceed with the forward direction. Let us suppose that $U$ is invariant under $T$. Then, we observe that we have the following:
+		\begin{align*}
+			STS^{-1}(Su) &= STu
+		\end{align*}
+	
+		Then, we note that since $U$ is invariant under $T$, we have then that $Tu \in U$. Then, for $U$ to be invariant under $STS^{-1}$, we must have that $Su \in U$; in other words, $U$ is invariant under $S$.
+		
+		For the backwards direction, we will first introduce the following lemma:
+		\begin{lem}
+			For a finite-dimensional vector space $V$, let $S \in \mathcal L(V)$ be invertible. Then, for subspace $U$ which is invariant under $S$, $U$ is also invariant under $S^{-1}$
+		\end{lem}
+		\begin{innerproof}
+			We observe that if $U$ is invariant under $S$, then $S(U) \subseteq U$.
+			
+			Furthermore, we note that since $S$ is invertible, then $\dim S(U) = \dim U$; so, we can conclude that $S(U) = U$.
+			
+			From here, observe that for any $u \in U$, we can write it as $T(w)$ for some $w \in U$. Then, we observe that $T^{-1}(u) = w$. In other words, we note that for any $u \in U$, we have $T^{-1}(u) \in U$ as well. Thus, $U$ must then be invariant under $S^{-1}$ as well.
+		\end{innerproof}
+	
+		Now with this in mind, we observe that since $U$ is invariant (and invertible), it follows that $U$ is invariant under $S^{-1}$.
+		
+		Then, we observe that for some $u \in U$, we have:
+		\begin{equation*}
+			STS^{-1}u = STw,
+		\end{equation*}
+		where $w \in U$. Then, we note that for $U$ to be invariant under $STS^{-1}$, we must have that $Tw \in U$. And since $w$ is some vector in $U$ and $Tw \in U$ as well, we can conclude then that $U$ must also then be invariant under $T$ as well.
+	\end{comment}
+	We claim that there exists a bijection between the set of subspaces $U$ which is invariant under $T$ and subspaces $W$ which is invariant under $STS^{-1}$. 
+	
+	\begin{comment}
+		Before we proceed, we will introduce the following lemma:
+		\begin{lem}
+		For a finite-dimensional vector space $V$, let $S \in \mathcal L(V)$ be invertible. Then, for subspace $U$ which is invariant under $S$, $U$ is also invariant under $S^{-1}$
+	\end{lem}
+	\begin{innerproof}
+		We observe that if $U$ is invariant under $S$, then $S(U) \subseteq U$.
+		
+		Furthermore, we note that since $S$ is invertible, then $\dim S(U) = \dim U$; so, we can conclude that $S(U) = U$.
+		
+		From here, observe that for any $u \in U$, we can write it as $T(w)$ for some $w \in U$. Then, we observe that $T^{-1}(u) = w$. In other words, we note that for any $u \in U$, we have $T^{-1}(u) \in U$ as well. Thus, $U$ must then be invariant under $S^{-1}$ as well.
+	\end{innerproof}
+	\end{comment}
+	
+	Now, to begin with, we note by definition that if a subspace $U$ is invariant under $T$, then $T(U) \subseteq U$. Similarly, if a subspace $U$ is invariant under $STS^{-1}$, then $STS^{-1}(U) \subseteq U$.
+	
+	Now, we note that if we have a subspace $U$ which is invariant under $T$, then we have the following:
+	\begin{align*}
+		STS^{-1}(S(U)) &= ST(U) \\
+		S(T(U)) &\subseteq S(U) \\
+		STS^{-1}(S(U)) &\subseteq S(U)
+	\end{align*}
+	
+	This tells us that if we have a $T$-invariant subspace $U$, then $S(U)$ will be invariant under $STS^{-1}$.
+	
+	Now, we observe that for some subspace $W$ invariant under $STS^{-1}$, we have the following:
+	\begin{align*}
+		STS^{-1}(W) &\subseteq W \\
+		S^{-1}(STS^{-1}(W)) &\subseteq S^{-1}(W) \\
+		TS^{-1}(W) &\subseteq S^{-1}(W) \\
+		T(S^{-1}(W)) &\subseteq S^{-1}(W)
+	\end{align*}
+	
+	So, we note that for a subset $W$ to be invariant under $STS^{-1}$, it follows that $S^{-1}(W)$ must also be invariant under $T$.
+	
+	We observe then that since we have the following:
+	\begin{enumerate}
+		\item If $U$ is $T$-invariant, then $S(U)$ is $STS^{-1}$-invariant, and
+		\item If $W$ is $STS^{-1}$-invariant, then $S^{-1}(W)$ is $T$-invariant,
+	\end{enumerate}
+	then in fact, there exists a bijection between the set of all $T$-invariant subspaces $U$ and the set of all $STS^{-1}$-invariant subspaces $W$.
+	
+	More concretely, let $f$ be a function which maps from the set of all $T$-invariant subspaces to the set of all $STS^{-1}$-invariant subspaces. Then, let $U$ be a subspace which is $T$-invariant. We have then that
+	\begin{align*}
+		f : U \mapsto S(U).
+	\end{align*}
+	
+	% Show that subspaces of STS-1 and T are isomorphic. We can show that We can map U to W by S(U), and then show that S-1(W) = U.
+	\end{solution}
+	
+\end{document}

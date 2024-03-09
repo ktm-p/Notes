@@ -1,0 +1,1281 @@
+\documentclass[openany]{book}
+%%%%% PREAMBLE
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% basic %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% header/footer %
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+\setlength{\headheight}{15pt}
+\renewcommand{\chaptermark}[1]{\markright{#1}{}}
+\renewcommand{\sectionmark}[1]{}
+\fancypagestyle{contentpage}{%
+	\lhead{}
+	\rhead{\textit{\rightmark}}
+	\cfoot{\thepage}
+}
+\pagestyle{contentpage}
+
+% table of content %
+\makeatletter
+\newcommand\mytoc{%
+	\if@twocolumn
+	\@restonecoltrue\onecolumn
+	\else
+	\@restonecolfalse
+	\fi
+	\toctrue
+	\chapter*{\contentsname
+		\@mkboth{%
+			\contentsname}{\contentsname}}\addcontentsline{toc}{chapter}{Contents}%
+	\tocfalse
+	\@starttoc{toc}%
+	\if@restonecol\twocolumn\fi
+}
+\makeatother
+
+% chapter formatting %
+\newif\iftoc
+\titleformat
+{\chapter} % command
+[display] % shape
+{\cabin} % font
+{} % label
+{2in} % 
+{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Chapter}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}
+[
+\vspace{-20pt}%
+\rule{\textwidth}{0.1pt}
+\vspace{0.0in}
+]
+\titlespacing{\chapter}
+{0pt}
+{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}
+{0pt}
+
+% hyperlink formatting %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% purple box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% green box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% yellow box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% blue box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% red box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% purple boxes (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=chapter]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% green boxes (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% blue boxes (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=chapter]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% red boxes (remarks) %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+
+% yellow boxes (warnings) %
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%%%
+
+%%%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% linalg stuff %
+\newcommand{\Span}{\mathrm{Span}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+%%%%%
+%END_FOLD
+%%%%%
+
+
+\begin{document}
+	\mytitle{Linear Algebra Done Right 3e Exercises}{Fall 2023}
+	
+	\chapter{Vector Spaces}
+	\section{$ \RR^{n }$ and $\CC^{n}$}
+	\begin{hw}\label{Problem 1.1}
+		Suppose $a,b$ are real numbers, not both zero. Find real numbers $c,d$ such that 
+		\begin{equation*}
+			1/(a+bi) = c + di.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		To do this, we proceed as follows:
+		\begin{align*}
+			\dfrac{1}{a+bi} &= \dfrac{a-bi}{a^{2}-b^{2}} \\
+			\dfrac{a-bi}{a^{2} - b^{2}} &= c + di \\
+			\dfrac{a}{a^{2} - b^{2}} - \dfrac{b}{a^{2} - b^{2}}i &= c + di
+		\end{align*}
+	
+		Thus, we see that
+		\begin{align*}
+			c &= \dfrac{a}{a^{2} - b^{2}} \\
+			d &= -\dfrac{b}{a^{2} - b^{2}}
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}\label{Problem 1.2}
+		Show that
+		\begin{equation*}
+			\dfrac{-1 + \sqrt{3} i}{2}
+		\end{equation*}
+		is a cube root of 1.
+	\end{hw}
+	\begin{solution}
+		We proceed as follows:
+		\begin{align*}
+			\left( \dfrac{-1 + \sqrt 3 i}{2} \right)^{3} &= \left( \dfrac{-1 + \sqrt 3 i}{2} \right)^{2} \cdot \dfrac{-1+\sqrt 3 i}{2} \\
+			&= \dfrac{1 -2\sqrt 3 i - 3}{4} \cdot \dfrac{-1 + \sqrt 3 i}{2} \\
+			&= \dfrac{-2 -2\sqrt 3 i}{4} \cdot \dfrac{-1 + \sqrt 3 i}{2} \\
+			&= \dfrac{2 -2\sqrt 3i + 2\sqrt 3i + 6}{8} \\
+			&= \dfrac{8}{8} \\
+			&= 1
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		Show that for all $\alpha, \beta \in \CC$, we have:
+		\begin{equation*}
+			\alpha + \beta = \beta + \alpha
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We note that $\alpha = a + bi$ and $\beta = c + di$ for $a,b,c,d \in \RR$. So, we observe the following:
+		\begin{align*}
+			\alpha + \beta &= (a+bi) + (c+di) \\
+			&= (a+c) + (b+d)i \\
+			&= (c+a) + (d+b)i \\
+			&= (c+di) + (a+bi) \\
+			&= \beta + \alpha
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		Show that, for all $\alpha,\beta,\lambda \in \CC$, we have:
+		\begin{equation*}
+			(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda).
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We first observe that, by definition, we have for $a,b,c,d,e,f \in \RR$:
+		\begin{align*}
+			\alpha &= a + bi \\
+			\beta &= c + di \\
+			\lambda &= e + fi
+		\end{align*}
+	
+		Then, we observe the following:
+		\begin{align*}
+			(\alpha + \beta) + \lambda &= ( (a+bi) + (c + di)) + (e + fi) \\
+			&= ((a + c) + (b + d)i) + (e + fi) \\
+			&= (a+c+e) + (b+d+f)i \\
+			&= a + (c+e) + bi + (d + f)i \\
+			&= (a+bi) + ( (c+e) + (d + f)i) \\
+			&= (a + bi) + ( (c + di) + (e + fi)) \\
+			&= \alpha + (\beta + \lambda)
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		Show that $(\alpha\beta)\lambda = \alpha(\beta\lambda)$, for all $\alpha,\beta,\lambda \in \CC$.
+	\end{hw}
+	\begin{solution}
+		We observe the following:
+		\begin{align*}
+			(\alpha\beta) \lambda &= ( (a+bi)(c + di)) (e+fi) \\
+			&= ( ac + adi + cbi - bd)(e + fi) \\
+			&= ((ac - bd) + (ad + cb)i) (e + fi) \\
+			&= ( e(ac - bd) + e(ad + cb)i + f(ac - bd)i - f(ad + cb)) \\
+			&= eac - ebd + eadi + ecbi + faci - fbdi - fad - fcb \\
+			\\
+			\alpha(\beta\lambda) &- (a+bi) ((c + di)(e+fi)) \\
+			&= (a+bi)(ce + cfi + edi - df) \\
+			&= ace + acfi + aedi - adf + cebi - bcf - bed - bdfi \\
+			&= eac - ebd + eadi + ecbi + faci - fbdi - fad - fcb
+		\end{align*}
+	
+		Thus, we see that $(\alpha\beta)\lambda = \alpha(\beta\lambda)$.
+	\end{solution}
+
+	\begin{hw}
+		Show that for every $\alpha \in \CC$, there exists a unique $\beta \in \CC$ such that
+		\begin{equation*}
+			\alpha + \beta = 0.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We observe that if $\alpha + \beta = 0$, then we have
+		\begin{align*}
+			0 &= \alpha + \beta \\
+			&= (a+bi) + (c+di) \\
+			&= (a+c) + (b + d)i
+		\end{align*}
+		
+		So, we have $a + c = 0$ and $b + d = 0$. In other words, we have $c = -a$, and $d = -b$. We note here that this in fact implies uniqueness.
+		
+		So, if we let $\beta = -a - bi$, then
+		\begin{align*}
+			\alpha + \beta &= (a+bi) + (-a - bi) \\
+			&= (a-a) + (b - b)i \\
+			&= 0
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		Show that for every $\alpha \in \CC$, where $\alpha \neq 0$, there exists a unique $\beta \in \CC$ such that $\alpha\beta = 1$.
+	\end{hw}
+	\begin{solution}
+		First, we want to check for existence.
+		
+		We observe that if $\alpha\beta = 1$, then
+		\begin{align*}
+			1 &= \alpha\beta \\
+			&= (a+bi) \cdot (c + di)
+		\end{align*}
+	
+		Then, we want $c + di = \frac{1}{a+bi}$ for this to be true. We recall then, from \ref{Problem 1.1}, that we have:
+		\begin{equation*}
+			c + di = \frac{a}{a^{2} - b^{2}} - \frac{b}{a^{2} - b^{2}}i.
+		\end{equation*}
+	
+		From here, we will check for uniqueness. To do this, we proceed as such:
+		\begin{align*}
+			\beta &= 1 \cdot \beta \\
+			&= \left( \frac{1}{\alpha} \right)\alpha \cdot \beta \\
+			&= \left( \frac{1}{\alpha} \right)(\alpha \cdot \beta) \\
+			&= \dfrac{1}{\alpha} \cdot 1 \\
+			&= \frac{1}{\alpha} \\
+			&= \frac{1}{a + bi}
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		Show that $\lambda(\alpha + \beta) = \lambda\alpha + \lambda\beta$.
+	\end{hw}
+	\begin{solution}
+		We observe the following:
+		\begin{align*}
+			\lambda(\alpha + \beta) &= (e+fi)( (a+bi) + (c+di)) \\
+			&= (e+fi) ( (a+c) + (b+d)i ) \\
+			&= ea + ec + ebi + edi + fai + fci - fb - fd \\
+			&= (ea + ebi + fai - fb) + (ec + edi + fci - fd)
+		\end{align*}
+	
+		We observe next that
+		\begin{align*}
+			\lambda\alpha &= (e+fi)(a +bi) \\
+			&= ea + ebi + fai - fb \\
+			\lambda\beta &= (e+fi)(c+di) \\
+			&= ec + edi + fci - ed
+		\end{align*}
+	
+		Thus, we see that
+		\begin{align*}
+			(ea + ebi + fai - fb) + (ec + edi + fci - fd) &= \lambda\alpha + \lambda\beta.
+		\end{align*}
+	
+		Therefore, we have that $\lambda(\alpha + \beta) = \lambda\alpha + \lambda\beta$.
+	\end{solution}
+	
+	\begin{hw}
+		Show that $(x+y)+z = x+(y+z)$, for all $x,y,z \in \mathbb{F}^{n}$.
+	\end{hw}
+	\begin{solution}
+		Let $x = (x_{1}, \ldots, x_{n})$, $y = (y_{1}, \ldots, y_{n})$, and $z = (z_{1}, \ldots, z_{n})$. We observe the following:
+		\begin{align*}
+			(x+y) + z &= (x_{1} + y_{1}, \ldots, x_{n} + y_{n}) + (z_{1}, \ldots, z_{n}) \\
+			&= ( (x_{1} + y_{1}) + z_{1}, \ldots, (x_{n} + y_{n}) + z_{n} ) \\
+			&= ( x_{1} + (y_{1} + z_{1}), \ldots, x_{n} + (y_{n} + z_{n})) \\
+			&= (x_{1}, \ldots, x_{n}) + (y_{1} + z_{1}, \ldots, y_{n} + z_{n}) \\
+			&= x + (y+z)
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		Show that $(ab)x = a(bx)$ for $x \in \mathbb{F}^{n}$ and $a,b \in \mathbb{F}$.
+	\end{hw}
+	\begin{solution}
+		We observe the following:
+		\begin{align*}
+			(ab)x &= (ab)(x_{1}, \ldots, x_{n}) \\
+			&= ( (ab)x_{1}, \ldots, (ab) x_{n}) \\
+			&= ( a (bx_{1}), \ldots, a (bx_{n})) \\
+			&= a (bx_{1}, \ldots, bx_{n}) \\
+			&= a (bx)
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		Show that $1x = x$ for all $x \in \mathbb{F}^{n}$.
+	\end{hw}
+	\begin{solution}
+		We observe the following:
+		\begin{align*}
+			1x &= 1 \cdot (x_{1}, \ldots, x_{n}) \\
+			&= (1x_{1}, \ldots, 1x_{n}) \\
+			&= (x_{1}, \ldots, x_{n}) \\
+			&= x
+		\end{align*}
+	\end{solution}
+
+	\section{Definition of Vector Spaces}
+	\begin{hw}
+		Prove that $-(-v) = v$ for every $v \in V$.
+	\end{hw}
+	\begin{solution}
+		We observe that
+		\begin{align*}
+			(-(-v)) + (-v) &= 0
+		\end{align*}
+		
+		So, we see that $-v$ and $-(-v)$ are additive inverses. Now, we recall that each element $v \in V$ has a unique additive inverse.
+		
+		We note then that
+		\begin{equation*}
+			v + (-v) = 0
+		\end{equation*}
+	
+		So, we know that $v$ is also an additive inverse of $-v$. Thus, since additive inverses are unique, we can conclude that, in fact, we have
+		\begin{equation*}
+			(-(-v)) = v.
+		\end{equation*}
+	\end{solution}
+
+	\begin{hw}
+		Suppose that $a \in \mathbb{F}$, $v \in V$, and $av = 0$. Prove that $a = 0$ or $v = 0$.
+	\end{hw}
+	\begin{solution}
+		We shall proceed by cases.
+		
+		We observe that if $a = 0$, then we have that $av = 0$. Thus, we are done.
+		
+		On the other hand, if $a \neq 0$, then we observe the following:
+		\begin{align*}
+			v &= 1 \cdot v \\
+			&= (a^{-1}a)v \\ 
+			&= a^{-1}(av) \\
+			&= a^{-1}(0) \\
+			&= 0
+		\end{align*}
+	
+		Thus, we see that $v = 0$.
+	\end{solution}
+
+	\begin{hw}
+		Suppose $v, w \in V$. Explain why exists a unique $x \in V$ such that $v + 3x = w$.
+	\end{hw}
+	\begin{solution}
+		We begin by noting that if we have $v + 3x = w$, then we see the following:
+		\begin{align*}
+			3x = w - v \\
+			x = \frac{1}{3}(w-v)
+		\end{align*}
+	
+		So, let us set $x = \frac{1}{3}(w-v)$. We observe the following then:
+		\begin{align*}
+			v + 3(\frac{1}{3}(w-v)) &= v + (w-v) \\
+			&= v + w + (-v) \\
+			&= w
+		\end{align*}
+	
+		Now, we suppose that there exists some other $x'$ such that $v + 3x' = w$. Then, we observe the following:
+		\begin{align*}
+			(v + 3x) - (v - 3x') &= w - w \\
+			v - v + 3x - 3x' &= 0 \\
+			3(x-x') &= 0 \\
+			x-x' &= 0 \\
+			x &= x'
+		\end{align*}
+	
+		Thus, we see that it must be that $x = x'$.
+	\end{solution}
+
+	\begin{hw}
+		The empty set is not a vector space. Which requirement does it fail to satisfy?
+	\end{hw}
+	\begin{solution}
+		We observe that the empty set $\emptyset = \left\{  \right\}$ does not contain the element $0$; it does not have the additive inverse. This also means then that any vector space $V$ cannot be empty. 
+	\end{solution}
+
+	\begin{hw}
+		Show that the requirement of having an additive inverse for vector spaces can in fact be replaced by the following:
+		\begin{equation*}
+			0v = 0, \forall v \in V.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We essentially want to show that $v + (-v) = 0 \iff 0v = 0$.
+		
+		First, we shall proceed with the forward direction. Let us suppose that we have some element $v' = -v$ such that $v + (-v) = 0$.
+		
+		Now, we observe the following:
+		\begin{align*}
+			0v &= (0+0)v \\
+			&= 0v + 0v
+			0v + (-0v) &= 0v + 0v + (-0v) \\
+			0 &= 0v
+		\end{align*}
+	
+		Now, let us proceed with the backwards direction. Suppose that $0v = 0$. Then, we see the following:
+		\begin{align*}
+			v + (-v) &= (1+ (-1))v \\
+			&= 0v \\
+			&= 0
+		\end{align*}
+	
+		Thus, we see that $v + (-v) = 0$; we have an additive inverse. 
+	\end{solution}
+
+	\begin{hw}
+		Let $\infty$ and $-\infty$ denote two distinct objects, neither of which are in $\RR$. 
+		
+		We define addition and scalar multiplication on $\RR \cup \left\{  -\infty \right\} \cup \left\{  \infty \right\}$:
+		\begin{enumerate}
+			\item The sum and product of real numbers is as usual.
+			\item For $t \in \RR$, we define:
+			\begin{enumerate}
+				\item Multiplication as:
+				\begin{align*}
+					t (\infty) &= 
+					\begin{cases}
+						- \infty & t < 0 \\
+						0 & t = 0 \\
+						\infty & t > 0
+					\end{cases} \\
+					t (-\infty) &= 
+					\begin{cases}
+						\infty & t < 0 \\
+						0 & t = 0 \\
+						-\infty & t > 0
+					\end{cases}
+				\end{align*}
+			
+				\item Addition as:
+				\begin{align*}
+					t + \infty &= \infty + t \\
+					 &= \infty \\
+					 \infty + \infty &= \infty \\
+					 t + (-\infty) &= (-\infty) + t \\
+					 &= -\infty \\
+					 (-\infty) + (-\infty) &= -\infty \\
+					 \infty + (-\infty) &= 0
+				\end{align*}
+			\end{enumerate}
+		\end{enumerate}
+	
+		Is $\RR \cup \left\{  -\infty \right\} \cup \left\{  \infty \right\}$ a vector space over $\RR$?
+	\end{hw}
+	\begin{solution}
+		Suppose for the sake of contradiction that $\RR \cup \left\{  -\infty \right\} \cup \left\{  \infty \right\}$ is indeed a vector space over $\RR$. Then, we observe the following:
+		\begin{align*}
+			\infty &= (2 + (-1))\infty \\
+			&= 2\infty  + (- 1)\infty \\
+			&= \infty + (-\infty) \\
+			&= 0
+		\end{align*}
+	
+		We note that this means that we don't have a unique additive identity element, and thus $\RR \cup \left\{  -\infty \right\} \cup \left\{  \infty \right\}$ cannot be a vector space.
+	\end{solution}
+
+	\section{Subspaces}
+	For each of the following subsets of $\mathbb{F}^{3}$, determine if it is a subspace of $\mathbb{F}^{3}$.
+	\begin{hw}
+		\begin{equation*}
+			S_{1} = \left\{  (x_{1}, x_{2}, x_{3}) \in \mathbb{F}^{3} : x_{1} + 2x_{2} + 3x_{3} = 0\right\}.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		First, we see that $(0,0,0)$ is contained in $S$:
+		\begin{equation*}
+			0 + 2(0) + 3(0) = 0.
+		\end{equation*}
+	
+		Next, we check for closure. First, consider some $v = (x_{1}, x_{2}, x_{3})$ and $w = (y_{1}, y_{2}, y_{3})$, where $v, w \in S$. So, we know that $x_{1} + 2x_{2} + 3x_{2} = 0$, and $y_{1} + 2y_{2} + 3y_{3} = 0$.
+		
+		Now, we observe the following for closure under addition:
+		\begin{align*}
+			v + w &= (x_{1} + y_{1}, x_{2} + y_{2}, x_{3} + y_{3}) \\
+			(x_{1} + y_{1}) + 2(x_{2} + y_{2}) + 3(x_{3} + y_{3}) &= (x + 2x_{2} + 3x_{3}) + (y_{1} + 2y_{2} + 3y_{3}) \\
+			&= 0 + 0 \\
+			&= 0
+		\end{align*}
+	
+		And for scalar multiplication, we observe that for some $\alpha \in \mathbb{F}$, we have:
+		\begin{align*}
+			\alpha v &= \alpha(x_{1}, x_{2}, x_{3}) \\ 
+			&= (\alpha x_{1}, \alpha x_{2}, \alpha x_{3}) \\
+			&= \alpha x_{1} + 2(\alpha x_{2}) + 3(\alpha x_{3}) \\
+			&= \alpha(x_{1} + 2x_{2} + 3x_{3}) \\
+			&= \alpha (0) \\
+			&= 0
+		\end{align*}
+	
+		Thus, we see that $S_{1}$ is indeed a subspace of $\mathbb{F}^{3}$.
+	\end{solution}
+
+	\begin{hw}
+		\begin{equation*}
+			S_{2} = \left\{  (x_{1}, x_{2}, x_{3}) \in \mathbb{F}^{3} : x_{1} + 2x_{2} + 3x_{3} = 4 \right\}.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We observe that $S_{2}$ is not a subspace of $\mathbb{F}^{3}$, as it does not contain the zero vector $(0,0,0)$:
+		\begin{align*}
+			0 + 2(0) + 3(0) &= 0 \\
+			&\neq 4
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}
+		\begin{equation*}
+			S_{3} = \left\{  (x_{1}, x_{2}, x_{3}) \in \mathbb{F}^{3} : x_{1} x_{2} x_{3} = 0\right\}.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We observe that $S_{3}$ is not a subspace of $\mathbb{F}^{3}$ as it isn't closed under addition.
+		
+		We observe that $(1,1,0)$ and $(0,0,1)$ are in $S_{3}$. However, we see that
+		\begin{align*}
+			(1,1,0) + (0,0,1) &= (1,1,1) \\
+			1(1)(1) &= 1 \\
+			&\neq 0 \\
+		\therefore	(1,1,1) &\not\in S_{3}
+		\end{align*}
+	\end{solution}
+
+	\begin{hw}\label{Problem 1.21}
+		\begin{equation*}
+			S_{4} = \left\{  (x_{1}, x_{2}, x_{3}) \in \mathbb{F}^{3} : x_{1} = 5x_{3} \right\}.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We first observe that $(0,0,0) \in S_{4}$.
+		
+		Next, we test for closure under addition. Suppose we have $v = (x_{1}, x_{2}, x_{3})$ and $w = (y_{1}, y_{2}, y_{3})$, both in $S_{4}$. Then, we have that $x_{1} = 5x_{3}$ and $y_{1} = 5y_{3}$. Then, we observe the following:
+		\begin{align*}
+			v + w &= (x_{1} + y_{1}, x_{2}+y_{2}, x_{3} +y_{3}) \\
+			x_{1}+y_{1} &= 5x_{3} + 5y_{3} \\
+			&= 5(x_{3} + y_{3})
+		\end{align*}
+	
+		And for scalar multiplication, we see that for some $\alpha \in \mathbb{F}$, we have
+		\begin{align*}
+			\alpha v &= \alpha (x_{1}, x_{2}, x_{3}) \\
+			\alpha x_{1} &= \alpha (5x_{3}) \\
+			&= 5 (\alpha x_{3})
+		\end{align*}
+	
+		Thus, we see that $S_{4}$ is indeed a subspace.
+	\end{solution}
+
+	\begin{hw}
+		Show that the set of differentiable real-valued functions $f$ on the interval $(-4, 4)$ such that $f'(-1) = 3f(2)$ is a subspace of $\RR^{(-4,4)}$.
+	\end{hw}
+	\begin{solution}
+		First, let us denote this set as $S$. Now, we observe that the zero-function $f(x) = 0, \forall x \in (-4,4)$ is indeed in $S$:
+		\begin{align*}
+			f'(-1) &= 0 \\
+			&= 3f(2)
+		\end{align*}
+	
+		Now, for closure of addition, we observe that for $f,g \in S$, we have that $f+g$ is also differentiable. Now, we see that:
+		\begin{align*}
+			(f+g)'(-1) &= f'(-1) + g'(-1) \\
+			&= 3f(2) + 3g(2) \\
+			&= 3(f(2) +g(2)) \\
+			&= 3 (f+g)(2)
+		\end{align*}
+	
+		And for scalar multiplication, we observe that for some $\alpha \in \RR$, we have that $\alpha f$ is similarly a differentiable function. Now, we have:
+		\begin{align*}
+			(\alpha f)'(-1) &= \alpha f'(-1) \\
+			&= \alpha (3f(2)) \\
+			&= 3(\alpha f(2)) \\
+			&= 3 (\alpha f)(2)
+		\end{align*}
+	
+		Thus, it follows that $S$ is indeed a subspace of $\RR^{(-4,4)}$.
+	\end{solution}
+
+	\begin{hw}
+		Suppose $b \in \RR$. Show that the set of continuous real-valued functions $f$ on the interval $\left[ 0,1 \right]$ such that $\int_0^{1} f  = b$ is a subspace of $\RR^{[0,1]}$ if and only if $b = 0$.
+	\end{hw}
+	\begin{solution}
+		Let us denote this set by $S$.
+		
+		First, we will proceed with the forward direction. Let us suppose that $S$ is indeed a subspace of $\RR^{[0,1]}$. Then, we know that the zero function $f(x) = 0, \forall x \in [0,1]$ must be in $S$.
+		
+		Then, we observe the following:
+		\begin{align*}
+			\int_0^{1} f(x) \mathrm dx &= F(1) - F(0) \\
+			&= 0 - 0 \\
+			&= 0
+		\end{align*}
+	
+		Thus, we see that we must have that $b = 0$ for the zero function to be contained in $S$.
+		
+		Now, let us proceed with the backwards direction. Suppose that $b = 0$. Then, we observe that the zero function is indeed contained in $S$ as shown earlier.
+		
+		Now, we will check for closure under addition. Suppose we have $f,g \in S$. Then, we observe that
+		\begin{align*}
+			\int_{0}^{1} (f+g)(x) \mathrm dx &= \int_0^{1} f(x) + g(x) \mathrm dx \\
+			&= \int_{0}^{1} f(x) \mathrm dx + \int_{0}^{1} g(x) \mathrm dx \\
+			&= 0 + 0 \\
+			&= 0
+		\end{align*}
+	
+		For scalar multiplication, we see that for some $\alpha \in \RR$, we have:
+		\begin{align*}
+		int_{0}^{1} (\alpha f)(x) \mathrm dx &= \int_{0}^{1} \alpha f(x) \mathrm dx \\
+		&= \alpha \int_0^{1} f(x) \mathrm dx \\
+		&- \alpha (0) \\
+		&= 0 
+		\end{align*}
+	
+		Thus, we see that for $b = 0$, we have a subspace of $\RR^{[0,1]}$.
+	\end{solution}
+	
+	\begin{hw}
+		Is $\RR^{2}$ a subspace of $\CC^{2}$?
+	\end{hw}
+	\begin{solution}
+		No; we observe that if $\RR^{2}$ is indeed a subspace of $\CC^{2}$, then we must have that:
+		\begin{equation*}
+			i(1,1) = (i,i) \in \RR^{2}. 
+		\end{equation*}
+	
+		However, of course, we see that $(i,i) \not\in \RR^{2}$; it isn't closed under scalar multiplication. Thus, we see that we have a contradiction, and thus $\RR^{2}$ can't be a subspace of $\CC^{2}$.
+	\end{solution}
+
+	\begin{hw}
+		Is $\left\{  (a,b,c) \in \RR^{3} : a^{3} = b^{3} \right\}$ a subspace of $\RR^{3}$?
+	\end{hw}
+	\begin{solution}
+		Yes; we observe that if $a^{3} = b^{3}$, then it follows that $a = b$. Then, from here, we can proceed as follows from previous problems (namely, \ref{Problem 1.21}).
+	\end{solution}
+
+	\begin{hw}
+		Is $\left\{  (a,b,c) \in \CC^{3} : a^{3} = b^{3} \right\}$ a subspace of $\CC^{3}$?
+	\end{hw}
+	\begin{solution}
+		No; we recall from \ref{Problem 1.2} that
+		\begin{equation*}
+			\left( \dfrac{-1 + \sqrt 3 i}{2} \right)^{3} = 1.
+		\end{equation*}
+	
+		In fact, the following vector is in our subset 
+		\begin{align*}
+			\left( 1,  \dfrac{-1 + \sqrt 3 i}{2}, 0 \right) \\
+			\left( 1, \dfrac{-1 - \sqrt 3 i}{2} , 0 \right)
+		\end{align*}
+	
+		However, we note that
+		\begin{align*}
+				\left( 1, \dfrac{-1 + \sqrt 3 i}{2} , 0 \right) + \left( 1,  \dfrac{-1 - \sqrt 3 i}{2}, 0 \right) &= (2, -1, 0)
+		\end{align*}
+		is not in our subset; and thus, it isn't closed under addition. Therefore, it isn't a subspace of $\CC^{3}$.
+	\end{solution}
+
+	\begin{hw}
+		Give an example of a nonempty subset $U$ of $\RR^{2}$ that is closed under addition and under taking additive inverses, but $U$ is not a subspace of $\RR^{2}$.
+	\end{hw}
+	\begin{solution}
+		We can define $U$ to be as follow:
+		\begin{equation*}
+			U \coloneq \left\{  (x,y) \in \RR^{2} : x,y \in \ZZ \right\}.
+		\end{equation*}
+	
+		We observe then that for any $x,y \in \ZZ$, we have $-x,-y \in \ZZ$ such that $(x,y) + (-x, -y) = (x - x, y - y) = (0,0) \in U$.
+		
+		Furthermore, we see that it is closed under addition, as for $u, u'$, we have:
+		\begin{align*}
+			u + u' &= (x, y) + (x', y') \\
+			&= (x + x', y + y')
+		\end{align*}
+	
+		And by closure of integers, we see that $x + x' \in \ZZ$ and $y + y' \in \ZZ$.
+		
+		However, we note that for $\alpha \in \RR$, we have:
+		\begin{align*}
+			\alpha u &= \alpha (x,y) \\
+			&= (\alpha x, \alpha y)
+		\end{align*}
+	
+		However, if $\alpha \not\in \ZZ$, then it follows that $\alpha x, \alpha y \not\in \ZZ$, and thus we have that $\alpha u = (\alpha x, \alpha y) \not\in U$; thus we see that it isn't closed under scalar multiplication.
+	\end{solution}
+
+	\begin{hw}
+		Give an example of a nonempty subset $U$ of $\RR^{2}$ such that it is closed under scalar multiplication, but is not a subspace of $\RR^{2}$.
+	\end{hw}
+	\begin{solution}
+		Let us define $U$ to be as follows
+		\begin{equation*}
+			U \coloneq \left\{  (x,y) \in \RR^{2} : x = 0 \lor y = 0 \in \right\}.
+		\end{equation*}
+	
+		Then, we observe that for $\alpha \in \RR$, we have three cases:
+		\begin{enumerate}
+			\item If $x = 0$, then $\alpha u = \alpha (0, y) = (\alpha(0) \alpha (y)) = (0, \alpha y)$. And we see that $x = 0$ still, so $\alpha u \in U$.
+			\item If $y = 0$, then we see that $\alpha u = \alpha(x,0) = (\alpha (x), \alpha (0)) = (\alpha x, 0)$. Again, since $y = 0$, we see that $\alpha u \in U$.
+			\item If $x,y = 0$, then it follows that $\alpha u = \alpha(0,0) = (0,0)$. And we see that $\alpha u \in U$ still.
+		\end{enumerate}
+	
+		However, we note now that while $u = (x,0), u'= (0,y) \in U$, for $x,y \neq 0$, we see that
+		\begin{align*}
+			u + u' &= (x,0) + (0,y) \\
+			&= (x,y)
+		\end{align*}
+	
+		However, since $x,y \neq 0$, then $u + u' \not\in U$. Thus, it is not closed under addition and thus not a subspace of $\RR^{2}$.
+	\end{solution}
+
+	\begin{hw}
+		A function $f : \RR \rightarrow \RR$ is called periodic if there exists a positive number $p$ such that $f(x) = f(x+p)$ for all $x \in \RR$. Is the set of periodic functions from $\RR$ to $\RR$ a subspace of $\RR^{\RR}$?
+	\end{hw}
+	\begin{solution}
+		Before we start, let us recall the following lemma:
+		\begin{lem}
+			$\sqrt{2} \not\in \QQ$.
+		\end{lem}
+		
+		Now, first, let us define $f(x) = \sin (\sqrt 2 x)$ and $g(x) = \cos(x)$. Then, let us define $h(x) = f(x) + g(x)$.
+		
+		Now, we observe that $h(0) = \sin(0) + \cos(0) = 1$. Then, we also know that since $f,g$ are both periodic functions, then $h(x)$ is too. This means then that there exists some $p$ such that $h(0) = h(p) = h(-p)$.
+		
+		However, we note now that if $h(0) = 1$, then it follows that
+		\begin{equation*}
+			1 = \sin(\sqrt 2 p) + \cos(p) = \sin(-\sqrt 2 p) + \cos(-p) = -\sin(\sqrt 2 p) + \cos(p).
+		\end{equation*}
+	
+		However, we note here that since $\sin(\sqrt 2 p) + \cos(p) = -\sin(\sqrt 2 p) + \cos(p)$, then it follows that $2\sin(\sqrt 2 p) = 0$; thus, we have that $\sin(\sqrt 2 p) = 0$. Thus, we know that $\cos(p) = 1 \implies p = 2\pi k$, for some $k \in \ZZ$.
+		
+		However, we note as well that since $\sin(\sqrt 2 p) = 0$, then we know that $\sqrt 2 p = l\pi$ for some $l \in \ZZ$.
+		
+		However, this means then that:
+		\begin{align*}
+			\frac{\sqrt 2 p}{p} &= \frac{l\pi}{2k\pi} \\
+			\sqrt 2 &= \dfrac{l}{2k}
+		\end{align*}
+	
+		However, this implies that $\sqrt 2 \in \QQ$; however, this is a contradiction, and thus we see that the set of periodic functions from $\RR$ to $\RR$ can't be a subspace of $\RR^{\RR}$.
+	\end{solution}
+
+	\begin{hw}
+		Suppose that $U_{1}, U_{2}$ are subspaces of $V$. Prove that $U_{1} \cap U_{2}$ is also a subspace of $V$.
+	\end{hw}
+	\begin{solution}
+		First, we note that the zero vector $0$ must be in both $U_{1}$ and in $U_{2}$ as they are both subspaces of $V$; thus, we see that $0 \in U_{1} \cap U_{2}$.
+		
+		Next, we observe that, by definition, we have that for any $x,y \in U_{1} \cap U_{2}$, it must be that it is also in $U_{1}$ and also in $U_{2}$. 
+		
+		Now, since $x,y \in U_{1}$, we know $x + y \in U_{1}$ too, as $U_{1}$ is a subspace, and thus is closed under addition. Similarly, since $x,y \in U_{2}$, then $x + y \in U_{2}$ as well by the same argument. Thus, we see that $x + y \in U_{1} \cap U_{2}$.
+		
+		The same argument follows for scalar multiplication.
+		
+		Thus, we see that $U_{1} \cap U_{2}$ is indeed a subspace of $V$ as well.
+	\end{solution}
+
+	\begin{rmk}
+		We note here that a similar argument can be used to prove that the intersection of every collection of subspaces of $V$ is also a subspace of $V$:
+		\begin{proof}
+			We suppose that for $i \in I$, $U_{i}$ is a subspace of $V$. Now, we want to show that $\bigcap_{i \in I} U_{i}$ is indeed a subspace as well.
+			
+			To do this, we note that by definition of a subspace, each $U_{i}$ for $i \in I$ must contain the zero vector $0$; thus, we see that $0 \in \bigcap_{i \in I} U_{i}$.
+			
+			Next, we will check for closure under addition. To do this, we note that if $x, y \in \bigcap_{i \in I} U_{i}$, then it follows that for each $i \in I$, $x, y \in U_{i}$. This means then that, since each $U_{i}$ is a subspace, it follows that $x + y \in U_{i}$ for each $i \in I$. Thus, we can then conclude that $x + y \in \bigcap_{i \in I} U_{i}$ too. Thus, it is closed under addition.
+			
+			For scalar multiplication, we take some $\alpha \in \mathbb{F}$. Then, we note that for $x \in \bigcap_{i \in I} U_{i}$, $x \in U_{i}$ for $i \in I$. And since each $U_{i}$ is a subspace, it is closed under scalar multiplication, and thus $\alpha x \in U_{i}$ for $i \in I$; thus, we can conclude that $\alpha x \in \bigcap_{i \in I} U_{i}$ too.
+			
+			Thus, we see that $\bigcap_{i \in I} U_{i}$ is indeed a subspace of $V$.
+		\end{proof}
+	\end{rmk}
+
+	\begin{hw}
+		Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+	\end{hw}
+	\begin{solution}
+		We shall proceed by the backwards direction. Let us suppose that there are two subspaces $U_{1}, U_{2}$ of $V$, and without loss of generality, let us suppose that $U_{1} \subseteq U_{2}$.
+		
+		We note then that $U_{1} \cup U_{2}$ is in fact $U_{2}$. And since $U_{2}$ is a subspace of $V$, then of course $U_{1} \cup U_{2} = U_{2}$ is as well.
+		
+		Now, let us proceed with the forward direction. We will proceed by contradiction; that is, suppose we have two subspaces $U_{1}, U_{2}$ such that $U_{1} \not\subseteq U_{2}$ and $U_{2} \not\subseteq U_{1}$, and that $U_{1} \cup U_{2}$ is a subspace of $V$.
+		
+		From here, let us consider two vectors $u_{1} \in U_{1} \setminus U_{2}$ and $u_{2} \in U_{2} \setminus U_{1}$. We observe then that $u_{1} + u_{2} \in U_{1} \cup U_{2}$. Then, by definition, we see that $u_{1} + u_{2}$ is either in $U_{1}$ or $U_{2}$.
+		
+		We now consider two cases.
+		
+		First, if $u_{1} + u_{2}$ is in $U_{1}$, then we see that by property of subspaces, we have that $u_{1} + u_{2} + (-u_{1}) = u_{2} \in U_{1}$. However, this is a contradiction as $u_{2}$ can't be contained in $U_{1}$ by construction.
+		
+		Similarly, if $u_{1} + u_{2} \in U_{2}$, then we see that $u_{1} + u_{2} + (-u_{2}) = u_{1} \in U_{2}$. Again, this is a contradiction.
+		
+		Therefore, we see that it must follow that either $U_{1} \subseteq U_{2}$ or $U_{2} \subseteq U_{1}$.
+	\end{solution}
+	
+	\begin{hw}
+		Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two. Also note that we are not working in a field containing two elements.
+	\end{hw}
+	\begin{solution}
+		Once again, we begin with the backwards direction. We consider subspaces $U_{1}, U_{2}, U_{3}$ of $V$. Without loss of generality, let us suppose that $U_{1}$ contains $U_{2}$ and $U_{2}$. It follows then that $U_{1} \cup U_{2} \cup U_{3} = U_{1}$. And since $U_{1}$ is a subspace of $V$, it follows that $U_{1} \cup U_{2} \cup U_{3} = U_{1}$ is also a subspace of $V$.
+		
+		Now, for the forward direction. We first consider $U_{1}\subseteq U_{2}$ or $U_{2} \subseteq U_{1}$. We denote this union by $W$.
+		
+		Then, we see that $U_{3} \subseteq W$ becomes the two-union case which we have shown last problem; we see then that one of these subspaces must contain the other two.
+		
+		Next, let us suppose that $U_{1}, U_{2}$ are not contained in each other. From here, let us consider $u_{1} \in U_{1} \setminus U_{2}$ and $u_{2} \in U_{2} \setminus U_{1}$.
+		
+		We will now show that $au_{1} + u_{2} \in U_{3}$. To do this, we observe that 
+	\end{solution}
+	\begin{rmk}
+		We remark that if we had a field containing two elements, then if we let $V = $
+	\end{rmk}
+
+	\begin{hw}
+		Suppose $U$ is a subspace of $V$. What is $U + U$?
+	\end{hw}
+	\begin{solution}
+		We note that since $U$ is a subspace of $V$, we then consider $u \in U$ and $u' \in U$. We see then that $u + u' \in U + U$. However, since $u, u' \in U$, then by closure of addition, we have that $u + u' \in U$ as well. Thus, we see that every vector in $U+U$ is also in $U$; $U + U \subseteq U$.
+		
+		Similarly, for $u \in U$, we observe that $u = u + 0$, and thus every $u \in u$ is also in $U+U$. So, we have $U \subseteq U+U$.
+		
+		Thus, we see that $U = U+U$.
+	\end{solution}
+
+	\begin{hw}
+		If $U,W$ are subspaces of $V$, is $U+W = W+U$?
+	\end{hw}
+	\begin{solution}
+		We consider $x \in U$ and $y \in W$. Now, we note that addition is commutative in $V$.
+		
+		So, it follows that for $x + y \in U + W$, we have $x + y = y + x \in W + U$. So, we see that $U + W \subseteq W + U$.
+		
+		Similarly, we note that for $y+x \in W +U$, we have $y+x=x+y \in U + W$. So, $W+U \subseteq U+W$.
+		
+		Therefore, we can conclude that, indeed, $U+W=W+U$.
+	\end{solution}
+
+	\begin{hw}
+		If $U_{1}, U_{2}, U_{3}$ are subspaces of $V$, does it follow that
+		\begin{equation*}
+			U_{1} + (U_{2} + U_{3}) = (U_{1} + U_{2}) + U_{3}?
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We consider $x,y,z$ in $U_{1}, U_{2}, U_{3}$ respectively. Now, we note that addition is commutative in $V$.
+		
+		We observe that $x + (y+z) \in U_{1} + (U_{2} + U_{3})$. Now, $x + (y+z) = (x+y)+z \in (U_{1} + U_{2}) + U_{3}$.
+		
+		So, we see that $U_{1} +(U_{2} + U_{3}) \subseteq (U_{1} + U_{2}) + U_{3}$.
+		
+		A similar argument follows for the other direction.
+		
+		Thus, we conclude that, indeed, we have $	U_{1} + (U_{2} + U_{3}) = (U_{1} + U_{2}) + U_{3}$.
+	\end{solution}
+	
+	\begin{hw}
+		Does the operation of addition on the subspaces of $V$ have an additive
+		identity? Which subspaces have additive inverses?
+	\end{hw}
+	\begin{solution}
+		We observe that for some subspace $U$ of $V$, and for the subspace $W = \left\{  0\right\}$, we have that $U + W = W + U = U$. Thus, the additive identity is simply $\left\{  0\right\}$.
+		
+		For an additive inverse, we observe that for a subspace $U$, there exists a subspace $W$ such that $U + W = 0$. However, we note that since $U \subseteq U+W$ and $W \subseteq U + W$, it follows then that the only way for $U + W = 0$ to occur is if both $U, W = \left\{  0\right\}$.
+	\end{solution}
+
+	\begin{hw}
+		Prove or disprove the following statement:
+		
+		If $U_{1}, U_{2}, W$ are subspaces of $V$ such that
+		\begin{equation*}
+			U_{1} + W = U_{2} + W,
+		\end{equation*}
+		then $U_{1} = U_{2}$.
+	\end{hw}
+	\begin{solution}
+		We will provide a counterexample.
+		
+		Suppose that $V = \RR^{2}$, $W = \Span\left\{  (1,1)\right\}$, $U_{1} = \Span\left\{  (1,0)\right\}$, and $U_{2} = \Span\left\{  (0,1)\right\}$.
+		
+		Now, we observe that $U_{1} + W = U_{2} + W$. However, it is clear that $U_{1} \neq U_{2}$. Thus, we have found a counterexample.
+	\end{solution}
+
+	\begin{hw}
+		Prove or disprove the following statement:
+		
+		If $U_{1}, U_{2}, W$ are subspaces of $V$ such that
+		\begin{equation*}
+			U_{1} \oplus W = U_{2} \oplus W,
+		\end{equation*}
+		then $U_{1} = U_{2}$.
+	\end{hw}
+	\begin{solution}
+	We will provide a counterexample.
+	
+	Suppose that $V = \RR^{2}$, $W = \Span\left\{  (1,1)\right\}$, $U_{1} = \Span\left\{  (1,0)\right\}$, and $U_{2} = \Span\left\{  (0,1)\right\}$.
+	
+	Now, we observe that $U_{1} \oplus W = U_{2} \oplus W$. However, it is clear that $U_{1} \neq U_{2}$. Thus, we have found a counterexample.
+\end{solution}
+
+\begin{hw}
+	Suppose
+	\begin{equation*}
+		U = \left\{  (x,y,x+y,x-y, 2x) \in \mathbb{F}^{5} : x,y \in \mathbb{F} \right\}.
+	\end{equation*}
+
+	Find a subspace $W$ of $\mathbb{F}^{5}$ such that $\mathbb{F}^{5} = U \oplus W$.
+\end{hw}
+\begin{solution}
+	We observe that we can simply let $W = \left\{  (0,0,a,b,c) \in \mathbb{F}^{5} : a,b,c \in \mathbb{F} \right\}$.
+	
+	First, we will show that $U \cap W = \left\{  0\right\}$. To do this, we note that we can rewrite $U$ to be
+	\begin{align*}
+		(x,y,x+y,x-y,2x) &= (x,0,x,x,2x) + (0,y,y,-y,0) \\
+		&= x(1,0,1,1,2) + y(0,1,1,-1,0)
+	\end{align*}
+
+	So, we can in fact rewrite $U = \Span\left\{  (1,0,1,1,2), (0,1,1,-1,0) \right\}$. We denote the first and second vectors as $u_{1}, u_{2}$ respectively.
+	
+	Similarly for $W$, we can rewrite it as $W = \Span\left\{  (0,0,1,0,0), (0,0,0,1,0), (0,0,0,0,1) \right\}$. We denote these vectors as $w_{1}, w_{1}, w_{3}$ respectively.
+	
+	Now, we want to prove that these vectors are linearly independent. Then, we want the following to hold true only when $a_{1} = \cdots = a_{5} =0 $:
+	\begin{align*}
+		a_{1}u_{1} + a_{2}u_{2} + a_{3}w_{1} + a_{4}w_{2} + a_{5}w_{3} &= 0 \\
+		a_{1}(1,0,1,1,2) + a_{2}(0,1,1,-1,0) + a_{3}(0,0,1,0,0) + a_{4}(0,0,0,1,0) + a_{5}(0,0,0,0,1) &= 0
+	\end{align*}
+
+	So, with this in mind, we observe that we get the following:
+	\begin{align*}
+		a_{1} &= 0 \\
+		a_{2} &= 0 \\
+		a_{1} + a_{2} + a_{3} &= 0 \\
+		a_{1} - a_{2} + a_{4} &= 0 \\
+		2a_{1} + a_{5} &= 0 \\
+		\\
+	\end{align*}
+
+	Then from here, we see that this system of equation shows us that $a_{1} = a_{2} = a_{3} = a_{4} = a_{5} = 0$. Thus, they're linearly independent.
+	
+	Furthermore, since we have a list of five linearly independent vectors, then it follows that $U \oplus W = \mathbb{F}^{5}$.
+\end{solution}
+	
+\begin{hw}
+	Suppose we have a function $f : \RR \rightarrow \RR$. We define an even function to be as follows:
+	\begin{equation*}
+		f(-x) = f(x).
+	\end{equation*}
+
+	And we define an odd function to be
+	\begin{equation*}
+		f(-x) = -f(x).
+	\end{equation*}
+
+	Let $U_{e}$ denote the set of real-valued even functions on $\RR$ and let $U_{o}$ be the set of real-valued odd functions of $\RR$. Prove that $U_{e} \oplus U_{o} = \RR^{\RR}$.
+\end{hw}
+\begin{solution}
+	First, we will begin by showing that $U_{e} + U_{0} = \RR^{\RR}$. Let us consider $f_{e}(x) \in U_{e}$ and $f_{o}(x) \in U_{o}$.
+	
+	Here, we note that we can rewrite $f_{e}$ and $f_{o}$ as follows:
+	\begin{align*}
+		f_{e}(x) &= \frac{f(x) + f(-x)}{2} \\
+		f_{o}(x) &= \dfrac{f(x) - f(-x)}{2}
+	\end{align*} 
+
+	Then, we observe the following:
+	\begin{align*}
+		f_{e}(-x) &= \dfrac{f(-x) + f(-(-x))}{2} \\
+		&= \dfrac{f(x) + f(-x)}{2} \\
+		&= f_{e}(x) \\
+		f_{o}(-x) &= \dfrac{f(-x) - f(-(-x))}{2} \\
+		&= \dfrac{-f(x) + f(-x)}{2} \\
+		&= -\dfrac{f(x) - f(-x)}{2} \\
+		&= -f_{o}(x)
+	\end{align*}
+
+	Next, we see that
+	\begin{align*}
+		f_{e}(x) + f_{o} (x) &= \dfrac{f(x) + f(-x)}{2} + \dfrac{f(x) - f(-x)}{2} \\
+		&= \dfrac{2f(x)}{2} \\
+		&= f(x)
+	\end{align*}	
+
+	Thus, we see that $U_{e} + U_{o} = \RR^{\RR}$.
+	
+	Now, from here, we will show that $U_{e} \cap U_{o} = \left\{  0\right\}$. To do this, we let $f \in U_{e} \cap U_{o}$. Since $f \in U_{e} \cap U_{o}$, we see that $f(-x) = f(x)$ and also $f(-x) = -f(x)$. Then, we observe that
+	\begin{align*}
+		f(-x) &= f(-x) \\
+		f(x) &= -f(x) \\
+		2f(x) &= 0 \\
+		f(x) &= 0
+	\end{align*}
+
+	Thus, we see that for all $x \in \RR$, $f(x) = 0$; in other words, $f = 0$. Therefore, we see that $U_{e} \cap U_{o} = \left\{  0\right\}$.
+	
+	Thus, we have proven that $U_{e} \oplus U_{o} = \RR^{\RR}$.
+\end{solution}
+
+\chapter{Finite-Dimensional Vector Spaces}
+\section{Span and Linear Independence}
+\begin{hw}
+	Suppose that $v_{1}, v_{2}, v_{3}, v_{4}$ spans $V$. Show that
+	\begin{equation*}
+		v_{1} - v_{2}, v_{2} - v_{3}, v_{3} - v_{4}, v_{4} 
+	\end{equation*} 
+	also spans $V$.
+\end{hw}
+\begin{solution}
+\begin{comment}
+		We observe that since $v_{1}, \ldots, v_{4}$ spans vectors in $v$, then by definition, for all $v \in V$, we can express as a linear combination, where $a_{1}, \ldots, a_{4}$ are some scalar in $\RR$.
+	\begin{equation*}
+		a_{1}v_{1} + a_{2}v_{2} + a_{3}v_{3} + a_{4}v_{4}.
+	\end{equation*}
+
+	From here, we note that
+	\begin{align*}
+		a_{1}(v_{1} - v_{2}) + a_{2}(v_{2} - v_{3}) + a_{3}(v_{3} - v_{4}) + a_{4}v_{4} &= a_{1}v_{1} -a_{1}v_{2} +a_{2}v_{2} - a_{2}v_{3} + a_{3}v_{3} - a_{3}v_{4} + a_{4}v_{4} \\
+		&= a_{1}v_{1} + (a_{2} -a_{1})v_{2} + (a_{3} - a_{2})v_{3} + (a_{4} - a_{3})v_{4}
+	\end{align*}
+\end{comment}
+We observe that we can express each of $v_{1}, \ldots, v_{4}$ in terms of the second list:
+\begin{align*}
+	v_{1} &= (v_{1} - v_{2}) + (v_{2} - v_{3}) + (v_{3} - v_{4}) + v_{4} \\
+	v_{2} &= (v_{2} - v_{3}) + (v_{3} - v_{4}) + v_{4} \\
+	v_{3} &= (v_{3} - v_{4}) + v_{4} \\
+	v_{4} &= v_{4} 
+\end{align*}
+
+Thus, since we can express each vector $v_{1}, \ldots, v_{4}$ as a linear combination of $v_{1} - v_{2}, \ldots, v_{4}$, we see then that they must also span $V$.
+\end{solution}
+
+\begin{hw}
+	Show that if we think of $\CC$ as a vector space over $\RR$, then the list $(1+i, 1-i)$ is linearly independent.
+\end{hw}
+\begin{solution}
+	We want to show that the following holds true only when $a_{1} = a_{2} = 0$:
+	\begin{equation*}
+		a_{1}(1+i) + a_{2}(1-i) = 0.
+	\end{equation*}
+
+	We see then that we have the following:
+	\begin{align*}
+		a_{1} + a_{2} &= 0 \\
+		a_{1}i - a_{2}i &= 0 \\
+		\\
+		()a_{1}-a_{2})i &= 0
+	\end{align*}
+
+	So, we see that $a_{1} + a_{2} = 0$ and $a_{1} - a_{2} = 0$. This means then that $a_{1} = a_{2} = 0$.
+	
+	Thus, we see that they're linearly independent.
+\end{solution}
+
+\begin{hw}
+	content...
+\end{hw}
+
+\end{document}

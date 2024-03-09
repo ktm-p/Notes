@@ -1,0 +1,487 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+\newcommand{\innerproduct}[2]{\left\langle{#1}, {#2}\right\rangle}
+\DeclareMathOperator*{\proj}{\mathrm{proj}}
+
+% Bracketing %
+\newcommand{\pr}[1]{\left( {#1} \right)}
+\newcommand{\br}[1]{\left[ {#1} \right]}
+\newcommand{\brc}[1]{ \left\{  {#1} \right\}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Math 135: Homework 1}{Spring 2024}
+	
+	\section{Axioms}
+	% Question 2
+	\begin{hw}[Problem 2.2]
+		Give an example of sets $A$ and $B$ for which $\bigcup A = \bigcup B$, but $A \neq B$.
+	\end{hw}
+	\begin{solution}
+		We can consider the following sets:
+		\begin{align*}
+			A &= \brc{ \brc{a}, \brc{b}} \\
+			B &= \brc{ \brc{a, b}}
+		\end{align*}
+	
+		Since the sets $A$ and $B$ contain different elements, we see that they are in fact not equal. However, note here that:
+		\begin{align*}
+			\bigcup A &= \brc{a,b} \\
+			\bigcup B &= \brc{a,b}.
+		\end{align*}
+	
+		Since $\bigcup A$ and $\bigcup B$ have the same elements, we see that they are in fact equal by the Extension Axiom. Thus, we have sets $A,B$ for which $\bigcup A = \bigcup B$, but $A \neq B$.
+	\end{solution}
+
+	% Question 6
+	\begin{hw}[Problem 2.6a]
+		Show that for any set $A$, $\bigcup\mathscr{P} A = A$.
+	\end{hw}
+	\begin{solution}
+		To do this, we shall the following inclusions: $\bigcup \mathscr{P}A \subseteq A$, and $A \subseteq \bigcup \mathscr P A$.
+		
+		First, we will show that $A \subseteq \bigcup \mathscr{P} A$. To do this, we will first introduce the following lemma:
+		
+		\begin{lem}
+			Every member of a set $A$ is a subset of $\bigcup A$.
+		\end{lem}
+		\begin{innerproof}
+			Suppose that $x \in A$.
+			
+			Then, for all $t \in x$, we observe that $t \in \bigcup A$ by definition. Thus, we observe that $x \subseteq \bigcup A$ by definition.
+		\end{innerproof}
+		
+	 	Now, note that since $A \subseteq A$, it follows then that $A \in \mathscr{P} A$. Then, by our lemma, we observe that $A \subseteq \bigcup \mathscr{P} A$.
+		
+		Next, we will show that $\bigcup \mathscr P A \subseteq A$. To do this, let us first consider some $a \in \bigcup \mathscr{P} A$. Then, there exists some $t \in \mathscr{P} A$ such that $a \in t$. This means then that there exists some $t \subseteq A$ to which $a$ belongs to. Thus, we have $a \in t \subseteq A$, meaning that $a \in A$. Since the choice of $a$ was arbitrary, we see then that, indeed, $\bigcup \mathscr{P} A \subseteq A$.
+		
+		Thus, we can conclude that, in fact, $A = \bigcup U \mathscr{P} A$ as desired.
+	\end{solution}
+
+	\begin{hw}[Problem 2.6b]
+		Show that $A \subseteq \mathscr{P} \bigcup A$. When does equality hold?
+	\end{hw}
+	\begin{solution}
+		We will first show the inclusion. Suppose that $a \in A$. Then, by Lemma 1.1, we note that $a \subseteq \bigcup A$, and thus $a \in \mathscr{P} \bigcup A$ by definition of the power set. Thus, we see that $A \subseteq \mathscr{P} \bigcup A$.
+		
+		In order for equality to hold, we first note that for any set $X$, the empty set will be an element of the power set $\mathscr{P} X$. Furthermore, we note that for elements $Y \in X$ which is a set itself, $Y \bigcup \emptyset = Y$ (this follows from our result in Problem 2.17, since $\emptyset \subseteq Y$). So, our set $X$ must contain the empty set, and furthermore, we need $X = \brc{\emptyset}$ for equality to hold:
+		\begin{align*}
+			X &= \brc{\emptyset} \\
+			\mathscr{P}\bigcup X &= \mathscr{P}\pr{\emptyset} \\
+			&= \brc{\emptyset} \\
+			&= X
+		\end{align*}
+	\end{solution}
+
+	% Question 8
+	\begin{hw}[Problem 2.8]
+		Show that there is no set to which every singleton belongs.
+	\end{hw}
+	\begin{solution}
+		First, let us suppose for the sake of contradiction that there exists some set $S$ to which every singleton belongs in.
+		
+		From here, let us then consider the set $S' = \bigcup S$. We note here that, by definition of $\bigcup S$, $S'$ will thus contain be a set to which every set belonged to. However, as discussed in class, we can't have a set containing all sets; if this is the case, then it would lead to Russel's Paradox, thus leading to a contradiction.
+		
+		Therefore, we can conclude that there is no set to which every singleton belongs.
+	\end{solution}
+
+	% Question 9
+	\begin{hw}[Problem 2.9]
+		Give an example of sets $a$ and $B$ for which $a \in B$ but $\mathscr{P}a \not\in \mathscr{P}B$.
+	\end{hw}
+	\begin{solution}
+		Let us consider the following sets:
+		\begin{align*}
+			a &= \brc{\emptyset} \\
+			B &= \brc{ \brc{\emptyset}}.
+		\end{align*}
+	
+		We see then that, indeed, $a \in B$. However, we note now that, by definition of power set, we have:
+		\begin{align*}
+			\mathscr{P}a &= \brc{\emptyset, \brc{\emptyset}} \\
+			\mathscr{P}B &= \brc{\emptyset, \brc{ \brc{\emptyset}}}.
+		\end{align*}
+	
+		Thus, we see that while $a \in B$, $\mathscr{P}a \not\in \mathscr P B$.
+	\end{solution}
+
+	% Question 10
+	\begin{hw}[Problem 2.10]
+		Show that if $a \in B$, then $\mathscr P a \in \mathscr P \mathscr P \bigcup B$.
+	\end{hw}
+	\begin{solution}
+		To begin with, we note that if $\mathscr P a \in \mathscr P \mathscr P \bigcup B$, then by definition of the power set, it suffices to show that we have $\mathscr P a \subseteq \mathscr P \bigcup B$.
+		
+		To do this, let us consider some element $x \in \mathscr P a$. Then, by definition of the power set, we have that $x$ must be a subset of $a$. That is, $x \subseteq a \in B$.
+		
+		Then, we note that for any $t \in x \subseteq a \in B$, we have $t \in a \in B$. Thus, $t \in \bigcup B$. This means then that $x \subseteq \bigcup B$, and thus $x \in \mathscr{P} \bigcup B$.
+		
+		And since $x$ was arbitrary, we can thus conclude that we have $\mathscr P a \subseteq \mathscr P \bigcup B$; in other words, given that $a \in B$, we have that $\mathscr P a \in \mathscr P \mathscr P \bigcup B$ as desired.
+	\end{solution}
+
+\section{Algebra of Sets}
+\begin{hw}[Problem 2.17]
+	Show that the following conditions are equivalent:
+	\begin{enumerate}
+		\item $A \subseteq B$,
+		\item $A \setminus B = \emptyset$,
+		\item $A \cup B = B$,
+		\item $A \cap B = A$.
+	\end{enumerate}
+\end{hw}
+\begin{solution}
+	To begin with, we will show that the first two conditions 1. and 2. are equivalent:
+	\begin{innerproof}
+		Let us suppose that $A \subseteq B$. Then,
+		\begin{align*}
+			A \subseteq B &\iff \forall x \pr{x \in A \implies x \in B} \\
+			&\iff \forall x \pr{x \not\in A \lor x \in B} \\
+			&\iff \forall x\neg\pr{x \in A \land x \in B} \\
+			&\iff \neg\pr{\exists x\pr{x \in A \land x \in B}} \\
+			&\iff A \setminus B = \emptyset
+		\end{align*}
+	\end{innerproof}
+
+	Next, we will show that 1. and 3. are equivalent:
+	\begin{innerproof}
+		To do this, we proceed as follows:
+		
+		Suppose that $A \subseteq B$. Then, we have:
+		\begin{align*}
+			A \subseteq B &\iff \forall x\pr{x \in A \implies x \in B} \\
+			&\iff \forall x\pr{x \in A \lor x \in B \iff x \in B}
+		\end{align*}
+	
+		However, note here that the set $\brc{x : x \in A \lor x \in B}$ is in fact $A \cup B$. Thus, we have:
+		\begin{equation*}
+			\forall x \pr{x \in A \lor x \in B \iff x \in B} \iff A \cup B = B.
+		\end{equation*}
+	\end{innerproof}
+
+	Finally, we will show that 1. and 4. are equivalent:
+	\begin{innerproof}
+		First, suppose that $A \subseteq B$.
+		
+		Then, we observe the following:
+		\begin{align*}
+			A \subseteq B &\iff \forall x (x \in A \implies x \in B) \\
+			&\iff \forall x (x \in A \land x \in B \iff x \in A) \\
+			&\iff A \cap B = A.
+		\end{align*} 
+	\end{innerproof}
+
+	Thus, we have shown that, indeed, the four conditions are equivalent as desired.
+\end{solution}
+
+\begin{hw}[Problem 2.19]
+	Is $\mathscr{P}(A \setminus B)$ always equal to $\mathscr{P} A - \mathscr{P} B$. Is it ever equal to $\mathscr{P} A \setminus \mathscr{P} B$.
+\end{hw}
+\begin{solution}
+	No.
+	
+	We observe that the empty set $\emptyset$ will always be an element of $\mathscr{P} X$, for any set $X$.
+	
+	Then, we note that $\emptyset \in \mathscr{P}(A \setminus B)$.
+	
+	Furthermore, we have $\emptyset \in \mathscr{P}A$ and $\emptyset \in \mathscr{P}B$.
+	
+	However, we note that the set $\mathscr{P} A \setminus \mathscr{P} B$ consists of elements in $\mathscr{P}A$ that is not in $\mathscr{P}B$; since $\emptyset$ is in both $\mathscr{P}A$ and $\mathscr{P}B$, then $\emptyset \not\in \mathscr{P} A \setminus \mathscr{P} B$.
+	
+	However, we note that while $\emptyset \in \mathscr{P}(A \setminus B)$, we have that $\emptyset\not\in\mathscr{P} A \setminus \mathscr{P} B$. Thus, we can conclude that these sets can never be equal.
+\end{solution}
+
+\begin{hw}[Problem 2.24a]
+	Show that if $A$ is nonempty, then $\mathscr{P} \bigcap A= \bigcap \brc{\mathscr{P} X : X \in A}$.
+\end{hw}
+\begin{solution}
+	We shall proceed as follows: suppose we have some $a \in \mathscr{P}\bigcap A$. Then, by definition, we have the following:
+	\begin{align*}
+		a \in \mathscr{P} \cap A &\iff a \subseteq \cap A \\ 
+		&\iff \forall X \in A, a \subseteq X \\
+		&\iff \forall X \in A, a \in \mathscr{P} X \\
+		&\iff a \in \bigcap \brc{\mathscr{P} X : X \in A}.
+	\end{align*}
+\end{solution}
+
+\begin{hw}[Problem 2.24b]
+	Show that
+	\begin{equation*}
+		\bigcup \brc{\mathscr{P} X : X \in A} \subseteq \mathscr{P} \bigcup A.
+	\end{equation*}
+
+	Under what condition does equality hold?
+\end{hw}
+\begin{solution}
+	To begin with, let us consider some $x \in \bigcup \brc{\mathscr{P} X : X \in A}$.
+	
+	Then, we observe the following:
+	\begin{align*}
+		x \in \bigcup \brc{\mathscr{P} X : X \in A} &\iff \exists X \in A, x \in \mathscr{P}X \\
+		&\iff x \subseteq X
+	\end{align*}
+
+	However, note here that $X \subseteq \bigcup A$ by definition, so we have:
+	\begin{align*}
+		x \subseteq X &\implies x \subseteq \bigcup A \\
+		&\implies x \in \mathscr{P} \bigcup A.
+	\end{align*}
+
+	Thus, we see that $\bigcup \brc{\mathscr{P} X : X \in A} \subseteq \mathscr{P} \bigcup A$.
+	
+	For equality to hold, we note that we want the following to be the case as well:
+	\begin{equation*}
+		\mathscr{P} \bigcup A \subseteq \bigcup \brc{\mathscr{P} X : X \in A}.
+	\end{equation*}
+
+	Then, let us take some $x \in \mathscr{P} \bigcup A$. Then, this means that $x \subseteq \bigcup A$. Now, in order for us to get to $x \subseteq X$ (so that $x \in \bigcup \brc{\mathscr{P} X : X \in A}$), we need that $\bigcup A \subseteq X$, for some $X \in A$.
+	
+	Thus, we see that, in fact, equality holds when $\bigcup A \subseteq X$.
+\end{solution}
+\end{document}

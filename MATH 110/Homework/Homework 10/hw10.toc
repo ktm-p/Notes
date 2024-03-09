@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Inner Product Validity}{3}{section.1}%
+\contentsline {section}{\numberline {2}Orthogonal Subspace and Orthonormal Basis}{4}{section.2}%
+\contentsline {section}{\numberline {3}Gram-Schmidt Pain}{5}{section.3}%
+\contentsline {section}{\numberline {4}An Orthonormal List of Vectors}{6}{section.4}%
+\contentsline {section}{\numberline {5}Deja Vu? Almost.}{8}{section.5}%

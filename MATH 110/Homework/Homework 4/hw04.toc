@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}When Does Linearity Occur}{3}{section.1}%
+\contentsline {section}{\numberline {2}Linear Maps and Span}{5}{section.2}%
+\contentsline {section}{\numberline {3}Maps and Linear Independence}{6}{section.3}%
+\contentsline {section}{\numberline {4}Testing for Commutativity}{8}{section.4}%
+\contentsline {section}{\numberline {5}Linear Maps and Dimensionality}{9}{section.5}%

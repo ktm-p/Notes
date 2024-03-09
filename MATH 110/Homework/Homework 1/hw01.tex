@@ -1,0 +1,555 @@
+\documentclass{article}
+%%%%%%% PREAMBLE %%%%%%%
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%%%
+
+%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%%
+%%%%%
+%END_FOLD
+%%%%%
+
+\begin{document}
+\mytitle{Math 110: Homework 1}{Fall 2023}
+
+\section{Complex Solutions to Polynomials}
+\begin{hw}
+	Determine, with explanation, which complex numbers $x$ satisfy the equation:
+	\begin{equation*}
+		x^{3} + x^{2} + x + 1 = 0
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	We begin by first grouping the expression as follow: $x^{2}(x+1) + 1(x+1)$. We see then that the polynomial above can be factored into $(x^{2}+1)(x+1) = 0$.
+	
+	With this in mind, we see that the solutions to the equation are ones that satisfies $x+1 = 0$ or $x^{2} + 1 = 0$.
+	
+	For $x+1=0$, we get:
+	\begin{align*}
+		x + 1 &= 0 \\
+		x &= -1 \\
+	\end{align*}
+
+	For $x^{2} + 1 = 0$, we get:
+	\begin{align*}
+		x^{2} + 1 &= 0 \\
+		x^{2} &= -1 \\
+		x &= \pm\sqrt{-1} \\
+		x &= \pm i
+	\end{align*}
+
+	Therefore, the solutions to the given equation are $x = -i, i, 1$.
+\end{solution}
+
+\newpage
+
+\section{Finding $\lambda$}
+\begin{hw}
+	Does there exist a complex number $\lambda$ such that
+	\begin{equation*}
+		\lambda(2-3i, 5+4i, -6+7i) = (2+i, 3-i, 4)?
+	\end{equation*}
+
+	Justify your answer.
+\end{hw}
+\begin{solution}
+\begin{comment}
+We want to find some complex number $\lambda = a + bi$ such that the following holds:
+\begin{align*}
+	(a + bi)(2-3i) &= 2+i \\
+	(a+bi)(5+4i) &= 3-i \\
+	(a+bi)(-6+7i) &= 4
+\end{align*}
+
+With this in mind, we have the following:
+\begin{align*}
+	(2a + 3b) + (-3a + 2b)i &= 2+i \\
+	(5a - 4b) + (4a + 5b)i &= 3 - i \\
+	(-6a - 7b) + (7a - 6b)i &= 4 + 0i \\
+\end{align*}
+
+From here, we can see from the last line that $(7a - 6b)i = 0i \implies 7a - 6b = 0 \implies 7a = 6b$. Then, we have that $a = \frac{6}{7}b$.
+
+Through substituting, we get $-\frac{36}{7}b - \frac{49}{7}b = 4$. So, we get $-\frac{85}{7}b = 4$, we $b = -\frac{28}{85}$.
+
+Then, we must have that $a = -\frac{4(7)}{85}\frac{6}{7} = -\frac{24}{85}$.
+
+However, when checking if these solutions work with the first line, we see that $2a + 3b = -\frac{132}{85} \not= 2$.
+\end{comment}
+We observe that in order for $\lambda(-6 + 7i) = 4$ to occur, then it must mean that $\lambda = \frac{4}{-6 + 7i}$. In order words, we have:
+\begin{align*}
+	\lambda &= \frac{4}{-6 + 7i} \\
+	&= \frac{4(-6-7i)}{(-6+7i)(-6-7i)} \\
+	&= \frac{-24 - 28i}{36 + 49} \\
+	&= -\frac{24}{85} -\frac{28}{85}i
+\end{align*}
+
+However, we see from here that $(2-3i)(-\frac{24}{85} - \frac{28}{85}i) \not= 2 + i$. Thus, there does not exist such a $\lambda$.
+\end{solution}
+
+\newpage
+
+\section{Fields}
+\begin{hw}
+	Suppose that $\left\{  0, 1, x\right\}$ is a field with exactly three elements. What do the addition and multiplication tables have to be in that case? Based on the addition and multiplication tables you get, check this is
+	indeed a field. What is the ``natural" way to think of this field (and of $x$)?
+\end{hw}
+
+\begin{solution}
+	We define $\mathbb{F}_{3}$ to be a field with elements $\left\{  0, 1, x\right\}$ and the operations $(+, \cdot)$.
+	
+	First, we will deal with addition. We know that $0 + 0 = 0, 0 + 1 = 1, 0 + x = x$. 
+	
+	Next, we know that $1 + 0 = 1$. 
+
+	We will now want to find out what $1 + 1$ is equal to. First, we suppose that $1 + 1 = 0$ for contradiction. If this is the case, then we have the following scenarios for $1 + x$:
+	\begin{enumerate}
+		\item $1 + x = 0$, which implies that $x = 1$ which is a contradiction as $x \not= 1$.
+		
+		\item $1 + x = 1$, which implies that $x = 0$. Again, this is a contradiction as $x \not= 0$.
+		
+		\item $1 + x = x$. In this case, this implies that $1 = 0$, which again is a contradiction.
+	\end{enumerate}
+	
+	 So, we know that $1 + 1 \not= 0$. Now, we suppose for contradiction that $1 + 1 = 1$. For $1 + 1 = 1$, we must have then that $1 = 0$; but this is a contradiction, as $1 \not= 0$. Therefore, it must be that $1 + 1 = x$.
+	 
+	 To find what $1 + x$ is equal to, we first assume for contradiction that $1 + x = 1$. Then, this means that $x = 0$, which is a contradiction as $x \not= 0$. Similarly, if $1 + x = x$, then $1 = 0$ which again is a contradiction. Therefore, we must have that $1 + x = 0$.
+	
+	From here, we see that $x + 0 = x$. 
+	
+	We now want to find what $x + 1$ is: suppose for contradiction that $x + 1 = 1$, then $x = 0$ which is a contradiction. If $x+1 = x$, then we have that $1 = 0$, which also leads to a contradiction. Thus, we see that $x + 1 = 0$.
+	
+	Finally, for $x + x$, we suppose for contradiction that $x + x = 0$. However, for this to be the case, one of the $x$'s must be equal to 1 as established previously, which is a contradiction. Similarly, if it's equal to $x$ then we must have that $x = 0$ for one of the $x$'s, which again is a contradiction as $x \not = 0$. Thus, we conclude that $x + x = 1$. 
+	
+	Next, we will deal with multiplication. 
+	
+	For multiplication involving $0$, we have $0(0) = 0, 0(1) = 0, 0(x) = 0$.
+	
+	Similarly, in the case of $1$, we have that $1(0) = 0, 1(1) = 1, 1(x) = x$.
+	
+	For $x$, we see that $x(0) = 0$ and $x(1) = x$. 
+	
+	Now, we only have the case of $x(x)$ to deal with.
+	
+	We know by the field axioms that any element $a \in \mathbb{F}_{3}$ where $a \not= 0$ must have a multiplicative inverse $a^{-1}$; that is, $aa^{-1} = 1$. However, we see that since $x(0) = 0$ and $x(1) = x$, then it follows that $x(x) = 1$; $x$ is its own multiplicative inverse.
+	
+	Then, the addition table for $\mathbb{F}_{3}$ is as follow:
+	\begin{center}
+		\begin{tabular}{c|c c c}
+			+ & 0 & 1 & x \\
+			\hline
+			0 & 0 & 1 & x \\
+			1 & 1 & x & 0 \\
+			x & x & 0 & 1
+		\end{tabular}
+	\end{center}
+
+	And we have the multiplication table for $\mathbb{F}_{3}$ to be:
+	\begin{center}
+		\begin{tabular}{c|c c c}
+			$\cdot$ & 0 & 1 & x \\
+			\hline
+			0 & 0 & 0 & 0 \\
+			1 & 0 & 1 & x \\
+			x & 0 & x & 1
+		\end{tabular}
+	\end{center}
+
+	Since every entry in the tables consist of only elements in $\left\{  0, 1, x\right\}$, we see that closure under addition and multiplication holds for $\mathbb{F}_{3}$. We also see that we have the elements 0 (the additive identity) and 1 (the multiplicative identity).
+
+	Furthermore, since the tables are symmetric along the main diagonal, commutativity holds.
+	
+	Also, since every row/column contains a 1 in the addition table, we see that the additive inverse exists. For the multiplication table, every non-zero row/column has a 1 as well, so a multiplicative inverse exists.
+	
+	
+	To check for associativity and distributivity, we first remark the fact that the field $\mathbb{F}_{3}$ can actually be thought of as the ring $\ZZ_{3}$, with $x \equiv 2 \pmod{3}$. Then, we observe the following tables for $\ZZ_{3}$:
+	
+	\begin{center}
+		\begin{tabular}{c|c c c}
+			+ & 0 & 1 & 2 \\
+			\hline
+			0 & 0 & 1 & 2 \\
+			1 & 1 & 2 & 0 \\
+			2 & 2 & 0 & 1
+		\end{tabular}
+	\end{center}
+	\begin{center}
+	\begin{tabular}{c|c c c}
+		$\cdot$ & 0 & 1 & 2 \\
+		\hline
+		0 & 0 & 0 & 0 \\
+		1 & 0 & 1 & 2 \\
+		2 & 0 & 2 & 1
+	\end{tabular}
+\end{center}
+	
+	Then, with this in mind, we see that associativity and distributivity must hold for $\mathbb{F}_{3}$ as well, as they hold for $\ZZ_{3}$.
+\end{solution}
+
+\newpage
+
+\section{Differentiable Functions}
+\begin{hw}
+	Suppose $a$ is a fixed real number, and consider the set of all real-valued twice differential functions $f$ on the interval $\left[0, \infty\right)$ such that $f''(2) + af'(1) - af(0) = 2a$ (equipped with the usual addition of functions
+	and multiplication by real scalars). For which values of a is this a vector space over $\RR$? Justify your answer.
+\end{hw}
+\begin{solution}
+	Let us consider the set of all real-valued, twice differential functions $f$ on $\left[0, \infty\right)$ where $f''(2) + af'(1) - af(0) = 2a$. We want to find the value(s) of $a$ which would form a vector space.
+	
+	First, let us take functions $g, h$ which satisfies the equation. From here, we want to find when $g + h$ is also a solution to the differential equation given; i.e., we want there to be closure under addition.
+	
+	With this in mind, we observe the following:
+	\begin{align*}
+		(g+h)''(2) + a(g+h)'(1) - a(g+h)(0) &= g''(2) + h''(2) + ag'(1) + ah'(1) - ag(0) - ah(0) \\
+		&= (g''(2) + ag'(1) - ag(0)) + (h''(2) + ah'(1) - ah(0)) \\
+		&= 2a + 2a \\
+		&= 4a \\
+		&\not= 2a
+	\end{align*}
+	
+	We observe that the only way for $4a = 2a$ to be true is if $a = 0$. Now, with $a = 0$, our equation becomes $f''(2) = 0$.
+	
+	Now, we will verify the other properties of a vector space for $a = 0$. To begin with, consider the functions $g, h, j$ on the interval $\left[ 0, \infty \right)$ which satisfies the equation given, along with scalars $\lambda, \mu \in \RR$. We now observe the following:
+	\begin{itemize}
+		\item Commutativity:
+		\begin{align*}
+			(g+h)''(2) &= g''(2) + h''(2) \\
+			&= 0 \\
+			&= h''(2) + g''(2) \\
+			&= (h+g)''(2)
+		\end{align*}
+	
+		\item Addition Associativity:
+		\begin{align*}
+			(g + (h + j))''(2) &= g''(2) + (h''(2) + j''(2)) \\
+			&= 0 + (0 + 0) \\
+			&= 0 \\
+			&= (0 + 0) + 0 \\
+			&= (g''(2) + h''(2)) + j''(2) \\
+			&= ( (g+h) + j)''(2)
+		\end{align*}
+	
+		\item Additive Identity: Let us take the function $f(x) = 0$ for all $x \in \left[ 0, \infty \right)$. Now, we observe the following:
+		\begin{align*}
+			(f + g)''(x) &= f''(x) + g''(x) \\
+			&= 0 + g''(x) \\
+			&= g''(x) \\
+			&= 0
+		\end{align*}
+	
+		\item Additive Inverse: Let us take the function $f(x) = -g(x)$. Then, we see the following:
+		\begin{align*}
+			(f+g)''(2) &= f''(2) + g''(2) \\
+			&= -g(2)'' + g''(2) \\
+			&= 0
+		\end{align*}
+	
+		\item Scalar Multiplication Associativity:
+		\begin{align*}
+			\lambda \cdot (\mu \cdot f''(2)) &= \lambda \cdot (\mu \cdot 0) \\
+			&= \lambda \cdot 0 \\
+			&= 0 \\
+			&= (\lambda \cdot \mu) \cdot 0 \\
+			&= (\lambda \cdot \mu) \cdot f''(2)
+		\end{align*}
+	
+		\item Scalar Multiplication Identity: Let us take $\lambda = 1$. Then, we see that
+		\begin{align*}
+			\lambda \cdot f''(2) &= 1 \cdot f''(2) \\
+			&= f''(2) \\
+			&= 0
+		\end{align*}
+		
+		\item Distributivity: For distributivity, we first observe the following:
+		\begin{align*}
+			\lambda \cdot ( (f+g)''(2)) &= \lambda \cdot (f''(2) + g''(2)) \\
+			&= \lambda \cdot (0) \\
+			&= 0 \\
+			&= 0 + 0 \\
+			&= (\lambda \cdot 0) + (\lambda \cdot 0) \\
+			&= (\lambda \cdot f''(2)) + (\lambda \cdot g''(2))
+		\end{align*}
+	
+		We also see that
+		\begin{align*}
+			(\lambda + \mu) \cdot f''(2) &= (\lambda + \mu) \cdot 0 \\
+			&= 0 \\
+			&= 0 + 0 \\
+			&= (\lambda \cdot 0) + (\mu \cdot 0) \\
+			&= (\lambda \cdot f''(2)) + (\mu \cdot f''(2))
+		\end{align*}
+	\end{itemize}
+
+	Thus, we see that only for $a=0$ do we have a vector space over $\RR$. 
+\end{solution}
+
+\newpage
+
+\section{Functions and Vector Spaces}
+\begin{hw}
+	Suppose $S$ is a non-empty set and $V$ is a vector space. Let $V^{S}$ denote the set of functions from $S$ to $V$. Define a natural addition and scalar multiplication on $V^{S}$, and show that $V^{S}$ is a vector space with these definitions.
+\end{hw}
+\begin{solution}
+	Let us suppose that we have a non-empty set $S$, and we shall denote $V^{S}$ as the set of functions from $S$ to $V$.
+	
+	Now, suppose we have functions $f, g \in V^{S}$. For some $s \in S$, let us define addition to be $(f \oplus g)(s) = f(s) + g(s)$. For scalar multiplication, for some scalar $\lambda \in \mathbb{F}$, we define it as $(\lambda \otimes f)(s) = \lambda \cdot f(s)$.
+	
+	From here, we will want to show that $V^{S}$ form a vector space with the provided definitions. Let us consider the functions $f,g,h \in V^{S}$, and the scalars $\lambda, \mu \in \mathbb{F}$.
+	
+	Now, we will first deal with addition:
+	\begin{itemize}
+		\item To begin with, for commutativity we have $(f \oplus g)(s) = f(s) + g(s) = g(s) + f(s) = (g \oplus f)(s)$.
+	
+		\item For associativity, we observe that $(f \oplus (g \oplus h))(s) = f(s) + (g(s) + h(s)) = (f(s) + g(s)) + h(s) = ((f \oplus g) \oplus h)(s)$.
+		
+		\item To show that there exists an additive identity, we simply define some function $f(s) = 0$, for all $s \in S$. We see then that $(f \oplus g)(s) = 0 + g(s) = g(s)$. Thus, we have the additive identity in $V^{S}$ as desired.
+		
+		\item To show that there exists an additive inverse, we define $f(s) = (-1)g(s)$. We see that $(f \oplus g)(s) = (-1)g(s) + g(s) = 0$, as desired.
+	\end{itemize}
+
+	Next, we look at multiplication. We observe the following:
+	\begin{itemize}
+		\item For associativity, we see that $( (\lambda \cdot \mu) \otimes f)(s) = (\lambda \cdot \mu) \cdot f(s) = \lambda \cdot (\mu \cdot f(s)) = (\lambda \cdot (\mu \otimes f))(s)$.
+		
+		\item We observe that for the multiplicative identity, we have $(1 \otimes f)(s) = 1 \cdot f(s) = f(s)$, where $1 \in \mathbb{F}$, and thus the multiplicative identity element in $V$.
+	\end{itemize}
+	
+	Finally, we check distributivity:
+	\begin{itemize}
+		\item We observe that $(\lambda \otimes (f \oplus g))(s) = \lambda \cdot (f(s) + g(s)) = (\lambda \cdot f(s)) + (\lambda \cdot g(s))$.
+		\item We also have that $( (\lambda + \mu) \otimes f)(s) = (\lambda + \mu) \cdot f(s) = (\lambda \cdot f(s)) + (\mu \cdot f(s))$.
+	\end{itemize}
+
+	Thus, we see that all of the vector space axioms are satisfied, and thus $V^{S}$ is a vector space with these definitions.
+\end{solution}
+
+\end{document}

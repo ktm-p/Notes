@@ -1,0 +1,746 @@
+\documentclass{article}
+%%%%%%% PREAMBLE %%%%%%%
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={CS70 Homework 1},
+	pdfauthor={Michael Pham},
+}
+
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%%%
+
+%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+\newcommand*{\eval}[3]{\left.#1\right\rvert_{#2}^{#3}}
+\newcommand*{\D}{$\mathrm{d}$}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%%
+
+%%% REDEFINING COMMANDS
+\let\oldint\int
+\renewcommand{\int}[2]{\oldint\limits_{#1}^{#2}}
+\let\oldprod\prod
+\renewcommand{\prod}[2]{\oldprod\limits_{#1}^{#2}}
+\let\oldsum\sum
+\renewcommand{\sum}[2]{\oldsum\limits_{#1}^{#2}}
+%%%
+%%%%%
+%END_FOLD
+%%%%%
+
+\begin{document}
+\mytitle{Homework 1}{January 23 2023}
+
+\setcounter{section}{-1}
+\section{Sundry}
+I worked on the homework questions by myself.
+
+\newpage
+
+\section{Calculus Review}
+% PROBLEM 1A
+\begin{hw}
+	Compute the following integral:
+	\begin{equation*}
+		\int{0}{\infty} \sin(t)e^{-t} dt
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	We can compute the integral by using integration by parts twice as follow:
+	\begin{align*}
+		u = \sin(t) &\quad dv = e^{-t}dt \\
+		du = \cos\left( t \right)dt &\quad v = -e^{-t}
+	\end{align*}
+	\begin{align*}
+		\int{0}{\infty} \sin(t)e^{-t} dt &= \eval{-e^{-t}\sin\left( t \right)}{0}{\infty} - \int{0}{\infty} -e^{-t}\cos\left( t \right)dt \\
+		&= \eval{-e^{-t}\sin\left( t \right)}{0}{\infty} + \int{0}{\infty} e^{-t}\cos\left( t \right)dt
+	\end{align*}
+	\begin{align*}
+		w = \cos\left( t \right) &\quad dx = e^{-t}dt \\
+		dw = -\sin\left( t \right)dt &\quad x = -e^{-t}
+	\end{align*}
+	\begin{align*}
+		\int{0}{\infty} e^{-t}\cos\left( t \right)dt &= \eval{-e^{-t}\cos\left( t \right)}{0}{\infty} - \int{0}{\infty} (-e^{-t})(-\sin\left( t \right))dt \\
+		&= \eval{-e^{-t}\cos\left( t \right)}{0}{\infty} - \int{0}{\infty} e^{-t}\sin\left( t \right)dt \\
+		\int{0}{\infty} \sin(t)e^{-t} dt &= \eval{-e^{-t}\sin\left( t \right)}{0}{\infty} \eval{-e^{-t}\cos\left( t \right)}{0}{\infty} - \int{0}{\infty} e^{-t}\sin\left( t \right)dt \\
+		2\int{0}{\infty} \sin(t)e^{-t} dt &= \eval{-e^{-t}(\sin\left( t \right) + \cos\left( t \right))}{0}{\infty} \\
+		\int{0}{\infty} \sin(t)e^{-t} dt &= \eval{\dfrac{-e^{-t}(\sin\left( t \right) + \cos\left( t \right))}{2}}{0}{\infty} \\
+		&= \eval{\dfrac{-(\sin\left( t \right) + \cos\left( t \right))}{2e^{t}}}{0}{\infty} \\
+		&= 0 - (-\dfrac{1}{2}) \\
+		&= \dfrac{1}{2}
+	\end{align*}
+\end{solution}
+
+% PROBLEM 1B
+\begin{hw}
+	Compute the values of $ x \in \left(-2, 2 \right) $ that corresponds to local maxima and minima of the function
+	\begin{equation*}
+		f(x) = \int{0}{x^{2}} t\cos\left( \sqrt[]{t} \right) dt
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	In order to find the local minima and maxima, we first find when $f'(x) = 0$. To find $f'(x)$, we can use the fundamental theorem of calculus as follow:
+	\begin{align*}
+		f(x) &= \int{0}{x^{2}} t\cos\left( \sqrt[]{t^{2}} \right) dt \\
+		f'(x) &= (2x)(x^{2}\cos\left( \sqrt{x^{2}} \right)) \\
+		&= 2x(x^{2}\cos\left( x \right)) \\
+		&= 2x^{3}\cos\left( x \right)
+	\end{align*}
+
+	Now, we want to find when $ f'(x) = 0$ within our domain $x\in(-2, 2)$:
+	\begin{align*}
+		2x^{3}\cos\left( x \right) &= 0 \\
+		x &= -\dfrac{\pi}{2}, 0, \dfrac{\pi}{2}
+	\end{align*}
+
+	Now, to find which point corresponds to a local minima or maxima, we observe that if $f'(x)$ is negative before and positive after when $f'(x)=0$, then it'll be a local minima. If it goes from positive to negative, then it'll be a local maxima. Now, we see the values for $f'(x)$ for different $x$'s below:
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+		\hline
+		& & & & & & & \\
+		$x$ & $\left( -2, -\dfrac{\pi}{2} \right)$ & $-\dfrac{\pi}{2}$ & $\left( -\dfrac{\pi}{2}, 0 \right)$ & $0$ & $\left( 0, \dfrac{\pi}{2} \right)$ & $\dfrac{\pi}{2}$ & $\left( \dfrac{\pi}{2}, 2 \right)$ \\
+		& & & & & & & \\
+		\hline
+		& & & & & & & \\
+		$f'(x)$ & $2\left( -\dfrac{7\pi}{12} \right)^{3}\cos\left( -\dfrac{7\pi}{12} \right)$ & $0$ & $2\left( -\dfrac{\pi}{4} \right)^{3}\cos\left( -\dfrac{\pi}{4} \right)$ & $0$ & $2\left( \dfrac{\pi}{4} \right)^{3}\cos\left( \dfrac{\pi}{4} \right)$ & $0$ & $2\left( \dfrac{7\pi}{12} \right)^{3}\cos\left( \dfrac{7\pi}{12} \right)$ \\
+		& & & & & & & \\
+		\hline 
+		& & & & & & & \\
+		$+/-$ & $+$ & $0$ & $-$ & $0$ & $+$ & $0$ & $-$ \\
+		& & & & & & & \\
+		\hline
+	\end{tabular}
+	\end{center}
+
+	From this, we see that $x=-\dfrac{\pi}{2}$ and $x=\dfrac{\pi}{2}$ are local maximas, while $x=0$ is a local minima.
+\end{solution}
+
+\newpage
+
+% PROBLEM 1C
+\begin{hw}
+	Compute the double integral
+	\begin{equation*}
+		\iint\limits_R 2x + y dA,
+	\end{equation*}
+	where $R$ is the region bounded by the lines $ x = 1 $, $ y = 0 $, and $ y = x $.
+\end{hw}
+\begin{solution}
+	To solve this double integral, we have to figure out our boundaries first. For this, we see that as the region is bounded by $y=0$ and $y=x$, then the $x$ value will range from $x=0$ to $x=1$. Now, we compute the double integral as follow:
+	
+	\begin{align*}
+		\int{0}{1} \int{0}{x} 2x + y dydx &= \int{0}{1} \eval{\left( 2xy + \dfrac{y^{2}}{2} \right)}{0}{x} dx \\
+		&= \int{0}{1} \left( 2x^{2} + \dfrac{x^{2}}{2} \right) dx \\
+		&= \eval{\left( \dfrac{2x^{3}}{3} + \dfrac{x^{3}}{6} \right)}{0}{1} \\
+		&= \dfrac{5}{6}
+	\end{align*}
+\end{solution}
+
+\newpage
+
+\section{Prove or Disprove}
+For each of the following, either prove the statement, or disprove by finding a counterexample.
+% PROBLEM 2A
+\begin{hw}
+	$\left( \all n \in \NN \right)$ if $ n $ is odd then $ n^{2} + 4n $ is odd.
+\end{hw}
+Before proceeding with the proof, we shall first introduce a lemma which was proven in class before:
+\begin{lem}
+	If $n$ is odd, then $n^{2}$ is odd.
+\end{lem}
+
+Now, we shall proceed with the proof for Problem 2.1:
+
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	Let us assume that $n$ is odd. Then, by definition, we can write $n$ as such: $n = 2k+1$ for some $k \in \ZZ$. Furthermore, by Lemma 2.1, we see that $n^{2}$ is also an odd number, and thus can be expressed as $n^{2} = 2l + 1$ for some $l \in \ZZ$.
+	
+	Now, we can rewrite $n^{2} + 4n$ as such:
+	\begin{align*}
+		n^{2} + 4n &= (2l+1) + 4(2k+1) \\
+		&= 2l+1 + 8k + 4 \\
+		&= 8k + 2l + 4 + 1 \\
+		&= 2(4k+l+2) + 1 \\
+		&= 2m + 1\text{, for $m \in \ZZ$, where $m=4k+l+2$} \tag{$\ZZ$ is closed under multiplication and addition}
+	\end{align*}
+
+	Now, we see that by definition of oddness, $n^{2}+4n = 2m + 1$ is an odd number, and thus we can conclude that if $ n $ is odd then $ n^{2} + 4n $ is odd.
+\end{solution}
+
+% PROBLEM 2B
+\begin{hw}
+$	\left( \all a,b \in \ZZ \right)$, if $a+b \leq 15$ then $a \leq 11$ or $b \leq 4$.
+\end{hw}
+\begin{solution}
+	% go with contraposition
+	
+	We shall proceed by contraposition.
+	
+	Let us assume that for integers $a$ and $b$, $a > 11$ and $b > 4$. 
+	
+	Then, we see that the smallest possible number $a$ and $b$ can be are $12$ and $5$ respectively. Then, the smallest value that $a+b$ can be is $a+b = 12 + 5 = 17 > 15$.
+	
+	Thus, by contraposition, we can conclude that if $a+b \leq 15$ then $a \leq 11$ or $b \leq 4$, for all integers $a$ and $b$.
+\end{solution}
+
+% PROBLEM 2C
+\begin{hw}
+	$\left( \all r \in \RR \right)$ if $r^{2}$ is irrational, then $r$ is irrational.
+\end{hw}
+\begin{solution}
+	% prove by contraposition
+	We shall proceed by contraposition.
+	
+	Let us assume that $r$ is a rational number. Then, by definition, $r = \dfrac{a}{b}$, for $a,b \in \ZZ$, and $b \not= 0$. 
+	
+	Now, we can observe the following:
+	\begin{align*}
+		r &= \dfrac{a}{b} \\
+		r^{2} &= \left( \dfrac{a}{b} \right) ^{2} \\
+		&= \dfrac{a^{2}}{b^{2}} \\
+		&= \dfrac{c}{d}\text{, for $c,d \in \ZZ$, where $c=a^{2}$, $d=b^{2}$, and $d \not= 0$} \tag{$\ZZ$ is closed under multiplication}
+	\end{align*}
+
+	Then, we see that since we can express $r^{2}$ as a fraction of two integers, then by definition $r^{2}$ is rational as well. Thus, by contraposition, we can conclude that if $r^{2}$ is irrational, then $r$ is irrational.
+\end{solution}
+
+% PROBLEM 2D
+\begin{hw}
+	$\left( \all n \in \ZZ^{+} \right)$ $5n^{3} > n!$
+\end{hw}
+\begin{solution}
+	We shall disprove this statement with a counterexample: let $n=7$. Then, we see the following:
+	 \begin{itemize}
+	 	\item $5n^{3} = 5(7)^{3} = 5\left( 7 \right)\left( 7 \right)\left( 7 \right)$.
+	 	\item $n! = 7! = \left( 7 \right)\left( 6 \right)\left( 5 \right)\left( 4 \right)\left( 3 \right)\left( 2 \right)\left( 1 \right) = 6\left( 7 \right)\left( 10 \right)\left( 12 \right)$.
+
+	 \end{itemize}	
+	Since all of the factors of $7!$ are greater than or equal to the factors of $5(7)^{3}$, then $n!$ must be greater than $5n^{3}$ for $n=7$. Therefore, we see that the statement $\left( \all n \in \ZZ^{+} \right)5n^{3} > n!$ is false.
+\end{solution}
+
+\newpage
+
+\section{Rationals and Irrationals}
+% PROBLEM 3
+\begin{hw}
+	Prove that the product of a non-zero rational number and an irrational number is irrational.
+\end{hw}
+\begin{solution}
+	We shall proceed by contradiction.
+	
+	Let us first assume for contradiction that the product of a non-zero rational number $a$ and an irrational number $b$ is rational. Let's call this number $c$. 
+	
+	Now, because $a$ is a rational number then, by definition, $a = \dfrac{x}{y}$, for $x,y \in \ZZ$, and $y \not= 0$.
+	
+	Furthermore, since the product $c=ab$ is rational, then $c = \dfrac{k}{l}$ for some integers $k, l$, where $l \not= 0$.
+	
+	Now, we see the following: 
+	\begin{equation*}
+		c = ab = \dfrac{x}{y}b = \dfrac{k}{l}
+	\end{equation*}
+
+	This means that $\dfrac{x}{y}b = \dfrac{k}{l}$; and from this, we see that $b = \dfrac{ky}{xl} = \dfrac{m}{n}$ for integers $m=ky$ and $n=xl$, where $n \not= 0$ (as $\ZZ$ is closed under multiplication).
+	
+	As $b$ can be written as a fraction of two integers then, by definition, this means that $b$ is a rational number. However, this is a contradiction with our assumption at the start that $b$ is an irrational number.
+	
+	Therefore, we can conclude that the product of a non-zero rational number $a$ and an irrational number $b$ is irrational.
+\end{solution}
+
+\newpage
+
+\section{Twin Primes}
+% PROBLEM 4A
+\begin{hw}
+	Let $p>3$ be a prime. Prove that $p$ is of the form $3k+1$ or $3k-1$ for some integer $k$.
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	Let us assume that $p>3$ is a prime. As $p$ is a prime, it can only be an odd number (if it was even, then it'd be divisible by 2). Then, we see the following for some integer $k$:
+	\begin{itemize}
+		\item $3k$ is not a prime, as it is divisible by $3$.
+		\item $3k+1$ could possibly be a prime, as if $k$ is an even number then $k=2l$ for some integer $l$. Then, $3k+1=3(2l)+1=6l+1=2(3l)+1=2x+1$ for some integer $x=3l$ (because $\ZZ$ is closed under multiplication). Since $3k+1$ is an odd number when $k$ is even, then it could possibly be a prime.
+		\item $3k+2$ could possibly be a prime, as if $k$ is an odd number then $k=2l+1$, for $l\in\ZZ$. Then, $3(2l+1)+2=6l+5=6l+4+1=2(3l+2)+1=2y+1$ for some integer $y=3l+2$. Thus, as $3k+2$ is an odd number when $k$ is odd, then it could possibly be a prime.
+		\item $3k+3$ is not a prime, as we can rewrite it as $3k+3 = 3\left( k+1 \right)=3m$, for some integer $m$. We see that this divisible by $3$.
+		\item Then, we see that this pattern continues on.
+	\end{itemize}
+	
+	From this, we see the only options that could result in a prime number are $3k+1$ and $3k+2$. However, we see that $3k+2 = 3m-1$ for some integer $m=k+1$. Thus, $3k+2 \equiv 3k-1$. Therefore, we can conclude that for some prime $p>3$, it is in the form of $3k+1$ or $3k-1$ for some integer $k$.
+\end{solution}
+
+% PROBLEM 4B
+\begin{hw}
+	\textit{Twin primes} are pairs of prime numbers $p$ and $q$ that have a difference of $2$. Use part (a) to prove that $5$ is the only prime number that takes part in two different twin prime pairs.
+\end{hw}
+\begin{solution}
+	We will proceed by cases.
+	
+	
+	
+	First, we assume that $5$ is a prime number that takes part in two different twin prime pairs. We can prove this by making the following observations:
+	\begin{itemize}
+		\item As $5$ is divisible only by $1$ and itself, it is a prime number. 
+		\item Next, observe that $5-2 = 3$, which is a prime number as it's divisible only by $1$ and itself.
+		\item Furthermore, $5+2=7$, which is also prime number as well, as $7$ is divisible only by $1$ and itself.
+	\end{itemize}
+	As such, we see that $5$ is a prime number that takes part in two different twin prime pairs: $(3,5)$ and $(5,7)$.
+
+	Now, recall that for a prime $p>3$, it can take on the form of $3k+1$ or $3k-1$. To be a part of two different twin prime pairs, we see that $p+2$ and $p-2$ must both result in a prime. Now, we observe the following:
+	\begin{itemize}
+		\item If we assume that $3k+1$ is a prime, then we see that $\left( 3k+1 \right)+2 = 3k+3 = 3(k+1)$. We see that this isn't a prime, as it's divisible by $3$. Thus, $3k+1$ can't take part in two different twin prime pairs.
+		
+		\item If we assume that $3k-1$ is a prime, then we see that $(3k-1)-2 = 3k-3 = 3(k-1)$, which is also divisible by $3$. Thus, $3k-1$ can't take part in two different twin prime pairs either.
+	\end{itemize}
+
+	Therefore, we can conclude that $5$ is the only prime number that's in two different twin prime pairs.
+\end{solution}
+
+\newpage
+
+\section{Airport}
+% PROBLEM 5
+\begin{hw}
+	Suppose that there are $2n+1$ airports, where $n$ is a positive integer. The distances between any two airports are all different. For each airport, exactly one airplane departs from it and is destined for the closest airport. Prove by induction that there is an airport which has no airplane destined for it.
+\end{hw}
+\begin{solution}
+	We shall proceed by induction on $n$.
+	
+	\underline{\textbf{Base Case}}: First, we shall prove the base case of $n=1$. We see that there are $2(1)+1 = 3$ airports with airplanes in them for $n=1$. Since the distance between any two airport are all different, we see that there is a unique distance between two airports such that it's the smallest out of the three possible distances. Then, the airplane in these two airports will be destined for each other. This means that the third airport won't have any planes destined for it.
+	
+	\underline{\textbf{Induction Hypothesis}}: Now, we shall introduce our induction hypothesis: for $n=k \geq 1$, there are $2k+1$ airports, where exactly one plane depart from each of them, there is an airport that has no airplane destined for it.
+	
+	\underline{\textbf{Inductive Step}}: Next, we want to prove that our induction hypothesis holds for $n=k+1$. We see that there are $2(k+1)+1 = 2k+3$ airports, where each of them have exactly one airplane departing from them. Now, observe that because the distance between any two airports is unique, then there exists a single distance between two airports that's the smallest out of all the possible distances. Then, the airplanes for these two airports will be destined for each other. Thus, there are now $2k+1$ airports with planes departing from each of them. However, by our induction hypothesis, we see that this means there will be an airport that has no airplane destined for it.
+	
+	Therefore, by the principle of mathematical induction, we can conclude that our claim is true for all positive integer $n$.
+\end{solution}
+
+\newpage
+
+\section{Proving Inequality}
+% PROBLEM 6
+\begin{hw}
+	For all positive integers $n \geq 1$, prove that
+	\begin{equation*}
+		\dfrac{1}{3^{1}} + \dfrac{1}{3^{2}} + \ldots + \dfrac{1}{3^{n}} < \dfrac{1}{2}
+	\end{equation*}
+\end{hw}
+
+%Before proceeding with our proof, we will instead try and strengthen the induction hypothesis as such:
+%\addtocounter{hw}{-1}
+%\begin{hw}
+%	For all positive integers $n \geq 1$, prove that
+%	\begin{equation*}
+%		\dfrac{1}{3^{1}} + \dfrac{1}{3^{2}} + \ldots + \dfrac{1}{3^{n}} = \dfrac{1}{2} - \dfrac{1}{2\left( 3^{n} \right)}
+%	\end{equation*}
+%\end{hw}
+%\begin{solution}
+%	We shall proceed by induction on $n$.
+%	
+%	First, we look at our base case of $n=1$. We see that $\dfrac{1}{3^{1}} = \dfrac{1}{2} - \dfrac{1}{2\left( 3^{1} \right)} = \dfrac{1}{3}$. Thus, our base case is true.
+%	
+%	Next, we introduce our induction hypothesis: for $n=k$, $\sum{i=1}{k} \dfrac{1}{3^{i}} = \dfrac{1}{2} - \dfrac{1}{2\left( 3 \right)^{k}}$.
+%	
+%	Now, we want to prove that our induction hypothesis holds for $n=k+1$. We observe the following:
+%	\begin{align*}
+%		\sum{i=1}{k+1} \dfrac{1}{3^{i}} &= \sum{i=1}{k} \dfrac{1}{3^{i}} + \dfrac{1}{3^{k+1}} \\
+%		&= \sum{i=1}{k} \dfrac{1}{3^{i}} + \dfrac{1}{3\left( 3^{k} \right)} \\
+%		&= \dfrac{1}{2} - \dfrac{1}{2\left( 3^{k} \right)} + \dfrac{1}{3\left( 3^{k} \right)} \tag{by our induction hypothesis}
+%	\end{align*}
+%
+%	Now, to prove our claim, it suffices to show the following:
+%	\begin{equation*}
+%		- \dfrac{1}{2\left( 3^{k} \right)} + \dfrac{1}{3\left( 3^{k} \right)} = - \dfrac{1}{2\left( 3^{k+1} \right)}
+%	\end{equation*}
+%
+%	To do this, we proceed as follow:
+%	\begin{align*}
+%		- \dfrac{1}{2\left( 3^{k} \right)} + \dfrac{1}{3\left( 3^{k} \right)} &= - \dfrac{3}{2\left( 3 \right)\left( 3^{k} \right)} + \dfrac{2}{2\left( 3 \right)\left( 3^{k} \right)} \\
+%		&= - \dfrac{1}{2\left( 3 \right)\left( 3^{k} \right)} \\
+%		&= - \dfrac{1}{2\left( 3^{k+1} \right)}
+%	\end{align*}
+%
+%	Therefore, by the principle of mathematical induction, for all positive integers $n \geq 1$, $\sum{i=1}{k} \dfrac{1}{3^{i}} = \dfrac{1}{2} - \dfrac{1}{2\left( 3^{n} \right)}$.
+%\end{solution}
+\begin{solution}
+	We shall proceed by induction on $n$.
+	
+	\underline{\textbf{Base Case}}: First, we look at our base case of $n=1$. We see that $\dfrac{1}{3^{1}} < \dfrac{1}{2}$. Thus, our claim holds for $n=1$.
+	
+	\underline{\textbf{Induction Hypothesis}}: Next, we shall introduce our induction hypothesis. Let us assume that for $n=k \geq 1$, our claim holds true. That is,
+	\begin{equation*}
+		\sum{i=1}{k} \dfrac{1}{3^{i}} < \dfrac{1}{2}
+	\end{equation*}
+
+	\underline{\textbf{Inductive Step}}: Now, we want to show our induction hypothesis holds for $n=k+1$. That is, we want to show:
+	
+	\begin{equation*}
+		\sum{i=1}{k+1} \dfrac{1}{3^{i}} < \dfrac{1}{2}
+	\end{equation*}
+
+	First, notice that multiplying $\sum{i=1}{k} \dfrac{1}{3^{i}}$ by $\dfrac{1}{3}$ ``shifts" our terms by $1$, while excluding the first term $\dfrac{1}{3}$. Then, with this in mind, we observe the following:
+	
+	\begin{equation*}
+		\sum{i=1}{k+1} \dfrac{1}{3^{i}} = \dfrac{1}{3}\sum{i=1}{k} \dfrac{1}{3^{i}} + \dfrac{1}{3}
+	\end{equation*}
+
+	Then, from here we see the following:
+	\begin{align*}
+		\sum{i=1}{k+1} \dfrac{1}{3^{i}} &= \dfrac{1}{3}\sum{i=1}{k} \dfrac{1}{3^{i}} + \dfrac{1}{3} \\
+		&< \dfrac{1}{3}\left( \dfrac{1}{2} \right) + \dfrac{1}{3} \tag{by our induction hypothesis} \\
+		&= \dfrac{1}{6} + \dfrac{1}{3} \\
+		&= \dfrac{1}{2} \\
+		\therefore\sum{i=1}{k+1} \dfrac{1}{3^{i}} &< \dfrac{1}{2}
+	\end{align*}
+
+	Thus, we have proven the induction hypothesis for $n=k+1$. Therefore, by the principle of mathematical induction, for all positive integers $n \geq 1$, $\sum{i=1}{n} \dfrac{1}{3^{i}} < \dfrac{1}{2}$.
+\end{solution}
+
+\newpage
+
+\section{AM-GM}
+In this problem, we will prove the AM-GM inequality. More precisely, for all positive integers $n \geq 2$, given any nonnegative real numbers $a_{1}, \ldots, a_{n}$, we show the following:
+\begin{equation*}
+	\dfrac{a_{1} + \ldots + a_{n}}{n} \geq \sqrt[n]{a_{1} \ldots a_{n}}
+\end{equation*}
+% PROBLEM 7A
+\begin{hw}
+	Prove that the AM-GM inequality holds for $n=2$. In other words, for nonnegative real numbers $a_{1}$ and $a_{2}$, show that
+	\begin{equation*}
+		\dfrac{a_{1} + a_{2}}{2} \geq \sqrt[]{a_1 a_{2}}
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	Observe that since $a,b$ are nonnegative real numbers, then $\left( \sqrt[]{a_{1}} - \sqrt[]{a_{2}} \right)^{2} \geq 0$, with equality when $a_{1} = a_{2}$. From here we have the following:
+	\begin{align*}
+		\left( \sqrt[]{a_{1}} - \sqrt[]{a_{2}} \right)^{2} &\geq 0 \\
+		a_{1} - 2\text{  }\sqrt[]{a_{1}a_{2}} + a_{2} &\geq 0 \\
+		a_{1}+a_{2} &\geq 2\text{  }\sqrt[]{a_{1}a_{2}} \\
+		\dfrac{a_{1}+a_{2}}{2} &\geq \sqrt[]{a_{1}a_{2}}
+	\end{align*}
+
+	Thus, we see that the AM-GM inequality holds for $n=2$. 
+\end{solution}
+\begin{rmk}
+	In the solution to Problem 7.1, we used the fact that $\left( \sqrt[]{a_{1}} - \sqrt[]{a_{2}} \right)^{2} = a_{1}-2\text{  }\sqrt[]{a_1 a_{2}}+a_{2}$, provided to us by the hint.                 
+\end{rmk}
+
+% PROBLEM 7B
+\begin{hw}
+	For some integer $k$, suppose that the AM-GM inequality holds for $n=2^{k}$. Show that the AM-GM inequality holds for $n=2^{k+1}$.
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	Assume that the AM-GM inequality holds for $n=2^{k}$. Now, we observe that for $n=2^{k+1}$, we can rewrite it as $2\left( 2^{k} \right)$. From this, let $m=2^{k}$, yielding us $n=2m$. From here, we see that we will have two AM-GM inequalities, each containing $m$ terms from $a_{1}$ to $a_{m}$ and $a_{m+1}$ to $a_{2m}$ respectively:
+	
+	\begin{equation*}
+		\dfrac{a_{1}+\ldots+a_{m}}{m}\geq\sqrt[m]{a_{1}\ldots a_{m}}\text{ and }\dfrac{a_{m+1}+\ldots+a_{2m}}{m}\geq\sqrt[m]{a_{m+1}\ldots a_{2m}}
+	\end{equation*}
+
+	Then, we can add the two inequalities together, yielding the following:
+	\begin{align*}
+		 \dfrac{\left( a_{1}+\ldots+a_{m} \right)+\left( a_{m+1}+\ldots+a_{2m} \right)}{m} &\geq \sqrt[m]{a_{1}\ldots a_{m}} + \sqrt[m]{a_{m+1}\ldots a_{2m}} \\
+		 %
+		 \dfrac{\left( a_{1}+\ldots+a_{m} \right)+\left( a_{m+1}+\ldots+a_{2m} \right)}{2m} &\geq \dfrac{\sqrt[m]{a_{1}\ldots a_{m}} + \sqrt[m]{a_{m+1}\ldots a_{2m}}}{2} \tag{divide both sides by $2$} \\
+		 %
+		 &\geq \sqrt[]{\sqrt[m]{a_{1}\ldots a_{m}}\sqrt[m]{a_{m+1} \ldots a_{2m}}} \tag{AM-GM inequality for n=2} \\
+		 %
+		 &= \sqrt[2m]{a_{1} \ldots a_{m}a_{m+1} \ldots a_{2m}}\\
+		 %
+		  \dfrac{\left( a_{1}+\ldots+a_{2^{k}} \right)+\left( a_{2^{k}+1}+\ldots+a_{2(2^{k})} \right)}{2(2^{k})} &\geq \sqrt[2\left( 2^{k} \right)]{a_{1}\ldots a_{2^{k}}a_{2^{k}+1}\ldots a_{2\left( 2^{k} \right)}} \tag{by substituting in $2^{k}$ for $m$} \\
+		 %
+		  \dfrac{\left( a_{1}+\ldots+a_{2^{k+1}} \right)}{2^{k+1}} &= \sqrt[2^{k+1}]{a_{1} \ldots a_{2^{k+1}}}
+	\end{align*}
+
+	Thus, we can conclude that the AM-GM inequality holds for all powers of $n=2^{k+1}$.
+\end{solution}
+
+% PROBLEM 7C
+\begin{hw}
+	For some positive integer $k \geq 2$, suppose that the AM-GM inequality holds for $n=k$. Show that the AM-GM inequality holds for $n=k-1$. 
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	Let us assume that the AM-GM inequality holds for $n=k$, where $k \geq 2$, then that means the following:
+	\begin{equation*}
+		\dfrac{a_{1} + \ldots + a_{k}}{k} \geq \sqrt[k]{a_{1}\ldots a_{k}}
+	\end{equation*}
+
+	Now, we want to show that the AM-GM inequality holds for $n=k-1$. Let us substitute in $a_{k} = \dfrac{a_{1} + \ldots + a_{k-1}}{k-1}$:
+	
+	\begin{align*}
+		\dfrac{a_{1} + \ldots + a_{k-1} + \dfrac{a_{1} + \ldots + a_{k-1}}{k-1}}{k} &\geq \sqrt[k]{a_{1}\ldots a_{k-1}\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)} \\
+		\dfrac{(k-1)(a_{1} + \ldots + a_{k-1}) + (a_{1} + \ldots + a_{k-1})}{k(k-1)} &\geq \sqrt[k]{a_{1}\ldots a_{k-1}\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)} \\
+%		\dfrac{k(a_{1} + \ldots + a_{k-1}) - (a_{1} + \ldots + a_{k-1}) + (a_{1} + \ldots + a_{k-1})}{k(k-1)} &\geq \sqrt[k]{a_{1}\ldots a_{k-1}\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)} \\
+		\dfrac{k(a_{1} + \ldots + a_{k-1})}{k(k-1)} &\geq \sqrt[k]{a_{1}\ldots a_{k-1}\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)} \\
+		\dfrac{a_{1} + \ldots + a_{k-1}}{k-1} &\geq \sqrt[k]{a_{1}\ldots a_{k-1}\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)} \\
+		\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)^{k} &\geq a_{1}\ldots a_{k-1}\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right) \\
+		\dfrac{\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)^{k}}{\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)} &\geq a_{1}\ldots a_{k-1} \\
+		\left( \dfrac{a_{1} + \ldots + a_{k-1}}{k-1} \right)^{k-1} &\geq a_{1}\ldots a_{k-1} \\
+		\dfrac{a_{1} + \ldots + a_{k-1}}{k-1} &\geq \sqrt[k-1]{a_{1}\ldots a_{k-1}}
+	\end{align*} 
+
+	Therefore, we can conclude that the AM-GM inequality holds for $n=k-1$.
+\end{solution}
+
+% PROBLEM 7D
+\begin{hw}
+	Argue why parts(a) - (c) imply that the AM-GM inequality holds for all positive integers $n \geq 2$.
+\end{hw}
+\begin{solution}
+	We see that part (a) and (b) when combined together is us proving, by induction, that the AM-GM inequality holds for all powers of $2$.
+	
+	However, there are ``gaps" between each of the powers of $2$; as such we can't claim that the inequality holds for all positive integers $n\geq 2$ yet. 
+	
+	But, in part (c) we show that the AM-GM inequality holds for $n=k-1$; this ``fills" in the gaps left by the powers of $2$. Therefore, we see that parts (a) to (c) implies that the AM-GM inequality holds for all positive integers $n \geq 2$.
+\end{solution}
+\newpage
+
+\section{A Coin Game}
+\begin{hw}
+	Your "friend" Stanley Ford suggests you play the following game with him.  You each start with a single stack of $n$ coins.  On each of your turns, you select one of your stacks of coins (that has at least two coins) and split it into two stacks, each with at least one coin.  Your score for that turn is the product of the sizes of the two resulting stacks (for example, if you split a stack of 5 coins into a stack of 3 coins and a stack of 2 coins, your score would be $3 \cdot 2 = 6$).  You continue taking turns until all your stacks have only one coin in them.  Stan then plays the same game with his stack of $n$ coins, and whoever ends up with the largest total score over all their turns wins.
+	
+	Prove that no matter how you choose to split the stacks, your total score will always be $\frac{n(n - 1)}{2}$. (This means that you and Stan will end up with the same score no matter what happens, so the game is rather pointless.)
+\end{hw}
+\begin{solution}
+	We shall proceed by induction on $n$.
+	
+	\underline{\textbf{Base Case}}: First, we want to prove the base case $n=2$. We see that for a stack of $2$ coins, we can only split it into two stacks, where each stack contains one coin each; at this point, neither of the stacks can be split further. Then, we see that the total score will be $1(1)=1=\dfrac{2(2-1)}{2}$. Thus, our base case holds.
+	
+	\underline{\textbf{Induction Hypothesis}}: Next, we shall introduce our induction hypothesis. We assume that for all $2 \leq n \leq k$, the total score will always be $\dfrac{k\left( k-1 \right)}{2}$.
+	
+	\underline{\textbf{Inductive Step}}: Now, for our inductive step, we want to prove that the claim holds for $n=k+1$. We observe that for $n=k+1$, we can first split it into two stacks of $a$ and $b$ coins such that $a+b=k+1$. This first turn will have a score of $ab$. Next, by our induction hypothesis, our stack of $a$ coins will have a score of $\dfrac{a\left( a-1 \right)}{2}$ and our stack with $b$ coins will have a score of $\dfrac{b\left( b-1 \right)}{2}$. With this, we can combine the three scores together to get our total score as such:
+	\begin{align*}
+		ab + \dfrac{a\left( a-1 \right)}{2} + \dfrac{b\left( b-1 \right)}{2} &= \dfrac{2ab}{2} + \dfrac{a^{2} - a}{2} + \dfrac{b^{2}-b}{2} \\
+		&= \dfrac{a^{2} + 2ab + b^{2} - a - b}{2} \\
+		&= \dfrac{\left( a+b \right)^{2} - \left( a + b \right)}{2} \\
+		&= \dfrac{\left( k+1 \right)^{2} - \left( k + 1 \right)}{2} \\
+		&= \dfrac{k^{2} + 2k + 1 - k - 1}{2} \\
+		&= \dfrac{k^{2}+k}{2} \\
+		&= \dfrac{\left( k+1 \right)k}{2} \\
+		&= \dfrac{\left( k+1 \right)\left( \left( k+1 \right)-1 \right)}{2}
+	\end{align*}
+	Thus, we have shown that our induction hypothesis holds for $n=k+1$ as well. 
+	
+	Therefore, by mathematical induction, we can conclude that our claim holds for all $n \in \NN$.
+\end{solution}
+\end{document}

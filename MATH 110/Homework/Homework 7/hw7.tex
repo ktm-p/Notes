@@ -1,0 +1,582 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Homework 7}{Fall 2023}
+	
+	\section{Intersections and Annihilators}
+	\begin{hw}
+		Suppose $V$ is finite-dimensional, and $U,W$ are its subspaces. Prove that
+		\begin{equation*}
+			(U \cap W)^{0} = U^{0} + W^{0}.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		To begin with, we will show that
+		\begin{equation*}
+			U^{0} + W^{0} \subseteq (U \cap W)^{0}.
+		\end{equation*}
+		
+		First, we observe that, by definition, we have:
+		\begin{align*}
+			U^{0} &= \left\{  \varphi \in V' : \varphi(u) = 0, \forall u \in U \right\} \\
+			W^{0} &= \left\{  \psi\in V' : \psi(w) = 0, \forall w \in W \right\}
+		\end{align*}
+	
+		Meanwhile, we note that for any $\gamma \in (U \cap W)^{0}$, $\gamma$ annihilate all of $u \in U \cap W$, but not necessarily all $u \in U$. Then, it follows that $U^{0} \subseteq (U \cap W)^{0}$.
+		
+		Similarly, we have that $W^{0} \subseteq (U \cap W)^{0}$.
+		
+		From here, suppose we have some $\varphi \in U^{0}$ and $\psi \in W^{0}$. Then, for some $a, b \in \mathbb{F}$, we observe the following:
+		\begin{align*}
+			(a\varphi + b\psi)(v) &= a\varphi(v) + b\psi(v) \\
+			&= 0 + 0 \\
+			&= 0
+		\end{align*}
+	
+		Then, we note that any $\gamma \in (U \cap W)^{0}$ can be expressed as a linear combination of $\varphi \in U^{0}$ and $\psi \in W^{0}$. In other words, we observe that for any $a\varphi + b\psi \in U^{0} + W^{0}$, we also have that it's in $(U \cap W)^{0}$. Thus, $U^{0} + W^{0} \subseteq (U \cap W)^{0}$.
+		
+		Now, to show that equality holds, we can simply show that $\dim (U \cap W)^{0} = \dim U^{0} + \dim W^{0}$. To do this, we introduce the following lemma:
+		\begin{lem}
+			\begin{equation*}
+				U^{0} \cap W^{0} = (U + W)^{0}
+			\end{equation*}
+		\end{lem}
+		\begin{innerproof}
+			We will first show that $U^{0} \cap W^{0} \subseteq (U + W)^{0}$.
+			
+			To do this, suppose we have some $\gamma \in U^{0} \cap W^{0}$. Then, by definition, we observe that $\gamma(u) = 0$ for all $u \in U$, and also that $\gamma(w) = 0$ for all $w \in W$.
+			
+			Then, suppose we had some $v \in U + W$. By definition of $U + W$, we observe then that we can rewrite $v = u + w$, for some $u, w \in U, W$ respectively. From here, we observe the following:
+			\begin{align*}
+				\gamma(v) &= \gamma(u + w) \\
+				&= \gamma(u) + \gamma(w) \\
+				&= 0 + 0 \\
+				&= 0
+			\end{align*}
+		
+			So, we see that $\gamma \in (U + W)^{0}$ as well, and thus $U^{0} \cap W^{0} \subseteq (U + W)^{0}$.
+			
+			Now, to show that $U^{0} \cap W^{0} \supseteq (U+W)^{0}$, we consider some $\gamma \in (U+W)^{0}$. We observe that, by definition, we have that for any $v \in U + W$,
+			\begin{equation*}
+				\gamma(v) = 0
+			\end{equation*}
+		
+			Now, as $U,W$ are subspaces of $V$, they must contain the zero vector $\vec{0}$. Then, it follows that $u + \vec{0} = u \in U +W$, and $w + \vec{0} = w \in U + W$. Then, we observe that for any $u, w \in U, W$ we have:
+			\begin{align*}
+				\gamma(u) &= 0 \\
+				\gamma(w) &= 0
+			\end{align*}
+		
+			In other words, we see that $\gamma \in U^{0} \cap W^{0}$.
+			
+			Therefore, we can conclude that we have equality as desired.
+		\end{innerproof}
+	
+		Now, with this in mind, we note as well that:
+		\begin{align*}
+			\dim (U + W) &= \dim U + \dim W - \dim (U \cap W) \\
+			\dim (U \cap W) &= \dim U + \dim W - \dim (U + W)
+		\end{align*}
+		
+		observe the following:
+		\begin{align*}
+			\dim (U^{0} + W^{0}) &= \dim U^{0} + \dim W^{0} - \dim (U^{0} \cap W^{0}) \\
+			&= \dim U^{0} + \dim W^{0} - \dim (U+W)^{0} \\
+			&= (\dim V - \dim U) + (\dim V - \dim W) - (\dim V - \dim (U + W)) \\
+			&= \dim V - \dim U - \dim W + \dim (U + W) \\
+			&= \dim V - (\dim U + \dim W - \dim (U + W)) \\
+			&= \dim V - \dim (U \cap W) \\
+			&= \dim (U \cap W)^{0}
+		\end{align*}
+	
+		Thus, since $\dim (U \cap W)^{0} = \dim (U^{0} + W^{0})$, then, indeed, we see that equality holds as desired.
+		\begin{comment}
+			Then, we note that for $$U^{0} + W^{0}$ consists of $\span(\varphi, \psi)$$
+	
+		Next, we note that $(U \cap W)^{0}$ consists of all $\gamma \in V'$ such that $\gamma(v) = 0$ for all $v \in U \cap W$. Since $v \in U \cap W$, this means then that $v \in U$ and $v \in W$; thus, we see that $\gamma \in U^{0}$ and $\gamma \in W^{0}$. This means then that every $\gamma \in (U \cap W)^{0}$ must then also be within $U^{0}$ and $W^{0}$.
+		
+		So, we have
+		\begin{equation*}
+			(U \cap W)^{0} \subseteq U^{0} + W^{0}.
+		\end{equation*}
+	
+		Now, we will show that
+		\begin{equation*}
+			(U \cap W)^{0} \supseteq U^{0} + W^{0},
+		\end{equation*}
+		and thus can conclude that they are in fact equal.
+		
+		To do this, we first observe that since $V$ is some finite-dimensional vector space, its subspaces $U, W$ are also finite-dimensional. Furthermore, we recall that
+		\begin{equation*}
+			\dim (U + W) = \dim U + \dim W - \dim (U \cap W).
+		\end{equation*}
+	
+		Then, we have:
+		\begin{align*}
+			\dim (U^{0} + W^{0}) &= \dim U^{0} + \dim W^{0} - \dim (U^{0} \cap W^{0}) \\
+			&= 
+			
+			\dim V - \dim (U + W) \\
+			&= \dim V - (\dim U + \dim W - \dim (U \cap W)) \\
+			&= \dim V - \dim U - \dim W + \dim (U \cap W)
+		\end{align*}
+	
+		Now, we observe that
+		\begin{align*}
+			\dim (U + W) &= \dim U + \dim W - \dim (U \cap W) \\
+			\dim (U \cap W) &= \dim U + \dim W - \dim (U+W)
+		\end{align*}
+	
+		Then, we observe the following:
+		\begin{align*}
+			\dim (U \cap W)^{0} &= \dim V - \dim (U \cap W) \\
+			&= \dim V - (\dim U + \dim W - \dim (U + W)) \\
+			&= \dim V - \dim U - \dim W + \dim (U + W) 
+		\end{align*}
+	
+		However, we note here that $\dim (U \cap W) \leq \min(\dim U, \dim W)$, which implies then that $\dim (U \cap W) \leq \dim (U + W)$.
+		
+		Then, it follows that
+		\begin{equation*}
+			\dim (U \cap W)^{0} \geq \dim (U^{0} + W^{0}).
+		\end{equation*}
+	
+		Then, since we know that $(U \cap W)^{0} \subseteq U^{0} + W^{0}$, and that $\dim (U \cap W)^{0} \geq \dim (U^{0} + W^{0})$, it must be then that they are in fact equal.
+		\end{comment}
+	\end{solution}
+	
+	\newpage
+	
+	\section{Null and Range}
+	\begin{hw}
+		Suppose $V,W$ are finite dimensional, and $T \in \mathcal L(V,W)$, and $\vnull T' = \vspan (\varphi)$ for some $\varphi \in W'$. Prove that $\vrange T = \vnull \varphi$. 
+	\end{hw}
+	\begin{solution}
+		To begin with, we will show that $\vrange T \subseteq \vnull \varphi$.		
+		
+		We first note that $\vnull T' = \vspan(\varphi)$. Now, we see then that this means that:
+		\begin{align*}
+			T'(\varphi) &= 0\\
+			\varphi \circ T &= 0 \\
+			(\varphi \circ T)(v) &= 0 \\
+			\varphi(T(v)) &= 0 \tag{for all $v \in V$}
+		\end{align*}
+	
+		Then, we see that, in fact, we have that for all $v \in V$, we have that $Tv \in \vnull \varphi$. Or, in other words, we have that $\vrange T \subseteq \vnull \varphi$.
+		
+		Next, we will show that they are in fact equal. 
+		
+		To do this, we will show that their dimensions are equal. 
+	\begin{comment}
+			First, we note that since $V,W$ is finite-dimensional, then
+			\begin{equation*}
+			\vnull T' = (\vrange T)^{0}
+		\end{equation*}
+	
+		This means then that $(\vrange T)^{0} = \vspan(\varphi)$. Then, $\dim (\vrange T)^{0} = \dim(\vspan(\varphi))$. If $\varphi$ is in fact the zero map, then $\dim(\vspan(\varphi)) = 0$, otherwise it'll be equal to 1. We note then that
+		\begin{align*}
+			\dim W &= \dim \vrange T + \dim (\vrange T)^{0} \\
+			\dim \vrange T &= \dim W - \dim (\vrange T)^{0} \\
+			 &= \dim W - \dim(\vspan(\varphi))
+		\end{align*}
+	\end{comment}
+
+		We have two cases to consider for this. First, consider $\varphi \neq 0$. Then, we note that since $\varphi \in W'$, then it means that $\varphi \in \mathcal L(W, \mathbb{F})$. From here, since $\varphi \neq 0$, it follows that $\dim \vrange (\varphi) = \dim \mathbb{F} = 1$. \begin{comment}
+			we note that $\vrange \varphi = \left\{  \varphi (w) : w \in W\right\}$. However, we note that since $\varphi(w) \in \mathbb{F}$, and $\varphi \neq 0$, it follows that $\dim \vrange (\varphi) = 1$.
+		\end{comment}
+		
+		Now, we observe:
+		\begin{align*}
+			\dim W &= \dim \vrange \varphi + \dim \vnull \varphi \\
+			\dim \vnull \varphi &= \dim W - \dim\vrange \varphi \\
+			&= \dim W - 1
+		\end{align*}
+	
+		Next, we look at $\dim \vrange T$. To do this, we recall that since $V,W$ are finite dimensional, it follows then that $\dim \vrange T = \dim \vrange T'$. Furthermore, we observe that since $\vnull T' = \vspan (\varphi)$, and $\varphi \neq 0$, then $\dim \vnull T' = 1$, as it's the span of a single vector. Furthermore, note that $T' \in \mathcal L(W', V')$, and that since $W$ is finite-dimensional, we have $\dim W' = \dim W$.
+		
+		Then, with this in mind, we observe the following:
+		\begin{align*}
+			\dim W' &= \dim \vrange T' + \dim \vnull T' \\
+			\dim \vrange T' &= \dim W' - \dim \vnull T' \\
+			\dim \vrange T &= \dim W - \dim \vnull T' \\
+			&= \dim W - 1
+		\end{align*}
+	
+		So, we see that, in fact, we have $\dim \null \varphi = \dim \vrange T$ for $\varphi \neq 0$.
+		
+		Now, in the case where $\varphi = 0$, we note that $\dim \vrange \varphi = 0$, so we have that $\dim \vnull \varphi = \dim W$. Meanwhile, since $\varphi = 0$, then $\dim \vspan (\varphi) = 0$, meaning that $\dim \vnull T' = 0$, so $\dim \vrange T' = \dim \vrange T = \dim W$.
+		
+		Thus, their dimensions are equal.
+	
+		Then, since we see that $\dim\vrange T = \dim\vnull \varphi$, and also that $\vrange T \subseteq \vnull \varphi$, we can conclude that equality holds.
+	\end{solution}
+	\begin{hw}
+		Give an example of such a pair $T, \varphi \neq 0$ for $V = \RR^{2}$ and $W = \RR^{3}$.
+	\end{hw}
+	\begin{solution}
+		Suppose we have $V = \RR^{2}$ and $W = \RR^{3}$.
+		
+		Since $T$ is a linear map from $V$ to $W$, we know that it has some matrix representation $\mathcal M(T)$. Now, we define $T$ to have the matrix representation as follows:
+		\begin{equation*}
+			\mathcal{M}(T) =
+			\begin{bmatrix} 
+				0 & 0 \\ 1 & 0 \\ 0 & 1
+			\end{bmatrix}
+		\end{equation*}
+	
+		Meanwhile, we let $\varphi$ to be as follow:
+		\begin{equation*}
+							\mathcal{M}(\varphi) = 
+			\begin{bmatrix}
+				1 & 0 & 0
+			\end{bmatrix}
+		\end{equation*}
+	
+		Then, we note that $\vnull \varphi = \vspan\left\{  (0,1,0), (0,0,1) \right\}$. Meanwhile, $\vrange T = \vspan\left\{  (0,1,0), (0,0,1) \right\}$. Thus, we see that, in fact, $\vnull \varphi = \vrange T$ as desired.
+	\end{solution}
+
+	\newpage
+
+	\section{Primer on Lagrange Interpolation}
+	\begin{hw}
+		Let $p \in \mathscr{P}_{n}(\CC)$ for some $n$ and suppose there exists distinct real numbers $x_{0}, \ldots, x_{n}$ such that $p(x_{j}) \in \RR$ for all $j = 0, \ldots, n$. Prove that all the coefficients of $p$ are real.
+	\end{hw}
+	\begin{solution}
+		From Question 4, we know that we can construct a unique Langrage Interpolating Polynomial $p$ such that $p(x_{j}) \in \RR$ for each $x_{0}, \ldots, x_{n}$.
+		
+		Let us denote each $p(x_{j}) = y_{j}$, and we note that $y_{j} \in \RR$.
+		
+		Now, we can in fact construct a polynomial $p \in \mathscr{P}_{n}(\CC)$ as follows:
+		\begin{equation*}
+			p(x) \coloneq \sum_{j=0}^{n} y_{j}p_{j}(x),
+		\end{equation*}
+		where we define $p_{j}$ as:
+		\begin{equation*}
+			p_{j}(x) \coloneq \prod_{k=0, k\neq j}^{n} \dfrac{(x-x_{k})}{(x_{j} - x_{k})}
+		\end{equation*}
+	
+		Notice here that at $x_{j}$, $p_{j}(x_{j}) = 1$ and $p_{k}(x_{j}) = 0$ for all $k \neq j$. Then, $p(x_{j}) = y_{j}$ as desired.
+	
+		Now, we note here that the denominator in $p_{j}$ consists of real numerical values. Furthermore, the numerator consists of $n+1$ distinct linear terms which, which, when expanded, will result in a degree $n$ polynomial. We note that this polynomial will also only have real coefficients by virtue of $x_{k}$ being a real number.
+		
+		Then, we observe that $p_{j}$ will be a polynomial with only real coefficients. And thus $p(x)$ must contain only real coefficients as well since $y_{j} \in \RR$, so $y_{j}p_{j}$ will have real coefficients only, and thus so will the sum of all $y_{j}p_{j}$.
+		
+		Then, we observe that $p$ has coefficients all real. Furthermore, by Question 4, we know that this $p$ is in fact unique.
+	\end{solution}
+ 
+	\newpage
+	
+	\section{Lagrange Interpolation}
+	\begin{hw}[Lagrange Interpolation]
+		Prove \textit{using linear algebra} that, given distinct data sites $x_{j}$ and arbitrary data $y_{j}$, for $j = 0, \ldots, n$, there exists a unique polynomial $p \in \mathscr{P}_{n}(\RR)$ such that $p(x_{j}) = y_{j}$.
+	\end{hw}
+	\begin{solution}
+		First, we will begin by proving such a polynomial actually exists.
+		
+		To do this, we can explicitly construct such a polynomial $p(x)$ as follows:
+		\begin{equation*}
+		p(x) \coloneq \sum_{j=0}^{n} y_{j}p_{j}(x),
+		\end{equation*}
+		where we define $p_{j}$ as:
+		\begin{equation*}
+			p_{j}(x) \coloneq \prod_{k=0, k\neq j}^{n} \dfrac{(x-x_{k})}{(x_{j} - x_{k})}
+		\end{equation*}
+	
+		Then, with this construction, we observe that at each $x_{j}$, we have that $p_{k}$, where $k \neq j$, will be equal to zero since the numerator will contain a $(x-x_{j})$ term, so $p_{k}(x_{j})$ will evaluate to zero. Meanwhile, we note that $p_{j}(x_{j}) = y_{j}$, as desired.
+		
+		We note as well that for each of our $p_{j}(x)$, the denominator of our fraction contains numerical values as well. On the other hand, we note that the numerator of our fraction contains $n+1$ distinct linear terms, and thus they form a degree $n$ polynomial. Furthermore, $y_{j}$ is some constant. Then, $p(x)$, the sum of each of our $y_{j}p_{j}(x)$, must also be a degree $n$ polynomial.
+		
+		Thus, we have shown that there indeed exists $p \in \mathscr P_{n}(\RR)$ that satisfies our conditions.
+		
+		Now, in order to show uniqueness, we will first show that our $p_{j}$'s are linearly independent, and thus form a basis for $\mathscr P_{n}(\RR)$.
+		
+		By definition, we observe that each $p_{0}, \ldots, p_{n}$ is linearly independent if $a_{0}p_{0} + \ldots + a_{n}p_{n} = 0$ only when $a_{0} = \cdots = a_{n} = 0$ for all $x \in \RR$.
+
+		With this in mind, we can construct the following system of equations:
+		\begin{align*}
+			(a_{0}p_{0} + \ldots + a_{n}p_{n})(x_{0}) &= 0 \\
+			&\vdots \\
+			(a_{0}p_{0} + \ldots + a_{n}p_{n})(x_{n}) &= 0 \\
+			\\
+			a_{0}p_{0}(x_{0}) + \ldots + a_{n}p_{n}(x_{0}) &= 0 \\
+			&\vdots \\
+			a_{0}p_{0}(x_{n}) + \ldots + a_{n}p_{n}(x_{n}) &= 0 \\
+			\\
+			a_{0} &= 0 \\
+			&\vdots \\
+			a_{n} &= 0
+		\end{align*}
+	
+		Thus, we see that $p_{0}, \ldots, p_{n}$ are linearly independent. Furthermore, since there are $n+1$ polynomials, we see that they in fact form a basis for $\mathscr{P}_{n}(\RR)$.
+		
+		This means then that any $p \in \mathscr{P}_{n}(\RR)$ can be written as a unique linear combination of our $p_{j}$'s. We note now that as $y_{0}, \ldots, y_{j}$ are all scalars, then $\sum_{j=0}^{n} y_{j}p_{j}$ must thus be a unique representation of $p$ as desired.
+	\end{solution}
+
+	\newpage
+	
+	\section{Roots}
+	\begin{hw}
+		Prove that every polynomial of odd degree with real coefficients has a real zero.
+	\end{hw}
+	\begin{solution}
+		Let us suppose for the sake of contradiction that our polynomial has no real zeros.
+		
+		Now, suppose that our polynomial has degree of $2n+1$. Since our polynomial $p$ must be of odd degree, $\deg p \geq 1$ (i.e. it can't be a constant polynomial). Then, we note that, by the Fundamental Theorem of Algebra, we know that our polynomial must have $2n+1$ complex roots $z$ (whose multiplicity can be greater than zero).
+		
+		Then, with this in mind, we note that as $p$ has real coefficients, then it follows that for each $z_{i}$ that is a root of $p$, its conjugate $\overline{z_{i}}$ must be as well. Since $p$ can't have a real zero, it must follow that $z_{i} \neq \overline{z_{i}}$.
+		
+		From here, $p$ can be iteratively divided by the real polynomial $(x-z)(x-\overline{z})$. Doing this process will then leave us with a single term $(x-z)$ remaining. However, we note that since $(x-z)$ is a root of $p$, then its complex conjugate $(x-\overline{z})$ must as well. But for this to be the case, we have that $z = \overline{z}$; $p$ has a real zero. Thus, we have a contradiction.
+		
+		Therefore, we can conclude that every polynomial of odd degree with real coefficients must have at least one real zero.
+	\end{solution}
+
+\end{document}

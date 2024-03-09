@@ -1,0 +1,800 @@
+\documentclass[openany]{book}
+%%%%% PREAMBLE
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% basic %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% header/footer %
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+\setlength{\headheight}{15pt}
+\renewcommand{\chaptermark}[1]{\markright{#1}{}}
+\renewcommand{\sectionmark}[1]{}
+\fancypagestyle{contentpage}{%
+	\lhead{}
+	\rhead{\textit{\rightmark}}
+	\cfoot{\thepage}
+}
+\pagestyle{contentpage}
+
+% table of content %
+\makeatletter
+\newcommand\mytoc{%
+	\if@twocolumn
+	\@restonecoltrue\onecolumn
+	\else
+	\@restonecolfalse
+	\fi
+	\toctrue
+	\chapter*{\contentsname
+		\@mkboth{%
+			\contentsname}{\contentsname}}\addcontentsline{toc}{chapter}{Contents}%
+	\tocfalse
+	\@starttoc{toc}%
+	\if@restonecol\twocolumn\fi
+}
+\makeatother
+
+% chapter formatting %
+\newif\iftoc
+\titleformat
+{\chapter} % command
+[display] % shape
+{\cabin} % font
+{} % label
+{2in} % 
+{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Week}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}
+[
+\vspace{-20pt}%
+\rule{\textwidth}{0.1pt}
+\vspace{0.0in}
+]
+\titlespacing{\chapter}
+{0pt}
+{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}
+{0pt}
+
+% hyperlink formatting %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% purple box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% green box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% yellow box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% blue box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% red box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% purple boxes (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=chapter]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% green boxes (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% blue boxes (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=chapter]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% red boxes (remarks) %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+
+% yellow boxes (warnings) %
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+\declaretheorem[style=yellowbox,name=Example,sibling=thm]{example, ex}
+\declaretheorem[style=yellowbox,name=Example, numbered=no]{example*, ex*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%%%
+
+%%%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% linalg %
+\newcommand{\Span}{\mathrm{Span}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+%%%%%
+%END_FOLD
+%%%%%
+
+
+\begin{document}
+	\mytitle{Math 110: Linear Algebra}{Fall 2023}
+	
+	\chapter{Introduction}
+	\section{Lecture - 8/24/2023}
+	\subsection{Complex Numbers}
+	\begin{defn}[Complex Numbers]
+		We can represent complex numbers in three different ways, for $a, b \in \RR$:
+		\begin{enumerate}
+			\item We can represent them as pairs: $(a,b)$.
+			\item We can write them as $a + bi$.
+			\item We can also represent them geometrically; we can imagine a plane where the x-axis is the real axis, and the y-axis is the imaginary axis.
+		\end{enumerate}
+	\end{defn}
+	
+	\subsection{Addition of Complex Numbers}
+	For complex numbers $\alpha = a+bi$ and $\beta = c + di$, we have that $\alpha + \beta = (a + bi) + (c + di) \coloneq (a + c) + (b + d)i$. 
+	
+	Geometrically, we can think of the diagonal of the parallelogram constructed by the two vectors corresponding to $\alpha$ and $\beta$.
+	
+	In terms of pairs, for $\alpha = (a,b)$ and $\beta = (c, d)$, we have $\alpha + \beta = (a+c, b+d)$.
+	
+	We proceed similarly for subtraction.
+	
+	\begin{rmk}
+		We note here that addition for complex numbers is commutative; that is, $\alpha + \beta = \beta + \alpha$.
+	\end{rmk}
+	
+	We also note here that in the complex world, we have the additive identity as well: $0 + 0i$.
+	
+	The additive inverse of $\alpha$ is simply $-\alpha$.
+	
+	\subsection{Multiplication of Complex Numbers}
+	We observe that for $\alpha = a + bi$ and $\beta = c + di$, we can also define multiplication as: $\alpha\beta = (ac - bd) + (ad + bc)i$.
+	
+	Similarly to addition, multiplication of complex numbers is also commutative.
+	
+	For the multiplicative inverse, we can proceed as follow:
+	\begin{align*}
+		\dfrac{1}{a+bi} &= \dfrac{a-bi}{(a+bi)(a-bi)} \\
+		&= \dfrac{a-bi}{a^{2} + b^{2}}
+	\end{align*}
+	
+	And since we are working with some $\alpha \not= 0$, then we know that at least one of $a,b \not= 0$. Thus, we have that $a^{2} + b^{2} \not= 0$ as well.
+	
+	Thus, we have the multiplicative inverse of $\alpha = a + bi$ as $\frac{a}{a^{2} + b^{2}} + \frac{b}{a^{2} + b^{2}}i$.
+	
+	To divide complex numbers $\alpha$ and $\beta$, then we simply have to do $(a+bi) \cdot \frac{1}{c+di} = \frac{ac + bd}{c^{2} + d^{2}} + \frac{bc - ad}{c^{2} + d^{2}}i$.
+	
+	We note here that both $\RR$ and $\CC$ are fields, with $\RR \subsetneq \CC$.
+	
+	\subsection{Complex Numbers, Polar Form, and Exponentials}
+	
+	We can picture a vector from the origin, at some angle $\theta$ from the real axis. We observe that $a = r\cos(\theta)$ and $b = r\sin(\theta)$, where $r$ is the length of the vector (or the ``modulus" of the complex number $a+bi$). 
+	
+	\section{Discussion - 8/25/2023}
+	\begin{hw}
+		Let $a = 1+i$, $b=2-i$. Find the following:
+		\begin{enumerate}
+			\item $a + b$
+			\item $2a-3b$
+			\item $ab$
+			\item $b/a$
+		\end{enumerate}
+	\end{hw}
+	\begin{solution}
+		\begin{enumerate}
+			\item $a + b = (1+2) + (1 + (-1))i = 3 + 0i = 3$.
+			\item $2a-3b = 2(1+i) - 3(2-i) = (2+2i) - (6 + 3i) = -4 + 5i$.
+			\item $ab = (1(2) - (1)(-1)) + (1(-1) + 2)i = 3 + i$ 
+			\item To find $b/a$, can find the conjugate of the denominator, and proceed with $\frac{(2-i)(1-i)}{(1+i)(1-i)} = \frac{1 -3i}{2}$.
+		\end{enumerate}
+	\end{solution}
+	
+	\begin{hw}
+		Solve the equation $x^{3} = 1$ in $\CC$.
+	\end{hw}
+	\begin{solution}
+		We can tackle this problem by working with the polar form of complex numbers instead. Define $\omega \coloneq r\cos(\theta) + ir\sin(\theta)$.
+		
+		Now, we observe that since we want to find $\omega^{3} = 1$, then we have that $r=1$. Next, we can think of a circle (with radius $r = 1$), and we rotate by $120^{\circ}$, yielding us three rotations before returning to the original position. Then solution then to our problem $\omega^{3} = 1$ are the three points for these rotations.
+		
+		We see then that the solutions are:
+		\begin{enumerate}
+			\item $\omega_{1} = 1 + 0i = 1$
+			\item $\omega_{2} = \cos(120) + i\sin(120) = -\frac{1}{2} + \frac{\sqrt{3}}{2}i$ 
+			\item $\omega_{3} = \cos(240) + i\sin(240) = -\frac{1}{2} - \frac{\sqrt{3}}{2}i$
+		\end{enumerate}
+	\end{solution}
+	
+	\begin{hw}
+		Find $x \in \RR^{4}$ such that $\left( 4, -3, 1, 7 \right) + 2x = (5, 9, -6, 8)$. 
+	\end{hw}
+	\begin{solution}
+		Let $x = (0.5, 6, -3.5, 0.5)$
+	\end{solution}
+	
+	\begin{hw}
+		Let $V = \RR_{+} = \left\{  a \in \RR : a > 0\right\}$. Define addition and scalar multiplication by $v \bigoplus w = vw$, $c \bigotimes v = v^{c}$. Convince yourself that $(V, \bigoplus, \bigotimes)$ is a vector space.
+		
+		Now, what is the zero vector of this vector space? What is the additive inverse of a vector?
+	\end{hw}
+	\begin{solution}
+		We observe that the zero vector $v$ is $1$. We see that $v \bigoplus w = (1)w = w$. We also see that $v \bigotimes w = w^{1} = w$.
+		
+		The additive inverse of any vector $w \in V$ is $w' = \frac{1}{w}$, as $w \bigoplus w' = w(w') = \frac{w}{w} = 1$.
+	\end{solution}
+	
+	\begin{hw}
+		Prove that for all positive integers $n$, we have that $n(n+1)$ is even.
+	\end{hw}
+	\begin{solution}
+		We proceed by cases.
+		
+		If we have a positive integer which is even, we see then that we can rewrite $n = 2m$ for some $m \in \ZZ$. Then, we observe that $n(n+1) = 2m(2m + 1) = 2(2m^{2} + m)$. By closure of integers, we have that $2m^{2} + m = j \in \ZZ$. Then, we have $n(n+1) = 2j$, which is even by definition.
+		
+		If the integer $n$ is odd, then we see that $n = 2m+1$. Now, we have $n(n+1) = (2m+1)(2m+2) = (2m+1)(2(m+1)) = 2(m+1)(m+1)$. Again, since $\ZZ$ is closed under multiplication and addition, we have then that $(m+1)^{2} = j \in \ZZ$, so $2j$ is also even.
+	\end{solution}
+	
+	\begin{hw}
+		Show that $\sqrt{2}$ is not a ratio of integers.
+	\end{hw}
+	\begin{solution}
+		Suppose for the sake of contradiction that $\sqrt{2}$ can be expressed as a ratio of integers. Then, there exist $m, n \in \ZZ$ such that $\sqrt{2} = \frac{m}{n}$, where $\gcd(m,n) = 1$.
+		
+		Now, observe that $2 = \frac{m^{2}}{n^{2}}$. Then, we see that $2n^{2} = m^{2}$. But, we see then that this contradicts with the fact that $\gcd(m,n) = 1$, as this implies that $m$ must have also been even.
+	\end{solution}
+	
+	\begin{hw}
+		Show that the opposite of a vector is unique.
+	\end{hw}
+	\begin{solution}
+		We suppose for the sake of contradiction that for a vector $v$, there exists two different vectors which is the opposite of it.
+		
+		Then, we see that $v + w = 0$ and $v + u = 0$. Then, we have that $v + w = v + u \implies w + u$. This thus contradicts with the fact that the two vectors are different; the opposite of a vector is unique.
+	\end{solution}
+	
+	\chapter{Vector Spaces}
+	\section{Lecture - 8/29/2023}
+	\subsection{Fields}
+	\begin{defn}[Fields]
+		We define a field to be a set $\mathbb{F}$ with two operations $\left( +, \cdot \right)$. We denote this by $\langle \mathbb{F}, +, \cdot\rangle$. These operations satisfying the following rules:
+		\begin{enumerate}
+			\item Closed under $+$ and $\cdot$
+			\begin{itemize}
+				\item If we add or multiply two elements in $\mathbb{F}$, the result will also be in $\mathbb{F}$. In other words, we have $+ : \mathbb{F} \times \mathbb{F} \rightarrow \mathbb{F}$. The same for $\cdot$.
+			\end{itemize}
+			
+			\item Commutativity
+			\begin{itemize}
+				\item In other words, for all $a, b \in \mathbb{F}$, we have $a + b = b + a$. similarly, $a \cdot b = b \cdot a$.
+			\end{itemize}
+			
+			\item Associativity
+			\begin{itemize}
+				\item For all $a, b, c \in \mathbb{F}$, we have $a + (b + c) = (a + b) + c$, and $a \cdot (b \cdot c) = (a \cdot b) \cdot c$.
+			\end{itemize}
+			
+			\item Identities
+			\begin{itemize}
+				\item There exist elements $0 \not= 1 \in \mathbb{F}$, where we have $0 + a = a$, and $1 \cdot a = a$.
+			\end{itemize}
+			
+			\item Inverses
+			\begin{itemize}
+				\item For any $a \in \mathbb{F}$, there exists $-a \in \mathbb{F}$ such that $a + (-a) = 0$. Furthermore, for any $a \in \mathbb{F}$, where $a \not=0$, we have $a^{-1} \in \mathbb{F}$ such that $aa^{-1} = 1$.
+			\end{itemize}
+			
+			\item Distributivity
+			\begin{itemize}
+				\item For $a, b, c \in \mathbb{F}$, we have $c \cdot (a+b) = c \cdot a + c \cdot b$.
+			\end{itemize}
+		\end{enumerate}
+	\end{defn}
+	
+	\begin{example}[Finite Field of Five Elements]
+		Suppose we have the integers mod 5. Now, we construct the following table for $+$:
+		\begin{center}
+			\begin{tabular}{c | c c c c c}
+				$+$ & 0 & 1 & 2 & 3 & 4 \\
+				\hline
+				0 & 0 & 1 & 2 & 3 & 4 \\
+				1 & 1 & 2 & 3 & 4 & 0 \\
+				2 & 2 & 3 & 4 & 0 & 1 \\
+				3 & 3 & 4 & 0 & 1 & 2 \\
+				4 & 4 & 0 & 1 & 2 & 3
+			\end{tabular}
+		\end{center}
+		
+		We see that commutativity holds as the table is symmetric along the main diagonal; if we flip the columns and rows, we will still have the same table. We see that since there is a zero in every row and column, then an additive inverse exists for every number.
+		
+		Now, for $\cdot$, we have the following table:
+		\begin{center}
+			\begin{tabular}{c | c c c c c}
+				$\cdot$ & 0 & 1 & 2 & 3 & 4 \\
+				\hline
+				0 & 0 & 0 & 0 & 0 & 0 \\
+				1 & 0 & 1 & 2 & 3 & 4 \\
+				2 & 0 & 2 & 4 & 1 & 3 \\
+				3 & 0 & 3 & 1 & 4 & 2 \\
+				4 & 0 & 4 & 3 & 2 & 1
+			\end{tabular}
+		\end{center}
+		
+		Again, we see that it is commutative by the same argument. Same applies for finding an inverse, though we have to make sure that we are only looking at rows/columns that are non-zero, and that we check if every row/column has a 1.
+	\end{example}
+	
+	\begin{rmk}[$0 \cdot a = 0$]
+		We will show that $0 \cdot a = 0$, for any $a \in \mathbb{F}$. We can proceed as follow:
+		\begin{align*}
+			0 \cdot a &= (0 + 0) \cdot a \\
+			&= 0 \cdot a + 0 \cdot a
+		\end{align*}
+		
+		So, we have that $0 \cdot a = 0 \cdot a + 0 \cdot a$.
+		
+		From here, we know that there exists some $-a \in \mathbb{F}$ such that $0 \cdot a  + (-a) = 0$. 
+		
+		So, we have $0 \cdot a + (-a) = 0 \cdot a + (0 \cdot a + (-a))$. So, we have $0 = 0 \cdot a + 0 \implies 0 \cdot a = 0$. 
+	\end{rmk}
+	
+	\begin{rmk}[Uniqueness of Additive Inverses]
+		We will prove that additive inverses are unique.
+		
+		Suppose for contradiction, we have two elements $b, c \in \mathbb{F}$ such that $a + b = 0, a + c = 0$.
+		
+		We see then that since $a + b = 0 = a + c$. Then, we have $a + b = a + c$. Then, we have $(a + b) + b = (a + c) + b$. From here, we see that $(a + b) + b = (a + b) + c$. Thus, we have $b = c$.
+	\end{rmk}
+	
+	\subsection{Vector Spaces}
+	\begin{defn}[Vector Spaces]
+		A vector space $V$ consists of two sets and two operations. We usually denote it by $\langle V, \mathbb{F}, +, \cdot \rangle$.
+		
+		$V$ is a set (of vectors).
+		
+		$\mathbb{F}$ is a set (of numbers/scalars). We note here that $\mathbb{F}$ must be a field its own operations.
+		
+		We define the operation $+ : V \times V \rightarrow V$, and $\cdot : \mathbb{F} \times V \rightarrow V$.
+	\end{defn}
+	
+	\begin{example}[Canonical Example]
+		The following are canonical examples: $\RR^{n}, \CC^{n}$ or, generally, $\mathbb{F}^{n}$.
+		
+		Given an $n \in \NN$, we define $\RR^{n} \coloneq \left\{  \left( x_{1}, x_{2}, \ldots, x_{n} \right) : x_{j} \in \RR, \forall j = 1, 2, \ldots, n  \right\}$.
+		
+		We also have $\RR^{\infty} \coloneq \left\{  \left( x_{1}, x_{2}, \ldots \right) : x_{j} \in \RR, \forall j \in \NN\right\}$.
+	\end{example}
+	
+	
+	\begin{defn}[Vector Addition]
+		Given $\left( x_{1}, \ldots, x_{n} \right), \left( y_{1}, \ldots, y_{n} \right) \in \mathbb{F}^{n}$, we can define addition by adding the corresponding components together as follow:
+		\begin{equation*}
+			\left( x_{1}, \ldots, x_{n} \right) + \left( y_{1}, \ldots, y_{n} \right) \coloneq \left( x_{1} + y_{1}, \ldots, x_{n} + y_{n} \right).
+		\end{equation*}
+		
+		We see that we have a neutral vector whose components are all equal to $0$ in regards to addition. We also see $\left( -x_{1}, \ldots, x_{n} \right) + \left( x_{1}, \ldots, -x_{n} \right) = \left( 0_{1}, \ldots, 0_{n} \right)$.
+		
+		We see then that the additive structure of our vector space must follow the same conditions seen in fields as well; $\langle V, + \rangle$ must be an Abelian group. 
+	\end{defn}
+	
+	\begin{defn}[(Scalar) Multiplication]
+		We define multiplication to be that as follow:
+		
+		Suppose we have some $c \in \mathbb{F}$, and some $\left( x_{1}, \ldots, x_{n} \right) \in \mathbb{F}^{n}$, we define multiplication as follow:
+		\begin{equation*}
+			c\left( x_{1}, \ldots, x_{n} \right) \coloneq \left( cx_{1}, \ldots, cx_{n} \right)
+		\end{equation*}
+		
+		For rules, we observe that we have distributivity as follows, for scalars $\lambda, \mu$ and vectors $u, v$:
+		\begin{align*}
+			\lambda \cdot (u + v) &= \lambda  \cdot u + \lambda \cdot v \\
+			(\lambda + \mu) \cdot u &= \lambda \cdot u + \mu \cdot u
+		\end{align*}
+		
+		We also have associativity for the scalars $\lambda, \mu$:
+		\begin{equation*}
+			\lambda \cdot (\mu \cdot v) = (\lambda \cdot \mu) \cdot v
+		\end{equation*}
+		
+		We also have the following rules:
+		\begin{align*}
+			1 \cdot v &= v
+		\end{align*}
+		
+	\end{defn}
+	\begin{rmk}
+		We can think of scalar multiplication geometrically as stretching/compressing(/flipping) the vector.
+	\end{rmk}
+	\begin{rmk}
+		We also note here that, for the associativity of $\cdot$ for vector spaces, the $\cdot$ operator is different in $\lambda \cdot (\mu \cdot v)$ and $(\lambda \cdot \mu) \cdot v$; the latter occurs in the field between two scalars, whereas the former is between a scalar and a vector -- the dot is being overloaded.
+	\end{rmk}
+	
+	\section{Lecture - 8/31/2023}
+	\begin{example}
+		Let $S$ be any given set which is non-empty, and $\mathbb{F}$ to be a field. We define $\mathbb{F}^{S}$ as follow:
+		\begin{equation*}
+			\mathbb{F}^{S} \coloneq \left\{  f : S \rightarrow \mathbb{F} \right\}.
+		\end{equation*}
+		
+		Take $\mathbb{F}$ as our field. We define, for any functions $f, g \in \mathbb{F}^{S}$, addition to be $(f+g)(s) \coloneq f(s) + g(s)$, and for some $\lambda \in \mathbb{F}$, we define (scalar) multiplication to be $(\lambda \cdot f)(s) \coloneq \lambda \cdot f(s)$.
+	\end{example}
+	
+	\begin{rmk}
+		We note here that in $(f+g)(s) = f(s) + g(s)$, the first $+$ takes place in $\mathbb{F}^{S}$, while the second $+$ takes place in $\mathbb{F}$.
+		
+		Similarly, the first $\cdot$ takes place in $\mathbb{F} \times \mathbb{F}^{S}$, whereas the second $\cdot$ takes place in $\mathbb{F}$.
+	\end{rmk}
+	
+	\begin{example}
+		Define $\mathbb{F} \coloneq \RR$, and $S \coloneq \left\{  1,2 \right\}$. Any function $f \in \RR^{S}$ is completely described by $(f(1), f(2))$.
+		
+		We see that adding two functions will result in adding the pairs together:
+		\begin{equation*}
+			(f(1), f(2)) + (g(1), g(2)) = ( (f+g)(1), (f+g)(2))
+		\end{equation*}
+		
+		Likewise, with scalar multiplication, we have:
+		\begin{equation*}
+			\lambda \cdot (f(1), f(2)) = ( (\lambda \cdot f)(1), (\lambda \cdot f)(2))
+		\end{equation*}
+	\end{example}
+	\begin{rmk}
+		Notice that if $S = \NN$ (or any other countable set), then $\mathbb{F}^{s}$ can be understood as $\mathbb{F}^{\infty}$, which is an infinite sequence.
+	\end{rmk}
+	
+	\subsection{Subspaces}
+	The following are basic observations in V:
+	\begin{itemize}
+		\item The zero vector is unique.
+		\item The additive inverses are unique.
+		\item $0 \cdot v = 0$
+		\item $(-1) \cdot v = -v$
+	\end{itemize}
+	
+	\begin{defn}[Subspaces]
+		Suppose we have a vector space $V$. Now, we have some $U \subseteq V$. We see that the following conditions must be met for $U$ to be a subspace:
+		\begin{itemize}
+			\item Closure under addition and scalar multiplication.
+			\item The zero vector is contained in $U$.
+		\end{itemize}
+		
+		All the other rules for a vector space is inherited by virtue of the fact that $U \subseteq V$. We note here that $U$ is also a vector space, contained within a vector space.
+		
+		Subspaces can be added.
+	\end{defn}
+	
+	\chapter{idk}
+	\section{Lecture - 9/5/2023}
+	\subsection{Recap}
+	Recall that a subspace $U \subseteq V$, where $V$ is a vector space, must satisfy the following two requirements:
+	\begin{enumerate}
+		\item Closure under vector addition and scalar multiplication.
+		\item The zero vector is contained in $U$.
+	\end{enumerate}
+	
+	We note that subspaces can be added. For example, suppose we have subspaces $U, W$ of $V$. Then, we define addition of subspaces as:
+	\begin{equation*}
+		U + W \coloneq \left\{  u + w : u \in U, w \in W \right\}.
+	\end{equation*}
+	
+	\begin{rmk}
+		We can add other things together as well. For example, we can add subsets together too.
+	\end{rmk}
+	
+	\begin{thm}
+		The sum $U+W$ is also a subspace of $V$.
+	\end{thm}
+	\begin{proof}
+		We can verify this as follows:
+		\begin{enumerate}
+			\item Since $U, W$ are subspaces, they are both closed under addition and scalar multiplication. Then we see that $\lambda(u + w) = \lambda u + \lambda w$; $\lambda u \in U, \lambda w \in W$. Similarly, $(u_{1} + w_{1}) + (u_{2} + w_{2}) = (u_{1} + u_{2}) + (w_{1} + w_{2})$. And we see that $(u_{1} + u_{2}) \in U$ and $(w_{1} + w_{2}) \in W$. So, we see that $U+W$ is closed under addition and scalar multiplication.
+			
+			\item For the zero vector, since both $U, W$ contains the zero vector, then we can take $0 \in U$ and $0 \in W$. Then, we see that $0 + 0 = 0$, so $U+W$ contains the zero vector as well.
+		\end{enumerate}
+	\end{proof}
+	
+	\subsubsection{A Little Thought Experiment}
+	Suppose we have the line $y = x$ in $\RR^{2}$ and the point $(0,2)$. We note that when adding them together, we have a line shifted up two units. However, while the line $y=x$ is a subspace of $\RR^{2}$, the point $(0,2)$ isn't; the result is no longer a subspace. We can verify this by the fact that we don't have the zero vector.
+	
+	Now, suppose that we instead added the point $(2,2)$; while the singleton isn't a subspace itself, the result of the addition yields a subspace still. This is because the point $(2,2)$ is an element of the subspace formed by $y=x$.
+	
+	\begin{rmk}
+		The key takeaway from this experiment is that, while adding two subspaces together guarantees a subspace, we can't guarantee the result if the sets aren't known subspaces.
+	\end{rmk}
+	
+	\subsection{Direct Sums}
+	\begin{defn}[Direct Sum of Subspaces]
+		A sum $U + W$ of 2 subspaces $U, W$ of $V$ is called a direct sum if every vector in this sum has a unique representation as $u+w$, where $u \in U, w \in W$.
+	\end{defn}
+	\begin{example}
+		Let us take two different lines going through the origin. We observe that the result is the entire plane $\RR^{2}$. 
+		
+		We observe from here that every vector has a unique vector representation because if we have two different vectors, then we have the following:
+		\begin{align*}
+			v_{1} + w_{1} &= v_{2} + w_{2} \\
+			v_{1} - v_{2} &= w_{2} - w_{1}
+		\end{align*}
+		
+		Since $U \cap W = \left\{  0\right\}$, we get $u_{1} = u_{2}$ and $w_{1} = w_{2}$.
+	\end{example}
+	
+	\begin{thm}
+		$U + W$ is a direct sum (of subspaces) if and only if:
+		\begin{itemize}
+			\item $U \cap W = \left\{  0\right\}$, or
+			\item $0$ has a unique representation $0_{\in U} + 0_{\in W}$.
+		\end{itemize}
+	\end{thm}
+	\begin{proof}
+		We shall prove the equivalences by cycling through them.
+		
+		\begin{enumerate}
+			\item Suppose we have a direct sum as per the definition. Then, every vector $u + w$ must have a unique representation, including the zero vector $0$. Since $0 = 0 + 0$, we know that this must be the only representation.
+			
+			\item We now want to show that if $0$ has a unique representation, then $U \cap W = \left\{  0\right\}$. We shall proceed by contraposition.
+			
+			Let us suppose that $U \cap W \not= \left\{  0 \right\}$. Then, we see that there is a non-zero vector $v \in U \cap W$. That means then that $v + (-v) = 0$, where $v \in U$ and $-v \in W$. So, we see that $0$ does not have a unique representation.
+			
+			\item The final implication of $U \cap W = \left\{  0\right\}$ implying direct sum's proof is the same as what we saw in our example.
+		\end{enumerate}
+	\end{proof}
+	
+	\begin{rmk}
+		Suppose we take two subspaces: is the intersection always at the origin? We see that this isn't the case, as if we take the intersection between some line in $\RR^{2}$ and $\RR^{2}$ itself (which is its own subspace!), we see that the intersection is actually the line itself.
+	\end{rmk}
+	
+	\begin{rmk}
+		If $U$ and $W$ are subspaces, then their intersection will also be a subspace. First, we observe that since $0 \in U$ and $0 \in W$, then $0 \in U \cap W$.
+		
+		For closure, we see that since $U, W$ are both closed, then suppose we have $v_{1}, v_{2} \in U \cap W$. Since $v_{1}, v_{2}$ are in both $U$ and $W$, then $v_{1} + v_{2} \in U$ and $v_{1} + v_{2} \in W$. Thus, we have that $v_{1} + v_{2} \in U \cap W$ as well.
+		
+		Similarly, suppose we have some vector $v \in U \cap W$. Then, $v \in U \land v \in W$. This means then that $\lambda v \in U \land \lambda v \in W$, where $\lambda \in \mathbb{F}$; then we see that $\lambda v \in U \cap W$ too.
+		
+		Thus, we see that $U \cap W$ is also a subspace.
+	\end{rmk}
+	
+	\section{Lecture - 9/7/2023}
+	\subsection{Recap} Last lecture, we discussed the sum and intersection of subspaces. Recall that the sum of subspaces will always yield a subspace, though in other scenarios all bets are off.
+	
+	\subsection{Extending to Multiple Subspaces}
+	\subsubsection{Intersections and Sum}
+	Now, we note here that there isn't anything necessarily sacred about performing these operations with just two subspaces/subsets/etc.; we can extend this to multiple subspaces. We can intersect any number of subspaces of some vector space $V$ and still get a subspace. We see that the more subspaces we intersect with each other, the smaller the resulting space will be.
+	
+	Similarly, we can perform sums on any number of subspaces. Let us take three subspaces $U_{1} + U_{2} + U_{2} \coloneq \left\{  u_{1} + u_{2} + u_{3} : u_{1} \in U_{1}, u_{2} \in U_{2}, u_{3} \in U_{3}\right\}$. Unlike the intersection, we see that the sum of subspaces will expand the size.
+	
+	\subsubsection{Direct Sum}
+	\begin{defn}[Direct Sum of k Subspaces]
+		$U_{1} + U_{2} + \ldots + U_{k}$ form a direct sum if every vector in $U_{1} + U_{2} + \ldots + U_{k}$ has a unique representation as $u_{1} + u_{2} + \ldots + u_{k}$.
+	\end{defn}
+	
+	For simplicity, let us consider the case where $n=3$. The most important part to note about this is that if $k > 2$, then the intersection condition is not an adequate way to check whether or not the resulting sum is direct.
+	
+	\subsection{Linear Dependence and Independence}
+	\subsubsection{(Linear) Span(ning)}
+	\begin{defn}[Span]
+		Given $v_{1}, v_{2}, \ldots, v_{k} \in V$, and some scalars $a_{1}, a_{2}, \ldots, a_{k} \in \mathbb{F}$, we can consider the following:
+		\begin{equation*}
+			a_{1} \cdot v_{1} + a_{2} \cdot v_{2} + \ldots + a_{k} v_{k}.
+		\end{equation*}
+		
+		This is what we refer to as a linear combination of $v_{1}, \ldots, v_{k}$, with coefficients $a_{1}, \ldots, a_{k}$.
+		
+		Then, the span $\mathrm{Span}(v_{1}, \ldots, v_{k}) \coloneq \left\{  a_{1}v_{1} + \ldots + a_{k}v_{k} : \forall j, a_{j} \in \mathbb{F} \right\}$
+	\end{defn}
+	
+	\begin{example}
+		Suppose we have $V = \RR^{2}$, and vectors $v_{1} = \left( 1,0 \right), v_{2} = \left( \pi, 0 \right)$.
+		
+		Then, we see that $\mathrm{Span}(v_{1}, v_{2}) = \left\{  (x,0) : x \in \RR \right\}$.
+	\end{example}
+	
+	We say that $v_{1}, \ldots, v_{k}$ spans $V$ if $\mathrm{Span}(v_{1}, \ldots, v_{k}) = V$.
+	
+	\begin{defn}[Finite Dimensional]
+		$V$ is called finite-dimensional if $V$ is spanned by some finite list of vectors.
+	\end{defn}
+	\begin{example}
+		We see that $\RR^{2}$ is finite-dimensional: $\RR^{2} = \Span\left( (1,0), (0,1) \right)$. We can see similarly that for $\RR^{n}$, we can construct a list of $n$ vectors that spans the space.
+		
+		Now, we observe that the space $\RR^{\infty}$ is infinite dimensional. We shall prove this later.
+	\end{example}
+	
+	\begin{example}
+		A polynomial $\mathfrak{P}(\mathbb{F})$ is a function of the form $f(z) = a_{0} + a_{1}z + \ldots + a_{m}z^{m}$, where $a_{0}, \ldots, a_{m} \in \mathbb{F}$. Now, if $a_{m} \not= 0$ then we see that $\deg (f) = m$.
+		
+		For this space, we see that the polynomial $f(z) = 0$, for all $z$, is the zero vector.
+		
+		Now, let us fix $m$. We observe that the sum of two polynomials of degree $\leq= m$, their sum is degree of at most $m$. Similarly, multiplying by a scalar still yields a polynomial of degree $m$. Thus, we see that $\mathfrak{P}(\mathbb{F})$ is a vector space. We see here that it is infinite-dimensional, as we can write it as being spanned by the vectors $\left\{  1, z, \ldots, z^{m}\right\}$.
+		
+		Now, suppose we don't restrict the degree and instead look at $\mathfrak{P}\left( \mathbb{F} \right)$. We see that it is a vector space, as the sum of polynomials will result in a polynomial, and multiplying by a scalar will still yield a polynomial. A quick note here is that we are working in non-finite fields; otherwise, we may run into weird situations.
+		
+		we say that the vector space $\mathfrak{P}(\mathbb{F})$ is infinite dimensional. We will prove this as follows:
+		\begin{proof}
+			Let us proceed by contradiction.
+			
+			Let us suppose that $\mathfrak{P}\left( \mathbb{F} \right)$ is spanned by a finite list of $n$ vectors $\left\{  1, z, \ldots, z^{n-1} \right\}$. We see then that the maximum degree of the polynomials in the span of this set is $n-1$; this means then that $z^{n} \not\in \left\{  1, z, \ldots, z^{n-1} \right\}$. This is a contradiction.
+			
+			Thus, it must be that $\mathfrak{P}(\mathbb{F})$ is infinite dimensional.
+		\end{proof}
+	\end{example}
+	
+\end{document}

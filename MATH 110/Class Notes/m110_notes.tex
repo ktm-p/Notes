@@ -1,0 +1,3899 @@
+\documentclass[openany]{book}
+%%%%% PREAMBLE
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% basic %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% header/footer %
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+\setlength{\headheight}{15pt}
+\renewcommand{\chaptermark}[1]{\markright{#1}{}}
+\renewcommand{\sectionmark}[1]{}
+\fancypagestyle{contentpage}{%
+	\lhead{}
+	\rhead{\textit{\rightmark}}
+	\cfoot{\thepage}
+}
+\pagestyle{contentpage}
+
+% table of content %
+\makeatletter
+\newcommand\mytoc{%
+	\if@twocolumn
+	\@restonecoltrue\onecolumn
+	\else
+	\@restonecolfalse
+	\fi
+	\toctrue
+	\chapter*{\contentsname
+		\@mkboth{%
+			\contentsname}{\contentsname}}\addcontentsline{toc}{chapter}{Contents}%
+	\tocfalse
+	\@starttoc{toc}%
+	\if@restonecol\twocolumn\fi
+}
+\makeatother
+
+% chapter formatting %
+\newif\iftoc
+\titleformat
+{\chapter} % command
+[display] % shape
+{\cabin} % font
+{} % label
+{2in} % 
+{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Week}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}
+[
+\vspace{-20pt}%
+\rule{\textwidth}{0.1pt}
+\vspace{0.0in}
+]
+\titlespacing{\chapter}
+{0pt}
+{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}
+{0pt}
+
+% hyperlink formatting %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% purple box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% green box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% yellow box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% blue box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% red box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% purple boxes (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=chapter]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% green boxes (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% blue boxes (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=chapter]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% red boxes (remarks) %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+
+% yellow boxes (warnings) %
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+\declaretheorem[style=yellowbox,name=Example,sibling=thm]{example, ex}
+\declaretheorem[style=yellowbox,name=Example, numbered=no]{example*, ex*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%%%
+
+%%%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\dotcup}{\dot{\cup}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{Span}
+\DeclareMathOperator*{\Null}{Null}
+\DeclareMathOperator*{\Range}{Range}
+\DeclareMathOperator*{\vspan}{span}
+\DeclareMathOperator*{\vnull}{null}
+\DeclareMathOperator*{\vrange}{range}
+\newcommand{\innerproduct}[2]{\left\langle{#1}, {#2}\right\rangle}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+%%%%%
+%END_FOLD
+%%%%%
+
+
+\begin{document}
+	\mytitle{Math 110: Linear Algebra}{Fall 2023}
+	
+	\chapter{Introduction}
+	\section{Lecture - 8/24/2023}
+	\subsection{Complex Numbers}
+	\begin{defn}[Complex Numbers]
+		We can represent complex numbers in three different ways, for $a, b \in \RR$:
+		\begin{enumerate}
+			\item We can represent them as pairs: $(a,b)$.
+			\item We can write them as $a + bi$.
+			\item We can also represent them geometrically; we can imagine a plane where the x-axis is the real axis, and the y-axis is the imaginary axis.
+		\end{enumerate}
+	\end{defn}
+	
+	\subsection{Addition of Complex Numbers}
+	For complex numbers $\alpha = a+bi$ and $\beta = c + di$, we have that $\alpha + \beta = (a + bi) + (c + di) \coloneq (a + c) + (b + d)i$. 
+	
+	Geometrically, we can think of the diagonal of the parallelogram constructed by the two vectors corresponding to $\alpha$ and $\beta$.
+	
+	In terms of pairs, for $\alpha = (a,b)$ and $\beta = (c, d)$, we have $\alpha + \beta = (a+c, b+d)$.
+	
+	We proceed similarly for subtraction.
+	
+	\begin{rmk}
+		We note here that addition for complex numbers is commutative; that is, $\alpha + \beta = \beta + \alpha$.
+	\end{rmk}
+	
+	We also note here that in the complex world, we have the additive identity as well: $0 + 0i$.
+	
+	The additive inverse of $\alpha$ is simply $-\alpha$.
+	
+	\subsection{Multiplication of Complex Numbers}
+	We observe that for $\alpha = a + bi$ and $\beta = c + di$, we can also define multiplication as: $\alpha\beta = (ac - bd) + (ad + bc)i$.
+	
+	Similarly to addition, multiplication of complex numbers is also commutative.
+	
+	For the multiplicative inverse, we can proceed as follow:
+	\begin{align*}
+		\dfrac{1}{a+bi} &= \dfrac{a-bi}{(a+bi)(a-bi)} \\
+		&= \dfrac{a-bi}{a^{2} + b^{2}}
+	\end{align*}
+	
+	And since we are working with some $\alpha \not= 0$, then we know that at least one of $a,b \not= 0$. Thus, we have that $a^{2} + b^{2} \not= 0$ as well.
+	
+	Thus, we have the multiplicative inverse of $\alpha = a + bi$ as $\frac{a}{a^{2} + b^{2}} + \frac{b}{a^{2} + b^{2}}i$.
+	
+	To divide complex numbers $\alpha$ and $\beta$, then we simply have to do $(a+bi) \cdot \frac{1}{c+di} = \frac{ac + bd}{c^{2} + d^{2}} + \frac{bc - ad}{c^{2} + d^{2}}i$.
+	
+	We note here that both $\RR$ and $\CC$ are fields, with $\RR \subsetneq \CC$.
+	
+	\subsection{Complex Numbers, Polar Form, and Exponentials}
+	
+	We can picture a vector from the origin, at some angle $\theta$ from the real axis. We observe that $a = r\cos(\theta)$ and $b = r\sin(\theta)$, where $r$ is the length of the vector (or the ``modulus" of the complex number $a+bi$). 
+	
+	\section{Discussion - 8/25/2023}
+	\begin{hw}
+		Let $a = 1+i$, $b=2-i$. Find the following:
+		\begin{enumerate}
+			\item $a + b$
+			\item $2a-3b$
+			\item $ab$
+			\item $b/a$
+		\end{enumerate}
+	\end{hw}
+	\begin{solution}
+		\begin{enumerate}
+			\item $a + b = (1+2) + (1 + (-1))i = 3 + 0i = 3$.
+			\item $2a-3b = 2(1+i) - 3(2-i) = (2+2i) - (6 + 3i) = -4 + 5i$.
+			\item $ab = (1(2) - (1)(-1)) + (1(-1) + 2)i = 3 + i$ 
+			\item To find $b/a$, can find the conjugate of the denominator, and proceed with $\frac{(2-i)(1-i)}{(1+i)(1-i)} = \frac{1 -3i}{2}$.
+		\end{enumerate}
+	\end{solution}
+	
+	\begin{hw}
+		Solve the equation $x^{3} = 1$ in $\CC$.
+	\end{hw}
+	\begin{solution}
+		We can tackle this problem by working with the polar form of complex numbers instead. Define $\omega \coloneq r\cos(\theta) + ir\sin(\theta)$.
+		
+		Now, we observe that since we want to find $\omega^{3} = 1$, then we have that $r=1$. Next, we can think of a circle (with radius $r = 1$), and we rotate by $120^{\circ}$, yielding us three rotations before returning to the original position. Then solution then to our problem $\omega^{3} = 1$ are the three points for these rotations.
+		
+		We see then that the solutions are:
+		\begin{enumerate}
+			\item $\omega_{1} = 1 + 0i = 1$
+			\item $\omega_{2} = \cos(120) + i\sin(120) = -\frac{1}{2} + \frac{\sqrt{3}}{2}i$ 
+			\item $\omega_{3} = \cos(240) + i\sin(240) = -\frac{1}{2} - \frac{\sqrt{3}}{2}i$
+		\end{enumerate}
+	\end{solution}
+	
+	\begin{hw}
+		Find $x \in \RR^{4}$ such that $\left( 4, -3, 1, 7 \right) + 2x = (5, 9, -6, 8)$. 
+	\end{hw}
+	\begin{solution}
+		Let $x = (0.5, 6, -3.5, 0.5)$
+	\end{solution}
+	
+	\begin{hw}
+		Let $V = \RR_{+} = \left\{  a \in \RR : a > 0\right\}$. Define addition and scalar multiplication by $v \bigoplus w = vw$, $c \bigotimes v = v^{c}$. Convince yourself that $(V, \bigoplus, \bigotimes)$ is a vector space.
+		
+		Now, what is the zero vector of this vector space? What is the additive inverse of a vector?
+	\end{hw}
+	\begin{solution}
+		We observe that the zero vector $v$ is $1$. We see that $v \bigoplus w = (1)w = w$. We also see that $v \bigotimes w = w^{1} = w$.
+		
+		The additive inverse of any vector $w \in V$ is $w' = \frac{1}{w}$, as $w \bigoplus w' = w(w') = \frac{w}{w} = 1$.
+	\end{solution}
+	
+	\begin{hw}
+		Prove that for all positive integers $n$, we have that $n(n+1)$ is even.
+	\end{hw}
+	\begin{solution}
+		We proceed by cases.
+		
+		If we have a positive integer which is even, we see then that we can rewrite $n = 2m$ for some $m \in \ZZ$. Then, we observe that $n(n+1) = 2m(2m + 1) = 2(2m^{2} + m)$. By closure of integers, we have that $2m^{2} + m = j \in \ZZ$. Then, we have $n(n+1) = 2j$, which is even by definition.
+		
+		If the integer $n$ is odd, then we see that $n = 2m+1$. Now, we have $n(n+1) = (2m+1)(2m+2) = (2m+1)(2(m+1)) = 2(m+1)(m+1)$. Again, since $\ZZ$ is closed under multiplication and addition, we have then that $(m+1)^{2} = j \in \ZZ$, so $2j$ is also even.
+	\end{solution}
+	
+	\begin{hw}
+		Show that $\sqrt{2}$ is not a ratio of integers.
+	\end{hw}
+	\begin{solution}
+		Suppose for the sake of contradiction that $\sqrt{2}$ can be expressed as a ratio of integers. Then, there exist $m, n \in \ZZ$ such that $\sqrt{2} = \frac{m}{n}$, where $\gcd(m,n) = 1$.
+		
+		Now, observe that $2 = \frac{m^{2}}{n^{2}}$. Then, we see that $2n^{2} = m^{2}$. But, we see then that this contradicts with the fact that $\gcd(m,n) = 1$, as this implies that $m$ must have also been even.
+	\end{solution}
+	
+	\begin{hw}
+		Show that the opposite of a vector is unique.
+	\end{hw}
+	\begin{solution}
+		We suppose for the sake of contradiction that for a vector $v$, there exists two different vectors which is the opposite of it.
+		
+		Then, we see that $v + w = 0$ and $v + u = 0$. Then, we have that $v + w = 0 = v + u \implies w + u$. This thus contradicts with the fact that the two vectors are different; the opposite of a vector is unique.
+	\end{solution}
+	
+	\chapter{Vector Spaces}
+	\section{Lecture - 8/29/2023}
+	\subsection{Fields}
+	\begin{defn}[Fields]
+		We define a field to be a set $\mathbb{F}$ with two operations $\left( +, \cdot \right)$. We denote this by $\langle \mathbb{F}, +, \cdot\rangle$. These operations satisfying the following rules:
+		\begin{enumerate}
+			\item Closed under $+$ and $\cdot$
+			\begin{itemize}
+				\item If we add or multiply two elements in $\mathbb{F}$, the result will also be in $\mathbb{F}$. In other words, we have $+ : \mathbb{F} \times \mathbb{F} \rightarrow \mathbb{F}$. The same for $\cdot$.
+			\end{itemize}
+			
+			\item Commutativity
+			\begin{itemize}
+				\item In other words, for all $a, b \in \mathbb{F}$, we have $a + b = b + a$. similarly, $a \cdot b = b \cdot a$.
+			\end{itemize}
+			
+			\item Associativity
+			\begin{itemize}
+				\item For all $a, b, c \in \mathbb{F}$, we have $a + (b + c) = (a + b) + c$, and $a \cdot (b \cdot c) = (a \cdot b) \cdot c$.
+			\end{itemize}
+			
+			\item Identities
+			\begin{itemize}
+				\item There exist elements $0 \not= 1 \in \mathbb{F}$, where we have $0 + a = a$, and $1 \cdot a = a$.
+			\end{itemize}
+			
+			\item Inverses
+			\begin{itemize}
+				\item For any $a \in \mathbb{F}$, there exists $-a \in \mathbb{F}$ such that $a + (-a) = 0$. Furthermore, for any $a \in \mathbb{F}$, where $a \not=0$, we have $a^{-1} \in \mathbb{F}$ such that $aa^{-1} = 1$.
+			\end{itemize}
+			
+			\item Distributivity
+			\begin{itemize}
+				\item For $a, b, c \in \mathbb{F}$, we have $c \cdot (a+b) = c \cdot a + c \cdot b$.
+			\end{itemize}
+		\end{enumerate}
+	\end{defn}
+	
+	\begin{example}[Finite Field of Five Elements]
+		Suppose we have the integers mod 5. Now, we construct the following table for $+$:
+		\begin{center}
+			\begin{tabular}{c | c c c c c}
+				$+$ & 0 & 1 & 2 & 3 & 4 \\
+				\hline
+				0 & 0 & 1 & 2 & 3 & 4 \\
+				1 & 1 & 2 & 3 & 4 & 0 \\
+				2 & 2 & 3 & 4 & 0 & 1 \\
+				3 & 3 & 4 & 0 & 1 & 2 \\
+				4 & 4 & 0 & 1 & 2 & 3
+			\end{tabular}
+		\end{center}
+		
+		We see that commutativity holds as the table is symmetric along the main diagonal; if we flip the columns and rows, we will still have the same table. We see that since there is a zero in every row and column, then an additive inverse exists for every number.
+		
+		Now, for $\cdot$, we have the following table:
+		\begin{center}
+			\begin{tabular}{c | c c c c c}
+				$\cdot$ & 0 & 1 & 2 & 3 & 4 \\
+				\hline
+				0 & 0 & 0 & 0 & 0 & 0 \\
+				1 & 0 & 1 & 2 & 3 & 4 \\
+				2 & 0 & 2 & 4 & 1 & 3 \\
+				3 & 0 & 3 & 1 & 4 & 2 \\
+				4 & 0 & 4 & 3 & 2 & 1
+			\end{tabular}
+		\end{center}
+		
+		Again, we see that it is commutative by the same argument. Same applies for finding an inverse, though we have to make sure that we are only looking at rows/columns that are non-zero, and that we check if every row/column has a 1.
+	\end{example}
+	
+	\begin{rmk}[$0 \cdot a = 0$]
+		We will show that $0 \cdot a = 0$, for any $a \in \mathbb{F}$. We can proceed as follow:
+		\begin{align*}
+			0 \cdot a &= (0 + 0) \cdot a \\
+			&= 0 \cdot a + 0 \cdot a
+		\end{align*}
+		
+		So, we have that $0 \cdot a = 0 \cdot a + 0 \cdot a$.
+		
+		From here, we know that there exists some $-a \in \mathbb{F}$ such that $0 \cdot a  + (-a) = 0$. 
+		
+		So, we have $0 \cdot a + (-a) = 0 \cdot a + (0 \cdot a + (-a))$. So, we have $0 = 0 \cdot a + 0 \implies 0 \cdot a = 0$. 
+	\end{rmk}
+	
+	\begin{rmk}[Uniqueness of Additive Inverses]
+		We will prove that additive inverses are unique.
+		
+		Suppose for contradiction, we have two elements $b, c \in \mathbb{F}$ such that $a + b = 0, a + c = 0$.
+		
+		We see then that since $a + b = 0 = a + c$. Then, we have $a + b = a + c$. Then, we have $(a + b) + b = (a + c) + b$. From here, we see that $(a + b) + b = (a + b) + c$. Thus, we have $b = c$.
+	\end{rmk}
+	
+	\subsection{Vector Spaces}
+	\begin{defn}[Vector Spaces]
+		A vector space $V$ consists of two sets and two operations. We usually denote it by $\langle V, \mathbb{F}, +, \cdot \rangle$.
+		
+		$V$ is a set (of vectors).
+		
+		$\mathbb{F}$ is a set (of numbers/scalars). We note here that $\mathbb{F}$ must be a field its own operations.
+		
+		We define the operation $+ : V \times V \rightarrow V$, and $\cdot : \mathbb{F} \times V \rightarrow V$.
+	\end{defn}
+	
+	\begin{example}[Canonical Example]
+		The following are canonical examples: $\RR^{n}, \CC^{n}$ or, generally, $\mathbb{F}^{n}$.
+		
+		Given an $n \in \NN$, we define $\RR^{n} \coloneq \left\{  \left( x_{1}, x_{2}, \ldots, x_{n} \right) : x_{j} \in \RR, \forall j = 1, 2, \ldots, n  \right\}$.
+		
+		We also have $\RR^{\infty} \coloneq \left\{  \left( x_{1}, x_{2}, \ldots \right) : x_{j} \in \RR, \forall j \in \NN\right\}$.
+	\end{example}
+	
+	
+	\begin{defn}[Vector Addition]
+		Given $\left( x_{1}, \ldots, x_{n} \right), \left( y_{1}, \ldots, y_{n} \right) \in \mathbb{F}^{n}$, we can define addition by adding the corresponding components together as follow:
+		\begin{equation*}
+			\left( x_{1}, \ldots, x_{n} \right) + \left( y_{1}, \ldots, y_{n} \right) \coloneq \left( x_{1} + y_{1}, \ldots, x_{n} + y_{n} \right).
+		\end{equation*}
+		
+		We see that we have a neutral vector whose components are all equal to $0$ in regards to addition. We also see $\left( -x_{1}, \ldots, x_{n} \right) + \left( x_{1}, \ldots, -x_{n} \right) = \left( 0_{1}, \ldots, 0_{n} \right)$.
+		
+		We see then that the additive structure of our vector space must follow the same conditions seen in fields as well; $\langle V, + \rangle$ must be an Abelian group. 
+	\end{defn}
+	
+	\begin{defn}[(Scalar) Multiplication]
+		We define multiplication to be that as follow:
+		
+		Suppose we have some $c \in \mathbb{F}$, and some $\left( x_{1}, \ldots, x_{n} \right) \in \mathbb{F}^{n}$, we define multiplication as follow:
+		\begin{equation*}
+			c\left( x_{1}, \ldots, x_{n} \right) \coloneq \left( cx_{1}, \ldots, cx_{n} \right)
+		\end{equation*}
+		
+		For rules, we observe that we have distributivity as follows, for scalars $\lambda, \mu$ and vectors $u, v$:
+		\begin{align*}
+			\lambda \cdot (u + v) &= \lambda  \cdot u + \lambda \cdot v \\
+			(\lambda + \mu) \cdot u &= \lambda \cdot u + \mu \cdot u
+		\end{align*}
+		
+		We also have associativity for the scalars $\lambda, \mu$:
+		\begin{equation*}
+			\lambda \cdot (\mu \cdot v) = (\lambda \cdot \mu) \cdot v
+		\end{equation*}
+		
+		We also have the following rules:
+		\begin{align*}
+			1 \cdot v &= v
+		\end{align*}
+		
+	\end{defn}
+	\begin{rmk}
+		We can think of scalar multiplication geometrically as stretching/compressing(/flipping) the vector.
+	\end{rmk}
+	\begin{rmk}
+		We also note here that, for the associativity of $\cdot$ for vector spaces, the $\cdot$ operator is different in $\lambda \cdot (\mu \cdot v)$ and $(\lambda \cdot \mu) \cdot v$; the latter occurs in the field between two scalars, whereas the former is between a scalar and a vector -- the dot is being overloaded.
+	\end{rmk}
+	
+	\section{Lecture - 8/31/2023}
+	\begin{example}
+		Let $S$ be any given set which is non-empty, and $\mathbb{F}$ to be a field. We define $\mathbb{F}^{S}$ as follow:
+		\begin{equation*}
+			\mathbb{F}^{S} \coloneq \left\{  f : S \rightarrow \mathbb{F} \right\}.
+		\end{equation*}
+		
+		Take $\mathbb{F}$ as our field. We define, for any functions $f, g \in \mathbb{F}^{S}$, addition to be $(f+g)(s) \coloneq f(s) + g(s)$, and for some $\lambda \in \mathbb{F}$, we define (scalar) multiplication to be $(\lambda \cdot f)(s) \coloneq \lambda \cdot f(s)$.
+	\end{example}
+	
+	\begin{rmk}
+		We note here that in $(f+g)(s) = f(s) + g(s)$, the first $+$ takes place in $\mathbb{F}^{S}$, while the second $+$ takes place in $\mathbb{F}$.
+		
+		Similarly, the first $\cdot$ takes place in $\mathbb{F} \times \mathbb{F}^{S}$, whereas the second $\cdot$ takes place in $\mathbb{F}$.
+	\end{rmk}
+	
+	\begin{example}
+		Define $\mathbb{F} \coloneq \RR$, and $S \coloneq \left\{  1,2 \right\}$. Any function $f \in \RR^{S}$ is completely described by $(f(1), f(2))$.
+		
+		We see that adding two functions will result in adding the pairs together:
+		\begin{equation*}
+			(f(1), f(2)) + (g(1), g(2)) = ( (f+g)(1), (f+g)(2))
+		\end{equation*}
+		
+		Likewise, with scalar multiplication, we have:
+		\begin{equation*}
+			\lambda \cdot (f(1), f(2)) = ( (\lambda \cdot f)(1), (\lambda \cdot f)(2))
+		\end{equation*}
+	\end{example}
+	\begin{rmk}
+		Notice that if $S = \NN$ (or any other countable set), then $\mathbb{F}^{s}$ can be understood as $\mathbb{F}^{\infty}$, which is an infinite sequence.
+	\end{rmk}
+	
+	\subsection{Subspaces}
+	The following are basic observations in V:
+	\begin{itemize}
+		\item The zero vector is unique.
+		\item The additive inverses are unique.
+		\item $0 \cdot v = 0$
+		\item $(-1) \cdot v = -v$
+	\end{itemize}
+	
+	\begin{defn}[Subspaces]
+		Suppose we have a vector space $V$. Now, we have some $U \subseteq V$. We see that the following conditions must be met for $U$ to be a subspace:
+		\begin{itemize}
+			\item Closure under addition and scalar multiplication.
+			\item The zero vector is contained in $U$.
+		\end{itemize}
+		
+		All the other rules for a vector space is inherited by virtue of the fact that $U \subseteq V$. We note here that $U$ is also a vector space, contained within a vector space.
+		
+		Subspaces can be added.
+	\end{defn}
+	
+	\chapter{Direct Sums and Linear Independence}
+	\section{Lecture - 9/5/2023}
+	\subsection{Recap}
+	Recall that a subspace $U \subseteq V$, where $V$ is a vector space, must satisfy the following two requirements:
+	\begin{enumerate}
+		\item Closure under vector addition and scalar multiplication.
+		\item The zero vector is contained in $U$.
+	\end{enumerate}
+	
+	We note that subspaces can be added. For example, suppose we have subspaces $U, W$ of $V$. Then, we define addition of subspaces as:
+	\begin{equation*}
+		U + W \coloneq \left\{  u + w : u \in U, w \in W \right\}.
+	\end{equation*}
+	
+	\begin{rmk}
+		We can add other things together as well. For example, we can add subsets together too.
+	\end{rmk}
+	
+	\begin{thm}
+		The sum $U+W$ is also a subspace of $V$.
+	\end{thm}
+	\begin{proof}
+		We can verify this as follows:
+		\begin{enumerate}
+			\item Since $U, W$ are subspaces, they are both closed under addition and scalar multiplication. Then we see that $\lambda(u + w) = \lambda u + \lambda w$; $\lambda u \in U, \lambda w \in W$. Similarly, $(u_{1} + w_{1}) + (u_{2} + w_{2}) = (u_{1} + u_{2}) + (w_{1} + w_{2})$. And we see that $(u_{1} + u_{2}) \in U$ and $(w_{1} + w_{2}) \in W$. So, we see that $U+W$ is closed under addition and scalar multiplication.
+			
+			\item For the zero vector, since both $U, W$ contains the zero vector, then we can take $0 \in U$ and $0 \in W$. Then, we see that $0 + 0 = 0$, so $U+W$ contains the zero vector as well.
+		\end{enumerate}
+	\end{proof}
+	
+	\subsubsection{A Little Thought Experiment}
+	Suppose we have the line $y = x$ in $\RR^{2}$ and the point $(0,2)$. We note that when adding them together, we have a line shifted up two units. However, while the line $y=x$ is a subspace of $\RR^{2}$, the point $(0,2)$ isn't; the result is no longer a subspace. We can verify this by the fact that we don't have the zero vector.
+	
+	Now, suppose that we instead added the point $(2,2)$; while the singleton isn't a subspace itself, the result of the addition yields a subspace still. This is because the point $(2,2)$ is an element of the subspace formed by $y=x$.
+	
+	\begin{rmk}
+		The key takeaway from this experiment is that, while adding two subspaces together guarantees a subspace, we can't guarantee the result if the sets aren't known subspaces.
+	\end{rmk}
+	
+	\subsection{Direct Sums}
+	\begin{defn}[Direct Sum of Subspaces]
+		A sum $U + W$ of 2 subspaces $U, W$ of $V$ is called a direct sum if every vector in this sum has a unique representation as $u+w$, where $u \in U, w \in W$.
+	\end{defn}
+	\begin{example}
+		Let us take two different lines going through the origin. We observe that the result is the entire plane $\RR^{2}$. 
+		
+		We observe from here that every vector has a unique vector representation because if we have two different vectors, then we have the following:
+		\begin{align*}
+			v_{1} + w_{1} &= v_{2} + w_{2} \\
+			v_{1} - v_{2} &= w_{2} - w_{1}
+		\end{align*}
+		
+		Since $U \cap W = \left\{  0\right\}$, we get $u_{1} = u_{2}$ and $w_{1} = w_{2}$.
+	\end{example}
+	
+	\begin{thm}
+		$U + W$ is a direct sum (of subspaces) if and only if:
+		\begin{itemize}
+			\item $U \cap W = \left\{  0\right\}$, or
+			\item $0$ has a unique representation $0_{\in U} + 0_{\in W}$.
+		\end{itemize}
+	\end{thm}
+	\begin{proof}
+		We shall prove the equivalences by cycling through them.
+		
+		\begin{enumerate}
+			\item Suppose we have a direct sum as per the definition. Then, every vector $u + w$ must have a unique representation, including the zero vector $0$. Since $0 = 0 + 0$, we know that this must be the only representation.
+			
+			\item We now want to show that if $0$ has a unique representation, then $U \cap W = \left\{  0\right\}$. We shall proceed by contraposition.
+			
+			Let us suppose that $U \cap W \not= \left\{  0 \right\}$. Then, we see that there is a non-zero vector $v \in U \cap W$. That means then that $v + (-v) = 0$, where $v \in U$ and $-v \in W$. So, we see that $0$ does not have a unique representation.
+			
+			\item The final implication of $U \cap W = \left\{  0\right\}$ implying direct sum's proof is the same as what we saw in our example.
+		\end{enumerate}
+	\end{proof}
+	
+	\begin{rmk}
+		Suppose we take two subspaces: is the intersection always at the origin? We see that this isn't the case, as if we take the intersection between some line in $\RR^{2}$ and $\RR^{2}$ itself (which is its own subspace!), we see that the intersection is actually the line itself.
+	\end{rmk}
+	
+	\begin{rmk}
+		If $U$ and $W$ are subspaces, then their intersection will also be a subspace. First, we observe that since $0 \in U$ and $0 \in W$, then $0 \in U \cap W$.
+		
+		For closure, we see that since $U, W$ are both closed, then suppose we have $v_{1}, v_{2} \in U \cap W$. Since $v_{1}, v_{2}$ are in both $U$ and $W$, then $v_{1} + v_{2} \in U$ and $v_{1} + v_{2} \in W$. Thus, we have that $v_{1} + v_{2} \in U \cap W$ as well.
+		
+		Similarly, suppose we have some vector $v \in U \cap W$. Then, $v \in U \land v \in W$. This means then that $\lambda v \in U \land \lambda v \in W$, where $\lambda \in \mathbb{F}$; then we see that $\lambda v \in U \cap W$ too.
+		
+		Thus, we see that $U \cap W$ is also a subspace.
+	\end{rmk}
+	
+	\section{Lecture - 9/7/2023}
+	\subsection{Recap} Last lecture, we discussed the sum and intersection of subspaces. Recall that the sum of subspaces will always yield a subspace, though in other scenarios all bets are off.
+	
+	\subsection{Extending to Multiple Subspaces}
+	\subsubsection{Intersections and Sum}
+	Now, we note here that there isn't anything necessarily sacred about performing these operations with just two subspaces/subsets/etc.; we can extend this to multiple subspaces. We can intersect any number of subspaces of some vector space $V$ and still get a subspace. We see that the more subspaces we intersect with each other, the smaller the resulting space will be.
+	
+	Similarly, we can perform sums on any number of subspaces. Let us take three subspaces $U_{1} + U_{2} + U_{2} \coloneq \left\{  u_{1} + u_{2} + u_{3} : u_{1} \in U_{1}, u_{2} \in U_{2}, u_{3} \in U_{3}\right\}$. Unlike the intersection, we see that the sum of subspaces will expand the size.
+	
+	\subsubsection{Direct Sum}
+	\begin{defn}[Direct Sum of k Subspaces]
+		$U_{1} + U_{2} + \ldots + U_{k}$ form a direct sum if every vector in $U_{1} + U_{2} + \ldots + U_{k}$ has a unique representation as $u_{1} + u_{2} + \ldots + u_{k}$.
+	\end{defn}
+	
+	For simplicity, let us consider the case where $n=3$. The most important part to note about this is that if $k > 2$, then the intersection condition is not an adequate way to check whether or not the resulting sum is direct.
+	
+	\subsection{Linear Dependence and Independence}
+	\subsubsection{(Linear) Span(ning)}
+	\begin{defn}[Span]
+		Given $v_{1}, v_{2}, \ldots, v_{k} \in V$, and some scalars $a_{1}, a_{2}, \ldots, a_{k} \in \mathbb{F}$, we can consider the following:
+		\begin{equation*}
+			a_{1} \cdot v_{1} + a_{2} \cdot v_{2} + \ldots + a_{k} v_{k}.
+		\end{equation*}
+		
+		This is what we refer to as a linear combination of $v_{1}, \ldots, v_{k}$, with coefficients $a_{1}, \ldots, a_{k}$.
+		
+		Then, the span $\mathrm{Span}(v_{1}, \ldots, v_{k}) \coloneq \left\{  a_{1}v_{1} + \ldots + a_{k}v_{k} : \forall j, a_{j} \in \mathbb{F} \right\}$
+	\end{defn}
+	
+	\begin{example}
+		Suppose we have $V = \RR^{2}$, and vectors $v_{1} = \left( 1,0 \right), v_{2} = \left( \pi, 0 \right)$.
+		
+		Then, we see that $\mathrm{Span}(v_{1}, v_{2}) = \left\{  (x,0) : x \in \RR \right\}$.
+	\end{example}
+	
+	We say that $v_{1}, \ldots, v_{k}$ spans $V$ if $\mathrm{Span}(v_{1}, \ldots, v_{k}) = V$.
+	
+	\begin{defn}[Finite Dimensional]
+		$V$ is called finite-dimensional if $V$ is spanned by some finite list of vectors.
+	\end{defn}
+	\begin{example}
+		We see that $\RR^{2}$ is finite-dimensional: $\RR^{2} = \Span\left( (1,0), (0,1) \right)$. We can see similarly that for $\RR^{n}$, we can construct a list of $n$ vectors that spans the space.
+		
+		Now, we observe that the space $\RR^{\infty}$ is infinite dimensional. We shall prove this later.
+	\end{example}
+	
+	\begin{example}
+		A polynomial $\mathscr{P}(\mathbb{F})$ is a function of the form $f(z) = a_{0} + a_{1}z + \ldots + a_{m}z^{m}$, where $a_{0}, \ldots, a_{m} \in \mathbb{F}$. Now, if $a_{m} \not= 0$ then we see that $\deg (f) = m$.
+		
+		For this space, we see that the polynomial $f(z) = 0$, for all $z$, is the zero vector.
+		
+		Now, let us fix $m$. We observe that the sum of two polynomials of degree $\leq= m$, their sum is degree of at most $m$. Similarly, multiplying by a scalar still yields a polynomial of degree $m$. Thus, we see that $\mathscr{P}(\mathbb{F})$ is a vector space. We see here that it is infinite-dimensional, as we can write it as being spanned by the vectors $\left\{  1, z, \ldots, z^{m}\right\}$.
+		
+		Now, suppose we don't restrict the degree and instead look at $\mathscr{P}\left( \mathbb{F} \right)$. We see that it is a vector space, as the sum of polynomials will result in a polynomial, and multiplying by a scalar will still yield a polynomial. A quick note here is that we are working in non-finite fields; otherwise, we may run into weird situations.
+		
+		we say that the vector space $\mathscr{P}(\mathbb{F})$ is infinite dimensional. We will prove this as follows:
+		\begin{proof}
+			Let us proceed by contradiction.
+			
+			Let us suppose that $\mathscr{P}\left( \mathbb{F} \right)$ is spanned by a finite list of $n$ vectors $\left\{  1, z, \ldots, z^{n-1} \right\}$. We see then that the maximum degree of the polynomials in the span of this set is $n-1$; this means then that $z^{n} \not\in \left\{  1, z, \ldots, z^{n-1} \right\}$. This is a contradiction.
+			
+			Thus, it must be that $\mathscr{P}(\mathbb{F})$ is infinite dimensional.
+		\end{proof}
+	\end{example}
+
+\subsection{Independence}
+\begin{defn}[Linear Independence]
+	Given $v_{1}, \ldots, v_{k} \in V$, this list is linearly independent if every vector in $\Span(v_{1}, \ldots, v_{k})$ has a unique representation as $a_{1}v_{1} + \ldots + a_{k}v_{k}$.
+	
+	We note here that $\Span(v_{1}, \ldots, v_{k}) = \Span(v_{1}) + \ldots + \Span(v_{k})$.
+\end{defn}
+\begin{thm}[Direct Sum and Linear Independence]
+	The subspaces $\Span(v_{1}), \ldots, \Span(v_{2})$ are in direct sum $\iff$ the vectors $v_{1}, \ldots, v_{k}$ is linearly independent.
+\end{thm}
+\begin{thm}[Linear Combination and Independence]
+	The list $v_{1}, \ldots, v_{k}$ is linearly independent $\iff$ The only way to obtain $0$ as a linear combination of $v_{1}, \ldots, v_{k}$ is if $a_{1}, \ldots, a_{k} = 0$.
+\end{thm}
+\begin{example}
+	Suppose we have a list of vectors which is linearly independent, then if we remove some vectors from the list, the resulting vector is linearly independent.
+	
+	Similarly, if we have a dependent list, then adding most vectors will still result in a dependent list.
+	
+	In other words, all sublists of an independent list is independent; all superlists of a dependent list is dependent.
+\end{example}
+\begin{rmk}
+	From this example, we observe that the empty list $\left\{  \right\}$ is linearly independent; $\Span() = \left\{  0\right\}$.
+\end{rmk}
+
+\subsubsection{Another Look at Dependence}
+\begin{example}
+	Suppose we have $V = \mathscr{P}_{2}(\RR)$. Let us have the vectors $f_{1}(x) = x^{2}- 2$ and $f_{2} = 2x^{2} - 4$.
+	
+	We see that the list containing only $(f_{1})$ is independent. However, the list $(f_{1}, f_{2})$ is dependent; $f_{2} - 2f_{1} = 0$.
+	
+	Then, any linear dependency $a_{1}v_{1} + \ldots + a_{m}v_{m} = 0$, where not all $a_{j} = 0$ for $j = 1, \ldots, m$, can be rewritten as the following:
+	\begin{equation*}
+		v_{k} \in \Span\left( v_{1}, \ldots, v_{k-1} \right) \tag{for some $k \leq m$}
+	\end{equation*}
+
+	Then, there is in fact a smallest $k$ with this property, 2.
+\end{example}
+
+\begin{rmk}
+	We note that if we have list of only one element, and that elemetn is the zero vector, then the list is not linearly independent!
+\end{rmk}
+
+\section{Discussion - 9/8/2023}
+\begin{hw}
+	Find a number $t$ such that the vectors $(3,1,4), (2,-3,5), (5,9,t)$ is \textit{not} linearly independent in $\RR^{3}$.
+\end{hw}
+\begin{solution}
+	We essentially want to find some number $t$ such that $a_{1}v_{1} + a_{2}v_{2} + a_{3}v_{3} = 0$, but not all $a_{j} = 0$.
+	
+	So, we observe the following:
+	\begin{align*}
+		3a_{1} + 2a_{2} + 5a_{3} &= 0 \\
+		a_{1} - 3a_{2} + 9a_{3} &= 0 \\
+		4a_{1} + 5a_{2} + ta_{3} &= 0 \\
+	\end{align*}
+
+	We can rewrite this as an augmented matrix, and find some value of $t$ that makes it not diagonalisable.
+\end{solution}
+
+\begin{hw}
+	Let $U = \left\{  (z_{1}, \ldots, z_{5}) : 6z_{1} = z_{2}, z_{3} + 2z_{4} + 3z_{5} = 0 \right\} \subseteq \RR^{5}$. Find a basis of $U$, and extend it to a basis of $\RR^{5}$.
+\end{hw}
+\begin{solution}
+	We observe that since we can write $ z_{2} $ in terms of $z_{1}$, and we see that $z_{3} + 2z_{4} + 3z_{5} = 0$
+	
+	We observe that since $z_{3} + 2z_{4} + 3z_{5} = 0$, then $z_{3} = -2z_{4} - 3z_{5}$. So, we can write $z_{3}$ as a linearly combination of $z_{4}$ and $z_{5}$. We also see that we can write $z_{2}$ as a linearly combination of $z_{1}$, since $z_{2} = 6z_{1}$.
+	
+	So, a basis we can write for $U$ is $\Span(z_{1}, z_{4}, z_{5})$.
+\end{solution}
+
+\begin{hw}
+	Suppose that $v_{1}, \ldots, v_{m}$ are linearly independent in $V$, and $w \in V$. Show that $v_{1}, \ldots, v_{m}, w$ is linearly independent if and only if $w \not\in \Span(v_{1}, \ldots, v_{m})$.
+\end{hw}
+\begin{solution}
+	Suppose that $v_{1}, \ldots, v_{m}$ are linearly independent and is in $V$, and that $w \in V$.
+	
+	\begin{proof}[Forward Direction]
+		Let us proceed with the forward direction. For the sake of contradiction, let us suppose that $w \in \Span(v_{1}, \ldots, v_{m})$. 
+		
+		We see that for $v_{1}, \ldots, v_{m}, w$ is linearly independent, then by definition we have
+		\begin{equation*}
+			a_{1}v_{1} + \ldots + a_{m}v_{m} + a_{m+1}w = 0
+		\end{equation*}
+		
+		occurs only when all $a_{1}, \ldots, a_{m+1} = 0$. Now, if we suppose that $w \in \Span(a_{1}, \ldots, a_{m})$, then $w$ can be written as some linearly combination of $v_{1}, \ldots, v_{m}$.
+		
+		Since this is the case however, then if we let $a_{m+1} = -1$, and we choose $a_{1}, \ldots, a_{m}$ such that $a_{1}v_{1} + \ldots + a_{m}v_{m} = w$, then we see that the result will be zero, and $a_{1}v_{1} + \ldots + a_{m}v_{m} + a_{m+1}w = 0$ but the coefficients are not all zero.
+		
+		Therefore, we have a contradiction.
+	\end{proof}
+	\begin{proof}
+		Let us now prove the backwards direction instead. For this, we will proceed by contraposition.
+		
+		Let us suppose that $v_{1}, \ldots, v_{m}, w$ is linearly dependent. Now, because $v_{1}, \ldots, v_{m}$ is linearly independent, then we know that $a_{1}v_{1} + \ldots + a_{m}v_{m} = 0$, and all coefficients are zero.
+		
+	 	However, by adding in $w$, the list of vectors is now linearly dependent; then, $a_{1}v_{1} + \ldots + a_{m}v_{m} + a_{m+1}w = 0$, where at least one of $a_{1}, \ldots, a_{m}, a_{m+1} \not= 0$.
+	 	
+	 	Then, we see that $a_{1}v_{1} + \ldots + a_{m}v_{m} + a_{m+1}w = 0$, where not all $a_{1}, \ldots, a_{m}, a_{m+1}$ are zero. Now, we have two cases:
+	 	\begin{enumerate}
+	 		\item If $w = 0$, then we observe that $a_{1}v_{1} + \ldots + a_{m}v_{m} = 0$, but at least one of $a_{1}, \ldots, a_{m} \not= 0$. However, this is a contradiction, as that would imply the vectors are linearly dependent.
+	 		
+	 		\item Therefore, we only have $w \not= 0$. In this case, we see that $w$ can be expressed as a linearly combination of $v_{1}, \ldots, v_{m}$:
+	 		\begin{equation*}
+	 			...
+	 		\end{equation*}
+	 	\end{enumerate} 
+	 	
+	 	We see then that since $w$ can be expressed as a linearly combination of vectors $v_{1}, \ldots, v_{m}$, then $w \in \Span(v_{1}, \ldots, v_{m})$.
+	\end{proof}
+
+	Thus, we have proved both directions of the proof. Therefore, we can conclude that the statement is true.
+\end{solution}
+
+\begin{hw}
+	Let $U, W$ be subspaces of $V$ such that $U \oplus W = V$, and $u_{1}, \ldots, u_{m}$ and $w_{1}, \ldots, w_{n}$ be the basis of $U$ and $W$ respectively. Show that $u_{1}, \ldots, u_{m}, w_{1}, \ldots, w_{n}$ be the basis of $V$.
+\end{hw}
+\begin{solution}
+	content...
+\end{solution}
+
+\chapter{Independence and Bases}
+\section{Lecture - 9/12/2023}
+\subsection{Removing Independent Vectors}
+Suppose we have a list of linearly independent vectors $v_{1}, \ldots, v_{m}$, and we look at its span $\Span(v_{1}, \ldots, v_{m})$. Now, if we were to remove a vector from this list, the span will become strictly smaller.
+
+The vector which we remove is independent from the rest, and thus doesn't live in the span of the other vectors. So, when we remove it, the span will be smaller.
+
+\subsection{Basis}
+	\begin{defn}[Basis]
+		If we have a list of linearly independent vectors, and they're spanning the entire vector space, then we have what is referred to as a ``basis."
+	\end{defn}
+
+	\subsubsection{Recap}
+	
+	Recall from last time that if we have a list of dependent vectors, then there exists a nontrivial combination of these vectors which is equal to zero. This combination isn't necessarily unique. First, we can scale a combination by an arbitrary scalar, and there could also be multiple linear combinations as well. In other words,
+	\begin{equation*}
+		a_{1}v_{1} + \ldots + a_{m}v_{m} = 0,
+	\end{equation*}
+
+	where not all $a_{j} = 0$. Now, we can express it as $v_{k} \in \Span(v_{1}, \ldots, v_{m-1})$.
+	
+	We can start from the right side, and keep on working backwards until we see some vector which can be expressed as a linear combination of the other vectors.
+	
+	Now, if the very first vectors is in the span of the previous vectors, then $v_{1}$ must be the zero vector.
+	
+	Now, with this observation, it leads it to the following idea:
+	\begin{thm}
+		The length of any linearly independent list $\leq$ length of any spanning list.
+	\end{thm}
+	\begin{proof}
+		Suppose the list $u_{1}, \ldots, u_{k}$ is linearly independent, and $v_{1}, \ldots, v_{l}$ is spanning for $V$.
+		
+		Now, we proceed as follows:
+		\begin{enumerate}
+			\item We consider the list $u_{1}, \ldots, u_{k}, v_{1}, \ldots, v_{l}$. This list is linearly dependent. We note that $u_{1} \not\in \Span( ) = \left\{  0\right\}$, since it comes from a linearly independent list. 
+			
+			\item So, we see that there's some $v_{j} \in \Span(u_{1}, v_{1}, \ldots, v_{j-1})$, where $j \leq l$. Now, let us remove this $v_{j}$ from the list. Then, the remaining list still spans $V$.
+			
+			\item Next, we consider the new list $u_{1}, u_{2}, v_{1}, \ldots, v_{j-1}, v_{j+1}, \ldots, v_{l}$. This list is still dependent, so we can apply the lemma and repeat the process.
+			
+			\item Once we have used up all of the $u$ vectors, we will have a list which has $l$ vectors. We can repeat this process $k$ times and bring the vectors $u_{1}, \ldots, u_{k}$ in. Thus, $k \leq l$.
+		\end{enumerate}
+	\end{proof}
+
+	Now, the consequences of this theorem are:
+	\begin{cor}
+		Any spanning set for $V$ can always be reduced to a basis.
+		
+		Likewise, any linearly independent list in a finite-dimensional space $V$ can be transformed into a basis by adding vectors. We can append the spanning list for $V$ after the linearly independent list, and then reduce down.
+	\end{cor}
+	\begin{cor}
+		Next, any two bases of a finite-dimensional space have the same number of vectors.
+	\end{cor}
+	
+	\subsubsection{Subspaces}
+	Suppose $U$ is a subspace of $V$ and $V$ is finite-dimensional.
+	
+	Now, consider the two following conjectures:
+	\begin{enumerate}
+		\item $\dim V < \stackrel{?}{\infty} \implies \dim U < \infty$
+		\item $v_{1}, \ldots, v_{n}$ is a basis of $V$ $\implies$ $v_{1}, \ldots, v_{n}$ contains a basis for $U$.
+	\end{enumerate}
+
+	For the second conjecture, we observe that it is false: we can consider the vector space $V = \RR^{2}$ with basis $(1,1)$ and $(1,-1)$. Then, the subspace $U = \left\{  (x,0) : x \in \RR\right\}$ cannot be created using the basis vectors of $V$.
+	
+	Then, if this is the case, how do we prove the first conjecture? In other words, how do we prove the following:
+	\begin{thm}
+		Every subspace $U$ of a finite-dimensional space $V$ must be finite-dimensional.
+	\end{thm}
+	\begin{proof}
+		Well, to do this, let us first take some $u_{1} \in U$. If $\Span (u_{1}) = U$, then we're done.
+		
+		Otherwise, there is another vector $u_{2} \not\in \Span(u_{1})$, where $u_{2} \in U$.
+		
+		If $\Span(u_{1}, u_{2}) = U$, we're done. If not, we repeat this process repeatedly.
+		
+		We note here that the process must terminate after finitely many steps. This is because the length of an independent list $\leq$ the length of a spanning list.
+		
+		Moreover, the number of vectors in any basis of $U$ $(= \dim U)$ is always $\leq$ the number of vectors in any basis of $V$ $(= \dim V)$. Thus, we can conclude that $U$ must be finite-dimensional as well.
+	\end{proof}
+
+	From here, if $U$ is a subspace of $V$, and $V$ is finite-dimensional, then any basis of $U$ can be extended to a basis of $V$. To do this, we can pick vectors $w_{j} \not\in \Span U$ until the resulting list of vectors spans $V$, and is linearly independent.
+	
+	\begin{thm}
+		Consider $W \coloneq \Span (w_{1}, \ldots, w_{l})$.
+		
+		Then, $U \oplus W = V$.
+		
+		This sum is direct since the vectors in $U, W$ are linearly independent form each other (as they form a basis for $V$). And by construction, we see that their sum will form the space $V$.
+	\end{thm}
+
+\section{Lecture - 9/14/2023}
+\subsection{Recap}
+We recall that last lecture we were discussing bases and dimension. The dimension of a vector space is the length of any basis.
+
+Now, say $v_{1}, \ldots, v_{k}, v_{k+1}, \ldots, v_{n}$ is a basis. Then, $\Span(v_{1}, \ldots, v_{k}) + \Span(v_{k+1}, \ldots, v_{n})$ spans the whole space. Furthermore, we know that the sum of these two spans is direct.
+
+Thus, with these observations, we can have a subspace $U$ with a basis, and then enlarge it to the basis of the whole space; then, the newly added vectors will form a basis for a new subspace $W$ such that $U \oplus W = V$.
+
+\begin{example}
+	Suppose we have $V = \mathscr{P}_{3}(\RR)$.Then, say we have $U \coloneq \left\{  f \in V : f'2 (2) = 0\right\}$. Then, the basis of this subspace is $\left\{  1, (x-2)^{2}, (x-2)^{3}\right\}$. We know that these vectors are all linearly independent of each other as they aren't scalar multiples of each other. We know its dimension then is at least 3. So, we have to rule out the possibility of it being of dimension 4.
+	
+	Now, if $\dim U = 4$, then $U$ must be the whole space; if the dimensions were equal, there is no way to make the list larger, and thus we have a basis for the entire space already. 
+	
+	In the case of $U$, we see that $x$ fails the condition; we can verify by looking at $\left\{  1, (x-2), (x-2)^{2}, (x-2)^{3} \right\}$.
+	
+	Now, we know that $\mathscr{P}_{3}$ is of dimension 4, since its basis is $\left\{  1, x, x^{2}, x^{3}\right\}$. So, in order to enlarge the list we have, we can just add $x-2$ to it.
+	
+	Thus, if we let $W \coloneq \Span \left\{  (x-2)\right\}$ and we will have $U \oplus W = V$.
+\end{example}
+
+\begin{rmk}
+	Axler mentions an analogy between finite sets and finite-dimensional vector spaces. He builds a small table, where $S$ represents finite sests, and $V$ representing finite-dimensional vector spaces:
+	\begin{center}
+		\begin{tabular}{c | c}
+			S & V \\
+			\hline
+			$\lvert S \rvert$ & $\dim V$ \\
+			$T \subseteq S$ (subset) & $U \subseteq V$ (subspace) \\
+			If $\lvert T \rvert = \lvert S \rvert$, then $T = S$ & If $\dim U = \dim V$, then $U = V$ \\
+			$S_{1} \cap S_{2}$ & $U_{1} \cap U_{2}$ \\
+			$S_{1} \cup S_{2}$ & $U_{1} + U_{2}$ \\
+			$S_{1} \dot{\cup} S_{2}$ & $U_{1} \oplus U_{2}$ \\
+			$\lvert S_{1} \dotcup S_{2} \rvert = \lvert S_{1} \rvert + \lvert S_{2} \rvert$ & $\dim (U_{1} \oplus U_{2}) = \dim U_{1} + \dim U_{2}$ \\
+			$\lvert S_{1} \cup S_{2} \rvert = \lvert S_{1} \rvert + \lvert S_{2} \rvert - \lvert S_{1} \cap S_{2} \rvert$ & $\dim \left( U_{1} + U_{2} \right) = \dim U_{1} + \dim U_{2} - \dim (U_{1} \cap U_{2})$
+		\end{tabular}
+	\end{center}
+\end{rmk}
+
+\begin{rmk}[Proof of (sort-of) PIE for Dimensionality]
+	We will prove that $\dim (U_{1} + U_{2}) = \dim U_{1} + \dim U_{2} - \dim (U_{1} \cap U_{2})$.
+	
+	First, let us take a basis for $U_{1} \cap U_{2}$. We will call it $u_{1}, \cap, u_{k}$. Now, we will extend it to a basis of $U_{1}$ -- to do this, we get $u_{1}, \ldots, u_{k}, v_{1}, \ldots, v_{l}$.
+	
+	We can also extend it so that it becomes a basis for $U_{2}$, yielding us $u_{1}, \ldots, u_{k}, w_{1}, \ldots, w_{m}$.
+	
+	First, we see that $\Span (u_{1}, \ldots, u_{k}, v_{1}, \ldots, v_{l}, w_{1}, \ldots, w_{m})$ contains $U_{1}$ and $U_{2}$. And since this spanning set contains the linear combination of all vectors from $U_{1} + U_{2}$, then $U_{1} + U_{2}$ is spanned by this set. In fact, it is exactly $U_{1} + U_{2}$.
+	
+	Now, to test for independence of these vectors, we imagine we have a linear combination of these vectors:
+	\begin{equation*}
+		a_{1}u_{1} + \ldots + a_{k}u_{k} + b_{1}v_{1} + \ldots + b_{l}v_{l} = -c_{1}w_{1} - \ldots - c_{m}w_{m}.
+	\end{equation*}
+
+	Now, we see that the LHS lives in $U_{1}$, whereas the RHS lives in $U_{2}$. So, the RHS $-c_{1}w_{1} - \ldots - c_{m}w_{m} = d_{1}u_{1}+ \ldots + d_{k}u_{k}$. Then, all of these coefficients have to be equal to zero, since this serves as a basis for $U_{2}$. Thus, they're linearly independent: $c_{1} = \cdots = c_{m} = d_{1} = \cdots = d_{k} = 0$. 
+	
+	Then, we have that the RHS of the original equation is equal to zero. Then, of course, the LHS coefficients must also be equal as it serves as a basis of $U_{1}$.
+	
+	Thus, we observe that $\dim (U_{1} + U_{2}) = k + l + m$. Meanwhile, $\dim U_{1} = l + k$ and $\dim U_{2} = l + m$. So, we see that $\dim U_{1} + \dim U_{2} = (k + l) + (k + m)$; this will yield $2k + l + m$. Now, we observe from here that in $U_{1}$ and $U_{2}$, they share the vectors $u_{1}, \ldots, u_{k}$; so, we see that $U_{1} \cap U_{2} = (u_{1}, \ldots, u_{l})$. Then, $\dim (U_{1} \cap U_{2}) = k$.
+	
+	Thus, if we subtract this from $2k + l + m$, we get $(2k + l + m) - k = k + l + m$, as desired.
+\end{rmk}
+
+\subsection{Linear Maps}
+We have the following set-up: we have two vectors spaces, $V$ and $W$. Now, we start looking at functions, or maps, from $V$ to $W$.
+
+Now, given some $T : V \mapsto W$, we say that $T$ is linear if it respects linear operations (or has linearity). In other words,
+\begin{enumerate}
+	\item $T(v_{1} + v_{2}) = T(v_{1}) + T(v_{2})$.
+	\item $T(\alpha v_{1}) = \alpha T(v_{1})$.
+\end{enumerate}
+
+We note that this definition alone requires that $V$ and $W$ to be over the same field.
+
+\begin{example}
+	Suppose we have $V = \RR^{2}$ and $W = \RR^{3}$.
+	
+	Examples of linear maps includes:
+	\begin{enumerate}
+		\item $(x_{1}, x_{2}) \mapsto (0,0,0)$
+		\item $(x_{1}, x_{2}) \mapsto (x_{1}, x_{2}, 0)$
+		\item $(x_{1}, x_{2}) \mapsto (x_{1}, x_{2}, x_{1} + x_{2})$
+	\end{enumerate} 
+
+	We can also consider the polynomials $\mathrm{P}$. Differentation is a linear map as well, with polynomials.
+\end{example}
+
+\begin{example}
+	Examples of non-linear maps are:
+	\begin{enumerate}
+		\item $(x_{1}, x_{2}) \mapsto (3x_{1} + x_{2}, -x_{2} - 25x_{2}, x_{1} + 1)$
+		\item $(x_{1}, x_{2}) \mapsto (\sin (x_{1}), \cos (x_{2}), \tan (x_{1} + x_{2}))$
+	\end{enumerate}
+\end{example}
+
+\section{Discussion - 9/15/2023}
+\begin{rmk}
+	We will first discuss the difference beteen $\left\{  \right\}$ and $\left(  \right)$.
+	
+	If we write the basis as a tuple, we can remember the order. Meanwhile, as a set, we have to remember the order ourselves. However, for the tuple, if we write something like $(1, i)$, the basis for $\CC$ over $\RR$, can be confused as a coordinate in $\CC^{2}$.
+\end{rmk}
+
+\begin{example}
+	Suppose we have the following:
+	\begin{equation*}
+		U \coloneq \left\{  (a, a-b, b) : a, b \in \RR \right\}.
+	\end{equation*}
+
+	We can find a basis by setting $a = 1, b = 0$, and vice versa. This gives us $\left\{  (1,1,0), (0,-1,1) \right\}$ as a basis.
+	
+	Now, to show that this indeed spans, we observe that all vectors in $U$ can be rewritten as a linear combination of these two vectors. Furthermore, we observe that they're linearly independent as neither of them are scalar multiples of each other.
+	
+	
+\end{example}
+
+\begin{hw}
+	Let $U = \left\{  (z_{1}, \ldots, z_{5}) : 6z_{1} = z_{2}, z_{3} + 2z_{4} + 3z_{5} = 0 \right\}$. Find a basis of $U$, and extend it to a basis of $\RR^{5}$. What if in 'abstract' vector spaces not written as $\mathbb{F}^{n}$?
+\end{hw}
+\begin{solution}
+	We observe that $6z_{1} = z_{2}$. Next, we observe that $z_{3} + 2z_{4} + 3z_{5} = 0$, it follows then that $-2z_{4} - 3z_{5} = z_{3}$.
+	
+	So, $U = \left\{  (z_{1}, 6z_{1}, -2z_{4} - 3z_{5}, z_{4}, z_{5}) : z_{1}, z_{4}, z_{5} \in \RR \right\}$. Then, the following is a basis for $U$:
+	\begin{equation*}
+		\left\{  (1,6,0,0,0), (0,0,-2,1,0), (0,0,-3,0,1) \right\}.
+	\end{equation*}
+
+	We see that all vectors in $U$ can be written as a linear combination of these basis vectors. Furthermore, to confirm that they are indeed linear independent, we observe the following:
+	% show work
+	
+	Now, to extend it to a basis for $\RR^{5}$, we can simply add the vectors $(0,1,0,0,0), (0,0,1,0,0)$ to our list.
+\end{solution}
+
+\begin{hw}
+	Suppose that $p_{0}, \ldots, p_{m} \in \mathscr{P}_{m}$ such that $p_{k}(2) = 0$. Show that $p_{0}, \ldots, p_{m}$ are not linearly independent.
+\end{hw}
+\begin{solution}
+	We suppose that $p_{0}, \ldots, p_{m}$ are linearly independent. Then, this means that for
+	\begin{equation*}
+		a_{0}p_{0} + \ldots + a_{m}p_{m} = 0
+	\end{equation*}
+	to be true, all the coefficients $a_{0}, \ldots, a_{m} = 0$.
+	
+	However, because $p_{k}(2) = 0$, then we see that for
+	\begin{equation*}
+		a_{0}p_{0}(2) + \ldots + a_{k}p_{k}(2) + \ldots + a_{m}p_{m}(2) = 0,
+	\end{equation*}
+	when $a_{1} = \ldots = a_{k-1} = a_{k+1} = \ldots = a_{m} = 0$, we have
+	\begin{equation*}
+		a_{k}p_{k}(2) = 0.
+	\end{equation*}
+
+	If these vectors were linearly independent, $a_{k}$ should be 0. However, because $p_{k}(2) = 0$, then any value of $a_{k}$ will satisfy the equation above. But, this means then that these vectors are not linearly independent, as $a_{k} \not= 0$ still satisfies the equation.
+	
+	Therefore, we can conclude that these vectors are in fact linearly dependent.
+\end{solution}
+
+\begin{hw}
+	Show that $\dim V_{1} + \ldots + \dim V_{n} \geq \dim(V_{1} + \ldots + V_{n})$.
+\end{hw}
+\begin{solution}
+	We can proceed by induction.
+	
+	\textbf{\underline{Base Case}}: For the case of $n=1$, we see that it is trivially true, as we get $\dim V_{1} = \dim V_{1}$.
+	
+	For the case of $n=2$, we will use the following lemma:
+	\begin{lem}
+		$\dim (V_{1} + V_{2}) = \dim V_{1} + \dim V_{2} - \dim(V_{1} \cap V_{2})$.
+	\end{lem}
+
+	Then, with this lemma in mind, we observe that in the case of $n=2$, we have
+	\begin{align*}
+		\dim V_{1} + \dim V_{2} &= \dim (V_{1} + V_{2}) + \dim (V_{1}\cap V_{2}) \\
+		\dim V_{1} + \dim V_{2} &\geq \dim (V_{1} + V_{2}).
+	\end{align*}
+
+	\textbf{\textit{Induction Hypothesis}}: Let us suppose that for $n=k$, we have:
+	\begin{equation*}
+		\dim V_{1} + \ldots + \dim V_{k} \geq \dim (V_{1} + \ldots + V_{k}).
+	\end{equation*}
+
+	\textbf{\underline{Inductive Step}}: Now, we will look at the case of $n=k+1$. We observe that we have:
+	\begin{align*}
+		\dim (V_{1} + \ldots + \dim V_{k} + \dim V_{k+1}) &= \dim ( (V_{1} + \ldots + V_{k}) + V_{k+1}) \\
+		&= \dim (V_{1} + \ldots + V_{k}) + \dim (V_{k+1}) - \dim ( (V_{1} + \ldots + V_{k}) \cap V_{k+1}) \\
+		&\leq \dim (V_{1} + \ldots + V_{k}) + \dim(V_{k+1}) \\
+		&\leq \dim V_{1} + \ldots + \dim V_{k} + \dim V_{k+1} 
+	\end{align*}
+
+	Thus, our induction hypothesis holds for the case of $n = k+1$. Therefore, by the principle of mathematical induction, we can conclude that our claim holds for all $n \in \NN$.
+\end{solution}
+
+\begin{hw}
+	Let $V$ be the space of real polynomial functions, $D = \frac{\mathrm d}{\mathrm dx}$, and $I$ be the identity map, both viewed as maps $V \rightarrow V$.
+	
+	Determine if $I, D, D^{2}$ are linearly independent or not.
+\end{hw}
+\begin{solution}
+	We observe that for the vectors to be linearly independent, only the trivial solution of $a_{1} = a_{2} = a_{3} = 0$ satisfies the following equation:
+	\begin{equation*}
+		a_{1}I + a_{2}D + a_{3}D^{2} = T_{0},
+	\end{equation*}
+
+	where $T_{0}$ is the linear map such that $T_{0}v = 0$ for all $v \in V$.
+	
+	Then, from here, we see that:
+	\begin{align*}
+		(a_{1}I + a_{2}D + a_{3}D^{2})(p) &= T_{0}(p)
+		&= 0
+	\end{align*}
+
+	So, let us define $p_{1} = x^{0} = 1$. Then, we have that
+	\begin{align*}
+		(a_{1}I + a_{2}D + a_{3}D^{2})(p_{1}) &= T_{0}(p_{1}) \\
+		a_{1} + 0 + 0 &= 0 \\
+		a_{1} &= 0
+	\end{align*}
+
+	Next, define $p_{2} = x$. Then, we have:
+	\begin{align*}
+		(a_{2}D + a_{3}D^{2})(p_{2}) &= T_{0}(p_{2}) \\
+		a_{2} + 0 &= 0 \\
+		a_{2} &= 0
+	\end{align*}
+
+	Finally, if we let $p_{3} = x^{2}$, then we see that
+	\begin{align*}
+		(a_{3}D^{2})(p_{3}) &= T_{0}(p_{3}) \\
+		2a_{3} &= 0 \\
+		a_{3} &= 0
+	\end{align*}
+
+	Since $a_{1} = a_{2} = a_{3} = 0$, we conclude that they are indeed linearly independent.
+\end{solution}
+
+\chapter{Linear Maps}
+\section{Lecture - 9/19/2023}
+\subsection{Linear Maps}
+We recall that when discussing ``linear map", we first need two vector spaces $V, W$ over the same field $\mathbb{F}$. 
+
+Now, a ``linear map" is defined as a map in which the following two conditions hold:
+
+For all $v, w \in V$, along with some scalar $\lambda \in \mathbb{F}$, we have:
+\begin{enumerate}
+	\item $T(v+w) = T(v) + T(w)$.
+	\item $T(\lambda v) = \lambda T(v)$.
+\end{enumerate}
+
+In other words, $T$ respects linearity.
+
+\subsubsection{A Little Thought Experiment (Save Me)}
+Suppose we have $V = \mathscr{P}(\RR) = W$.
+
+When we try to integrate some expression, such as $(x-1)^{2}$, using an indefinite integral, we see that we are stuck with having a $+C$ at the end -- what should this $C$ be?
+
+There is no canonical $C$, so in order to resolve this issue, we can instead take the definite integral $\int_{0}^{x} f(t) dt$. Of course, the lower bound isn't necessarily sacred; we could change it to be whatever; the difference between choosing, say, starting at 1 and 0 would be that constant $C$.
+
+Then, let us take the following:
+\begin{equation*}
+	f(x) \mapsto \int_{a}^{x} f(t) \mathrm d t
+\end{equation*}
+
+Now, we want to show that this is indeed a linear map. Let us take $f,g \in \mathscr{P}(\RR)$ and $\alpha, \beta \in \RR$. We then observe the following:
+\begin{align*}
+	(\alpha f + \beta g) (x) &\mapsto \int_{a}^{x} (\alpha f + \beta g)(t) \mathrm d t \\
+	&= \int_{a}^{x} (\alpha f)(t) \mathrm d t + \int_{a}^{x} (\beta g)(t) \mathrm d t \\
+	&= \alpha\int_{a}^{x} ( f)(t) \mathrm d t + \beta\int_{a}^{x} (g)(t) \mathrm d t \\
+	&= \alpha (Tf)(x) + \beta (Tg)(x)
+\end{align*}
+
+\begin{rmk}
+		Now, we notice that if we start from integrating, then differentiating, then we get:
+	\begin{equation*}
+		f(x) \mapsto \int_a^{x} f(t) \mathrm d t \mapsto f(x).
+	\end{equation*}
+
+	However, in the opposite direction, we get:
+	\begin{equation*}
+		f(x) \mapsto f'(x) \mapsto \int_{a}^{x} f'(t)dt = f(x) - f(a).
+	\end{equation*}
+
+	Now, we note that if we're working in a finite-dimension then we are working in a more rigid structure, and thus one-sided inverses won't necessarily occur. But with infinite-dimensional vector spaces, it can occur.
+\end{rmk}
+
+\begin{example}
+	Suppose we have some mapping from $\mathscr{P}(\RR) \rightarrow \mathscr{P}(\RR)$.
+	
+	Let us consider $f(x) \mapsto (x^{2} - 1)f(x)$. In this case, it is linear.
+	
+	However, if we tried instead to do $\sin(x)$, then it wouldn't work, since we're violating the fact that we are working in the polynomials.
+	
+	If we tried $f(x) \mapsto f(x^{2} + x - 3)$, the resulting map will also be linear.
+\end{example}
+\begin{example}
+	Suppose we have $V = \mathscr{P}(\RR)$ and $W = \RR$, both of which are vector spaces over $\RR$.
+	
+	Then, suppose we have the mapping $T: V \rightarrow W$. Then, if we have $f \mapsto f(\pi)$, then this will be a linear mapping. Similarly, $f \mapsto \int_0^{5} f(t) \mathrm d t$ is also linear.
+\end{example}
+
+\subsubsection{The Set of Linear Maps}
+Now, let us consider the set of all linear maps from $V$ to $W$, denoted by $\mathcal L (V,W)$.
+
+Likewise, the set of all linear maps from $V$ to $V$ is denoted by $\mathcal L(V,V)$, or also sometimes $\mathcal L (V)$.
+
+It turns out that $\mathcal L(V,W)$ and $\mathcal L(V)$ also have some sort of linear structures.
+
+First, we note that $\mathcal L (V,W)$ is essentially just a set of functions. Then, we know, provided the outputs allows us to, we can perform pointwise addition with functions. Then, let us proceed as follows:
+
+\begin{thm}[Addition of Linear Maps]
+	Let us consider two linear maps $T \in \mathcal L(V,W), S \in \mathcal L(V,W)$. Then, we define $T + S$ as:
+	\begin{equation*}
+		(T+S)(v) \coloneq T(v) + S(v), \qquad \forall v \in V.
+	\end{equation*}
+
+	We note that the result will also be linear as well.
+\end{thm}
+\begin{proof}
+	We observe the following:
+	\begin{align*}
+		(T+S)(\alpha v + \beta w) &= T(\alpha v + \beta w) + S(\alpha v + \beta w) \\
+		&= \alpha T(v) + \beta T(w) + \alpha S (v) + \beta S(w) \\
+		&= \alpha (T+S)(v) + \beta (T+S)(w) 
+	\end{align*}
+
+	Thus, we observe that $T+S$ is also a linear map. In other words, we have that $(T+S)(v) \in \mathcal L(V,W)$ as well.
+\end{proof}
+
+\begin{thm}[Scalar Multiplication on Linear Maps]
+	We define $(c \cdot T)(v) = c \cdot T(v)$. The proof that $(c \cdot T)(v)$ is similar to the one above for addition.
+\end{thm}
+
+To sum up, we observe that $\mathcal L (V,W)$ is a vector space over the same field as $V$ and $W$.
+
+\begin{defn}[Map Composition]
+	Suppose we have a mapping $T$ from $V$ to $W$. Then, we have a mapping $S$ from $W$ to $U$.
+	
+	In other words, suppose we have $T \in \mathcal L (V,W)$, $S \in \mathcal L (W, U)$. Then, we define this as $(S \circ T)(v) = S(T(v))$.
+	
+	Evidently, this composition is also linear.
+\end{defn}
+
+\subsubsection{Special Spaces (actually, subspaces) Associated to a Linear Map}
+Consider $T \in \mathcal (V,W)$. Then,
+\begin{enumerate}
+	\item $T(0) = 0$. A small note is that the first zero is in $V$, whereas the second is in $W$. 
+	
+	Generally, other vectors in $V$ may be sent to $0_{W}$ by a linear map $T$. Suppose we have two vectors $v_{1}, v_{2}$ such that $T(v_{1}) = T(v_{2})$. Then, we have $T(v_{1}) - T(v_{2}) = 0$.
+	
+	So, $T \iff (T(v) = 0 \implies v = 0)$.
+\end{enumerate}
+
+\begin{defn}
+	We define the null space, denoted as $\mathrm{Null} (T) : \left\{  v \in V : T(v) = 0 _{w} \right\}$.
+\end{defn}
+
+We note that $T$ is injective $\iff \mathrm{Null}(T) = \left\{  0\right\}$. Also, notice that $\mathrm{Null}(T)$ is a subspace of $V$.
+\begin{proof}
+	We will prove some of the facts above.
+	
+	First, for $T(0) = 0$, we observe the following:
+	\begin{align*}
+		T(0) &= T(0+0) \\
+		&= T(0) + T(0)
+		T(0) + T(-1(0)) &= T(0) + T(0) + T(-1(0)) \\
+		T(0) - T(0) &= T(0) + T(0) - T(0) \\
+		0 &= T(0)
+	\end{align*}
+\end{proof}
+
+\section{Lecture - 9/20/2023}
+\subsection{True or False?}
+\begin{enumerate}
+	\item Linear Maps are injective -- False.
+	
+	\item $\vnull T = \left\{  0 \right\} \implies T$ is injective -- True. However, we note that this holds only when $T$ is linear.
+	
+	\item $T$ is surjective $\implies$ $T$ is linear -- False.
+	
+	\item The map $T : \mathscr{P}(\RR) \rightarrow \mathscr{P}(\RR), f(x) \mapsto (x^{2} + x - 1)f(x+1) - f'(x)$ is linear -- True; we observe that this is a difference of two linear maps. The first part is a composition of two linear maps, with the first being a shift, then multiplication by a fixed polynomial. Meanwhile, the second part is simply the derivative, which is also linear.
+\end{enumerate}
+
+\subsection{Range}
+\begin{defn}[Range]
+	We define the range of some linear map $T$ as:
+	\begin{equation*}
+		\vrange T \coloneq \left\{   T(v) : v \in V \right\}.
+	\end{equation*}
+
+	Here, $T \in \mathcal L(V,W)$.
+\end{defn}
+
+First, we observe that $\vrange T \subseteq W$. If $T$ is surjective, then it means that $\vrange T = W$.
+
+\begin{thm}
+	$\vrange T$ is a subspace of $W$.
+\end{thm}
+\begin{proof}
+	First, we observe that since $T(0_{v}) = 0_{w}$, it follows then that $0_{w} \in \vrange T$. Thus, the zero vector is contained in $\vrange T$.
+	
+	We now want to check whether closure holds for $\vrange T$.
+	
+	To do this, let us look at vectors $w_{1}, w_{2} \in \vrange T$ and some scalars $\alpha, \beta \in \mathbb{F}$. 
+	
+	Now, since $w_{1}, w_{2} \in \vrange T$, it follows then that $Tv_{1} = w_{1}$, and $Tv_{2} = w_{2}$. It follows then that:
+	\begin{align*}
+		T(\alpha v_{1} + \beta v_{2}) &= \alpha T(v_{1}) + \beta T(v_{2}) \\
+		&= \alpha w_{1} + \beta w_{2} 
+	\end{align*}
+	
+	Thus, we observe that $\alpha w_{1} + \beta w_{2} \in \vrange T$.
+	
+	Therefore, we have confirmed that $\vrange T$ is indeed a subspace of $W$.
+\end{proof}
+
+\subsection{The Fundamental Theorem of Linear Maps}
+Suppose we have $T \in \mathcal L(V,W)$.  Let us assume that $V$ is finitely dimensional. Then, we have the following:
+\begin{thm}[Fundamental Theorem of Linear Maps]
+	The following is one of the most important theorems of this course:
+	\begin{equation*}
+				\dim V = \dim \vnull T + \dim \vrange T 
+	\end{equation*}
+\end{thm}
+\begin{proof}
+	Let us suppose that $\dim V = m$.
+	
+	We observe that since $\dim V$ is finite, it follows then that $\dim \vnull T$ must also be finite.
+	
+	Now, we take some basis $v_{1}, \ldots, v_{n}$ of $\vnull T$.
+	
+	Now, let us extend the basis of $\vnull T$ to the basis of $V$. Then, we have a list of vectors $v_{1}, \ldots, v_{n}, v_{n+1}, \ldots, v_{m}$ which forms a basis for $V$.
+	
+	Now, we observe that for $v_{1}, \ldots, v_{n}$, these vectors get sent by $T$ to $0$. We see next that the vectors $v_{n+1}, \ldots, v_{m}$ must be sent to some non-zero vector in $W$ by $T$.
+	
+	Then, we see that $\vspan T = \left\{  T(v_{i}) : i = n+1, \ldots, m \right\}$.
+	
+	Now, we want to show that all of these vectors form a basis for $\vrange T$. Since we already have that they span $\vrange T$, then we want to show linear independence. To do this, we observe that since $T$ is a linear map, we have:
+	\begin{align*}
+		a_{n+1}T(v_{n+1}) + \ldots + a_{m}T(v_{m}) &= 0 \\
+		T(a_{n+1}v_{n+1} + \ldots + a_{m}v_{m}) &= T(0) \\
+		a_{n+1}v_{n+1} + \ldots + a_{m}v_{m} &= 0
+	\end{align*} 
+
+	And since we know that the vectors $v_{n+1}, \ldots, v_{m}$ are part of a basis for $V$, it follows then that the coefficients must thus be all equal to zero as these vectors are linearly independent.
+	
+	Therefore, we observe that these vectors $v_{n+1}, \ldots, v_{m}$ are a basis for $\vrange T$. Then, we have the following information:
+	\begin{align*}
+		\dim V &= m \\
+		\dim \vnull T &= n \\
+		\dim \vrange T &= m - n
+	\end{align*}
+
+	Therefore, we see that:
+	\begin{align*}
+		\dim V &= m \\
+		&= n + (m-n) \\
+		&= \dim \vnull T + \dim \vrange T.
+	\end{align*}
+\end{proof}
+\begin{example}
+	Suppose we have $V = \mathscr{P}(\RR)_{k}$. Then, we see that $\dim V = k+1$.
+	
+	Now, suppose we have the linear map $T$ which differentiates all $p \in V$. Then, we see that $\dim \vrange T = (k+1) - 1 = k$. Similarly, we observe that $\dim \vnull T = 1$.
+	
+	Thus, we see that $\dim \vnull T + \dim \vrange T = 1 + k = k + 1$.
+\end{example}
+
+\begin{rmk}
+	We observe that this theorem is actually assymetric; the right-hand side is focused entirely on $V$. Meanwhile, the left-hand side is composed of a subspace of $V$ and a subspace of $W$.
+	
+	We note that this is due to the fact that there is nothing exactly ``sacred" about the codomain; while we do need $\vrange T \subseteq W$, we can have $W$ to be as big as we want.
+	
+	Thus, it is unreasonable to expect that we have the dimension of $W$ to appear in this formula.
+\end{rmk}
+
+\begin{example}
+	This formula can be used to answer questions of injectivity and surjectivity.
+	
+	For example, let us consider $\dim V = \dim W = n$, $\dim \vnull T = 2$, and $\dim \vrange T = n - 2$.
+	
+	From this, we observe that since $\dim \vnull T = 2$, it can't be injective. Furthermore, since $\dim \vrange T \not= n$, it follows that it can't be surjective either.
+\end{example}
+
+\begin{lem}
+	If we have $\dim V = \dim W < \infty$, then we observe the following:
+	\begin{align*}
+		\text{Injectivity} \iff \text{Surjectivity}
+	\end{align*}
+\end{lem}
+\begin{rmk}
+	We observe that if our assumption of $\dim V = \dim W$ isn't made, then this lemma fails.
+	
+	For example, suppose we have some linear map $T$ which takes polynomials in $\mathscr{P}(\RR)_{k} \rightarrow \mathscr{P}(\RR)_{k-1}$. While it may be surjective, we see that it isn't injective, because all the constants are sent to the zero vector.
+\end{rmk}
+\begin{lem}
+	We cannot have an injective, linear mapping from a higher-dimensional vector space to a lower-dimensional one. This is because $\dim \vrange T$ must be less than the dimension of $V$, meaning that $\dim \vnull T \not= 0$. Thus, we can't have injectivity.
+	
+	Similarly, we cannot send a lower-dimensional vector to a higher-dimensional vector with a linear map that is surjective. This is because ...
+\end{lem}
+
+\subsection{Finite-Dimensional Domains}
+Firstly, if $\dim V < \infty$, then we always have some basis $v_{1}, \ldots, v_{n}$ of $V$.
+
+If $T \in \mathcal L (V,W)$, then the vectors $T(v_{j}) : j = 1, \ldots, n$ determine the action of $T$ on any vector $v \in V$.
+
+We can think of this as rewriting any vector in $V$ as some linear combination of the basis vectors. Then, using linearity of the map, we can break it down.
+
+\begin{thm}
+	For $v_{1}, \ldots, v_{n}$, we can always form a linear map $T$ which sends them to $w_{1}$
+\end{thm}
+
+\subsection{Matrices}
+Suppose we have $T \in \mathcal L (V,W)$ such that $\dim V, \dim W < \infty$.
+
+Then, given a basis $v_{1}, \ldots, v_{n}$ and $w_{1}, \ldots, w_{m}$ of $V$ and $W$ respectively, we have:
+\begin{equation*}
+	T(v_{j}) = a_{1,j}w_{1} + a_{2,j}w_{2} + \ldots + a_{m,j}w_{m}.
+\end{equation*}
+
+\section{Discussion - 9/22/2023}
+\begin{hw}
+	Given vectors $v_{1}, \ldots, v_{m} \in V$, construct a linear map $T : \mathbb{F}^{n} \rightarrow V$ by $T(x_{1}, \ldots, x_{m}) = \sum x_{i}v_{i}$. Show that $T$ is injective if and only if $v_{1}, \ldots, v_{m}$ are linearly independent.
+\end{hw}
+\begin{solution}
+	To begin with, we will prove the forward direction. Let us suppose that $T$ is injective. Then, by definition, we observe that $T(v) = T(w) \implies v = w$.
+	
+	Now, suppose we have the following:
+	\begin{align*}
+		T(x_{1}, \ldots, x_{m}) &= T(y_{1}, \ldots, y_{m}) \\
+		\sum x_{i}v_{i} &= \sum y_{i}w_{i}, \quad v_{i}, v_{i} \in V \\
+		x_{1}v_{1} + \ldots x_{m}v_{m} &= y_{1}w_{1} + \ldots + y_{m}v_{m} \\
+		x_{1}v_{1} + \ldots + x_{m}v_{m} - y_{1}w_{1} - \ldots - y_{m}v_{m} &= 0 \\
+		(x_{1} - y_{1})v_{1} + \ldots + (x_{m} - y_{m})v_{m} &= 0
+	\end{align*}
+
+	Furthermore, we know that, by injectivity, we have that $x_{i} = y_{i}$ for each $x_{i}, y_{i}$. So, each $x_{i} - y_{i} = 0$. Thus, we have that every coefficient in the equation above is equal to zero, meaning that $v_{1}, \ldots, v_{m}$ is linearly independent.
+
+	Now, let us suppose that $v_{1}, \ldots, v_{m}$ is linearly independent.
+	
+	We observe then that for $x_{1}, \ldots, x_{m}$ and $y_{1}, \ldots, y_{m}$, we have:
+	\begin{align*}
+		T(x_{1}, \ldots, x_{m}) &= x_{1}v_{1} + \ldots + x_{m}v_{m} \\
+		T(y_{1}, \ldots, y_{m}) &= y_{1}v_{1} + \ldots + y_{m}v_{m}
+	\end{align*}
+
+	Setting each of these equations equal to zero yields us:
+	\begin{align*}
+		x_{1}v_{1} + \ldots + x_{m}v_{m} &= 0 \\
+		y_{1}v_{1} + \ldots + y_{m}v_{m} &= 0
+	\end{align*}
+
+	And because $v_{1}, \ldots, v_{m}$ is linearly independent, then we see that each $x_{1} = \cdots = x_{m} = y_{1} = \cdots = y_{m} = 0$. Then, it follows that $x_{1}, \ldots, x_{m} = y_{1}, \ldots, y_{m}$. So, we have shown that if $T(x_{1}, \ldots, x_{m}) = T(y_{1}, \ldots, y_{m})$, then $x_{1}, \ldots, x_{m} = y_{1}, \ldots, y_{m}$ as well.
+\end{solution}
+
+\begin{hw}
+	Now, show that $T$ is injective if and only if $v_{1}, \ldots, v_{m}$ spans $V$.
+\end{hw}
+\begin{solution}
+	We will proceed with the forward direction. Let us suppose that $T$ is injective. Then, by definition, we see that $\dim \vnull T = 0$. Furthermore, we observe that because $T(x_{1}, \ldots, x_{m}) = x_{1}v_{1} + \ldots + x_{m}v_{m}$, it follows then that any vector $t \in T$ can be expressed as a linear combination of $m$ vectors. Since $T$ is injective, we note that it must be linearly independent. Thus, we have that $\vrange T = m$.
+	
+	Then, we see the following:
+	\begin{align*}
+		\dim \vnull T + \dim \vrange T &= \dim V \\
+		0 + m &= \dim V \\
+		\dim V = m.
+	\end{align*}
+
+	Thus, we see that $v_{1}, \ldots, v_{m}$ must be a spanning set of $V$.
+	
+	Now, let us suppose that $v_{1}, \ldots, v_{m}$ spans $V$. Then, we know that all vectors $v \in V$ can be written as a linear combination of $x_{1}v_{1} + \ldots + x_{m}v_{m}$. So, $\dim V \leq m$.
+	
+	Next, we note here that this linear combination is exactly $T(x_{1}, \ldots, x_{m})$, and we further note that $\dim \vrange T = \dim V$.
+	
+	And because we have that $\dim V = \dim \vrange T$, then it must follow that $\dim \vnull T = 0$, meaning that $T$ is injective.
+\end{solution}
+
+\begin{hw}
+	Let $S : V \rightarrow W$, $T: U \rightarrow V$ be linear maps. If $ST$ is injective, show that $T$ is injective.
+\end{hw}
+\begin{solution}
+	\begin{comment}
+		We suppose that $ST$ is injective. Then, by definiteion, we observe that if $ST(v) = ST(w)$, then $v = w$.
+		
+		We observe the following:
+		
+		Suppose we have $T(v) = T(w)$. Then, $ST(v) = ST(w) \implies v = w$. So, we have that $T(v) = T(w) \implies v = w$.
+	\end{comment}
+	
+	We will proceed by contrapositive.
+	
+	We suppose that $T$ is not injective. Then it follows that there's some non-zero $v \in V$ such that $Tv = 0$.
+	
+	From here, we observe that $S(Tv) = S(0) = 0$. Thus, we see that $STv$ is also not injective.
+\end{solution}
+
+\begin{hw}
+	Define $T : \mathscr{P}_{2}(\RR) \rightarrow \RR^{2}$ by
+	\begin{equation*}
+		Tp = (p(1) + p'(2), p(0)).
+	\end{equation*}
+
+	What is $T1$ and $Tx$?
+\end{hw}
+\begin{solution}
+	We observe that $T1$ and $Tx$ are:
+	\begin{align*}
+		T1 &= (1, 1) \\
+		Tx &= (2, 0)
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	What is the null space of $T$?
+\end{hw}
+\begin{solution}
+	We observe that the null space of $T$ is the list of polynomials $p$ such that $Tp = (0,0)$.
+	
+	Then, we must have that $p(1) + p'(2) = 0$, and $p(0) = 0$.
+	
+	In other words, we have:
+	\begin{align*}
+		c &= 0 \\
+		5a + 2b + c &= 0 \\
+		5a + 2b &= 0
+	\end{align*}
+
+	So, any polynomial of the form $ax^{2} - \frac{5}{2}ax$ will be within the null space of $T$, for $a \in \RR$. Thus, we have:
+	\begin{equation*}
+		\vnull T = \left\{  ax^{2} - \frac{5}{2}ax : a \in \RR \right\}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}
+	Define $T_{1}, T_{2}, T_{3} : \mathscr{P}_{2}(\RR) \rightarrow \RR$ as:
+	\begin{align*}
+		T_{1}(p) &= p(1) \\
+		T_{2}(p) &= p(2) \\
+		T_{3}(p) &= p(3).
+	\end{align*}
+	
+	Are $T_{1}, T_{2}, T_{3}$ linearly independent?
+\end{hw}
+\begin{solution}
+	We observe that for $T_{1}, T_{2}, T_{3}$ to be linearly independent, it must follow that only the trivial solution satisfies the following equation:
+	\begin{align*}
+		a_{1}T_{1} + a_{2}T_{2} + a_{3}T_{3} &= T_{0} \\
+		(a_{1}T_{1} + a_{2}T_{2} + a_{3}T_{3})(p) &= (T_{0})(p)
+	\end{align*}
+
+	where $T_{0}$ is the linear map which maps all polynomial $p$ to 0.
+	
+	Now, we observe that for $p = ax^{2} + bx + c$, we have:
+	\begin{align*}
+		a_{1}(a+b+c) + a_{2}(4a + 2b + c) + a_{3}(9a + 3b + c) &= 0 \\
+		(a_{1} + 4a_{2} + 9a_{3})a + (a_{1} + 2a_{2} + 3a_{3})b + (a_{1} + a_{2} + a_{3})c &= 0
+	\end{align*}
+
+	Then, we can write this as a system of equations as follow:
+	\begin{align*}
+		a_{1} + 4a_{2} + 9a_{3} &= 0 \\
+		a_{1} + 2a_{2} + 3a_{3} &= 0 \\
+		a_{1} + a_{2} + a_{3} &= 0
+	\end{align*}
+
+	From here, after some computation, we observe that $a_{1} = a_{2} = a_{3} = 0$.
+\end{solution}
+
+\begin{hw}
+	Show that there is no linear map $T : \RR^{3} \rightarrow \RR^{3}$ with $\vnull T = \vrange T$.
+\end{hw}
+\begin{solution}
+	We observe that the linear map $T$ takes vectors from a vector space $V = \RR^{3}$ to $W = \RR^{3}$.
+	
+	Then, we observe that $T \in \mathcal{L}(\RR^{3}, \RR^{3})$
+\end{solution}
+
+\begin{hw}
+	We observe that for $T(v+v)$, we can rewrite it as $T(2v)$, and thus if we keep on going we can get $T(kv)$. But this isn't good, because $k \in \ZZ_{+}$, so we can't have something like $T(0.5v)$.
+	
+	The problem now is, let's construct a map where $T(v+v) = T(v) + T(v)$, but not that $T(\lambda v) = \lambda T(v)$.
+	
+	Similarly, construct a map such that $T(\lambda v) = \lambda T(v)$, but $T(v+v) \not= T(v) + T(v)$.
+\end{hw}
+\begin{solution}
+	Hint 1: 2 but not 1. Map from $\RR^{2} to \RR$. $\sqrt[3]{a^{3} + b^{3}}$
+	1 but not 1: $T: \CC \rightarrow \CC$, then we have $T(a+bi) = b$.
+	
+	Consider something where we have $\sqrt{a^{2} + b^{2}}$.  
+\end{solution}
+	
+	
+\chapter{Matrix Representation, Invertibility, and Isomorphisms}
+\section{Lecture - 9/26/2023}
+\subsection{Matrix Representations}
+
+\begin{example}
+	Let $V = \vspan_{\CC} (1, \cos x , \sin x , \cos 2x, \sin 2x)$.
+	
+	We define $T : f(x) \mapsto f''(x) + 4f(x)$. Now, consider the following:
+	\begin{enumerate}
+		\item Is $T$ in $\mathcal L(V,V)$?
+		\item If yes, what is the representation of $T$ in the above basis?
+	\end{enumerate}
+
+	We note that since linearity and closure checks out, we see that $T$ is indeed in $\mathcal L (V,V)$.
+	
+	Now, we observe that the list $1, \cos x, \sin x, \cos 2x, \sin 2x$ are linearly independent, and thus forms a basis for $V$. Then, in  order to determine what the representation of $T$, we simply see what it maps each of the basis to.
+	
+	As it turns out, we get the following matrix:
+	\begin{equation*}
+		\begin{bmatrix}
+			4 & 0 & 0 & 0 & 0 \\
+			0 & 3 & 0 & 0 & 0 \\
+			0 & 0 & 3 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, from here, we observe the following: $\Range T = \vspan_\CC (1, \sin x, \cos x)$, and $\Null T = \vspan_\CC (\cos 2x, \sin 2x)$.
+	
+	Now, we consider: is it 
+\end{example}
+
+\section{Lecture - 9/28/2023}
+\subsection{Invertibility}
+We recall that for a map to be invertible, it must be that it is both injective and surjective (in other words, it's bijective).
+
+Now, suppose that $T : V \rightarrow W$ bijectively. Now, we want to find some inverse $T^{-1}$.
+
+We define an inverse $S : W \rightarrow V$ by taking $S(w) = v$, where $\left\{  v \right\} \in T^{-1}(\left\{  w \right\})$. We note that this is guaranteed by the bijectivity of $T$.
+
+Observe then that
+\begin{align*}
+	(TS)(w) &= Tv \\
+	&= v
+	\\
+	(ST)(v) &= S(T(v)) \\
+	&= v
+\end{align*}
+
+Thus, we observe that $ST = I_{V}$, and $ST = I_{W}$, where $I$ is the identity map.
+
+\begin{rmk}
+	We note here that this is independet of the linearity of the map $T$.
+\end{rmk}
+
+\subsubsection{Linearity of Inverse}
+Consider the following question: if $T$ happens to be linear and invertible, what about its inverse $S$?
+
+\begin{thm}
+	If $T$ is linear and invertible, then its inverse $S$ must be linear as well.
+\end{thm}
+
+We note that since $T$ is linear, it follows then that
+\begin{align*}
+	T(v+w) &= T(v) + T(w) \\
+	T(\lambda v) &= \lambda T(v).
+\end{align*}
+
+Now, we observe the following:
+\begin{align*}
+	S(w_{1}+w_{2}) &= v_{1} + v_{2} \\
+	&= S(w_{1}) + S(w_{2})
+\end{align*}
+
+A similar check is done for scalar multiplication.
+
+\subsubsection{Dimensionality of W}
+Now, suppose we have some $T \in \mathcal L(V,W)$ which is invertible. Moreover, we know $\dim V = n$. Then, what about $\dim W$?
+
+\begin{thm}
+	If $T \in \mathcal L(V,W)$ is invertible, and $\dim V = n$, then $\dim W = n$ as well.
+\end{thm}
+\begin{proof}
+	We observe here that $\dim W$ must be equal to $m$. We know that since $T$ is invertible, it means that it is bijective; in other words, we have that $T$ is both injective and surjective.
+	
+	Now, we recall that since $T$ is injective, it follows that $\dim \vnull T = 0$. Then, we see that $\dim \vrange T = n$.
+	
+	However, since $T$ is surjective, we see then that $\vrange T = W$. Thus, it must be that $\dim \vrange T = n = \dim W$.
+	
+	Therefore, we see then that $\dim V = \dim W$.
+\end{proof}
+
+Alternatively, we can proceed as follows:
+\begin{proof}
+	Let us define $T$ linearly by
+	\begin{equation*}
+		T(v_{j}) \coloneq w_{j} \tag*{for j = 1, \ldots, n.}
+	\end{equation*}
+
+	Now, we observe that this map is indeed surjective, as we note that $\vrange T$ has to contain the span of $w_{1}, \ldots, w_{n}$ which is precisely $W$.
+	
+	We note as well that $T$ is injective, since the condition $T(\sum a_{j}v_{j}) = 0$ means that $\sum a_{j}w_{j} = 0$. The latter implies that $a_{j} = 0$, for all $j$'s as $w_{1}, \ldots, w_{n}$ is linearly independent. Thus, it must be that $T$ is injective as well.
+	
+	From here, we observe that $\dim W = n$.
+\end{proof}
+
+\subsection{Isomorphisms}
+\begin{thm}
+	We say that a linear map invertible map from $V$ to $W$ is an isomorphism. And in this case, $V$ and $W$ are isomorphic.
+	
+	In other words, we see that if $V \cong W$ means that there exists some $T : V \rightarrow W$ such that $T$ is invertible.
+\end{thm}
+
+We note here that it must be that $\dim V = \dim W$ (as proven earlier).
+
+Furthermore, we see that if $T$ maps the basis of $V$ to the basis of $W$, then we have that $T$ is thus invertible.
+
+We also note that if $\dim \vnull T = 0$, and we know that $\dim V = \dim W$, then of course it must be that $T$ is invertible.
+
+
+Now, let us revisit the map
+\begin{equation*}
+	\mathcal M : \mathcal L(V,W) \rightarrow \mathbb{F}^{m \times n},
+\end{equation*}
+where $\dim V = n$ and $\dim W = m$. We note here that this map actually maps from one vector to another vector space. Also, note that $\mathbb{F}^{m \times n}$ consists of the $m \times n$ matrices.
+
+Now, we posit the following question: is it true that $\mathcal M(\alpha T_{1} + \beta T_{2}) = \alpha \mathcal M (T_{1}) + \beta \mathcal M(T_{2})$.
+
+It follows that this is indeed true by construction.
+
+We further note now that this map $\mathcal M$ is indeed invertible.
+
+\begin{example}
+	To see that $\mathcal M $ is invertible, let's proceed with the following example:
+	\begin{equation*}
+		T \coloneq
+		\begin{bmatrix}
+			1 & 0 & 1 \\ 0 & 2 & 2 \\ 0 & 0 & 3 
+		\end{bmatrix}
+	\end{equation*}
+
+	Next, we suppose that $V = \mathbb{P}_{2}$ and $W = \RR^{3}$.
+	
+	Now, say the basis of $V$ is $7, x+5, x^{2} - 8$. And the basis of $W$ is $(3,0,0), (0,5,0), (1,1,1)$.
+	
+	Now, we observe that:
+	\begin{align*}
+		T : a7 + b(x+5) + c(x^{2} - 8) &\rightarrow a(3,0,0) + 2b(0,5,0) + c(3,0,0) + 2c(0,5,0) + 3c(1,1,1) \\
+		&= (3a + 6c, 10b + 13c, 3c)
+	\end{align*}
+
+	Now, we write $a + bx + cx^{2} = \tilde{a}7 + \tilde{b}(x+5) + \tilde{c}(x^{2} - 8)$.
+	
+	Then, we see that $\tilde{c} = c, \tilde{b} = b, \tilde a = \frac{1}{7}(a - 5b + 8c)$.
+	
+	Thus, we see that $T$ maps $a+bx+cx^{2}$ to $(\frac{3}{7} (a-5b+8c) + 6c, 10b + 13c, 3c)$.
+	
+	From here, we see that we can always reverse the steps and thus find an inverse for $T$.
+\end{example}
+
+Now, we see that because $\mathcal M$ is an isomorphism, it must be then that $\dim \mathcal L(V,W) = \mathbb \mathbb{F}^{m,n}$.
+\begin{thm}
+	For finite-dimensional vector spaces $V,W$, we observe that we have
+	\begin{equation*}
+		\dim \mathcal L(V,W) = \dim W \dim V.
+	\end{equation*}
+\end{thm}
+
+\subsection{Duality}
+Duality comes from a very non-scary subset.
+
+Suppose that $V$ is some finite-dimensional vector space, over some field $\mathbb{F}$ (for example, $\RR$ or $\CC$).
+
+Now, we define the dual space $V'$ to be:
+\begin{equation*}
+	V' \coloneq \mathcal L(V, \mathbb{F}).
+\end{equation*}
+
+Now, we already know that $\dim V' = \dim V$. The elements of $V'$ are called linear functionals.
+
+\begin{example}
+	Suppose $V = \mathscr{P}_{2}(\RR)$. Now, can we find a basis for $V'$?
+	
+	First, $f \mapsto f(0)$ is a linear functional. Similarly, $f \mapsto f'(0)$ and $f \mapsto f''(0)$.
+	
+	We denote these are $\delta_0, \delta_{0}', \delta_0''$. Now, we want to check whether
+	\begin{equation*}
+		a\delta_0 + b \delta_0' + c \delta_0'' = 0.
+	\end{equation*}
+
+	So, let us proceed as follows:
+	\begin{align*}
+		(a\delta_0 + b \delta_0' + c \delta_0'')(1) &= a \\
+		(a\delta_0 + b \delta_0' + c \delta_0'')(x) &= b \\
+		(a\delta_0 + b \delta_0' + c \delta_0'')(x^{2}) &= 2c
+	\end{align*}
+
+	Thus, they form the basis for $V'$, the dual space of $V$.
+\end{example}
+
+\section{Discussion - 9/29/2023}
+\subsection{Coordinates}
+Say we have a vector space $V$ and a basis $\mathcal B = \left\{  v_{1}, \ldots, v_{n}\right\}$. So, for any $v \in V$, we can write it as a linear combination of the $v_{i}$'s.
+
+Furthermore, we note that each vector $v$ has a unique linear combination of the $v_{i}$'s.
+
+Then, each of these coefficients form the coordinate of $v$ under the basis $\mathcal B$.
+
+\begin{hw}
+	Let $V = \mathscr{P}_{2}$. Find the coordinate of $x^{2} + x + 1$ under basis $\left\{  x^{2}, x, 1\right\}$, and under the basis $\left\{  x^{2}, x, 1-x^{2} \right\}$. 
+\end{hw}
+\begin{solution}
+	For the first basis, we have the coordinate $(1,1,1)$.
+	
+	For the second basis, we have the coordinate $(2, 1, 1)$.
+\end{solution}
+
+\subsection{Definitions of Matrix}
+Suppose for $T : V \rightarrow W$, we have the basis $B$ and $C$ for $V$ and $W$ respectively.
+
+Then, the matrix of $T$ under $BC$ has the following definitions:
+\begin{enumerate}
+	\item $[T]_{C}^{B} \cdot [v]_{B} = [Tv]_{C}$.
+	\item $[T]_{C}^{B} = \left[ [Tv_{1}]_{C}, [Tv_{2}]_{C}, \cdots, [Tv_{n}]_{C} \right]$
+\end{enumerate}
+
+\begin{hw}
+	Find the matrix of $\frac{\mathrm d}{\mathrm dx}$, with the basis $\left\{  x^{2}, x, 1\right\}$.
+\end{hw}
+\begin{solution}
+	We see that the matrix is:
+	\begin{equation*}
+		\begin{bmatrix}
+			0 & 0 & 0 \\
+			2 & 0 & 0 \\
+			0 & 1 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	Other than the usual way (of using definition 2), we instead note that we can do the following to find the matrix:
+	\begin{equation*}
+		[v]_{B} = (a,b,c)
+	\end{equation*}
+
+	Then, we note that $Tv = \frac{\mathrm d}{\mathrm dx} (ax^{2} + bx + c) = 2ax + b$. Then, we see that $[Tv]_{C} = (0,2,b)$.
+	
+	So, we want to find some matrix $M$ such that
+	\begin{equation*}
+		M
+		\begin{bmatrix}
+			a \\ b \\ c
+		\end{bmatrix}
+		= \begin{bmatrix}
+			0 \\ 2a \\ b
+		\end{bmatrix}
+	\end{equation*}
+
+	The matrix that yields this is indeed the same matrix
+	\begin{equation*}
+		\begin{bmatrix}
+			0 & 0 & 0 \\ 2 & 0 & 0 \\ 0 & 1 & 0
+		\end{bmatrix}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}
+	Let $V, W$ be finite-dimensional vector spaces, with basis $\left\{  v_{1}, \ldots, v_{m}\right\}$ and $\left\{  w_{1}, \ldots, w_{n}\right\}$ respectively.
+	
+	Use $\mathcal M : \mathcal L(V,W) \rightarrow M_{n \times m}$ for the matrix of a linear map under the basis chosen. Show that $\mathcal M$ is a linear map.
+\end{hw}
+\begin{solution}
+	For $\mathcal M$ to be a linear map, we require that $\mathcal M(\alpha T_{1} + \beta T_{2}) = \alpha\mathcal{M}(v_{1}) + \beta\mathcal M(v_{2})$.
+	
+	We first observe that each column $i$ in $M_{n \times m}$ will be represented as the coefficients of $Tv_{i}$ in the basis of $W$. 
+	\begin{comment}
+	So, for column $i$, we see:
+	\begin{align*}
+		[T_{1} + T_{2}]_{C}^{B} &= [T_{1}]_{C}^{B} + [T_{2}]_{C}^{B}
+		
+	\end{align*}
+	\end{comment}
+	
+	Then, we observe the following:
+	\begin{equation*}
+		\mathcal M(T_{1} + T_{2}) =
+	%	\begin{equation*}
+			\begin{bmatrix}
+				\alpha a_{1,1} + \beta b_{1,1} & \cdots & \alpha a_{1, m} + \beta b_{1, m} \\
+				\vdots & \ddots & \vdots \\
+			\alpha	a_{n, 1} + \beta b_{n,1} & \cdots & \alpha a_{n,m} + \beta b_{n,m}
+			\end{bmatrix}
+	%	\end{equation*}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}
+	Given matrices $A,B$ such that $AB$ makes sense, show that there exists a matrix $C$ with $A = ABC$ if and only if the rank of $A$ and $AB$ are equal.
+\end{hw}
+\begin{solution}
+	We observe that for $A = ABC$ to be true, then it follows then that we must have $BC = I$, where $I$ is the identity matrix to get $ABC = AI = A$.
+	
+	Then, we observe that $CBA = A$ as well. However, we note here that 
+	
+	Now, from here, it follows then that $B$ must be invertible, with $C$ being its inverse.
+\end{solution}
+
+\chapter{Duality}
+\section{Lecture - 10/3/2023}
+Recall that our setting is some finite-dimensional vector space $V$, over a field $\mathbb{F} = \RR \lor \CC$.
+
+And last lecture, we were defining $V' = \mathcal L(V,\mathbb{F})$; each elements in this $V'$ are called linear functionals. In our example, we considered $V = \mathscr P_{2}(\RR)$, and $V'$ to be the dual of $V$.
+
+We recall that we took the functions $\delta_0, \delta'_0, \delta'_0$ such that
+\begin{align*}
+	\delta_0 : f \mapsto f(0) \\
+	\delta'_{0} : f \mapsto f'(0) \\
+	\delta''_{0}: f\mapsto f''(0)
+\end{align*}
+
+Last time, we got the Gramian matrix:
+\begin{equation*}
+	\begin{bmatrix}
+		\delta_0(1) & \delta'_{0}(1) & \delta''_{0}(1) \\
+		\delta_0(x) & \delta'_0(x) & \delta''_{0}(x) \\
+		\delta_0(x^{2}) & \delta'_{0}(x^{2}) & \delta''_{0}(x^{2})
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 2
+	\end{bmatrix}
+\end{equation*}
+
+We note the that the Gramian matrix is invertible, and thus we can conclude that $\delta_0, \delta'_{0}, \delta''_{0}$ are linearly independent. In fact, we observe the following:
+\begin{thm}
+	Suppose that $\dim V = n$, and $V$ is over $\RR$ or $\CC$. Now, suppose we have $n$ vectors $v_{1}, \ldots, v_{n} \in V$ and linear functions $\varphi_1, \ldots, \varphi_n \in V'$.
+	
+	We further suppose that the Gramian matrix, consisting of
+	\begin{equation*}
+		\begin{bmatrix}
+			\varphi_{j}(v_{i})
+		\end{bmatrix}, \quad j = 1,\ldots,n; i = 1, \ldots, n
+	\end{equation*}
+	is invertible.
+	
+	Then, the following is true:
+	\begin{enumerate}
+		\item $\varphi_1, \ldots, \varphi_n$ are a basis for $V'$, the dual of $V$.
+		\item $v_{1}, \ldots, v_{n}$ are a basis for $V$.
+	\end{enumerate}
+	
+\end{thm}
+\begin{proof}
+	We need to check only for the linearly independence $v_{1}, \ldots, v_{n}$ and $\varphi_1, \ldots, \varphi_n$.
+	
+	Now, if we suppose that there exists some linear combination of $a_{1}\varphi_1 + \ldots + a_{n}\varphi_n = 0$, then we observe that
+	\begin{equation*}
+		\sum_{j=1}^{n} a_{j}\varphi_j(v_{i}) = 0 \quad \forall i = 1, \ldots, n.
+	\end{equation*}
+
+	Then, we observe that $\varphi_jv_{i}$ form our coefficients, and the $a_{j}$'s form our unknowns. Thus, we have in fact that this is our Gramian matrix that we know is invertible. 
+	
+	This shows that $a_{j} = 0$ for all $j=1,\ldots,n$ is the only solution to this linear system.
+	
+	Similarly, if $\sum_{i=1}^{n} b_{i}v_{i} = 0$, then we see that
+	\begin{equation*}
+		\sum_{i=1}^{n} b_{i}\varphi_{j}(v_{i}) = 0, \quad \forall j = 1, \ldots,n
+	\end{equation*}
+
+	Then, similarly, we see that the only solution is if $b_{i} = 0$ for all $i = 1,\ldots, n$.
+\end{proof}
+
+\begin{thm}
+	The special case when the Gramian is in fact the identity matrix
+	\begin{equation*}
+		\begin{bmatrix}
+			1 & 0 & \ldots & 0 \\
+			0 & 1 & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & \cdots & \cdots  & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	We note that this has a special name/term attached to it: we say then that the two bases $v_{1}, \ldots, v_{n}$ and $\varphi_1, \ldots, \varphi_{n}$ are dual to each other.
+\end{thm}
+\begin{rmk}
+	We note that to modify our original example, we can make the bases duals by changing $x^{2}$ to $\frac{1}{2} x^{2}$ in $V$.
+	
+	Similarly, we can also change $\delta''_{0} : f \mapsto f''(0)$ to $\delta''_{0}: f \mapsto \frac{1}{2} f''(0)$ in $V'$.
+\end{rmk}
+
+\begin{example}
+	Let $V = \mathscr P(\RR)$. Find a basis for $V'$ such that the Gramian is not the identity matrix.
+	
+	To do this, we can look at $\delta_0, \delta_1, \delta_2$.
+	
+	The Gramian is then
+	\begin{equation*}
+		\begin{bmatrix}
+			1 & 1 & 1 \\ 0 & 1 & 2 \\ 0 & 1 & 4
+		\end{bmatrix}
+	\end{equation*}
+	
+	We note that this matrix is actually called the Vandermonde matrix. Now, to check for invertibility, we can just row reduce it to see that it is, indeed, invertible.
+\end{example}
+
+\begin{rmk}[Quadrature Rule]
+	Say we have some basis for the dual space $V'$: $\varphi_1, \ldots, \varphi_n$, where $V$ is some function space with $\dim V < \infty$.
+	
+	Then any other functional such as integration over a finite interval can be written as a linear combination of the linear functionals in our basis.
+	
+	Concretely, let us suppose that $V = \mathscr{P}_{2}(\RR)$, and we take $\delta_0, \delta_1,\delta_2$.
+	
+	Now, take $\varphi : f \mapsto \int_0^{2} f(t) \mathrm dt$. We note that this $\varphi$ is indeed an element in $V'$.
+	
+	Now, to find $\varphi$ as a combination of $a\delta_0 + b\delta_1+c\delta_2$, we just need to evaluate this prospective combination at a basis of $V  = \mathscr{P}_{2}(\RR)$.
+	
+	\begin{align*}
+		\varphi(1) &= (a\delta_0 + b\delta_1 + c\delta_2)(1) \\
+		2 &= a + b + c \\
+		\varphi(x) &= (a\delta_0+b\delta_1+c\delta_2)(x) \\
+		1 &= b + 2c \\
+		\varphi(x^{2}) &= (a\delta_0+b\delta_1+c\delta_{2})(x^{2}) \\
+		\frac 8 3 &= b + 4c
+	\end{align*}
+
+	Therefore, we see that $c = \frac{1}{3}, b = \frac{4}{3}, a = \frac{1}{3}$.
+\end{rmk}
+
+\begin{rmk}
+	Suppose that $v_{1}, \ldots, v_{n}$ is a basis for $V$. Then, is there necessarily a unique basis $\varphi_1, \ldots, \varphi_n$ of $V'$ which is dual to $v_{1}, \ldots, v_{n}$.
+	
+	In this case, we observe that a linear map is defined by the action of the map on the basis $V$.
+	
+	First, to get a dual basis for $v_{1}, \ldots, v_{n}$, we can define $\varphi_j(v_{i}) = \delta_{ij} = \begin{cases}
+		1 & i = j \\ 0 & i \not= j
+	\end{cases}$ 
+\end{rmk}
+	
+\section{Lecture - 10/5/2023}
+\subsection{Dual Maps}
+\begin{defn}[Dual Maps]
+	Given some $T \in \mathcal L(V,W)$, we can define the dual map to be:
+	\begin{equation*}
+		T' : W' \rightarrow V' : T' : \varphi \mapsto \varphi \circ T
+	\end{equation*}
+
+	We note that $\varphi \in W'$, and $\varphi \circ T \in V'$.
+\end{defn}
+\begin{example}
+	Suppose we have $V = \mathscr{P}_{2}(\RR)$, and $W = \mathscr{P}_{2}(\RR)$.
+	
+	Now, let $T : f(x) \mapsto xf(x)$. Furthermore, we define $\varphi$ such that $\varphi : p \mapsto p'(2)$.
+	
+	Then, we observe that $T'(\varphi) = \varphi \circ T$. From here, we see that $\varphi \circ T = (xp(x))'(2) = p(2) + 2p'(2)$.
+\end{example}
+\begin{example}
+	Suppose we have $T \in \mathcal L(V,W)$ and $T' \in \mathcal L(W', V')$.
+	
+	Now, what is the null space of $T'$ as it relates to $T$. Similarly, what is $\vrange T'$ as it relates to $\vrange T$.
+	
+	To do this, we require the use of annihilators.
+\end{example}
+
+\begin{defn}[Annihilator]
+	Given any subset $S$ (not necessarily a subspace) of some vector space $V$, we can define its annihilator $S^{0}$ as follows:
+	
+	\begin{equation*}
+		S^{0} \coloneq \left\{  \varphi \in V' : \varphi(v) \mapsto 0, \forall v \in S \right\}.
+	\end{equation*}
+\end{defn}
+\begin{example}
+	Suppose $V = \RR^{3}$. Suppose we have the subset $S = \left\{  (x,1,z) : x, z \in \RR \right\}$.
+	
+	Note that for any functional on $\RR^{3}$ looks like $(x,y,z) \mapsto ax + by + cz$, for some $a,b,c \in \RR$. 
+	
+	Here, we consider the canonical basis for $\RR^{3}$, and the following:
+	\begin{align*}
+		(x,y,z) &\mapsto x \\
+		(x,y,z) &\mapsto y \\
+		(x,y,z) &\mapsto z 
+	\end{align*}	
+
+	is a dual basis in $\RR^{3}$.
+	
+	Now, we observe that in our context, we have $(x,y,z) \mapsto ax + b + cz$, for fixed $a,b,c$.
+	
+	We want to find what $a,b,c$ such that $ax + b + cz = 0$. We see that in this case, $a = b = c = 0$. Thus, only the zero functional is contained in the annihilator.
+\end{example}
+\begin{example}
+	Suppose that instead, we changed $S$ to be $S \coloneq \left\{  (x,1,2):x\in \RR\right\}$.
+	
+	So, $S^{0}$ will consist of all functions of the type $(x,y,z) \mapsto ax+by+cz$.
+	
+	Then, in this case, we observe that for $ax + b + 2z = 0$, we first must have that $a = 0$, and $b = -2c$.
+	
+	Now, we note here that $S^{0}$ is actually a subspace of $V'$.
+\end{example}
+
+	Generally, if $S$ is a subset of $V$, then $0 \in V'$ is in $S^{0}$ as well. Furthermore, if $\varphi, \psi \in S^{0}$, then so is any combination $a\varphi + b\psi$, since $(a\varphi + b\psi)(v) = a\varphi(v) + b\psi(v) = 0$, whenever $v \in S$.
+	
+	What is interesting is that although $S$ doesn't necessarily have to be a subset of $V$, $S^{0}$ is. 
+	
+\begin{example}
+	Now, suppose that $U$ is a subspace of $V$. Our goal here is to compute the dimension $\dim U^{0}$, in terms of $\dim U$.
+	
+	Here, we claim that it appears as though $\dim V = \dim U + \dim U^{0}$.
+\end{example}
+\begin{thm}
+	The relation between the dimensions of $U, U^{0}, V$ is as follows:
+	\begin{equation*}
+		\dim V = \dim U + \dim U^{0}.
+	\end{equation*}
+\end{thm}
+\begin{proof}
+	Suppose we have the inclusion map $I : U \rightarrow V$ such that $u \rightarrow u$.
+	
+	Similarly, suppose we have $I' : V' \mapsto U'$. $I'$ maps $\varphi$ to $\varphi \circ I$.
+	
+	Now, we see then that $\vnull I' = U^{0}$; this comes from the fact that $\null I'$ consists of all functions $\varphi \circ I$ such that $(\varphi \circ I )(u)= 0$, for all $u \in U$. Thus, it is all the functionals $\varphi$ that sends $u$ to zero. This is precisely the annihilator.
+	
+	Now, we observe that $\vrange I' \cong U'$, as every $\varphi$ on $U$ can be realised as $\varphi \circ I$, for some larger $\varphi \in V'$.
+	
+	Then, we observe that:
+	\begin{align*}
+		\dim \vnull I' + \dim \vrange I' &= \dim U^{0} + \dim U' \\
+		&= \dim U^{0} + \dim U \\
+		&= \dim V' \\
+		&= \dim V
+ 	\end{align*} 
+ 
+ 	So, from here, we observe that for 
+	
+	
+\end{proof}
+
+
+\begin{rmk}
+		Incidentally, $T'$ being in $\mathcal L(W', V')$ means that the requisite check is as follows:
+	
+	We take $\varphi, \psi \in W'$ and check that:
+	\begin{align*}
+		a\varphi + b \psi &\mapsto (a\varphi + b \psi) \circ T \\
+		&= a\varphi \circ T + b \psi \circ T \\
+		&= a T'(\varphi) + b T'(\psi)
+	\end{align*}
+\end{rmk}
+
+\chapter{Midterm Pain}
+\section{Lecture - 10/12/2023}
+This lecture, we explore the connection between the two notions -- the annihilator and the dual map.4
+
+First, recall that we have
+\begin{equation*}
+	\dim U^{0} =\dim V - \dim U.
+\end{equation*}
+
+An interesting question to ponder is what would happen if $U$ was not a subspace. Then, we observe that we can in fact use the above equation and modify it a bit to get
+\begin{equation*}
+	\dim U^{0} = \dim V - \dim \vspan U
+\end{equation*}
+
+With this in mind, we observe the following:
+\begin{cor}
+	If the dimension $\dim U^{0} = \left\{  0\right\}$, then it follows that $\dim U = \dim V$.
+	
+	Similarly, if $U^{0} = V'$, then $U = \left\{  0 \right\}$.
+\end{cor}
+
+In other words, if we happen to come across a subspace such that its annihilator is the entirety of the dual space $V'$, then we can conclude that $U$ must consist of $0$.
+
+Then, let us consider the null space of $T'$, $\vnull T'$, in terms of $\vrange T$. Now, consider some $w \in T(v)$. Then, $(\varphi \circ T)(v) = 0$ whenever $\varphi \in \vnull T'$.
+
+Then, the null space $T'$ is related related to the annihilator of $\vrange T$. In fact, we have
+\begin{equation*}
+	\vnull T' = (\vrange T)^{0}.
+\end{equation*}
+
+Then, we can proceed further to observe the following:
+\begin{align*}
+	\dim \vnull T' &= \dim (\vrange T)^{0} \\
+	&= \dim W - \dim \vrange T \\
+	&= \dim W - \dim V + \dim \vnull T 
+\end{align*}
+
+Next, we observe that $\vrange T' = \dim (\vnull T)^{0}$. To do this, we first observe that if we have some $v \in \vnull T$, then $Tv = 0$. This means then that $(\varphi \circ T)(0) = 0$; we observe then that $\vrange T' \subseteq (\vnull T)^{0}$.
+
+Then, to prove equality, we observe the following:
+\begin{align*}
+	\dim \vrange T' &= \dim W' - \dim \vnull T' \\
+	&= \dim W - (\dim W - \dim \vrange T) \\
+	&= \dim \vrange T \\
+	&= \dim V - \dim \vnull T \\
+	&= \dim (\vnull T)^{0}
+\end{align*}
+
+\begin{comment}
+	\vrange T' = functionals such that \varphi \circ T.
+(\vnull T)^{0} = \varphi in V' such that \varphi(v) = 0 for all v in vnull T.
+
+If v \in vnull T -> Tv = 0 -> (\varphi T)(0) = 0 -> \vrange T' \subseteq (\vnull T)^{0}.
+
+Similarly, we observe that for any \dim \vrange T' = \dim W' - \dim W \vnull T' = \dim W - \dim \vrange T^{0} = \dim W - (\dim W - \dim \vrange T) = \dim \vrange T = \dim V - \dim \vnull T = (\dim \vnull T)^{0}.
+\end{comment}
+
+\subsection{Matrix Representations v2}
+Now, concretely, what does this mean exactly? To do this, we can look at matrix representations.
+
+First, consider $T \in \mathcal L(V,W)$. We note consider some bases for $V$ and $W$.
+
+Then, for $T' \in \mathcal L(W', V')$, we consider some dual bases for $W'$ and $V'$.
+
+Now, we consider $\mathcal (T)$; in other words, a matrix with entries $A_{ij}$.
+
+Now, consider the basis for $V$, $v_{1}, \ldots, v_{n}$, and the basis for $W$ consisting of $w_{1}, \ldots, w_{m}$.
+
+Then, we note that $A_{ij} = \psi_{i}(Tv_{j})$.
+
+Then, what about $T'$? What is the $(j,i)^{th}$ entry in $\mathcal (T')$?
+To do this, we can simply get $(T'\psi_{i})(v_{j}) = \psi_i \circ T(v_{j}) = \psi_i T(v_{j}) = A_{ij}$. So, in fact, we see that they're transposes of each other.
+
+In other words, we have:
+\begin{equation*}
+	(\mathcal T)^{\intercal} = (\mathcal T')
+\end{equation*}
+
+\chapter{Polynomials}
+\section{Lecture - 10/17/2023}
+To begin with, what is the simplest "building blocks" for polynomials viewed multiplicatively?
+
+The goal for today's lecture is to factor polynomials as much as possible.
+
+\begin{rmk}
+	Using Galois Theory, we can determine which polynomials can be solved using radicals. In this case, we can't create a formula for solving polynomials of degree five.
+\end{rmk}
+
+First, let's consider the case of a degree two polynomial. We have three different scenarios:
+\begin{enumerate}
+	\item Two real roots
+	\item One double root
+	\item No real roots (we have a complex solution!)
+\end{enumerate}
+
+In the first scenario, we observe that for roots at $x_{1}, x_{2}$, we can write our polynomial as $(x-x_{1})(x-x_{2})$.
+
+In the case of a double root at $x_{1}$, we have $(x-x_{1})^{2}$.
+
+In the case where we don't have any real roots, we can still factor our polynomial. However, it will occur over $\CC$ rather than $\RR$. We can factor our polynomial as follows: $(x-z_{1})(x-\overline{z_{1}})$.
+
+\begin{thm}
+	Suppose we have $f(x) \in \mathscr{P}(\RR)$, and $z \in \CC$ is a root of $f$. In other words, $f(z) = 0$. Then, we note that $f(\overline{z}) = 0$.
+\end{thm}
+\begin{proof}
+	Suppose we have some $f(x) \in \mathscr{P}(\RR)$ such that $f(z) = 0$, for some $z \in \CC$. Now, we observe that this means, for $a_{0}, \ldots, a_{n} \in \RR$, we have:
+	\begin{align*}
+		f(x) &= a_{0}x^{n} + a_{1}x^{n-1} + \ldots + a_{n-1}x + a_{n} \\
+		f(z) &= 0 \\ 
+		a_{0}z^{n} + a_{1}z^{n-1} + \ldots + a_{n-1}z + a_{n} &= 0 \\
+		\overline{a_{0}z^{n} + a_{1}z^{n-1} + \ldots + a_{n-1}z + a_{n}} &= \overline{0} \\
+		\overline{a_{0}z^{n}} + \overline{a_{1}z^{n-1}} + \ldots + \overline{a_{n-1}z} + \overline{a_{n}} &= 0 \\
+		\overline{a_{0}} \cdot \overline{z}^{n} + \overline{a_{1}}\cdot\overline{z}^{n-1} + \ldots + \overline{a_{n-1}}\cdot\overline{z} + \overline{a_{n}} &= 0 \\
+		a_{0}\overline{z}^{n} + a_{1}\overline{z}^{n-1} + \ldots + a_{n-1}\overline{z} + a_{n} &= 0 \\
+		f(\overline{z}) &= 0
+	\end{align*}
+\end{proof}
+
+\begin{rmk}
+	We note that for some $z \in \RR$ or $\CC$, it is a root of a polynomial $f \in \mathscr{P}(\RR)$ or $\mathscr{P}(\CC)$ if and only if $f(x) = (x-z)g(x)$ for some $g \in \mathscr{P}$.
+\end{rmk}
+\begin{proof}
+	We begin with the backwards direction. We note that if $f(x) = (x-z)g(x)$, then of course $f(z) = (z-z)g(z) = 0g(z) = 0$.
+	
+	For the forward direction, we observe the following:
+	
+	\begin{thm}
+		For any two polynomials with real or complex coefficients, $f,g$, we can always find two more polynomials $q,r$ such that:
+	\begin{equation*}
+		f(x) = q(x)g(x) + r(x).
+	\end{equation*}
+	\end{thm}
+	We note that:
+	\begin{equation*}
+		\deg q =
+		\begin{cases}
+			\deg f - \deg g & \deg f \geq \deg g \\
+			-\infty & \text{otherwise}
+		\end{cases}
+	\end{equation*}
+
+	And we note that $\deg r < \deg g$.
+	\begin{example}
+		To illustrate that $\deg r < \deg g$, we observe the following:
+		
+		Suppose we have $f(x) = x^{3} + 3x^{2} + 2x + 1$, and $g(x) = x^{2} + 2x + 1$. Then, we observe the following:
+		\begin{align*}
+			f(x) &= q(x) g(x) + r(x) \\
+			q(x) &= x+1 \\
+			r(x) &= -x
+		\end{align*}
+	
+		Now, is it possible to have some other $f(x) = \tilde{q(x)}g(x) + \tilde{r(x)}$? We note that if this was the case, we have:
+		\begin{align*}
+			\tilde{q}(x)g(x) + \tilde{r}(x) &= q(x)g(x) + r(x) \\
+			q(x)g(x) - \tilde{q}(x)g(x) &= \tilde{r}(x) - r(x)
+		\end{align*}
+	
+		Then, we note that $\deg \tilde{r}(x) - r(x) \leq \deg g$. Furthermore, we note that $\deg(q(x) - \tilde{q}(x)) g(x) \geq \deg g(x) $.
+		
+		Then...
+	\end{example}
+
+	Now, if $f(z) = 0$, we can always get $f(x) = (x-z)q(x) + r(x)$. Then, we note that $\deg r < \deg (x-z) = 1$. In other words, we have $\deg r < 1$. Moreover, because we have that $f(z) = 0$, then $f(z) = r(x) = 0$. Thus, we must have that $r(x) = 0$.
+\end{proof}
+
+\begin{thm}[Fundamental Theorem of Algebra]
+	Suppose we have $f(x) = \mathscr{P}(\CC)$ has degree $n \geq 1$. Then, there exists a number $z \in \CC$ such that $f(z) = 0$.
+\end{thm}
+\begin{lem}
+	Any polynomial in $\mathscr{P}(\CC)$ of degree $n \geq 1$ factors as:
+	\begin{equation*}
+		f(x) = a(x-z_{1}) \cdots (x-z_{n}),
+	\end{equation*}
+	where $z_{1}, \ldots, z_{n} \in \CC$, and $a \in \CC \setminus \left\{  0\right\}$.
+\end{lem}
+\begin{rmk}
+	Over $\RR$, we have
+	\begin{equation*}
+		f(x) = a(x-z_{1})(x-\overline{z_{1}})\cdots(x-z_{k})(x-\overline{z_{k}}) \cdot (x-x_{1}) \cdots (x-x_{n-2k}),
+	\end{equation*}
+	where $z_{1}, \ldots, z_{k} \in \CC \setminus \RR$, and $x_{1}, \ldots, x_{n-2k} \in \RR$.
+\end{rmk}
+
+\section{Lecture - 10/19/2023}
+\begin{rmk}[Proof for Fundamental Theorem of Algebra]
+	We  note that the Fundamental Theorem of Algebra, despite it name, doesn't have a truly algebraic proof.
+	
+	One of the proofs was by d'Alambert. In LADR, Axler lists two proofs, the second of which requires a result in complex analysis about analytic functions.
+	
+	The proof uses the fact that if a function $f$ of a complex variable is analytic in $\CC$, and is bounded (i.e. $\lvert f(z) \rvert \leq c$, for all $z \in \CC$), then $f(z) \equiv c$, where $c$ is some constant.
+	
+	Then, suppose we have any polynomial $p$ such that $p \in \mathscr P(\CC)$, with $\deg p \geq 1$. Then, suppose that $p(z) \neq 0$ for all $z \in \CC$.
+	
+	Then, we consider $g(z) = \frac{1}{p(z)}$. Then, $g(z)$ is analytic in $\CC$, and is also bounded globally. Then, $g(z)$ must be constant as well. From here, it follows that $p(z)$ must be constant too.
+	
+	However, if this is the case, then $\deg p \not\geq 1$, and thus we have a contradiction.
+	
+	Thus, we note that $p(z)$ must be equal to zero for some value $z \in \CC$.
+\end{rmk}
+\subsection{Eigenvalues and Eigenvectors}
+\begin{defn}[Linear Operator]
+	Suppose we have $T \in \mathcal L(V)$, where $\dim V < \infty$. We say then that $T$ is a linear operator.
+\end{defn}
+\begin{defn}[Invariance]
+	We call a subspace $U \subseteq V$ invariant with respect to $T$ if $T(U) \subseteq U$.
+\end{defn}
+\begin{example}
+	Suppose we have $V = \RR^{2}$, and $T: (x,y) \mapsto (y,x)$.
+	
+	Then, we observe that all the invariant subspaces are:
+	\begin{enumerate}
+		\item $0$,
+		\item $\RR^{2}$,
+		\item $\vspan\left\{  (1,1)\right\}$,
+		\item $\vspan \left\{  (1,-1)\right\}$.
+	\end{enumerate}
+
+	Now, the subquestion of interest to us is: what are the one-dimensional invariant subspaces of a linear operator $T$?
+\end{example}
+
+\begin{thm}[Invariance of $T$]
+	We can express invariance with the following formula:
+	\begin{equation*}
+		Tv = \lambda v \tag{for some $v \in V \setminus \left\{  0\right\}, \lambda \in \mathbb{F}$}
+	\end{equation*}
+\end{thm}
+
+\begin{example}
+	Suppose we are in $\RR^{2}$, and we have $T : (x,y) \mapsto (-y,x)$.
+	
+	Then, this transformation is rotating everything by $90^{\circ}$ counterclockwise. Thus, we see that we don't have invariance for any one-dimensional subspace.
+	
+	However, we can think of it in another way: since $Tv = \lambda v$, then it follows that $T^{2}v = \lambda^{2}v$.
+	
+	However, we note that $T^{2}:(x,y) \mapsto (-x,-y)$. Then, we observe that $\lambda^{2} = -1$; however, we note that $\lambda \in \RR$, which is thus a contradiction.
+\end{example}
+\begin{rmk}
+	Note here that if we were working in $\CC$, then $T$ has eigenvalues and eigenvectors.
+	
+	Namely, we note that $T(1,i) = (-i,1)$. Then, we see that $T(1,i) = -i(1,i)$. Similarly, $T(1,-i) = (i, 1) = i(1,i)$.
+	
+	Then, we observe that these two vectors in fact form a basis for $\CC^{2}$, which consist of eigenvectors of $T$ such that $\mathcal T$ is diagonal in that basis.
+\end{rmk}
+
+We observe here that the eigenvectors are indeed linearly independent.
+
+\begin{proof}
+	To show this, suppose that $\lambda_{1}, \ldots, \lambda_k$ are distinct eigenvalues of $T \in \mathcal L(V)$. Furthermore, suppose that $v_{1}, \ldots, v_{k}$ are corresponding eigenvectors. 
+
+We proceed by induction. Suppose that our base case works.
+
+Now, suppose that $av_{1} + \ldots + kv_{k} = 0$. Then,
+\begin{align*}
+	T(av_{1} + \ldots + kv_{k}) &= T(0) \\
+	aT(v_{1}) + \ldots + kT(v_{k}) &= 0 \\
+	a\lambda_1 v_{k-1} + \ldots + k\lambda_k v_{k} &= 0
+\end{align*}
+
+Then, we note that $(\lambda_k)(av_{1} + \ldots + kv_{k}) = 0$. Then, if we subtract this from the previous line, we have:
+\begin{align*}
+	a(\lambda_{1} - \lambda_{k})v_{1} + \ldots + j(\lambda_1 - \lambda_k-1)v_{k-1} &= 0
+\end{align*}
+
+Then, we observe that each $\lambda_i - \lambda_k \neq 0$, so it follows then that all $a, \ldots, j$ must be equal to zero as well. Hence, we see that $a_{k} = 0$ as well.
+\end{proof}
+
+\section{Discussion - 10/20/2023}
+\begin{hw}
+	Let $f \in \mathscr{P}(\RR)$, with $\deg f \geq 3$. Then, prove that there exists $g, h \in \mathscr P(\RR)$, both non-constant, such that $f = g \cdot h$.
+\end{hw}
+\begin{solution}
+	 We first note that since $.$
+\end{solution}
+
+\begin{hw}
+	Let $p$ be a polynomial over $\CC$. Show that $p$ has distinct roots if and only if $p$ and $p'$ has no common roots.
+\end{hw}
+\begin{solution}
+	First, we will proceed with the forward direction. Suppose that $p$ has distinct roots.
+	
+	Since $p$ has distinct roots, it follows then that we can rewrite $p$ as:
+	\begin{equation*}
+		p(z) = c(z- \lambda_1)\cdots(z-\lambda_n)
+	\end{equation*}
+
+	And since the roots are all distinct, it follows then that $\lambda_{1}, \ldots, \lambda_n$ are all not equal to each other.
+	
+	From here, we note then that $p'(z)$ can be written as:
+	\begin{equation*}
+		p'(z) = c\left( \sum_{i=1}^{n} \prod_{j=1, j\neq i}^{n} (z-\lambda_j) \right)
+	\end{equation*}
+
+	Then, from here, we observe that at each $\lambda_i$'s such that $p(\lambda_i) = 0$, we have that $p'(z) \neq 0$; we can see this from the fact that $\lambda_i$ will eliminate all terms except one: the term which doesn't contain $(z-\lambda_{i})$ in its product.
+	
+	So, it follows that $p$ and $p'$ have no common roots.
+	
+	Now, let us proceed with the backwards direction. To do this, let us proceed by contraposition.
+	
+	Suppose instead that $p$ has a root of multiplicity greater than 1. Then, it follows that we have:
+	\begin{equation*}
+		p(z) = c(z-\lambda_1)^{n_{1}}\cdot(z-\lambda_{n})^{n_{n}},
+	\end{equation*}
+	where $n_{i} \geq 1$, and each $\lambda_{i}$. Furthermore, since $p$ has some non-distinct root, at least one of $n$ must be greater than or equal to 1.
+
+	From here, when we differentiate it, we have:
+	\begin{equation*}
+		p'(z) = c\left( \sum_{i=1}^{n} n_{i}(z-\lambda_i)^{n_{i} - 1}\prod_{j=1, j\neq i}^{n} (z-\lambda_j)^{j}\right).
+	\end{equation*}
+
+	Then, we observe that for the $n_{k} > 1$, we have $(z-\lambda_k)^{n_{k} - 1}$, and $n_{k} - 1 \geq 1$ somewhere in the polynomial $p'$, and the other terms also contains $z- \lambda_k$ in it. Then, it follows that for $z = \lambda_{k}$, we have that $p'(z) = 0$; thus, $p$ and $p'$ have common roots.
+	
+	Therefore, we have shown the backwards direction, and thus can conclude that the claim is indeed true.
+\end{solution}
+
+\begin{hw}
+	Suppose that $f(x) \geq 0$ for all real numbers if and only if there exists real polynomials $g,h$ such that $f(x) = g^{2}(x) + h^{2}(x)$.
+\end{hw}
+\begin{solution}
+	Let us proceed with the backwards direction. Suppose that $f(x) = g^{2}(x) + h^{2}(x)$.
+	
+	We note then that $g^{2}(x) \geq 0$ and  $h^{2}(x) \geq 0$. Then, it follows that their sum $f(x) = g^{2}(x) + h^{2}(x) \geq 0$ as well.
+	
+	\begin{comment}
+		For the forward direction, suppose that $f(x) \geq 0$ for all real numbers. We observe then that, for $c, \lambda_i \in \RR$ and $\mu_j \in \CC$ for $i = 0, \ldots, n$ and $j = 0, \ldots, m$, we can rewrite $f(x)$ as follow:
+	\begin{equation*}
+		f(x) = c(x-\lambda_1)^{n_{1}} \cdots (x-\lambda_n)^{n_{n}}\left[ (x-\mu_1)(x-\overline{\mu_{1}}) \right]\cdots\left[ (x-\mu_n)(x-\overline{\mu_{n}}) \right].
+	\end{equation*}
+
+	Then, we observe that each of the $n_{1}, \ldots, n_{n}$ must be even for $f(x) \geq 0$ to be true; if the root has an odd-degree multiplicity, then at $\lambda_i$, the graph crosses the x-axis, and thus violates our condition of $f(x) \geq 0$.
+	
+	Additionally, since $c \in \RR$, we can rewrite it as the square of some other constant $a^{2} \in \RR$.
+	
+	From here, since each of the real roots have even multiplicity, we can decompose them down to the following form:
+	\begin{equation*}
+		f(x) = a^{2}(x-\lambda_1)^{2}\cdots(x-\lambda_m)^{2}\left[ (x-\mu_1)(x-\overline{\mu_{1}}) \right]\cdots\left[ (x-\mu_n)(x-\overline{\mu_{n}}) \right],
+	\end{equation*}
+	where $m \geq n$.
+
+	From here, we can construct the following two polynomials:
+	\begin{align*}
+		g(x) &= a(x-\lambda_1)\cdots(x-\lambda_m) \\
+		h(x) &= (x-\mu_1)\cdots(x-\mu_n)
+	\end{align*}
+
+	Furthermore, we note that we can in fact rewrite our polynomial $h(x)$ as the sum of two polynomials $h_{\mathrm{re}}, h_{\mathrm{im}}$
+	\end{comment}
+
+	For the forward direction, let us suppose that $f(x) \geq 0$ for all real numbers. Now, we note that for each real root of $f(x)$, it must have even multiplicity; if the multiplicity was odd then $f(x)$ would cross the x-axis, and thus violate $f(x) \geq 0$. For the remaining factors of $f(x)$, it must be of some quadratic of the form $x^{2} + bx + c$, with $b^{2} < 4c$; it must have complex roots.
+	
+	Additionally, for any number $a \in \RR$, we can rewrite it as the square of some other number $c \in \RR$; $c^{2} = a$.
+	
+	Then, with this in mind, we can write $f(x)$ as follows:
+	\begin{equation*}
+		f(x) = c^{2}(x-\lambda_0)^{2}\cdots(x-\lambda_m)^{2}[(x-\mu_0)(x-\overline{\mu_0})]\cdots[(x-\mu_n)(x-\overline{\mu_n})],
+	\end{equation*}
+	where we have $c, \lambda_0, \ldots, \lambda_m \in \RR$ and $\mu_0,\ldots,\mu_n \in \CC$.
+	
+	From here, let us define the functions $g,h$ as follow:
+	\begin{align*}
+		s(x) &= c^{2}(x-\lambda_0)\cdots(x-\lambda_m) \\
+		t(x) &= (x-\mu_0)\cdots(x-\mu_n)
+	\end{align*}
+
+	Furthermore, we can split $t(x)$ into a ``real" and ``imaginary" component as follows:
+	\begin{equation*}
+		t(x) = t_{\mathrm{Re}}(x) + it_{\mathrm{Im}}(x)
+	\end{equation*}
+
+	Then, from here, we note that we can rewrite $f(x)$ as follows:
+	\begin{align*}
+		f(x) &= s^{2}(x)t(x)\overline{t(x)} \\
+		&= s^{2}(x)(t_{\mathrm{Re}}(x) + it_{\mathrm{Im}}(x))(t_{\mathrm{Re}}(x) - it_{\mathrm{Im}}(x)) \\
+		&= s^{2}(x)(t^{2}_{\mathrm{Re}}(x) + t^{2}_{\mathrm{Im}}(x)) \\
+		&= s^{2}(x)t^{2}_{\mathrm{Re}}(x) + s^{2}t^{2}_{\mathrm{Im}}(x) \\
+		&= (s(x)t_{\mathrm{Re}}(x))^{2} + (s(x)t_{\mathrm{Im}}(x))^{2} 
+	\end{align*}
+
+	Therefore, if we let
+	\begin{align*}
+		g(x) &= s(x)t_{\mathrm{Re}}(x) \\
+		h(x) &0 s(x)t_{\mathrm{Im}}(x),
+	\end{align*}
+
+	then we can rewrite $f(x)$ as
+	\begin{equation*}
+		f(x) = g^{2}(x) + h^{2}(x)
+	\end{equation*}
+\end{solution}
+
+\chapter{Eigenwhateverthefuck}
+\section{Lecture - 10/24/2023}
+\subsection{Recap}
+Remember from last time that we established that for some $T \in \mathcal L(V)$, an eigenvalue $\lambda$ is one such that
+\begin{equation*}
+	Tv = \lambda v, 
+\end{equation*}
+where $v \neq 0, \lambda \in \mathbb{F}$. Furthermore, we observe that we have then the following:
+\begin{equation*}
+	(T- \lambda I)v = 0.
+\end{equation*}
+ This gives rise to the following statements which are all equivalent:
+ \begin{thm}
+ 	If $\lambda$ is an eigenvalue of $T$, then the following are equivalent:
+ 	\begin{enumerate}
+ 		\item $T - \lambda I$ is not invertible.
+ 		\item $T - \lambda I$ is not injective.
+ 		\item $T - \lambda I$ is not surjective.
+ 	\end{enumerate}
+ 
+ 	Note that this only applies to finite-dimensional vector spaces $V$.
+ \end{thm}
+
+Furthermore, recall from last lecture that we have the following:
+\begin{thm}
+	Each eigenvector corresponding to distinct eigenvalues are necessarily linearly independent.
+\end{thm}
+
+This leads to the following corollary:
+\begin{cor}
+	Any $T \in \mathcal L(V)$ has at most $\dim V$ distinct eigenvalues.
+\end{cor}
+
+Now, we will begin thinking of the following question: can we always find eigenvalues/vectors if $V$ is over $\CC$? What about over $\RR$?
+
+And a related question is: what do eigenvectors have to do with polynomials?
+
+To do this, let us first proceed with the following topic:
+
+\subsection{Applying Polynomials to Operators}
+Suppose that we have $T \in \mathcal L(V)$. Then, we can consider
+\begin{equation*}
+	T^{n} = T \circ T \circ \cdots \circ T \tag{n times}
+\end{equation*}
+
+Then, we can understand any polynomial in $T$, in other words $p(T)$ where $p(x) = a_{0} + a_{1}x_{1} + \ldots+ a_{n}x^{n}$. We can just think of this as replacing $x$ with $T$.
+
+\begin{example}
+	Suppose we have $T : (x,y,z) \mapsto (z,x,y)$.
+	
+	What is $T^{2} + T + I = p(t)$, where $p(x) = x^{2} + x + 1$. Then, we have:
+	\begin{equation*}
+		p(T) : (x,y,z) \mapsto (y,z,x) + (z,x,y) + (x,y,z) = (x+y+z, x+y+z, x+y+z)
+	\end{equation*}
+\end{example}
+
+Now, suppose that we have $(\lambda, v)$ which is an eigenpair of $T$. What is $p(T)v$? In this case, we can simply find $p(\lambda)v$
+
+Indeed, we observe that $T^{n}v = \lambda^{n}v$. Then, we have:
+\begin{align*}
+	p(T) &= a_{0}I + a_{1}T + \ldots + a_{n}T^{n} \\
+	&= a_{0}\lambda^{0} + a_{1}\lambda + \ldots + a_{n}\lambda^{n} \\
+	&= p(\lambda)v.
+\end{align*}
+
+Now, let's see if we can always find eigenvalues and eigenvectors for some finite-dimensional vector space $V$ over $\CC$.
+
+The answer is yes.
+\begin{thm}
+	We can always find eigenvalues/eigenvectors if $V$ is a finite-dimensional vector space over $\CC$.
+\end{thm}
+\begin{proof}
+	Suppose that we have a finite-dimensional vector $V$ with dimension $\dim V = n$.
+	
+	Let us fix some $v \in V \setminus \left\{  0\right\}$.
+	
+	Now, consider the list $v, Tv, \ldots, T^{n}v$. This list then contains $n+1$ vectors, and thus they must be linearly dependent.
+	
+	There, we know that there exists a non-trivial combination which is equal to zero. Moreover, there is a smallest power $k$ such that $v, Tv, \ldots, T^{k}$ is dependent.
+	
+	In other words, we have:
+	\begin{equation*}
+		a_{0}v + a_{1}Tv + \ldots + a_{k}T^{k}v = 0
+	\end{equation*}
+
+	Then, we know that $a_{k} \neq 0$; otherwise, $k$ would not be the smallest power which makes the list dependent. Furthermore, we know that $k > 0$ (as we start with a non-zero vector).
+	
+	So, without loss of generality, we can let $a_{k} = 1$. Then, note in fact that this can be rewritten as $p(T)v = 0$, where $p(x) = a_{0} + a_{1}x + \ldots + a_{k}x^{k}$.
+	
+	Then, the eigenvalues are ones such that
+	\begin{equation*}
+		T - \lambda I = 0.
+	\end{equation*}
+
+	Then, since we are over $\CC$, we can in fact split our polynomial up into degree 1 factors. Then, we can rewrite $p(x)$ as:
+	\begin{equation*}
+		p(x) = (x-\lambda)q(x),
+	\end{equation*}
+	for some $\lambda \in \CC$ and $q \in \mathscr{P}(\CC)$.
+	
+	Then, we note that $\lambda$ is an eigenvalue corresponding to $q(T)v$:
+	\begin{equation*}
+		p(T)v = (T-\lambda I)q(T)v = 0
+	\end{equation*}
+
+	We should also check that $q(T)v \neq 0$, else it wouldn't be valid. However, we recall that since $\deg q(x) = k -1$, and we note that $k$ is the \textit{smallest} degree such that we have a linear dependence, it follows then that $q(T)v \neq 0$, else it would violate this condition.
+	
+	So, we have found an eigenvalue and eigenvector as desired.
+\end{proof}
+\begin{example}
+	Let $V = \vspan\left\{  1, \cos x, \sin x, \cos 2x, \sin 2x \right\}$, and define $T$ to be $T \coloneq D^{3} - D$.
+	
+	Now, let $v(x) = \cos 2x$. Then, we have:
+	\begin{equation*}
+		(Tv)(x) = 10\sin 2x
+	\end{equation*}
+
+	Then, $(T^{2}v)x = -100\cos(2x)$. So, we observe that $100v + T^{2}v = 0$.
+	
+	In other words, we have $p(T)v = 0$, where $p(t) = 100 + t^{2}$. So, we have:
+	\begin{equation*}
+		p(t) = (t+10i)(t-10i).
+	\end{equation*}
+
+	Now, from this construction, we observe that the eigenvector corresponding to $\lambda = 10i$ is $[(T+10i I)v](x) = 10\sin 2x + 10i\cos 2x$.
+	
+	This is the same as $10e^{2ix}$.
+	
+	Then, to check our answer, we note that ...
+\end{example}
+\begin{rmk}
+	A better basis to work with, at least for differential operators, is the exponential basis:
+	\begin{equation*}
+		1, e^{ix}, e^{-ix}, e^{2ix}, e^{-2ix}.
+	\end{equation*}
+\end{rmk}
+
+\section{Lecture - 10/26/2023}
+\subsection{Minimal Polynomials}
+\begin{thm}
+	Suppose that we have $T \in \mathcal L (V)$ with $\dim V < \infty$. Now, $V$ is over some field $\mathbb{F} = \RR$ or $\mathbb{F} = \CC$. Then, there exists a monic polynomial $p \in \mathscr P(\mathbb{F})$ such that $p(T) = 0$ (on $V$).
+\end{thm}
+
+We recall that previously, we were working over $\CC$. However, this isn't necessarily the case for here. Furthermore, last lecture, we had $p(T)(v) = 0$ for some fixed $v$. 
+
+Today, we will find a monic polynomial such that $p(T) = 0$; in other words, we don't have to fix $v$.
+
+\begin{proof}
+	We shall proceed by induction on $\dim V$.
+	
+	\textbf{Base Case}: Suppose that $\dim V = 1$. Then, we note that $Tv = \lambda v$. Then, we want the minimal polynomial to be $p(t) = t - \lambda$, since $T - \lambda I = 0$.
+	
+	\textbf{Inductive Step}: Suppose that $\dim V > 1$. Then, we observe that for $V$, we can take some $v \in V$ (where $v \neq 0$). We know from last lecture that there exists some $g \in \mathscr{P}(\mathbb{F})$ such that $g(T)v = 0$. Furthermore, $1 \leq \deg g \leq \dim V$
+	
+	Let us denote $\deg g = k$. Then, due to the minimality of $k$ with this property, we know then that $v, Tv, \ldots, T^{k-1}v$ are linearly independent.
+	
+	Then, let us consider $\vnull g(T)$. Then, we observe that $v \in \vnull g(T)$. Furthermore, we note that $Tv, \ldots, T^{k-1}v$ are also included in $\vnull g(T)$.
+	
+	We note then that this follows from the fact that:
+	\begin{equation*}
+		g(T)(T^{j}v) = T^{j}(g(T)v) = 0
+	\end{equation*}
+
+	So, we know that $\dim \vnull g(T) \geq k \geq 1$. Furthermore, we know then that $\dim \vrange g(T) = \dim V - \dim\vnull g(T)$.
+	
+	Then, we have:
+	\begin{align*}
+		\dim \vrange g(T) &= \dim V - \dim\vnull g(T) \\
+		&\leq \dim V - k \\
+		&\leq \dim V - 1
+	\end{align*}
+
+	However, we note that $\vrange g(T)$ is $T$-invariant. Then, we can use the induction hypothesis on $\vrange g(T)$ to conclude that we can create a monic polynomial $q \in\mathscr{P}(\mathbb{F})$ whose degree $\deg q \leq \dim \vrange g(T)$ such that $q(T \mid_{\vrange g(T)}) = 0$ on the range of $g(T)$.
+	
+	Then, consider the product $g(t)q(t)$. Then, we note that
+	\begin{align*}
+		q(T)g(T) &= 0
+	\end{align*}
+
+	This follows from the fact $q(T)g(T)v = q(T)w$, where $w \in \vrange g(T)$. Then, we note that any vector $w \in \vrange g(T)$ gets sent to $0$ by $q(T)$. So, we see that this polynomial $q(t)g(t) \leq \dim \vrange g(T) + \deg g(t) \leq \dim V$.
+	
+	Thus, we have an existence of some polynomial which satisfies our condition. 
+	
+	However, this does not necessarily guarantee that $g(t)q(t)$ is the minimal polynomial. But, we note that since there are only finitely many degrees below, there exists a polynomial $p$ of minimal degree.
+	
+	Thus, we have $p(T) = 0$, and $p$ is in fact monic.
+\end{proof}
+
+Then, what are the connections between the minimal polynomial and eigenvalues? We claim the following:
+
+\begin{thm}
+	The zeroes of the minimal polynomial are precisely the eigenvalues of $T$.
+\end{thm}
+\begin{proof}
+	First, suppose that $\lambda$ is an eigenvalue of $T$. Then, we note that $p(T)v = p(\lambda)v = 0$, for any eigenvector associated with $\lambda$.
+	
+	In other words, we have $p(\lambda) = 0$; $\lambda$ is a zero of our minimal polynomial.
+	
+	On the other hand, if we have some minimal polynomial $p$ and we have $p(\lambda) = 0$, for some $\lambda \in \mathbb{F}$. Then, we note that we can factor our a degree one term from $p(t)$ to get $p(t) = (t-\lambda)q(t)$ for some $q \in \mathscr{P}(\mathbb{F})$.
+	
+	Then, we observe that $p(T) = (T-\lambda I)q(T)$. Then, by the minimality of $p$, we have that $q(T) \neq 0$. So, we note that there exists some $v$ such that $q(T)v \neq 0$. Then, say $q(T)v = w$. Then, we have $p(T)w = (T-\lambda I)w$. So, $q(T)v$ is an eigenvector associated with an eigenvalue $\lambda$.
+\end{proof}
+	
+	Then, this leads to the following crucial idea:
+	\begin{thm}
+		If $V$ is a finite-dimensional vector space over $\RR$, we may not necessarily have eigenvalues. More specifically, only when $\dim V$ is odd is it that we have an eigenvalue.
+	\end{thm}
+
+\subsection{Triangularisable Case}
+This is when computing the minimal polynomial is easy.
+
+\begin{defn}[Triangularisability]
+	When $T$ is triangularisable, it means that we have a matrix representation $\mathcal M (T)$ such that
+	\begin{equation*}
+		\mathcal M(T) =
+		\begin{bmatrix}
+			* & * & \cdots & * \\
+			0 & * & \cdots & * \\
+			\vdots & \ddots & \ddots & \vdots \\
+			0 & \cdots & \cdots & *
+		\end{bmatrix}
+	\end{equation*}
+
+	or a lower triangular matrix idk. ill tex it out later.
+\end{defn}
+
+Consider a basis for $V$: $v_{1}, \ldots, v_{n}$.
+
+We note that in the lower-triangular matrix, if we apply $T$ to the first vector, we get a linear combination of all of the vectors. On the second vector, we get a linear combination of the second vector and beyond.
+
+Meanwhile, the upper-triangular matrix is simply applying $T$ onto our basis for $V$, but in reverse.
+
+Then, say we have
+\begin{equation*}
+	\begin{bmatrix}
+		\lambda_{1} & * & \cdots & * \\
+		0 & \lambda_2 & \cdots & * \\
+		\vdots & \ddots & \ddots & * \\
+		0 & \cdots & \cdots & \lambda_n
+	\end{bmatrix}
+\end{equation*}
+
+Then, we note that the polynomial $(x-\lambda_1)(x-\lambda_2)\cdots(x-\lambda_n)$ is an annihilating polynomial for $T$. We see that if we apply $p(T)$ onto $v_{n}$, then it can be written as a linear combination of the previous $n-1$ vectors. We repeat this process until we get to the first vector. Then, we see that $p(T)v_{1} = 0$, as desired.
+
+\section{Discussion - 10/27/2023}
+\begin{hw}
+	Define $T \in \mathcal (\RR^{2})$ as $T(x,y) = (y,x)$. Find the eigenvalues and eigenvectors of $T$. Furthermore, find the minimal polynomial of $T$.
+\end{hw}
+\begin{solution}
+	We observe that we want the following to hold true:
+	\begin{equation*}
+		Tv = \lambda v
+	\end{equation*}
+	Then, we observe that for $v = (x,y)$, we have:
+	\begin{align*}
+		Tv &= \lambda v \\
+		(y,x) &= (\lambda x, \lambda y)
+	\end{align*}
+
+	So, we see that $\lambda = 1$ for $(x,y) = (1,1)$ satisfies this.
+\end{solution}
+
+\begin{hw}
+	If $T \in \mathcal L(V)$ satisfies $T^{2} = I$, then there is a basis of $V$ formed by eigenvectors of $T$.
+\end{hw}
+\begin{solution}
+	We observe that if $T^{2} = I$, then it follows that $T$ is in fact its own inverse. This further means that $T$ is in fact invertible.
+\end{solution}
+
+\chapter{Dialganalisation}
+\section{Lecture - 10/31/2023}
+\subsection{Triangular Form}
+We recall from last lecture that if we have the following matrix representation for $T$
+\begin{equation*}
+	\mathcal M (T) = \begin{bmatrix}
+		\lambda_{1} & * & \cdots & * \\
+		0 & \lambda_2 & \cdots & * \\
+		\vdots & \ddots & \ddots & * \\
+		0 & \cdots & \cdots & \lambda_n
+	\end{bmatrix},
+\end{equation*}
+then the polynomial $(x-\lambda_1)\cdots(x-\lambda_n)$ will annihilate $T$. However, we note that this polynomial is \textbf{not} necessarily the minimal polynomial.
+\begin{example}
+	To begin with, let $V = \RR^{3}$. Then, we note that any linear operator $T$ such that
+	\begin{equation*}
+		\mathcal M (T) =  
+		\begin{bmatrix}
+			\lambda_{1} & * & * \\ 0 & \lambda_{2} & * \\ 0 & 0 & \lambda_3
+		\end{bmatrix},
+	\end{equation*}
+	where $\lambda_1,\lambda_2,\lambda_3$ are all distinct.
+	
+	More concretely, let us define $T : (x,y,z) \mapsto (x,2y+3x,3z-x-y)$. Then,
+	\begin{equation*}
+		\mathcal M(T) =
+		\begin{bmatrix}
+			1 & 3 & -1 \\ 0 & 2 & -1 \\ 0 & 0 & 3
+		\end{bmatrix}
+	\end{equation*}
+	
+	Then, we claim that the diagonal entries of $T$ are the eigenvalues. The easiest way to verify this is as follows:
+	
+	Let us take $\mathcal M (T) - 2I$. Then, we note that the first and third diagonal entries are non-zero, but the second is zero. Then, we claim that $\mathcal M(T) - 2I$ is non-invertible; this follows from the fact that since the second diagonal entry is zero, the second column lives in the span of the first.
+	
+	Thus, we observe that the minimal polynomial is $p(t) = (t - 1)(t-2)(t-3)$.
+\end{example}
+\begin{example}
+	On the other hand, let us consider an example for the other direction. In this case, let $T \coloneq I$. Then, we observe that
+	\begin{equation*}
+		\mathcal M(T) =
+		\begin{bmatrix}
+			1 &0&0\\0&1&0\\0&0&1.
+		\end{bmatrix}
+	\end{equation*}
+	
+	Then, of course, $p(t) = (t-1)^{3}$ annihilates $T$. However. the minimal polynomial is simply $(x-1)$.
+	
+	Notice that if we had
+	\begin{equation*}
+		\begin{bmatrix}
+			1 & 1&0\\0&1&0\\0&0&1
+		\end{bmatrix}
+	\end{equation*}
+	then the minimal polynomial will be $(x-1)^{2}$.
+\end{example}
+
+Now, we will introduce an important theorem for triangular matrix representations:
+\begin{thm}
+	An operator $T \in \mathcal L(V)$ has an upper-triangular matrix representation if and only if its minimal polynomial has the form $(x-\lambda_1)\cdots(x-\lambda_n)$, where $\lambda_i \in \mathbb{F}$ (more specifically, $\RR$ or $\CC$).
+\end{thm}
+\begin{proof}
+	Let us proceed with the forward direction. Suppose that $T$ is upper-triangular. Then, it follows that the polynomial $(x-\lambda_1)^{k}\cdots(x-\lambda_n)^{k}$, where each $\lambda_i$ are the diagonal entries of $T$. We observe then that the minimal polynomial will consist of the same factors, but with powers $l \leq k$ for each term.
+	
+	Let us proceed with the backwards direction. Suppose that the minimal polynomial has the form $(x-\lambda_1)\cdots(x-\lambda_n)$, where $n \leq \dim V$. We shall use induction on $k$:
+	
+	First, if $k = 1$, then the minimal polynomial is simply $(x-\lambda_1)$. Then, we see that $T - \lambda_1 I = 0$. Then, we have
+	\begin{equation*}
+		\mathcal T = \lambda_1
+		\begin{bmatrix}
+			1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0 \\ \vdots & \ddots & \ddots & \vdots \\ 0 & \cdots & \cdots &1
+		\end{bmatrix}.
+	\end{equation*}
+
+	Thus, $T$ is upper triangular.
+	
+	Now, suppose that $p_{\mathrm{min}} (x) = (x-\lambda_1) q(x)$, where $q(x) = (x-\lambda_2) \cdots(x-\lambda_n)$.
+	
+	Then, we already have $\lambda_1$ as an eigenvalue of $T$. Then, we can split our space $V$ into a direct sum $U_{1} \oplus U_{2}$. Then, \textbf{INSERT PROOF HERE}
+\end{proof}
+Note here that we do not require the eigenvalues to be distinct!
+
+Now, with this theorem in mind, we observe that we in fact have the following corollary:
+\begin{cor}
+	Any $T \in \mathcal L(V)$ will always have an upper-triangular matrix representation if $\mathbb{F} = \CC$.
+\end{cor}
+\begin{proof}
+	We recall this is because in $\CC$, any polynomial we have can be factored completely.
+\end{proof}
+
+\subsection{Diagonal Form}
+The following are all equivalent statements:
+\begin{thm}
+	$T$ is diagonalisable if $\mathcal M(T)$ is diagonal in some basis. Then, we observe the following about $\mathcal{M}(T)$:
+	\begin{equation*}
+		\mathcal M(T) =
+		\begin{bmatrix}
+			\lambda_1 I & & \\ & \ddots & \\ & & \lambda_n I
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we observe that, in fact, the following are all equivalent:
+	\begin{enumerate}
+		\item $V = E(\lambda_1, T) \oplus \ldots \oplus E(\lambda_n, T)$. Conversely, if $V$ splits like this, then we can take an eigenbasis for each $E_{i}$, combine them together, and thus will get a diagonalisable matrix $\mathcal M(T)$.
+		
+		\item $\dim E(\lambda_1, T) + \ldots + \dim E(\lambda_n, T) = \dim V$.
+	\end{enumerate}
+\end{thm}
+
+\section{Lecture - 11/2/2023}
+We recall from last time that we discussed triangular matrices. Now, suppose we have the following matrix for $T$;
+\begin{equation*}
+	\mathcal{ T} = \begin{bmatrix}
+		\lambda_1 I & 0 & 0 \\ 0 & \lambda _{2} I & 0 \\ 0 & 0 & \lambda_k I
+	\end{bmatrix}
+\end{equation*}
+
+Now, note that $\mathcal{M}(p(T)) = p(\mathcal{M}(T))$. Then, we have:
+\begin{equation*}
+	\begin{bmatrix}
+		p(\lambda_1) I & 0 & 0 \\ 0 & p(\lambda 2) I & 0 \\ 0 & 0 & p(\lambda_k) I
+	\end{bmatrix}
+\end{equation*}
+
+Then, we observe that in fact, we have the minimal polynomial to be $(x-\lambda_1)(x-\lambda_2) \cdots (x-\lambda_k)$.
+
+Now instead, let us suppose that $(x-\lambda_1)(x- \lambda_2)\cdots(x-\lambda_k)$, where $\lambda_i$ are all distinct. Then, we make the following observation: for any $\lambda_j$, $\vnull (T - \lambda_j I) \cap \vrange (T - \lambda_jI) = \left\{  0 \right\}$.
+
+We see that for any $v \in \vrange (T-\lambda_j I) \cap \vnull (T - \lambda_j I)$, we have $v = (T- \lambda_j I) w$, for some $w \in V$.
+
+Then, we see that $(T - \lambda_{1} I) \cdots (T - \lambda_k I)(T-\lambda_j I)w$. Then, we see that this is equal to zero.
+
+On the other hand, suppose $v \in \vnull (T - \lambda_j I)$, then $Tv = \lambda_j v$. So, we have the following:
+\begin{align*}
+	(T-\lambda_{1} I) \cdots (T-\lambda_kI)(T-\lambda_j I)w &= (T-\lambda_1I)\cdots(T-\lambda_k I)v \\
+	&= (\lambda_j - \lambda_1) \cdots (\lambda_j-\lambda_k)v \\
+	&= 0
+\end{align*}
+
+Now, we note that all of the $(\lambda_j - \lambda_i)$ are non-zero, and thus we can conclude that $v$ then must be equal to zero.
+
+Then, we note that, by the Rank-Nullity theorem, we have:
+\begin{equation*}
+	\vnull (T - \lambda_j I) \oplus \vrange (T - \lambda_j I) = V.
+\end{equation*}
+
+So, with respect to any basis of $\vnull(T - \lambda_1 I)$ and a basis of $\vrange (T - \lambda_{1} I)$, we can put them together and are guaranteed to have a block diagonal form of $T$. Note that the non-diagonal blocks in this matrix will be zero; this comes from the fact that the range and nullspace are invariant subspaces under $T$.
+
+Incidentally, for any choice of basis in $\vnull (T-\lambda_1 I)$, the corresponding submatrix is simply $\lambda_1 I$. And on the range of $\vrange (T-\lambda_1 I)$, we simply use the induction hypothesis to get a diagonal form. We can do this because $T \mid_{\vrange (T-\lambda_1 I)}$ is annihilated by the other factors $(x-\lambda_2) \cdots (x- \lambda_k)$.
+
+So, the minimal polynomial for $T\mid_{\vrange (T-\lambda_1 I)}$ still splits into distinct, degree 1 factors.
+
+\begin{rmk}
+	The base case for where we only have one factor, then $T$ is simply $\lambda I$.
+\end{rmk}
+
+\begin{example}
+	Suppose we have $V = \mathscr{P}_{2}^{2} (\CC)$. This is the span of the polynomials $1, x, y, x^{2}, y^{2}, xy$. Let $T \in \mathcal L(V)$ such that $T : p \mapsto \frac{\partial p}{\partial x} + \frac{\partial p}{\partial y}$.
+	
+	Then, is $T$ triangularisable? And is it diagonalisable?
+	
+	First, since $V$ is over $\CC$, we know that $T$ must be triangularisable. To check for diagonalisability, we first find $\mathcal{M}(T)$:
+	\begin{equation*}
+		\mathcal{T} =
+		\begin{bmatrix}
+			0 & 1 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 2 & 0 & 1 \\
+			0 & 0 & 0 & 0 & 2 & 1 \\
+			0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	Now, we note that the only eigenvalue of $T$ is $0$, but $T \neq 0$, then $T$ does not diagonalise. 
+	
+	To find the minimal polynomial, we note that if we apply $T^{2}$ onto $x^{2}$, we have non-zero result. However, $T^{3}$ is zero for everything.
+\end{example}
+
+\subsection{Commutativity}
+\begin{thm}
+	Suppose that two operators $T,S \in \mathcal L(V)$ commute. In other words, $ST = TS$. Then, any eigenspace $E$ for $T$ must be invariant under $S$, and vice versa.
+\end{thm}
+\begin{proof}
+	If $Tv = \lambda v$, then $TSv = STv = S(\lambda v) = \lambda(Sv)$. So, we have that $Sv$ is an eigenvector of $T$; that is, it belongs to the eigenspace of $T$.
+\end{proof}
+
+A consequence of this is the following:
+\begin{cor}
+	Over $\CC$, any two commuting operators must share an eigenvector. Furthermore, any two commuting linear operator can be simultaneously triangularised.
+\end{cor}
+
+\begin{defn}[Simultaneously Triangularisation]
+	There exists some basis such that both $S$ and $T$ are triangular (not mixed though; both will be of the same form).
+\end{defn}
+\begin{proof}
+	...
+\end{proof}
+
+\section{Discussion - 11/3/2023}
+\subsection{How to Find Eigenvalues/Eigenvectors}
+In order to find the eigenvalues of some $A$, we want to first find $\det(A - \lambda I)$, yielding us the characteristic polynomial. Then, the roots of this polynomial are our eigenvalues.
+
+Then, any $v \in \vnull (A - \lambda I)$ such that $v \neq 0$ are our eigenvectors corresponding to $\lambda$.
+
+\subsection{Is it Diagonalisable?}
+To begin with, we will introduce the following definitions:
+\begin{defn}[Multiplicities of Eigenvalues]
+	Let $\lambda$ be an eigenvalue. 
+	
+	Then, we denote its algebraic multiplicity as the multiplicity of $\lambda$ as a root of the characteristic polynomial.
+	
+	Meanwhile, its geometric multiplicity is simply $\dim\vnull (A - \lambda I)$.
+	
+	Note that the geometric multiplicity $\leq$ algebraic multiplicity.
+\end{defn}
+
+If $T \in \mathcal L(V)$ is diagonalisable, then
+\begin{enumerate}
+	\item The algebraic multiplicity and geometric multiplicity of every $\lambda$ must be equal.
+	\item Let $\lambda_1, \ldots, \lambda_n$ be all distinct eigenvalues of $T$. Then, $(\lambda - \lambda_1) \cdots (\lambda - \lambda_n)$ is the minimal polynomial of $T$.
+\end{enumerate}
+
+\begin{hw}
+	If $T \in \mathcal L(\CC^{4})$ is diagonalisable, with three distinct eigenvalues $\lambda_1, \lambda_2, \lambda_3$, then the minimal polynomial of $T$ is $(\lambda)$
+\end{hw}
+\begin{solution}
+	Suppose that $T$ is diagonalisable, with three distinct eigenvalues $\lambda_1, \lambda_2, \lambda_3$. Then, since $T$ is diagonalisable, we note that there exists some basis $v_{1}, \ldots, v_{4}$ consisting of the eigenvectors of $T$.
+	
+	From here, we note that for each $v_{i}$, there exists a $\lambda_j$ such that
+	\begin{align*}
+		T(v_{i}) &= \lambda_{j} v_{i} \\
+		(T - \lambda_j I)v_{i} &= 0
+	\end{align*}
+
+	Then, we note that we have:
+	\begin{equation*}
+		(T-\lambda_1)(T-\lambda_{2})(T-\lambda_3)v_{i} = 0.
+	\end{equation*}
+
+	Thus, we see that, indeed, the minimal polynomial for $T$ is $(\lambda - \lambda_1)(\lambda - \lambda_{2})(\lambda - \lambda_3)$.
+\end{solution}
+
+
+\begin{hw}
+	If $\lambda$ is an eigenvalue of $T$, then $p(\lambda)$ is an eigenvalue of $p(T)$.
+\end{hw}
+\begin{solution}
+	Suppose that $\lambda$ is an eigenvalue of $T$. Then, by definition, we have that $Tv = \lambda v$, for some $v \neq 0$.
+	
+	Now, we observe that
+	\begin{align*}
+		p(T)(v) &= (a_{0}I + a_{1}T + \cdots + a_{n}T^{n})(v) \\
+		&= a_{0}v + a_{1}Tv + \ldots + a_{n}T^{n}v \\
+		&= a_{0}\lambda^{0}v + a_{1}\lambda^{1} v + \cdots + a_{n}\lambda^{n}v 
+	\end{align*}
+
+	Now, we note that we have for the $v \neq 0$:
+	\begin{align*}
+		p(\lambda) &= a_{0}\lambda^{0} + a_{1}\lambda + \cdots + a_{n}\lambda^{n} \\
+		p(\lambda)(v) &= (a_{0}\lambda^{0} + a_{1}\lambda + \cdots + a_{n}\lambda^{n})(v) \\
+		&= a_{0}\lambda^{0}v + a_{1}\lambda^{1}v + \cdots + a_{n}\lambda^{n}v \\
+		&= p(T)(v)
+	\end{align*}
+
+	Thus, we see that since for $v \neq 0$, we have $p(T)(v) = p(\lambda)v$, it follows then that, indeed, if $\lambda$ is an eigenvalue of $T$, then $p(\lambda)$ is an eigenvalue of $p(T)$.
+\end{solution}
+
+\begin{hw}
+	If $T \in \mathcal L(V)$ is upper-triangular with respect to the basis $v_{1}, \ldots, v_{n}$, show then that any polynomial of $T$ is upper-triangular with respect to the basis of $v_{1}, \ldots, v_{n}$.
+\end{hw}
+\begin{solution}
+	Suppose that $T$ is upper-triangular with respect to some basis $v_{1}, \ldots, v_{n}$ of $V$. Then, we have the following:
+	\begin{equation*}
+		\mathcal M(T) = \begin{bmatrix}
+			\lambda_1 & * & \cdots & * \\
+			0 & \lambda_2 & \cdots & * \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & \lambda_n
+		\end{bmatrix}
+	\end{equation*}
+\end{solution}
+
+\chapter{Inner Products}
+\section{Lecture - 11/7/2023}
+\subsection{Inner Products}
+This week, we will be discussing the concept of ``inner products."
+
+\begin{defn}[Inner Product]
+	An inner product space is a vector with an additional operation which is denoted by $\innerproduct{\cdot}{\cdot}$. The $\cdot$ denotes where the arguments go.
+	
+	We note that the inner product is a function from $V \times V \rightarrow \mathbb{F}$.
+\end{defn}
+
+Before we continue, recall that we are working in a field $\RR$ or $\CC$.
+
+Now, an inner product has the following properties, with linearity in the first slot:
+\begin{enumerate}
+	\item \textbf{Positivity} (Non-Negativity): $\innerproduct{v}{v} \geq 0$, for all $v \in V$.
+	\item \textbf{Definiteness}: $\innerproduct{v}{v}  = 0 \iff v = 0$.
+	\item \textbf{Additivity}: $\innerproduct{v_{1}+v_{2}}{w} = \innerproduct{v_{1}}{w} + \innerproduct{v_{2}}{w}$, $\forall v_{1},v_{2},w \in V$.
+	\item \textbf{Homogeneity}: $\innerproduct{\lambda v}{w} = \lambda \innerproduct{v}{w}$, $\forall v, w \in V$ and $\forall \lambda \in \mathbb{F}$. 
+	\item \textbf{Conjugation ``Symmetry"}: $\innerproduct{v}{w} = \overline{\innerproduct{w}{v}}$, $\forall v,w \in V$.
+\end{enumerate}
+\begin{rmk}
+	Note here that additivity holds in the second slot, but homogeneity is replaced with some ``homogeneity with conjugation." More specifically, we have:
+	\begin{align*}
+		\innerproduct{v}{\lambda w} &= \overline{\innerproduct{\lambda w}{v}} \\
+		&= \overline{\lambda} \overline{\innerproduct{w}{v}} \\
+		&= \overline{\lambda} \innerproduct{v}{w}.
+	\end{align*}
+\end{rmk}
+\begin{rmk}
+	Such a product is called sesquilinear, where ``sesqui" means "one and a half."
+\end{rmk}
+
+Subordinate to any inner product, we have the norm, which is defined to be:
+\begin{defn}[Norm]
+	\begin{equation*}
+		\norm{v} = \sqrt{\innerproduct{v}{v}}.
+	\end{equation*}
+\end{defn}
+
+Now, we will look at the following example
+\begin{example}[Dot Product]
+	Suppose we have $V = \RR^{n}$, with the feld $\mathbb{F} = \RR$.
+	
+	Then, a standard inner product is the following:
+	\begin{equation*}
+		\innerproduct{(x_{1}, \ldots, x_{n})}{(y_{1}, \ldots, y_{n})} = x_{1}y_{1} + \ldots + x_{n}y_{n}.
+	\end{equation*}
+
+	This is called a ``dot product."
+	
+	To check that this is indeed an inner product, we proceed as follows:
+	\begin{enumerate}
+		\item Positive Definiteness: We note that $\innerproduct{x}{x} = x_{1}^{2} + \ldots + x_{n}^{2}$, which is non-negative, and is equal to zero only when $x = 0$.
+		\item Additivity: We can just do some computations.
+		\item Homogeneity: As above.
+		\item Conjugation ``Symmetry": We observe that since $a = \overline{a}$ for all $a \in \RR$, we have then that $x_{1}y_{1} = y_{1}x_{1} = \overline{y_{1}x_{1}}$. 
+	\end{enumerate}
+\end{example}
+
+\begin{example}[Modifying the Dot Product for $\CC$]
+	However, we note that if we are working in $V = \CC^{n}$ (over $\CC$), we no longer have an inner product using the dot product. Consider having a vector $v$ where all of the entries are equal to $i$; then, $\innerproduct{v}{v} < 0$.
+
+	Furthermore, if we have, say, $\innerproduct{(1+3i, i)}{(1+3i, i)} = 6i - 9$, which is non-real.
+
+	So, to fix this, we need to redefine the dot product as such:
+	\begin{equation*}
+		x_{1}\overline{y_{1}} + \ldots + x_{n}\overline{y_{n}} = \innerproduct{x}{y}.
+	\end{equation*}
+
+	Then, we can check all of our requirements and see that this is indeed an inner product.
+\end{example}
+
+\begin{example}
+	Suppose we have $V = C[0,1]$, such that $\left\{  f : [0,1] \rightarrow \CC, \text{ where $f$ is continuous on $[0,1]$}\right\}$.
+	
+	Then, an inner product would be:
+	\begin{equation*}
+		\innerproduct{f}{g} = \int_{0}^{1}	f(t) \overline{g(t)} \mathrm dt.
+	\end{equation*}
+
+	This can be generalised to
+	\begin{equation*}
+		\int_{0}^{1} f(t)\overline{g(t)} w(t) \mathrm dt,
+	\end{equation*}
+	where $w : [0,1] \rightarrow \RR$.
+\end{example}
+
+\subsection{Basic Consequences}
+Some basic consequences of our inner product is that
+\begin{enumerate}
+	\item $\innerproduct{v}{0} = 0 = \innerproduct{0}{v}$.
+	\item $\norm{v} \geq 0$, for any $v \in V$.
+	\item $\norm{v} = 0 \iff v = 0$.
+	\item $\norm{\alpha v} = \lvert \alpha \rvert\norm{v}$. % \sqrt{\innerproduct{\alpha v}{\alpha v}} = \sqrt{\alpha\lvert  \alpha \rvert \innerproduct{v}{v}} = \lvert \alpha \rvert\sqrt{\innerproduct{v}{v}} =
+\end{enumerate}
+
+\subsection{Orthogonality}
+\begin{defn}
+	We say that vectors $v,w$ are orthogonal to each other if $\innerproduct{v}{w} = 0$.
+\end{defn}
+
+With this definition, we note that the zero vector is orthogonal to the entire space of $V$. That is, $0 \perp V$. Conversely, if $v \perp V$, then $v \perp v$; in other words, $\innerproduct{v}{v} = 0 \implies v = 0$.
+
+Thus, we note that the zero vector is the only one orthogonal to the entire space.
+
+\begin{thm}
+	Suppose $v \perp w$. Then,
+	\begin{equation*}
+		\norm{v+w}^{2} = \norm{v}^{2} + \norm{w}^{2}.
+	\end{equation*}
+\end{thm}
+\begin{proof}
+	We note that
+	\begin{align*}
+		\norm{v + w}^{2} &= \innerproduct{v+w}{v+w} \\
+		&= \innerproduct{v}{v} + \innerproduct{w}{v} + \innerproduct{v}{w} + \innerproduct{w}{w} \\
+		&= \innerproduct{v}{v} + \innerproduct{w}{w} \\
+		&= \norm{v}^{2} + \norm{w}^{2}.
+	\end{align*}
+\end{proof}
+
+We note that in fact, we also have:
+\begin{equation*}
+	\norm{v-w}^{2} = \norm{v}^{2} + \norm{w}^{2}
+\end{equation*}
+
+\begin{rmk}
+	The Pythagorean Theorem generalises to the case of multiple orthogonal vectors, $v_{1}, \ldots, v_{k}$ such that $v_{i} \perp v_{j}$, for all $i \neq j$.
+	
+	So, we have
+	\begin{align*}
+		\norm{v_{1} + \ldots + v_{k}}^{2} &= \sum_{i,j = 1}^{k} \innerproduct{v_{i}}{v_{j}} \\
+		&= \sum_{i=1}^{k} \innerproduct{v_{i}}{v_{i}} \\
+		&= \sum_{i=1}^{k}\norm{v_{i}}^{2}.
+	\end{align*}
+\end{rmk}
+
+\subsection{Projections (Onto 1D Subspaces)}
+[insert diagram here]
+
+Our goal is to write $v$ as some kind of multiple of $w$ added with another vector orthogonal to $w$.
+
+So, we observe that we have:
+\begin{equation*}
+	v - \alpha w \perp w.
+\end{equation*}
+
+So,
+\begin{align*}
+	\innerproduct{v - \alpha w}{w} &= 0 \\
+	\innerproduct{v}{w} - \alpha \innerproduct{w}{w} &= 0 \\
+	\alpha &= \frac{\innerproduct{v}{w}}{\innerproduct{w}{w}}.
+\end{align*}
+
+\section{Lecture - 11/9/2023}
+\subsection{Some Corollaries}
+Recall from where we left off last time. Then, some of the consequences of the observation we made last time include:
+\begin{thm}[Cauchy-Schwarz Inequality]
+	Suppose we have two vectors $u,v$. Then, we have:
+	\begin{equation*}
+		\lvert \innerproduct{u}{v} \rvert \leq \norm{u} \cdot \norm{v}.
+	\end{equation*}
+\end{thm}
+\begin{proof}
+	First, in the case where $v = 0$, then it is trivial to see that the inequality holds (and in fact, we have equality of both sides).
+	
+	In the case where $v \neq 0$, we see the following:
+	\begin{align*}
+		v &= \frac{\innerproduct{u}{v}}{\innerproduct{u}{u}}u + w \tag{$u \perp w$} \\
+		\norm{v}^{2} &= \norm{\frac{\innerproduct{u}{v}}{\innerproduct{u}{u}} u}^{2} + \norm{w}^{2} \tag{By Pythagorean Theorem} \\
+		\norm{v}^{2} &\geq \norm{\frac{\innerproduct{u}{v}}{\innerproduct{u}{u}} u}^{2} \\
+		\norm{v}^{2} &\geq \lvert \innerproduct{u}{v} \rvert^{2} \cdot \left( \frac{1}{\norm{u}^{4}} \right) \norm{u}^{2} \\
+		\norm{v}^{2} \geq \lvert \innerproduct{u}{v} \rvert^{2} \cdot \frac{1}{\norm{u}^{2}} \\
+		\norm{v}^{2} \cdot \norm{u}^{2} &\geq \lvert \innerproduct{u}{v} \rvert^{2} \\
+		\norm{u} \cdot \norm{v} &\geq \lvert \innerproduct{u}{v} \rvert
+	\end{align*}
+\end{proof}
+
+\begin{cor}[Triangle Inequality]
+	\begin{equation*}
+		\norm{v + w} \leq \norm{v} + \norm{w}
+	\end{equation*}
+\end{cor}
+\begin{proof}
+	We will begin by doing the following:
+	\begin{align*}
+		\norm{v+w}^{2} &= \innerproduct{v+w}{v+w} \\
+		&= \innerproduct{v}{v} + \innerproduct{v}{w} + \innerproduct{w}{v} + \innerproduct{w}{w} \\
+		&= \norm{v}^{2} + 2\mathrm{Re} \innerproduct{v}{w} + \norm{w}^{2} \\
+		&\leq \norm{v}^{2} + 2\lvert \innerproduct{v}{w} \rvert + \norm{w}^{2} \\
+		&\leq \norm{v}^{2} + 2\norm{v}\norm{w} + \norm{w}^{2} \\
+		&= (\norm{v} + \norm{w})^{2} \\
+		\norm{v+w} &\leq \norm{v} + \norm{w}
+	\end{align*}
+\end{proof}
+
+\begin{cor}[Reverse Triangle Inequality]
+	\begin{equation*}
+		\lvert \norm{v} - \norm{w} \rvert \leq \norm{v - w}
+	\end{equation*}
+\end{cor}
+\begin{proof}[Exploration]
+	We note that $(v-w) + w = v$. Then, using the Triangle Inequality, we have:
+	\begin{align*}
+		\norm{v - w + w} &\leq \norm{v - w} + \norm{w} \\
+		\norm{v} - \norm{w} &\leq \norm{v - w} \\
+		\norm{w} - \norm{v} &\leq \norm{w - v} \\
+		&= \norm{v - w} \\
+		\lvert \norm{v} - \norm{w} \rvert &\leq \norm{v - w}
+	\end{align*}
+\end{proof}
+
+\begin{cor}[Parallelogram]
+	\begin{equation*}
+		\norm{v + w}^{2} + \norm{v - w}^{2} = 2 \left( \norm{v}^{2} + \norm{w}^{2} \right)
+	\end{equation*}
+\end{cor}
+
+\subsection{Talks on Orthogonality}
+
+\begin{thm}
+	Suppose we have $v_{1}, \ldots, v_{k}$ which are linearly independent. Then, we have $u_{1} = v_{1}, u_{2}, \ldots, u_{k}$ which can be built by repeated projections so that each vector is orthogonal to each other.
+\end{thm}
+\begin{proof}
+	Specifically, if we have $u_{1} = v_{1}, u_{2}, \ldots, u_{k}$ which are already mutually orthogonal, and $\vspan\left\{  v_{1}, \ldots, v_{j} \right\} = \vspan\left\{  u_{1}, \ldots, u_{j} \right\}$, then $u_{j+1} = v_{j+1} - a_{1}u_{1} - \ldots - a_{j}u_{j}$, where we have $a_{j} = \frac{\innerproduct{v_{j+1}}{u_{j}}}{\innerproduct{u_{j}}{u_{j}}}$.
+
+Thus, with this construction, we can guarantee that $u_{j+1}$ is orthogonal is all the preceding vectors.
+
+\end{proof}
+\begin{thm}
+	Now, conversely, if $u_{1}, \ldots, u_{k}$ are non-zero vectors and are mutually orthogonal, it follows then that they must be linearly independent.
+\end{thm}
+\begin{proof}
+	We observe that we have the following:
+	\begin{align*}
+		a_{1}u_{1} + \ldots + a_{k}u_{k}&= 0 \\
+		\lvert a_{1} \rvert^{2} \norm{u_{1}}^{2} + \ldots + \lvert a_{k} \rvert^{2}\norm{u_{k}} &= 0
+	\end{align*}
+
+	However, since each $u_{1}, \ldots, u_{k}$ are non-zero, it follows then that their norms are $\geq 0$. Then, for the equality to hold true, we must have that $a_{1}, \ldots, a_{k} = 0$.
+\end{proof}
+
+\begin{defn}
+	We say that $u_{1}, \ldots, u_{k}$ are orthonormal if $\innerproduct{u_{i}}{u_{j}} = \delta_{ij}$ (this is the Kronecker delta).
+\end{defn}
+\begin{rmk}
+	We remark that this is reminiscent with the dual maps; this suggests a connection with functionals which will be explored in future lectures.
+\end{rmk}
+
+Now, we note that we can in fact extend our list $u_{1}, \ldots, u_{k}$ of orthonormal vectors into a basis for $V$.
+
+\subsection{Orthornomal Bases Properties}
+The following are some good properties of orthonormal bases.
+
+Say we have an orthonormal basis $e_{1}, \ldots, e_{n}$ for $V$. Then, for arbitrary vectors $v,w \in V$, we have:
+\begin{enumerate}
+	\item $v = \innerproduct{v}{e_{1}}e_{1} + \ldots + \innerproduct{v}{e_{n}}e_{n}$.
+	\item $\innerproduct{v}{w} = \sum_{j=1}^{n} \innerproduct{v}{e_{j}} \innerproduct{e_{j}}{w}$. And in fact, if $w = v$, then we have:
+	\item $\norm{v}^{2} = \sum_{j=1}^{n} \lvert \innerproduct{v}{e_{j}} \rvert^{2}$ (Parsival's Equality).
+\end{enumerate}
+
+Now, imagine if we didn't have a list of orthonormal vectors $e_{1}, \ldots, e_{m}$ that is not necessarily a basis. Then, we have
+\begin{equation*}
+	\norm{v}^{2} \geq \sum_{j=1}^{k} \lvert \innerproduct{v}{e_{j}} \rvert^{2}
+\end{equation*}
+
+\subsection{Connection with Functionals}
+
+Suppose we have $\varphi \in V'$ and $e_{1}, \ldots, e_{n}$ is an orthonormal basis. Then, for any $v, w \in V$, we have:
+...
+
+\chapter{More Inner Products}
+\section{Lecture - 11/16/2023}
+\subsection{Recap}
+Recall that, given a subspace $U \subseteq V$, we have an orthogonal projector $P_{U}$ onto $U$. The remaining properties are:
+\begin{enumerate}
+	\item $I - P_{U} = P_{U^{\perp}}$; in other words, it's the orthogonal projector onto $U^{\perp}$. From here, it follows that the following holds:
+	\item $\vrange (I - P_{U}) = U^{\perp}$.
+	\item $(I - P_{U})^{2} = I - P_{U}$
+	\item $\norm{P_{U}v} \leq \norm{v}$. This is a consequence of the Pythagorean Theorem.
+	\item If we have an orthonormal basis $e_{1}, \ldots, e_{k}$ for $U$, then $P_{U}v = \sum_{j=1}^{k} \innerproduct{v}{e_{j}}e_{j}$.
+\end{enumerate}
+\begin{rmk}[Uniqueness of Orthogonal Projector]
+	Our orthogonal projector splits the space into a direct sum, where the complement to our subspace is the orthogonal complement. Thus, we see that by the fact of $V$ being a direct sum, each vector $v$ has a unique representation using $u$ and $u^{\perp}$.
+\end{rmk}
+
+\subsection{Adjoints}
+\begin{defn}[Adjoint]
+	Given two inner product vector spaces $V, W$ and a map $T \in \mathcal{L}(V,W)$, we can define the adjoint $T^{*}$ to be
+	\begin{equation*}
+		\innerproduct{Tv}{w} \coloneq \innerproduct{v}{T^{*}w}.
+	\end{equation*}
+
+	We observe here that $T^{*} \in \mathcal{L}(W,V)$. Furthermore, the first inner product lives in $W$, whereas the second lives in $V$.
+\end{defn}
+	Now, is such a $T^{*}$ well-defined?
+	
+	First, if $T$ and $w$ are fixed, then the map $v \mapsto \innerproduct{Tv}{w}$ is in fact a linear functional. Then, by Riesz's Theorem, we say that there exists a representer $u \in V$ such that $\innerproduct{Tv}{w} = \innerproduct{v}{u}$ for all $v \in V$. Then, we say that $T^{*}w = u$.
+	
+	Since the representer is unique, then we can conclude that indeed $T^{*}$ is well-defined.
+	
+	Next, we will check for linearity of $T^{*}$. First, take $w_{1}, w_{2} \in W$ and $\alpha, \beta \in \mathbb{F}$. Then, we observe the following:
+	\begin{align*}
+		\innerproduct{v}{T^{*}(\alpha w_{1} + \beta w_{2})} &= \innerproduct{Tv}{\alpha w_{1} + \beta w_{2}} \\
+		&= \innerproduct{Tv}{\alpha w_{1}} + \innerproduct{Tv}{\beta w_{2}} \\
+		&= \overline{\alpha}\innerproduct{Tv}{w_{1}} + \overline{\beta}\innerproduct{Tv}{w_{2}} \\
+		&= \overline{\alpha}\innerproduct{v}{T^{*}w_{1}} + \overline{\beta}\innerproduct{v}{T^{*}w_{2}} \\
+		&= \innerproduct{v}{\alpha T^{*}w_{1}} + \innerproduct{v}{\beta T^{*}w_{2}} \\
+		&= \innerproduct{v}{\alpha T^{*}w_{1} + \beta T^{*}w_{2}}.
+	\end{align*}
+	
+	Then, the difference between $T^{*}(\alpha w_{1} + \beta w_{2})$ and $\alpha T^{*}(w_{1}) + \beta T^{*}(w_{2})$ is orthogonal to the entire space $V$. This means then that the difference is equal to zero. Thus, we see that, indeed, $T^{*}(\alpha w_{1} + \beta w_{2}) = \alpha T^{*}w_{1} + \beta T^{*}w_{2}$. Thus, $T^{*} \in \mathcal{L}(W,V)$; i.e. it's a linear map.
+	
+	\begin{example}
+		Let $V = \RR^{3}$ and $W = \RR^{2}$, with the standard inner products. Let's take $T: V \rightarrow W$ to be $T(x,y,z) = (x+y, z)$. Then, we see the following:
+		\begin{equation*}
+			\mathcal{M}(T) = \begin{bmatrix}
+				1 & 1 & 0 \\
+				0 & 0 & 1
+			\end{bmatrix}
+		\end{equation*}
+	
+		Then, $\mathcal{M}(T^{*})$ would be:
+		\begin{equation*}
+			\begin{bmatrix}
+				1 & 0 \\ 1 & 0 \\ 0 & 1
+			\end{bmatrix}
+		\end{equation*}
+	
+		Another way to solve this is to first suppose that we have $\innerproduct{Tv}{w}$, with $v = (a,b,c)$ amd $w = (\alpha, \beta)$. 
+		
+		Then, we see that $\innerproduct{Tv}{w} = \innerproduct{(a+b, c)}{(\alpha, \beta)} = (a+b)\alpha + c\beta$.
+		
+		Then, we want this to be equal to $\innerproduct{v}{T^{*}w} = \innerproduct{(a,b,c)}{T^{*}w}$. Then, we want $T^{*}(\alpha, \beta) = (\alpha, \alpha, \beta)$.
+	\end{example}
+
+	\begin{thm}
+		The following is a property of the adjoint:
+		\begin{equation*}
+			(T+S)^{*} = T^{*} + S^{*}.
+		\end{equation*}
+	\end{thm}
+	\begin{proof}
+		We observe the following:
+		\begin{align*}
+			\innerproduct{v}{(T+S)^{*}w} &= \innerproduct{(T+S)v}{w} \\
+			&= \innerproduct{Tv + Sv}{w} \\
+			&= \innerproduct{Tv}{w} + \innerproduct{Sv}{w} \\
+			&= \innerproduct{v}{T^{*}w} + \innerproduct{v}{S^{*}w} \\
+			&= \innerproduct{v}{T^{*}w + S^{*}w}.
+		\end{align*}
+	\end{proof}
+
+	\begin{thm}
+		Similarly, another property is:
+		\begin{equation*}
+			(\alpha T)^{*} = \overline{\alpha}T^{*}
+		\end{equation*}
+	\end{thm}
+	\begin{proof}
+		We observe that
+		\begin{align*}
+			\innerproduct{v}{(\alpha T)^{*}w} &= \innerproduct{(\alpha T)v}{w} \\
+			&= \alpha \innerproduct{Tv}{w} \\
+			&= \alpha \innerproduct{v}{T^{*}w} \\
+			&= \innerproduct{v}{\overline{\alpha}T^{*}w}.
+		\end{align*}
+	\end{proof}
+
+	\begin{thm}
+		We also have
+		\begin{equation*}
+			(T^{*})^{*} = T
+		\end{equation*}
+	\end{thm}
+	\begin{thm}
+		The adjoint of the identity is itself. In other words,
+		\begin{equation*}
+			I^{*} = I.
+		\end{equation*}
+	\end{thm}
+
+	\begin{thm}
+		We have the following:
+		\begin{equation*}
+			(ST)^{*} = T^{*}S^{*}
+		\end{equation*}
+	\end{thm}
+
+	\begin{thm}
+		For the inverse, we have
+		\begin{equation*}
+			(T^{-1})^{*} = (T^{*})^{-1}.
+		\end{equation*}
+	\end{thm}
+	\begin{proof}
+		Suppose that $T$ is invertible. First, we see that
+		\begin{align*}
+			T^{*}(T^{-1})^{*} &= (T^{-1} T)^{*} = I^{*} = I \\
+			(T^{-1})^{*}T^{*} &= (T T^{-1})^{*} = I^{*} = I
+		\end{align*}
+		\begin{comment}
+			
+		
+		Then we see the following:
+		\begin{align*}
+			TT^{-1} &= I \\
+			(TT^{-1})^{*} &= I^{*} \\
+			(T^{-1})^{*}T^{*} &= I^{*} \\
+			(T^{-1})^{*}T^{*} &= I \\
+			\\
+			(T^{*})^{-1}T^{*} &= I
+		\end{align*}
+		\end{comment}
+	\end{proof}
+
+\chapter{Adjoints And Stuff}
+\section{Lecture - 11/21/2023}
+The following are basic results about the null spaces and ranges of adjoints:
+\begin{enumerate}
+	\item $\vnull T^{*} = (\vrange T)^{\perp}$.
+	\item $\vrange T^{*} = (\vnull T)^{\perp}$.
+	\item $\vnull T = (\vrange T^{*})^{\perp}$.
+	\item $\vrange T = (\vnull T^{*})^{\perp}$.
+\end{enumerate}
+\begin{proof}
+	We will first prove 1.
+	
+	To begin with, we note that by definition of $T^{*}$, this means that $w \in \vnull T^{*}$ is one such that $\innerproduct{Tv}{w} = \innerproduct{v}{0}$.
+	
+	But, note that $\innerproduct{v}{0} = 0$.
+	
+	So, we have that $\innerproduct{Tv}{w} = 0$. Then, we see that any vector $w \in T^{*}$ must be orthogonal to all $Tv$. In other words, it is in the orthogonal complement of $Tv$, which is the same as saying $w \in (\vrange T)^{\perp}$.
+	
+	From here, to get 3, we can simply replace $T$ with $T^{*}$. Then, using the fact that $\left( T^{*} \right)^{*} = T$, we have then that $\vnull (T^{*})^{*} = \vnull T = (\vrange T^{*})^{\perp}$.
+	
+	To get 4, we observe that $(\vnull T^{*})^{\perp} = \left( (\vrange T)^{\perp} \right)^{\perp} = \vrange T$.
+	
+	Then, we can do the same with 4 as we did to 1 to get 2.
+\end{proof}
+
+The last thing to tackle is the following:
+First, suppose that $e_{1}, \ldots, e_{n}$ is an orthonormal basis of $V$. Furthermore, suppose $f_{1}, \ldots, f_{n}$ is an orthonormal basis for $W$.
+
+Then, what are the connection between $\mathcal{T}$ and $\mathcal{T^{*}}$?
+
+\begin{thm}
+	Given an orthonormal basis $e_{1}, \ldots, e_{k}$ and $f_{1}, \ldots, f_{m}$ for $V$ and $W$ respectively, then
+	\begin{equation*}
+		\mathcal{M}(T) = \overline{\mathcal{M}(T)^{\intercal}}
+	\end{equation*}
+\end{thm}
+\begin{proof}
+	To begin with, we see that the $(j,k)$th entry of $\mathcal{M}(T)$ is
+	\begin{align*}
+		\innerproduct{Te_{k}}{f_{j}} &= \innerproduct{e_{k}}{T^{*}f_{j}} \\
+		&= \innerproduct{T^{*}f_{j}}{e_{k}}.
+	\end{align*}
+	
+	Then, we see that the last line is the $(k,j)$th entry of $\mathcal{M}(T^{*})$.
+	
+	Thus, we have that $\mathcal{T^{*}} =\overline{\mathcal{M}(T)^{\intercal}}$.
+\end{proof}
+
+\begin{rmk}
+	However, we note that this only holds for when we have an orthonormal basis!
+	
+	If we only had orthogonality, we will have to adjust by the norm of the vectors.
+\end{rmk}
+
+\subsection{Self-Adjoint Operators}
+We say an operator $T \in \mathcal{L}(V)$ is self-adjoint if $T = T^{*}$.
+
+First, suppose $\mathbb{F} = \RR$ or $\CC$. Given an eigenvalue $\lambda \in \mathbb{F}$ of $T \in \mathcal{L}(V)$ such that $T = T^{*}$, there exists an eigenvector $v \in V$ corresponding to $\lambda$. Then, we observe that
+\begin{equation*}
+	\lambda\innerproduct{v}{v} = \innerproduct{\lambda v}{v} = \innerproduct{Tv}{v} = \innerproduct{v}{T^{*}v} = \innerproduct{v}{Tv} = \innerproduct{v}{\lambda v} = \overline{\lambda}\innerproduct{v}{v}.
+\end{equation*}
+
+Thus, we see that since $\innerproduct{v}{v} \neq 0$, then it follows that $\lambda = \overline{\lambda}$. In other words, $\lambda \in \RR$.
+
+In fact, we can get a stronger version of this observation about the structure of any self-adjoint operator. 
+\begin{thm}[Complex Spectral Theorem]
+	The following are equivalent over $\CC$ for a self-adjoint operator:
+	\begin{enumerate}
+		\item $T \in \mathrm{L}(V)$ is self-adjoint.
+		\item $\mathcal{M}(T)$ is diagonal with real entries with respect to some orthonormal basis vectors.
+		\item $V$ has an orthonormal basis consisting of eigenvectors of $T$.
+	\end{enumerate}
+\end{thm}
+\begin{proof}
+	We note that b and c are equivalent.
+	
+	Now, to show b implies a, we proceed as follows: suppose that $\mathcal{M}(T)$ is diagonal with real diagonal entries. Then, we note that $\overline{\mathcal{M}(T)^{\perp}} = \mathcal{M}(T)$. So, $T = T^{*}$ as $\mathcal{M}(T)$ is written with respect to an orthonormal basis.
+	
+	To show the other way, suppose that $T$ is self-adjoint. Then, $T = T^{*}$. Then, we note that $\mathcal{M}(T)$ has an upper-triangular representation in $\CC$ with respect to some orthonormal basis.
+	
+	Then, we note that since $T = T^{*}$, we have then that $\mathcal{M}(T^{*}) = \overline{\mathcal{M}(T)^{\intercal}}= \mathcal{M}(T)$. However, we note that since this is the case, it follows then that all of the entries in the strictly-upper triangular section of $\mathcal{M}(T)$ is equal to the strictly-lower triangular entries. In other words, these entries must be zero.
+	
+	Furthermore, since the conjugate is equal, it follows that the diagonal entries must be rael.
+	
+	Thus, we see that a implies b as desired.
+\end{proof}
+
+To prove this result for the reals, we must first investigate whether the minimal polynomial of $T = T^{*}$ can contain quadratic factors $x^{2} + ax + b$ where $a^2 - 4b < 0$. This is because for $\CC$, we used the fact that in $\CC$, we always have a triangular representiation with respect to some orthonormal basis.
+
+Now, given $v \in V$, consider $\innerproduct{(T^{2} + aT + bI)v}{v}$.
+ 
+\subsubsection{Blast from the Past}
+Quick side-track: the discriminant arises from completing the square. Note that
+\begin{align*}
+	x^{2} + ax + b &= (x + \frac{a}{2})^{2} + b - \frac{a^{2}}{4} \\
+	&= (x + \frac{a}{2})^{2} - \frac{1}{4}(a^{2} - 4b)
+\end{align*}
+
+Anyways, we see then that:
+\begin{align*}
+	(T^{2} + aT + bI)&= (T+\frac{a}{2}I)^{2} - \frac{1}{4}(a^{2} -4b)I \\
+	\innerproduct{(T^{2} + aT + bI)v}{v} &= \innerproduct{(T+\frac{a}{2}I)^{2}v}{v} - \frac{1}{4}(a^{2} - 4b) \innerproduct{v}{v} \\
+	&= \innerproduct{(T+\frac{a}{2}I)v}{(T + \frac{a}{2}I)v} - \frac{1}{4}(a^{2} - 4b)\innerproduct{v}{v}
+\end{align*}
+
+However, we note that both parts are non-zero.
+
+However, this means then that $(T^{2} + aT + bI)v \neq 0$, meaning that the operator has a trivial null space. In other words, it is injective. However, this means then that it must be invertible.
+
+From here, it follows that because the polynomial is invertible, it cannot occur in the minimal polynomial. Thus, we see that the minimal polynomial contains only real roots!
+
+\chapter{More on Operators}
+\section{Lecture - 11/28/2023}
+\subsection{Recap}
+Remember that over $\CC$, if $T$ is normal, them $\mathcal{M}(T)$ is diagonal under some orthonormal basis. This isn't necessarily the case for $\RR$ though.
+
+\subsection{Nonnegative and Positive Operators}
+\begin{defn}
+	We say that $S$ is nonnegative if and only if $S$ is self-adjoint and $\innerproduct{Sv}{v} \geq 0$ for all $v \in V$.
+\end{defn}
+\begin{defn}
+	We say that $S$ is positive if and only if $S$ is self-adjoint and $\innerproduct{Sv}{v} > 0$ for all $v$ in $V \setminus \left\{  0 \right\}$.
+\end{defn}
+
+\begin{rmk}
+	To check self-adjointness, remember to check if $\innerproduct{Tv}{w} = \innerproduct{v}{Tw}$, for all $v, w \in V$.
+\end{rmk}
+
+The following are characterisations of non-negativity:
+\begin{enumerate}
+	\item $T$ is non-negative.
+	\item $T$ is self-adjoint and all of its eigenvalues are nonnegative.
+	\item $\mathcal M(T)$ is diagonal with non-negative entries over some orthonormal basis.
+	\item $T$ has a non-negative square root.
+	\item $T$ has a self-adjoint square root.
+	\item $T = R^{*}R$. 
+\end{enumerate}
+
+Before starting, we let $S$ be the square root of $T$ if $S^{2} = T$. Then, we want to show that $1 \implies 2$:
+\begin{proof}
+	Suppose that $(\lambda, e)$ is an eigenpair of $T$. Then, we note that $\innerproduct{Tv}{v} = \innerproduct{\lambda v}{v} = \lambda \innerproduct{v}{v} \geq 0$. We note that $\innerproduct{v}{v} > 0$, and thus we have that $\lambda \geq 0$.
+\end{proof}
+
+From here, we see that $2 \implies 3$ by the Spectral Theorem. Then, to show $3 \implies 4$, we observe:
+\begin{proof}
+	By $3$, we have $e_{1}, \ldots, e_{n}$ by an orthonomal basis such that $Te_{i} = \lambda_{i} e_{i}$, for all $i, \lambda_i \geq 0$. Then, we define $S$ by $e_{i} \mapsto \sqrt{\lambda_i}e_{i}$, which is non-negative.  
+\end{proof}
+
+Then, to show $4 \implies 5$, we note that any non-negative operator is also self-adjoint.
+
+From $5 \implies 6$, we see that any self-adjoint square root $S$ can be defined as $R = S$. Then, we note that $R^{*} = R$. So, we see that $R^{*}R = RR = R^{2} = S^{2} = T$ by definition.
+
+Then, from here, to show $6 \implies 1$, we simply observe that $(R^{*}R)^{*} = R^{*}(R^{*})^{*} = R^{*}R$. Then, we see that $\innerproduct{R^{*}Rv}{v} = \innerproduct{Rv}{Rv} \geq 0$.
+
+For a positive operator, we instead have the following characterisations:
+\begin{enumerate}
+	\item $T$ is positive.
+	\item $T$ is self-adjoint and all of its eigenvalues are positive.
+	\item $\mathcal M(T)$ is diagonal with positive entries over some orthonormal basis.
+	\item $T$ has a positive square root.
+	\item $T$ has a self-adjoint square root, with $T$ invertible.
+	\item $T = R^{*}R$ where $R$ is invertible. 
+\end{enumerate}
+
+\subsection{SVDs}
+Let $T \in \mathcal{L}(V,W)$. Then,
+\begin{enumerate}
+	\item $T^{*}T$ is a nonnegative operator on $V$.
+	\item $\vnull T^{*}T = \vnull T$.
+	\item $\vrange T^{*}T = \vrange T^{*}$.
+	\item $\dim \vrange T^{*} = \dim \vrange T = \dim \vrange T^{*}T$.
+\end{enumerate}
+\begin{proof}
+	To begin with, we note that the first property has been shown previously.
+	
+	To show the second property, we observe that for any $v \in \vnull T$, we have that $T^{*}Tv = 0$ as well. Meanwhile, we note that if $v \in \vnull T^{*}T$, then we have that $T^{*}Tv = 0$. However, we note that this means that $\innerproduct{T^{*}Tv}{v} = \innerproduct{Tv}{Tv} = \norm{Tv}^{2} = 0$. Thus, we see that, indeed, $Tv = 0$ and thus $v \in \vnull T$.
+	
+	For the third property, we observe that $\vrange T^{*}T = (\vnull T^{*}T)^{\perp} = (\vnull T)^{\perp} = \vrange T^{*}$.
+	
+	...
+\end{proof}
+
+We say that the singular values of $T \in \mathcal{L}(V,W)$ are the square roots of the eigenvalues of $T^{*}T$. We list these values in non-increasing order.
+
+\begin{thm}[SVD Simple Version]
+	Let $T \in \mathcal L(V,W)$ and $s_{1}, \ldots, s_{m}$ are its positive singular values. Then, there exists two orthonormal lists $e_{1}, \ldots, e_{m} \in V$ and $f_{1}, \ldots, f_{m} \in W$ such that
+	\begin{equation*}
+		Tv = s_{1}\innerproduct{v}{e_{1}}f_{1} + \ldots + s_{m}\innerproduct{v}{e_{m}}f_{m}
+	\end{equation*}
+\end{thm}
+\begin{proof}
+	Let $e_{1}, \ldots, e_{n}$ be an orthonormal basis of $V$ such that $T^{*}T$ has a diagonal representation in that basis, with diagonal entries $s_{j}^{2}$.
+	
+	Then, we have $v = \innerproduct{v}{e_{1}}e_{1} + \ldots + \innerproduct{v}{e_{n}}e_{n}$. Then, for the non-zero $s_{j}$, we set $f_{j} = \frac{1}{s_{j}}Te_{j}$.
+	
+	Then, from here, we see that by this definition, we can indeed get to our claim above.
+	
+	However, we will also need to prove the orthonormality of the $f_{j}$'s. To do this, we note that we have:
+	\begin{align*}
+		\innerproduct{f_{j}}{f_{k}} &= \innerproduct{\frac{1}{s_{j}}Te_{j}}{\frac{1}{s_{k}}Te_{k}} \\
+		&= \frac{1}{s_{j}s_{k}}\innerproduct{Te_{j}}{Te_{k}} \\
+		&= \frac{1}{s_{j}s_{k}}\innerproduct{T^{*}Te_{j}}{e_{k}} \\
+		&= \frac{s_{j}}{s_{k}}\innerproduct{s_{j}^{2}e_{j}}{e_{k}} \\
+		&= \innerproduct{s_{j}}{s_{k}}\innerproduct{e_{j}}{e_{k}}.
+	\end{align*}
+
+	From here, we note that since $e_{j}, e_{k}$ are orthogonal to each other for $j \neq k$, it follows then that the inner product must be equal to zero. In other words, we have that each $f_{j}, f_{k}$ are orthogonal to each other as well for $j \neq k$. If they're equal to each other, we have that they're equal to $1$. Thus, we see that it is indeed orthonormal as desired.
+\end{proof}
+\begin{example}
+	Let $V = \mathscr{P}_{2}(\RR)$ and $W = \mathscr{P}_{3}(\RR)$, with $p(x) \mapsto xp(x) + p'(x)$. Define the inner product to be
+	\begin{equation*}
+		\innerproduct{f}{g} = \int_{-1}^{1} fg \mathrm dx
+	\end{equation*}
+
+	First, we will find its singular values. To do this, we first must consider what $T^{*}$ does.
+	\begin{equation*}
+		\innerproduct{Tv}{w} = \innerproduct{xp(x) + p'(x)}{g(x)} = \int_{-1}^{1} xp(x) + p'(x) \mathrm dx = \int_{-1}^{1} xp(x) \mathrm dx + \int_{-1}^{1} p'(x) \mathrm dx
+	\end{equation*}
+	
+	Then, from here, we use integration by parts...
+\end{example}
+
+\section{Lecture - 11/30/2023}
+Recall that for SVD, we have:
+\begin{equation*}
+	Tv = s_{1}\innerproduct{v}{e_{1}}f_{1} + \ldots + s_{m}\innerproduct{v}{e_{m}}f_{m},
+\end{equation*}
+where $e_{1}, \ldots, e_{m}$ and $f_{1}, \ldots, f_{m}$ are orthonormal in $V$ and $W$ respectively. Furthermore, we let $s_{1} \geq s_{2} \geq \cdots \geq s_{m} > 0$ be the singular values.
+
+Then, we have the following:
+\begin{enumerate}
+	\item $T$ is injective $\iff$ 0 is not a singular value.
+	\item $\dim \vrange T$ is the number of positive singular values of $T$.
+	\item $T$ is surjective $\iff$ $\dim W$ is equal to the number of positive singular values of $T$.
+\end{enumerate}
+
+For b, we first note that the range of $T$ must be contained in the span of $f_{1}, \ldots, f_{m}$. So, ...
+
+For c, we note that if $T$ is surjective, then $\dim \vrange T = \dim W$, and from the previous part, we know that $\dim W$ is the number of positive singular values of $T$.
+
+To find the adjoint of $T$, we look at the definition of the adjoint. That is,
+\begin{equation*}
+	\innerproduct{Tv}{w} = \innerproduct{v}{T^{*}w}.
+\end{equation*}
+
+Then, we observe the following:
+\begin{align*}
+	\innerproduct{s_{1}\innerproduct{v}{e_{1}}f_{1} + \ldots + s_{m}\innerproduct{v}{e_{m}}f_{m}}{w} &= s_{1}\innerproduct{v}{e_{1}}\innerproduct{f_{1}}{w} + \ldots + s_{m}\innerproduct{v}{e_{m}}\innerproduct{f_{m}}{w} \\
+	&= \innerproduct{v}{s_{1}\overline{\innerproduct{f_{1}}{w}}e_{1}} + \ldots + \innerproduct{v}{s_{m}\overline{\innerproduct{f_{m}}{w}}e_{m}} \\
+	&= \innerproduct{v}{s_{1}\innerproduct{w}{f_{1}}e_{1} + \ldots + s_{m}\innerproduct{w}{f_{m}}e_{m}}
+\end{align*}
+
+\subsection{Isometry}
+$T \in \mathcal L(V,W)$ is called an isometry if $\norm{Tv} = \norm{v}$, for all $v \in V$.
+
+In case $T \in \mathcal L(V)$ is an invertible isometry, we call it ``unitary."
+
+\begin{rmk}
+	If $T \in \mathcal L(V)$ is unitary, then any eigenpair $(\lambda, v)$ satisfies:
+	\begin{equation*}
+		\norm{Tv} = \norm{\lambda v} = \lvert \lambda \rvert\norm{v} = \norm{v}.
+	\end{equation*}
+
+	Thus, we have that $\lvert \lambda \rvert  = 1$.
+\end{rmk}
+
+Note that if $T$ is an isometry, then
+\begin{equation*}
+	\norm{Te_{j}} = \norm{e_{j}} = 1.
+\end{equation*}
+
+Furthermore, we have $\norm{Te_{j}} = \norm{s_{j} f_{j}} = s_{j}$. THus, the singular value $s_{j}$ must be one.
+
+We can also note that since $\vnull T^{*}T = \vnull T$, then if $v \in \vnull T$, then we have $Tv = 0$. Thus, $\norm{Tv} = 0$. Then, $\norm{v} = 0$. So, $v = 0$.
+
+Thus, if we have an isometry, we must have that $T$ is injective. However, it doesn't have to necessarily be surjective.
+
+\subsection{Jordan Normal Form}
+To begin with, we have the following setting: $V$ is finite-dimensional inner product space over $\CC$.
+
+Our goal is that for $T \in \mathcal L(V)$, we get a matrix representation which is as ``simple as possible." 
+
+In this case, we want to get a matrix which has as many zeroes as possible (i.e. as sparse as possible).
+
+Our first stop is to decompose $V$ into a direct sum $V = U \oplus W$, where $U,W$ are $T$-invariant and $T$ is nilpotent on $U$ (meaning that $T^{n}\big|_U = 0$, for some $n \in \NN$) and invertible on $W$. 
+
+To get this, we notice that $\left\{  0 \right\} \subseteq \vnull T \subseteq T^{2} \cdots $. Now, since $\dim V$ is not infinite, this chain stabilises. In other words, there exists some $n \in \NN$ where $\vnull T^{n} = \vnull T^{n_{1}}$.
+\end{document}

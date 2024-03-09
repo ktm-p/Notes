@@ -1,0 +1,19 @@
+\contentsline {chapter}{Contents}{2}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Discussion 0A}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Discussion 0B}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Perfect Square}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Number of Friends}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Pebbles}{6}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Preserving Set Operations}{6}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Discussion 1A}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Natural Induction on Inequality}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Make it Stronger}{8}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Binary Numbers}{9}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Fibonacci for Home}{10}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Discussion 1B}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Stable Matching}{11}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Propose-and-Reject Proofs}{11}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Be a Judge}{12}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Stable Matching III}{13}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Discussion 2A}{14}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{14}{section.5.1}%

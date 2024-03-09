@@ -1,0 +1,500 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Homework 9}{Fall 2023}
+	
+	\section{Eigenvalues of Dual Maps}
+	\begin{hw}
+		Suppose $V$ is a complex finite-dimensional vector space, $T \in \mathcal L(V)$, and $\lambda \in \CC$. Prove or disprove:
+		if $\lambda$ is an eigenvalue of $T$, then it is also an eigenvalue of $T'$.
+	\end{hw}
+	\begin{solution}
+		To begin with, let us denote $A = \mathcal{M}(T)$. Then, since $V$ is a finite-dimensional vector space, with $T \in \mathcal L(V)$, then we note that $\mathcal{M}(T') = A^{\intercal}$.
+		
+		From here, we note that since $V$ is a complex, finite-dimensional vector space, then we know that $T$ is triangularisable under some basis. In other words, for some basis of $V$, we have
+		\begin{equation*}
+			\mathcal{M}(T) = A = \begin{bmatrix}
+				\lambda_{1} & * & \cdots & * \\
+				0 & \lambda_{2} & \cdots & * \\
+				\vdots & \vdots & \ddots & \vdots \\
+				0 & 0 & \cdots & \lambda_n
+			\end{bmatrix}
+		\end{equation*}
+	
+		We note here that since $\mathcal{M}(T)$ is an upper-triangular matrix, the eigenvalues of $T$ are precisely the diagonal entries of the matrix $\mathrm{M}(T)$.
+	
+		Then, with this in mind, we observe the following:
+		\begin{equation*}
+			\mathcal{M}(T') = A^{\intercal} = \begin{bmatrix}
+				\lambda_1 & 0 & \cdots & 0 \\
+				* & \lambda_2 & \cdots & 0 \\
+				\vdots & \vdots & \ddots & \vdots \\
+				* & * & \cdots & \lambda_n
+			\end{bmatrix}
+		\end{equation*}
+	
+		Then, since $\mathrm{M}(T')$ is a lower-triangular matrix, we note that its eigenvalues are precisely the diagonal entries. Thus, we note that if $\lambda$ is an eigenvalue of $T$, then it must be an eigenvalue of $T'$ as well. 
+		\begin{comment}
+			then there exists at least one $\lambda$ such that:
+		\begin{equation*}
+			A - \lambda I \neq 0.
+		\end{equation*}
+	
+		This $\lambda$ is an eigenvalue of $T$.
+		
+		From here, we will introduce the following lemma:
+		\begin{lem}
+			Let $A$ denote some $n \times n$ matrix. Then, $A$ is invertible if and only if $A^{\intercal}$ is invertible.
+		\end{lem}
+		\begin{innerproof}
+			We begin with the forward direction. Let us suppose that $A$ is invertible. Then, there exists some $B$ such that $AB = I$. Now, we observe the following:
+			\begin{align*}
+				AB = I &\iff (AB)^{\intercal} = I^{\intercal} \\
+				&\iff B^{\intercal}A^{\intercal} = I.
+			\end{align*}
+		
+			Then, indeed, we see that by the uniqueness of inverses, we have that $B^{\intercal}$ is the inverse of $A^{\intercal}$; $A^{\intercal}$ is invertible.
+			
+			For the backwards direction, we simply proceed backwards to see that, by uniqueness of inverses, we have that $B$ is the inverse of $A$, and thus $A$ is invertible.
+		\end{innerproof}
+	
+		Now, with this in mind, we observe the following:
+		\begin{align*}
+			(A-\lambda I)^{\intercal} &= A^{\intercal} - (\lambda I)^{\intercal} \\
+			&= A^{\intercal} - \lambda I^{\intercal} \\
+			&= A^{\intercal} - \lambda I
+		\end{align*}
+	
+		Now, we note that since $A - \lambda I \neq 0$, meaning that it is not invertible, we have then that $(A-\lambda I)^{\intercal} = A^{\intercal} - \lambda I$ is not invertible either; i.e. $A^{\intercal} - \lambda I \neq 0$.
+		
+		And we note that since $\mathcal{M}(T') = A^{\intercal}$, it follows then that $\lambda$ must then also be an eigenvalue of $T'$ as desired.
+		\end{comment}
+	\end{solution}
+	\begin{hw}
+		Prove or disprove the converse.
+	\end{hw}
+	\begin{solution}
+		We proceed similarly: let us denote $A = \mathcal{M}(T')$. Then, we note that $\mathcal{M}(T) = A^{\intercal}$.
+		
+		Then, as before, we note that $T'$ can be triangularised under some basis of $V$, yielding us the following matrix representation:
+		\begin{equation*}
+			\mathcal{M}(T') = A = \begin{bmatrix}
+				\lambda_1 & 0 & \cdots & 0 \\
+				* & \lambda_2 & \cdots & 0 \\
+				\vdots & \vdots & \ddots & \vdots \\
+				* & * & \cdots & \lambda_n
+			\end{bmatrix}
+		\end{equation*}
+	
+		And since $\mathcal{M}(T')$ is a lower-triangular matrix, we note that the diagonal entries $\lambda_1, \ldots, \lambda_{n}$ are its eigenvalues.
+	
+		Then, as before, we note that
+		\begin{equation*}
+			\mathcal{M}(T) = A^{\intercal} = \begin{bmatrix}
+				\lambda_{1} & * & \cdots & * \\
+				0 & \lambda_{2} & \cdots & * \\
+				\vdots & \vdots & \ddots & \vdots \\
+				0 & 0 & \cdots & \lambda_n
+			\end{bmatrix}
+		\end{equation*}
+		
+		And since $\mathcal{M}(T)$ is an upper-triangular matrix, we see that its diagonal entries $\lambda_{1}, \ldots, \lambda_{n}$ are precisely its eigenvalues as well. Thus, if $\lambda$ is an eigenvalue of $T'$, it must also be an eigenvalue of $T$.
+	\end{solution}
+
+	\newpage
+	
+	\section{Partial Derivatives?!}
+	\begin{hw}
+		Let $V$ be the complex vector space of bivariate polynomials of total degree at most $2$, and let $T$ be a linear operator defined as such:
+		\begin{equation*}
+			T : p \mapsto \frac{\partial p}{\partial x} - \frac{\partial p}{\partial y}.
+		\end{equation*}
+	
+		Determine the minimal polynomial.
+	\end{hw}
+	\begin{solution}
+		First, we note that a basis for $V$ is: $1, x, y, x^{2}, y^{2}, xy$.
+		
+		Then, we apply $T$ on each of the basis vectors to see the following:
+		\begin{enumerate}
+			\item $T(1) = 0$,
+			\item $T(x) = 1$,
+			\item $T(y) = -1$,
+			\item $T(x^{2}) = 2x$,
+			\item $T(y^{2}) = -2y$,
+			\item $T(xy) = y - x$.
+		\end{enumerate}
+		
+		Then, we note that the matrix representation for $T$ is as such:
+		\begin{equation*}
+			\mathcal{M}(T) =
+			\begin{bmatrix}
+				0 & 1 & -1 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 2 & 0 & -1 \\
+				0 & 0 & 0 & 0 & -2 & 1 \\
+				0 & 0 & 0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & 0 & 0
+			\end{bmatrix}
+		\end{equation*}
+	
+		Now, we note that $T^{2}(x^{2}) = 2$, which is non-zero. So the smallest power of $T$ which annihilates everything is $T^{3}$. This is because every time we apply $T$ onto some vector, it reduces the degree by one. As such, $x^{2}, y^{2}, xy$ all have degree $2$, so we need to apply $T$ there times. 
+		
+		Thus, we see that the minimal polynomial must be $p(z) = z^{3}$.
+	\end{solution}
+
+	\begin{hw}
+		Determine all eigenvalues.
+	\end{hw}
+	\begin{solution}
+		We observe that since $\mathcal{T}$ is an upper-triangular matrix under our chosen basis, the eigenvalues are in fact the diagonal entries. In this case, all eigenvalues $\lambda$ are $0$.
+	\end{solution}
+
+	\begin{hw}
+		Determine the corresponding eigenvectors.
+	\end{hw}
+	\begin{solution}
+		First, we note that $\dim \vrange T = 3$. So, by the Rank-Nullity Theorem, we know that $\dim \vnull T = \dim V - \dim \vrange T = 6 - 3 = 3$. Then, we must have three eigenvectors. The eigenvectors are some $p \in V$ such that $Tp = 0v = 0$. So, by inspection, we have the following:
+		\begin{enumerate}
+			\item $1$,
+			\item $x+y$,
+			\item $2xy + x^{2} + y^{2}$.
+		\end{enumerate}
+	
+		To confirm that these are our eigenvectors, we proceed as follows:
+		\begin{align*}
+			T(1) &= 0 \\
+			\\
+			T(x+y) &= 1 - 1 \\
+			&= 0 \\
+			\\
+			T(2xy +x^{2} + y^{2}) &= (2y + 2x) - (2x + 2y) \\
+			&= 2y + 2x - 2x - 2y \\
+			&= 0
+		\end{align*}
+	\end{solution}
+
+	\newpage
+	
+	\section{Diagonalisability}
+	\begin{hw}
+		Suppose that $V$ is a finite-dimensional vector space. Prove or disprove: if two operators $T,S$ from $\mathrm{L}(V)$ commute, then $T$ is diagonalisable if and only if $S$ is. 
+	\end{hw}
+	\begin{solution}
+		We provide the following counterexample: let us define $V = \mathbb{F}^{3}$. Then, let us define $T, S \in \mathcal L(\mathbb{F}^{3})$ to have the following matrix representations:
+		\begin{align*}
+			\mathcal{M}(T) &= \begin{bmatrix}
+				1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+			\end{bmatrix} \\
+			\mathcal{M}(S) &= \begin{bmatrix}
+				0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+			\end{bmatrix}
+		\end{align*}
+	
+		Now, we note that $T = I$, and the identity matrix always commute. Then, we have that $TS = ST$ as desired. Furthermore, note that the identity matrix is diagonalisable.
+		
+		However, we observe that $S$ is not diagonalisable: we note that since $\mathcal{M}(S)$ is an upper-triangular matrix, its eigenvalues are the diagonal entries. In this case, $\lambda = 0$ is the only eigenvalue of $S$. Furthermore, we note that:
+		\begin{equation*}
+			E(0, S) = \left\{  (a,0,0) \in \mathbb{F}^{3} : a \in \mathbb{F} \right\}.
+		\end{equation*}
+	
+		Thus, we see that $V$ does not have a basis consist of the eigenvectors of $S$, and thus $S$ is not diagonalisable.
+	\end{solution}
+
+	\newpage
+	
+	\section{Checking a Bunch of Stuff}
+	\begin{hw}
+		Let $V \coloneq \mathscr{P}_{3}(\RR)$ and let $T \in \mathcal{L}(V)$ be the operator $f(x) \mapsto f(x-1) + f(x+1)$. Is $T$ triangularisable?
+	\end{hw}
+	\begin{solution}
+		Let us consider a basis for $V$: $1, x, x^{2}, x^{3}$. Then, we note that the matrix representation of $T$ under this basis is:
+		\begin{equation*}
+			\mathrm{M}(T) = 
+			\begin{bmatrix}
+				2 & 0 & 2 & 0 \\
+				0 & 2 & 0 & 6 \\
+				0 & 0 & 2 & 0 \\
+				0 & 0 & 0 & 2
+			\end{bmatrix}
+		\end{equation*}
+	
+		Then, we see that $\mathrm{M}(T)$ is already upper-triangular, so $T$ is indeed triangularisable.
+	\end{solution}
+	\begin{hw}
+		Is $T$ diagonalisable?
+	\end{hw}
+	\begin{solution}
+		To begin with, we can see that since $\mathcal{M}(T)$ is upper-triangular, its eigenvalues are the diagonal entries of the matrix. More specifically, we know that $\lambda = 2$ is the only eigenvalue of $T$.
+		
+		From here, we note that the eigenvectors are non-zero vectors such that $(T - 2 I)v = 0$. In other words, $v \in \vnull (T - 2I)$. We note as well that:
+		\begin{equation*}
+			T - 2I =
+			\begin{bmatrix}
+				0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 6 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0
+			\end{bmatrix}
+		\end{equation*}
+		
+		Then, we see that $\dim \vrange (T - 2I) = 2$. Now, by the Rank-Nullity theorem, we know that $\dim \vnull (T - 2I) = \dim V - \dim \vrange (T - 2I) = 4 - 2 = 2$. So, we know that we have two eigenvectors. From here, by inspection, we can also determine the eigenvectors to be:
+		\begin{align*}
+			v_{1} = \begin{bmatrix}
+				1 \\ 0 \\ 0 \\ 0
+			\end{bmatrix},
+		v_{2} = \begin{bmatrix}
+			0 \\ 1 \\ 0 \\ 0
+		\end{bmatrix}.
+		\end{align*} 
+	
+		However, we note that $V$ does not have a basis consisting of the eigenvectors of $T$, and thus $T$ is not diagonalisable.
+	\end{solution}
+	
+\end{document}

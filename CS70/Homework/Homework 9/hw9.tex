@@ -1,0 +1,704 @@
+\documentclass{article}
+%%%%%%% PREAMBLE %%%%%%%
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%%%
+
+%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%%
+
+%%% REDEFINING COMMANDS
+\let\oldint\int
+\renewcommand{\int}[2]{\oldint\limits_{#1}^{#2}}
+\let\oldprod\prod
+\renewcommand{\prod}[2]{\oldprod\limits_{#1}^{#2}}
+\let\oldsum\sum
+\renewcommand{\sum}[2]{\oldsum\limits_{#1}^{#2}}
+%%%
+%%%%%
+%END_FOLD
+%%%%%
+
+\begin{document}
+\mytitle{Homework 9}{Spring 2023}
+
+\section{Monty Hall's Revenge}
+Due to a quirk of the television studio's recruitment process, Monty Hall has
+ended up drawing all the contestants for his game show from among the ranks of
+former CS70 students. Unfortunately for Monty, the former students' amazing
+probability skills have made his cars-and-goats gimmick unprofitable for the
+studio. Monty decides to up the stakes by asking his contestants to generalise
+to three new situations with a variable number of doors, goats, and cars:
+
+\begin{hw}
+	There are $n$ doors for some $n > 2$. One has a car behind it, and the
+	remaining $n-1$ have goats. As in the ordinary Monty Hall problem, Monty will reveal one door with a goat behind it after you make your first selection. How would switching affect the odds that you select the car?
+	
+	(Compute the probability of winning in both scenarios, and compare the results.)
+\end{hw}
+\begin{solution}
+	Observe that if we didn't switch, the probability of getting a car on our first try would be:
+	\begin{equation*}
+		\dfrac{1}{n}
+	\end{equation*}
+	
+	In the scenario where we switch, the probability of winning a car would be that we didn't pick the door with a car behind it first guess and, after switching, we pick the door with a car:
+	\begin{equation*}
+		\left( \dfrac{n-1}{n} \right)( \dfrac{1}{n-2}) = \dfrac{n-1}{n(n-2)}
+	\end{equation*}
+
+	We observe then that $\frac{n-1}{n(n-2)} \geq \dfrac{1}{n}$ for $n > 2$. Thus, we see that it's better if we switch.
+\end{solution}
+
+\begin{hw}
+	Again there are $n > 2$ doors, one with a car and $n-1$ with goats, but
+	this time Monty will reveal $n-2$ doors with goats behind them instead
+	of just one. How does switching affect the odds of winning in this
+	modified scenario?
+\end{hw}
+\begin{solution}
+	Once again, we observe that if we don't switch, the chances of correctly picking the door with the car is $\frac{1}{n}$.
+	
+	If we always switch, we observe that after $n-2$ doors with goats are revealed, then the probability of picking the car would be us not having picked the door with a car on our initial guess, which is $\frac{n-1}{n}$.
+	
+	We observe then that $\frac{n-1}{n} \geq \frac{1}{n}$ for $n > 2$. Thus, we should always switch.
+\end{solution}
+
+\begin{hw}
+	Finally, imagine there are $k<n-1$ cars and $n-k$ goats behind the
+	$n>2$ doors. After you make your first pick, Monty will reveal $j<n-k$
+	doors with goats. What values of $j, k$ maximize the relative
+	improvement in your odds of winning if you choose to switch? (i.e. what
+	$j, k$ maximizes the ratio between your odds of winning when you switch, and your odds of winning when you do not switch?)
+\end{hw}
+\begin{solution}
+	We observe that for $k$ cars and $n-k$ goats, the probability of winning a car without switching is:
+	\begin{equation*}
+		\dfrac{k}{n}
+	\end{equation*}
+
+	If we do switch, the probability of winning a car after $j$ doors are revealed would be:
+	\begin{equation*}
+		\left( \dfrac{n-k}{n} \right)\left( \dfrac{k}{n-j-1} \right) = \dfrac{k(n-k)}{n(n-j-1)}
+	\end{equation*}
+
+	From here, we observe that the ratio between our odds of winning when we switch and our odds of winning when we don't switch would be:
+	\begin{equation*}
+		\dfrac{\dfrac{k(n-k)}{n(n-j-1)}}{\dfrac{k}{n}} = \dfrac{n-k}{n-j-1}
+	\end{equation*}
+
+	From here, we observe that to maximize this ratio, we want $k$ to be as small as possible, and $j$ to be as big as possible. In other words, let $k = 1$ and let $j = n-k-1$.
+\end{solution}
+
+\newpage
+
+\section{Man Speaks Truth}
+Consider a man who speaks the truth 3 out of 4 times.
+
+For the next three questions, suppose that the man flips a biased coin that comes up heads $1/3$ of the time, and reports that it is heads. 
+\begin{hw}
+	What is the probability that the coin actually landed on heads?
+\end{hw}
+\begin{solution}
+	We can find the probability using Bayes' Theorem. First, denote $H$ as the event of heads showing up, and $M$ to be the event of the man saying that it lands up heads.
+	
+	Now, from here, we observe that:
+	\begin{align*}
+		P(H \mid M) &= \dfrac{P(M \mid H)P(H)}{P(M)} \\
+		&= \dfrac{\left( \dfrac{3}{4} \right)\left( \dfrac{1}{3} \right)}{\left( \dfrac{1}{3} \right)\left( \dfrac{3}{4} \right) + \left( \dfrac{2}{3} \right)\left( \dfrac{1}{4} \right)} \\
+		&= \dfrac{\left( \dfrac{3}{12} \right)}{\left( \dfrac{5}{12} \right)} \\
+		&= \dfrac{3}{5}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Unconvinced, you ask him if he just lied to you, to which he replies ``no''. What is the probability now that the coin actually landed on heads?
+\end{hw}
+\begin{solution}
+	We now want to find $P(H \mid M \cap N)$, where $N$ is the event in which the man said ``no."
+	
+	Then, we observe that:
+	\begin{align*}
+		P(H \mid M \cap N) &= \dfrac{P(M \cap N \cap H)}{P(M \cap N)} \\
+		&= \dfrac{\dfrac{1}{3} \times \dfrac{3}{4} \times \dfrac{3}{4}}{\dfrac{1}{3} \times \dfrac{3}{4} \times \dfrac{3}{4} + \dfrac{2}{3} \times \dfrac{1}{4} \times \dfrac{1}{4}} \\
+		&= \dfrac{\dfrac{3}{16}}{\dfrac{11}{48}} \\
+		&= \dfrac{9}{11}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Did the probability go up, go down, or stay the same with this new information? Explain in words why this should be the case.
+\end{hw}
+\begin{solution}
+	We see that the probability went up with this new information. This is because, suppose that the coin didn't actually land on heads, the more times he says that it landed on heads, the more he would have to lie. So the probability of lying goes down, meaning that the probability of him telling the truth increases, and thus the probability of it actually being heads increases.
+\end{solution}
+
+Now, suppose the man rolls a fair $6$-sided die. When you ask him if the die came up with a $6$, he answers ``yes''.
+\begin{hw}
+	What is the probability that the die actually came up with a 6?
+\end{hw}
+\begin{solution}
+	Let $S$ denote the event in which the die came up with a 6, and $Y$ denote the event in which the man answered ``yes".
+	
+	We observe now that:
+	\begin{align*}
+		P(S \mid Y) &= \dfrac{P(S \cap Y)}{P(Y)} \\
+		&= \dfrac{\dfrac{1}{6} \times \dfrac{3}{4}}{\dfrac{1}{6} \times \dfrac{3}{4} + \dfrac{5}{6} \times \dfrac{1}{4}} \\
+		&= \dfrac{\dfrac{1}{8}}{\dfrac{3}{24} + \dfrac{5}{24}} \\
+		&= \dfrac{3}{8}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Skeptical, you also ask him whether the die came up with a 1, to which he replies ``yes''. What is the probability now that the die actually came up with a $6$?
+\end{hw}
+\begin{solution}
+	Denote the event of the man saying ``yes" when we ask if it came up with a 1 as $O$.
+	
+	Now, we want to find $P(S \mid Y \cap O)$:
+	\begin{align*}
+		P(S \mid Y \cap O) &= \dfrac{P(S \cap Y \cap O}{P(Y \cap O)} \\
+		&= \dfrac{\dfrac{1}{6} \times \dfrac{3}{4} \times \dfrac{1}{4}}{\dfrac{1}{6} \times \dfrac{3}{4} \times \dfrac{1}{4} + \dfrac{1}{6} \times \dfrac{1}{4} \times \dfrac{3}{4} + \dfrac{4}{6} \times \dfrac{1}{4} \times \dfrac{1}{4}} \\
+		&= \dfrac{3}{10}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Did the probability go up, go down, or stay the same with this new information? Explain in words why this should be the case.
+\end{hw}
+\begin{solution}
+	The probability went down in this case. This is because when asking if a one showed up or not, the answer has a higher chance of contradicting what he said previously, which will result in the probability of it being a 6 to be lower.
+\end{solution}
+
+\newpage
+
+\section{Mario's Coins}
+Mario owns three identical-looking coins. One coin shows heads with probability
+$1/4$, another shows heads with probability $1/2$, and the last shows heads 
+with probability $3/4$.
+
+\begin{hw}
+	Mario randomly picks a coin and flips it. He then picks one of the
+	other two coins and flips it. Let $X_1$ and $X_2$ be the events of the 1st
+	and 2nd flips showing heads, respectively. Are $X_1$ and $X_2$ independent?
+	Please prove your answer.
+\end{hw}
+\begin{solution}
+	We observe that the probability $P(X_{1})$ is:
+	\begin{equation*}
+		\left( \dfrac{1}{3} \right)\left( \dfrac{1}{4} \right) + \left( \dfrac{1}{3} \right)\left( \dfrac{1}{2} \right) + \left( \dfrac{1}{3} \right)\left( \dfrac{3}{4} \right) = \dfrac{1}{2}
+	\end{equation*}
+
+	For $P(X_{2})$, we have:
+	\begin{align*}
+		&\dfrac{1}{3}\left( \dfrac{1}{2}\times\dfrac{1}{2} + \dfrac{1}{2}\times\dfrac{3}{4}\right) + \dfrac{1}{3}\left( \dfrac{1}{2}\times\dfrac{1}{4} + \dfrac{1}{2}\times\dfrac{3}{4}\right) + \dfrac{1}{3}\left( \dfrac{1}{2}\times\dfrac{1}{4} + \dfrac{1}{2}\times\dfrac{1}{2}\right) \\ 
+		&= \dfrac{1}{3}\left( \dfrac{5}{8} + \dfrac{4}{8} + \dfrac{3}{8} \right) \\
+		&= \dfrac{1}{3}\left( \dfrac{12}{8} \right) \\
+		&= \dfrac{12}{24} \\
+		&= \dfrac{1}{2}
+	\end{align*}
+
+	Now, for $P(X_{1} \cap X_{2})$, we have:
+	\begin{align*}
+		&\dfrac{1}{3}\left( \dfrac{1}{4} \right)\left( \dfrac{1}{2}\times\dfrac{1}{2} + \dfrac{1}{2}\times\dfrac{3}{4} \right) + \dfrac{1}{3}\left( \dfrac{1}{2} \right)\left( \dfrac{1}{2}\times\dfrac{1}{4} + \dfrac{1}{2}\times\dfrac{3}{4}\right) + \dfrac{1}{3}\left( \dfrac{3}{4} \right)\left( \dfrac{1}{2}\times\dfrac{1}{4} + \dfrac{1}{2}\times\dfrac{1}{2} \right) \\
+		&= \dfrac{1}{3}\left( \dfrac{1}{4}\left( \dfrac{5}{8} \right) + \dfrac{1}{2}\left( \dfrac{4}{8} \right) + \dfrac{3}{4}\left( \dfrac{3}{8} \right)\right) \\
+		&= \dfrac{1}{3}\left( \dfrac{5}{32}  + \dfrac{8}{32} + \dfrac{9}{32}\right) \\
+		&= \dfrac{1}{3}\left( \dfrac{23}{32} \right) \\
+		&= \dfrac{22}{96} \\
+		&= \dfrac{11}{48}
+	\end{align*}
+
+	We see then that
+	\begin{equation*}
+		P(X_{1})P(X_{2}) = \left( \dfrac{1}{2} \right)\left( \dfrac{1}{2} \right) = \dfrac{1}{4} \not= \dfrac{11}{48} = P(X_{1} \cap X_{2})
+	\end{equation*}
+
+	Since $P(X_{1} \cap X_{2}) \not= P(X_{1})P(X_{2})$, we see that the events aren't independent.
+\end{solution}
+
+\begin{hw}
+	Mario randomly picks a single coin and flips it twice. Let $Y_1$ and
+	$Y_2$ be the events of the 1st and 2nd flips showing heads, respectively.
+	Are $Y_1$ and $Y_2$ independent? Please prove your answer.
+\end{hw}
+\begin{solution}
+	We observe the following:
+	\begin{align*}
+		P(Y_1) &= \left( \dfrac{1}{3} \right)\left( \dfrac{1}{4} \right) + \left( \dfrac{1}{3} \right)\left( \dfrac{1}{2} \right) + \left( \dfrac{1}{3} \right)\left( \dfrac{3}{4} \right) \\
+		&= \dfrac{1}{2} \\
+		P(Y_2) &= \left( \dfrac{1}{3} \right)\left( \dfrac{1}{4} \times \dfrac{1}{4} + \dfrac{3}{4} \times \dfrac{1}{4}\right) + \left( \dfrac{1}{3} \right)\left( \dfrac{1}{2} \times \dfrac{1}{2} + \dfrac{1}{2} \times \dfrac{1}{2}\right) + \left( \dfrac{1}{3} \right)\left( \dfrac{3}{4} \times \dfrac{3}{4} + \dfrac{1}{4} \times \dfrac{3}{4}\right)\\
+		&= \dfrac{1}{2} \\
+		P(Y_1 \cap Y_2) &= \dfrac{1}{3}\left( \dfrac{1}{4} \right)\left( \dfrac{1}{4} \right) + \dfrac{1}{3} \left( \dfrac{1}{2} \right)\left( \dfrac{1}{2} \right) + \dfrac{1}{3}\left( \dfrac{3}{4} \right)\left( \dfrac{3}{4} \right)\\
+		&= \dfrac{7}{24}
+	\end{align*}
+
+	We see then that $P(Y_{1} \cap Y_{2}) = \frac{7}{24} \not= \frac{1}{4} = P(Y_{1})P(Y_{2})$. Thus, the events aren't independent.
+\end{solution}
+
+\begin{hw}
+	Mario arranges his three coins in a row. He flips the coin on the 
+	left, which shows heads. He then flips the coin in the middle, which shows 
+	heads. Finally, he flips the coin on the right. What is the probability 
+	that it also shows heads?
+\end{hw}
+\begin{solution}
+	We see that the probability of getting heads will be:
+	\begin{equation*}
+		\dfrac{1}{3}\left( \dfrac{1}{4} + \dfrac{1}{2} + \dfrac{3}{4} \right) = \dfrac{1}{2}
+	\end{equation*}
+\end{solution}
+
+\newpage
+
+\section{Symmetric Marbles}
+A bag contains 4 red marbles and 4 blue marbles. Rachel and Brooke play a game where they draw four marbles in total, one by one, uniformly at random, without replacement. Rachel wins if there are more red than blue marbles, and Brooke wins if there are more blue than red marbles. If there are an equal number of marbles, the game is tied.
+\begin{hw}
+	Let $A_1$ be the event that the first marble is red and let $A_2$ be the event that the second marble is red. Are $A_1$ and $A_2$ independent?
+\end{hw}
+\begin{solution}
+	We observe that $P(A_{1}) = \frac{4}{8} = \frac{1}{2}$, and $P(A_{2}) = \frac{4}{8}\frac{3}{7} + \frac{4}{8}\frac{4}{7} = \frac{1}{2}$.
+	
+	Then, $P(A_{1})P(A_{2}) = \frac{1}{4}$
+	
+	Meanwhile, $P(A_{1} \cap A_{2}) = \frac{4}{8}\frac{3}{7} = \frac{3}{14}$.
+	
+	Since $P(A_{1} \cap A_{2}) \not= P(A_{1})P(A_{2})$, we see then that they're not independent.
+\end{solution}
+
+\begin{hw}
+	What is the probability that Rachel wins the game?
+\end{hw}
+\begin{solution}
+	We see that the events in which Rachel wins the game is if four of the blue marbles are picked, and none of the reds; or, three of the blue marbles are picked, and one of the red marbles.
+	
+	Then, the following results would lead to a win:
+	\begin{enumerate}
+		\item BBBB
+		\item RBBB
+		\item BRBB
+		\item BBRB
+		\item BBBR
+	\end{enumerate}
+	
+	Then, denote $W$ as the event in which Rachel wins:
+	\begin{align*}
+		P(W) &= \dfrac{4 \times 3 \times 2 \times 1}{8 \times 7 \times 6 \times 5} + 4\left( \dfrac{4 \times 4 \times 3 \times 2}{8 \times 7 \times 6 \times 5} \right) \\
+		&= \dfrac{17}{70}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Given that Rachel wins the game, what is the probability that all of the marbles were red?
+\end{hw}
+\begin{solution}
+	Denote $R$ as the event in which all the marbles were red. Then,
+	\begin{align*}
+		P(R \mid W) &= \dfrac{P(R) \cap P(W)}{P(W)} \\
+		&= \dfrac{\dfrac{1}{70}}{\dfrac{17}{70}} \\
+		&= \dfrac{1}{17}
+	\end{align*}
+\end{solution}
+
+Now, suppose the bag contains 8 red marbles and 4 blue marbles. Moreover, if there are an equal number of red and blue marbles among the four drawn, Rachel wins if the third marble is red, and Brooke wins if the third marble is blue. All other rules stay the same.
+\begin{hw}
+	What is the probability that the third marble is red?
+\end{hw}
+\begin{solution}
+	We observe that, by symmetry, the probability that the third marble is red is:
+	\begin{equation*}
+		\dfrac{8}{12} = \dfrac{2}{3}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}
+	Given that there are $k$ red marbles among the four drawn, where $0 \leq k \leq 4$, what is the probability that the third marble is red? Answer in terms of $k$.
+\end{hw}
+\begin{solution}
+	Once again, by symmetry, we see that the probability that the third marble is red is:
+	\begin{equation*}
+		\dfrac{k}{4}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}
+	Given that the third marble is red, what is the probability that Rachel wins the game?
+\end{hw}
+\begin{solution}
+	Denote $R$ as the event in which the third marble is red, and $W$ as the event in which Rachel wins. We want to find $P(W \mid R)$:
+	\begin{equation*}
+		P(W \mid R) = \dfrac{P(W \cap R)}{P(R)}
+	\end{equation*}
+	
+	We observe that in the case where the third marble is red, we have the following combinations:
+	\begin{enumerate}
+		\item RRRR
+		\item BRRR
+		\item RBRR
+		\item RRRB
+		\item BBRR
+		\item BRRB
+		\item RBRB
+		\item BBRB
+	\end{enumerate}
+
+	From here, we see that out of those scenarios, we observe the following:
+	\begin{align*}
+		P(W \cap R) &= \dfrac{8(7)(6)(5)}{12(11)(10)(9)} + 3\dfrac{4(8)(7)(6)}{12(11)(10)(9)} + 3\dfrac{4(3)(8)(7)}{12(11)(10)(9)} \\
+		&= \dfrac{322}{495}
+	\end{align*}
+
+	Then, with this, we get:
+	\begin{align*}
+		P(W \mid R) &= \dfrac{P(W \cap R)}{P(R)} \\
+		&= \dfrac{\dfrac{322}{495}}{\dfrac{2}{3}} \\
+		&= \dfrac{161}{165}
+	\end{align*}
+\end{solution}
+
+\newpage
+
+\section{Cookie Jars}
+\begin{hw}
+	You have two jars of cookies, each of which starts with $n$ cookies initially.
+	Every day, when you come home, you pick one of the two jars randomly (each jar is chosen with probability $1/2$) and eat one cookie from that jar.
+	One day, you come home and reach inside one of the jars of cookies, but you find that is empty!
+	Let $X$ be the random variable representing the number of remaining cookies in non-empty jar at that time.
+	What is the distribution of $X$?
+\end{hw}
+\begin{solution}
+	Let $X$ be the number of remaining cookies in the jar.
+	
+	Now, suppose that we found the first jar (which we will denote by $J_{1}$) to be empty.
+	
+	Now, we observe that there are $2n$ cookies in total. For there to be $k$ cookies remaining, it means that we must have had eaten $2n-k$ cookies (i.e. we have picked cookies from a jar for $2n-k$ days).
+	
+	From here, we see that in those $2n-k$ days, $n$ of those days we picked $J_{1}$. The probability of this occurring is:
+	\begin{equation*}
+		\binom{2n-k}{n}\left( \dfrac{1}{2^{n}} \right)\left( \dfrac{1}{2^{n-k}} \right) = \binom{2n-k}{n}\dfrac{1}{2^{2n-k}}
+	\end{equation*}
+
+	Then, the next day, we must have picked $J_{1}$ again to find out that it's empty. The probability of us finding this out then is $\frac{1}{2}$. Putting this together, we observe that the probability of us picking $J_{1}$ for $n$ days, then discovering that it's empty is:
+	\begin{equation*}
+		\binom{2n-k}{n}\dfrac{1}{2^{2n-k+1}}
+	\end{equation*}
+
+	Now, by symmetry, we see that the probability is the same if we had found jar 2 to be empty. Thus, we see that in total:
+	\begin{equation*}
+		\Pr[X = k] = \binom{2n-k}{n}\dfrac{1}{2^{2n-k}}
+	\end{equation*}
+\end{solution}
+
+\newpage
+
+\section{Testing Model Planes}
+Amin is testing model airplanes. He starts with $n$ model planes which each independently have probability $p$ of flying successfully each time they are flown, where $0<p<1$. Each day, he flies every single plane and keeps the ones that fly successfully (i.e. don't crash), throwing away all other models. He repeats this process for many days, where each "day" consists of Amin flying any remaining model planes and throwing away any that crash. Let $X_i$ be the random variable representing how many model planes remain after $i$ days. Note that $X_0 = n$. Justify your answers for each part.
+
+\begin{hw}
+	What is the distribution of $X_1$? That is, what is $\Pr[X_1=k]$? 
+\end{hw}
+\begin{solution}
+	The distribution of $X_{1}$ is a binomial distribution.
+	
+	We observe that $\Pr[X_{1} = k] = \binom{n}{k} p^{k} (1-p)^{n-k}$.
+\end{solution}
+
+\begin{hw}
+	What is the distribution of $X_2$? That is, what is $\Pr[X_2=k]$? Recognize the distribution of $X_2$ as one of the famous ones and provide its name and parameters.
+\end{hw}
+\begin{solution}
+	We observe that the distribution of $X_{2}$ is also a binomial distribution, with $\Pr[X_{2} = k] = \binom{n}{k} \left( p^{2} \right)^{k} (1-p^{2})^{n-k}$.
+	
+	The parameters are $p$, which is the probability of success (i.e. the plane doesn't crash), and $k$, which is the number of trials.
+\end{solution}
+
+\begin{hw}
+	Repeat the previous part for $X_t$ for arbitrary $t \geq 1$.
+\end{hw}
+\begin{solution}
+	\begin{equation*}
+		\Pr[X_{t} = k] = \binom{n}{k} (p^{t})^{k} (1-p^{t})^{n-k}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}
+	What is the probability that at least one model plane still remains (has not crashed yet) after $t$ days? Do not have any summations in your answer.
+\end{hw}
+\begin{solution}
+	To do this, we use the complement rule: first find the probability of $\Pr[X_{t} = 0]$, then subtract it from one.
+	\begin{equation*}
+		\Pr[X_{t} = 0] = \binom{n}{0}(1-p^{t})^{n}
+	\end{equation*}
+
+	Then, $\Pr[X_{t} \geq 1]$ is:
+	\begin{align*}
+		\Pr[X_{t} \geq 1] &= 1 - \Pr[X_{t} = 0] \\
+		&= 1 - (1-p^{t})^{n}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Considering only the first day of flights, is the event $A_1$ that the first and second model planes crash independent from the event $B_1$ that the second and third model planes crash? Recall that two events $A$ and $B$ are independent if $\Pr[A\cap B] = \Pr[A]\Pr[B]$. Prove your answer using this definition.
+\end{hw}
+\begin{solution}
+	Denote $A$, $B$, $C$ as the event in which the first, second, and third model planes doesn't crash respectively. Furthermore, we know that the probability that each plane flies successfully is independent from one another. Notice here that $A^{c}$ is the event in which the first model plane crashes. And since we know that $\Pr[A]$ and $\Pr[B]$ are independent, we also know their complements are too. Same applies for $C$ and $D$.
+	
+	From here, we observe that the probability $\Pr[A_{1}] = \Pr[A^{c} \cap B^{c}] = (1-p)^{2}$.
+	
+	Similarly, $\Pr[B_{1}] = \Pr[B^{c} \cap C^{c}] = (1-p)^{2}$.
+	
+	We see then that $\Pr[A_{1} \cap B_{1}] = \Pr[A^{c}]\Pr[B^{c}]\Pr[C^{c}] = (1-p)^{3} \not= \Pr[A_{1}]\Pr[B_{1}]$.
+	
+	Thus, the events are not independent.
+\end{solution}
+
+\begin{hw}
+	Considering only the first day of flights, let $A_2$ be the event that the first model plane crashes 
+	\emph{and} exactly two model planes crash in total. Let $B_2$ be the event that 
+	the second plane crashes on the first day. What must $n$ be equal to 
+	in terms of $p$ such that $A_2$ is independent from $B_2$? Prove your answer using the definition 
+	of independence stated in the previous part.
+\end{hw}
+\begin{solution}
+	We see that $\Pr[A_{2}] = (1-p)\binom{n-1}{1}p^{n-2}(1-p) = (1-p)^{2}(n-1)p^{n-2}$.
+	
+	Meanwhile, $\Pr[B_{2}] = (1-p)$.
+	
+	Now, we observe that $\Pr[A_{2} \cap B_{2}] = (1-p)^{2}p^{n-2}$. In order for this to be equal to $\Pr[A_{2}]\Pr[B_{2}]$, we must do the following:
+	\begin{align*}
+		(1-p)^{2}p^{n-2} &= (1-p)^{3}(n-1)p^{n-2}
+	\end{align*}
+
+	Then, we see that for this to be the case, we must have that $n = \frac{2-p}{1-p}$.
+\end{solution}
+
+\begin{hw}
+	Are the random variables $X_i$ and $X_j$, where $i<j$, independent? Recall that two random variables $X$ and $Y$ are independent if $\Pr[X=k_1 \cap Y=k_2] = \Pr[X=k_1]\Pr[Y=k_2]$ for all $k_1$ and $k_2$. Prove your answer using this definition.
+\end{hw}
+\begin{solution}
+	The random varaibles $X_{i}$ and $X_{j}$ are not independent.
+	
+	We observe that 
+\end{solution}
+
+\end{document}

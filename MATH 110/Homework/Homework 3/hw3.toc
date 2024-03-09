@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Polynomial Basis}{3}{section.1}%
+\contentsline {section}{\numberline {2}Linearly Independence}{4}{section.2}%
+\contentsline {section}{\numberline {3}Inclusion-Exclusion of Subspaces?}{5}{section.3}%
+\contentsline {section}{\numberline {4}Canonical Bases}{6}{section.4}%
+\contentsline {section}{\numberline {5}Basis Condition}{7}{section.5}%

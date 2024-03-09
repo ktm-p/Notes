@@ -1,0 +1,690 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Homework 5}{Fall 2023}
+	
+	\section{Direct Sums of Null and Range}
+	\begin{hw}
+		Let $V \coloneq \CC^{3}$. Give an example of a map $T \in \mathcal L(V,V)$ such that $V = \vnull T \oplus \vrange T$, with both $\vnull T, \vrange T$ non-zero. Or prove that none such map exists.
+	\end{hw}
+	\begin{solution}
+		Let us consider the linear map from $V = \CC^{3} \rightarrow V$ represented by the following matrix:
+		\begin{equation*} T \coloneq
+			\begin{bmatrix}
+				1 & 0 & -1 \\
+				1 & -1 & 0 \\
+				0 & 1 & -1
+			\end{bmatrix}
+		\end{equation*}
+	
+		Now, we observe the following for the basis vectors $v_{1} = (1,0,0), v_{2} = (0,1,0), v_{3} = (0,0,1)$:
+		
+		\begin{align*}
+			Tv_{1} &= (1,1,0) \\
+			Tv_{2} &= (0,-1,1) \\
+			Tv_{3} &= (-1, 0, -1)
+		\end{align*}
+	
+		From here, we note that $Tv_{1}, Tv_{2}, Tv_{3}$ forms a spanning set for $\vrange T$ but not a basis; we note that $-Tv_{1} - Tv_{2} = Tv_{3}$. Then, let us remove $Tv_{3}$ from this list, giving us $Tv_{1}, Tv_{2}$.
+		
+		Since neither of these vectors are scalar multiples of each other, we note that it is a basis for $\vrange T$. Thus, we see that a basis for $\vrange T$ is:
+		\begin{equation*}
+			\left\{  (1,1,0), (0,-1,1) \right\}.
+		\end{equation*}
+		
+		Next, we note that for some vector $v = (a,b,c)$, applying $T$ onto it yields us the vector:
+		\begin{equation*}
+			Tv = (a-c, a-b, b-c).
+		\end{equation*}
+	
+		In order for us to find vectors in $\vnull T$, we want some $v$ such that $Tv = 0$. In this case, we note that only when $a = b = c$ do we get that $Tv = 0$; in other words, a basis for $\vnull T$ is
+		\begin{equation*}
+			\left\{  (1,1,1) \right\}.
+		\end{equation*}
+	
+		From here, we observe that for $\vrange T + \vnull T = \left\{  (1,1,0), (0,-1, 1), (1,1,1) \right\}$, we want to check for linear independence. In other words, we want to see whether the following holds true only when $a_{1} = a_{2} = a_{3} = 0$:
+		\begin{equation*}
+			a_{1}(1,1,0) + a_{2}(0,-1,1) +a_{3}(1,1,1) = 0.
+		\end{equation*}
+	
+		Then, we observe that we get the following system of equations:
+		\begin{align*}
+			a_{1} + a_{3} &= 0 \\
+			a_{1} - a_{2} + a_{3} &= 0 \\
+			a_{2} + a_{3} &= 0
+		\end{align*}
+	
+		From here, we note that since $a_{1} + a_{3} = 0$, then:
+		\begin{align*}
+			a_{1} - a_{2} + a_{3} &= 0 \\
+			a_{1} + a_{3} - a_{2} &= 0\\
+			0 - a_{2} &= 0 \\
+			a_{2} &= 0 \\
+			\\
+			a_{2} + a_{3} &= 0 \\
+			0 + a_{3} &= 0 \\
+			a_{3} &= 0 \\
+			\\
+			a_{1} + a_{3} &= 0 \\
+			a_{1} + 0 &= 0 \\
+			a_{1} &= 0
+		\end{align*}
+	
+		Thus, since $a_{1} = a_{2} = a_{3} = 0$, it follows then that the vectors $(1,1,0), (0,-1,1), (1,1,1)$ are all linearly independent. Thus, we have that
+		\begin{align*}
+			\vnull T \oplus \vrange T &= \vspan \left( (1,1,0), (0,-1,1), (1,1,1) \right).
+		\end{align*}
+		
+		And we note that since it is the span of three linearly independent vectors, it must be then that it spans all of $\CC^{3}$, and thus we can conclude that
+		\begin{equation*}
+			\vnull T \oplus \vrange T = V.
+		\end{equation*}
+	\end{solution}
+
+	\newpage
+	
+	\section{Nullity of T}
+	\begin{hw}
+		Given an example of a map $T \in \mathcal L (\RR^{6}, \RR^{2})$ such that
+		\begin{equation*}
+			\vnull T = \left\{  (x_{1}, x_{2}, x_{3}, x_{4}, x_{5}, x_{6}) : x_{1} = - x_{2}, x_{3} + x_{5} = 0, x_{1} - x_{4} - x_{5} = 0 \right\},
+		\end{equation*}
+		or prove that none such map exists.
+	\end{hw}
+	\begin{solution}
+		We first note that since $T$ maps from $\RR^{6}$ to $\RR^{2}$, we know that $\dim V = 6$, and also that $\dim \vrange T \leq 2$.
+		
+		Now, we observe the following:
+		\begin{align*}
+			\dim V &= \dim \vnull T + \dim \vrange T \\
+			\dim V &\leq \dim \vnull T + 2 \\
+			4 &\leq \dim \vnull T
+		\end{align*}
+		
+		In other words, by the Rank-Nullity Theorem, we see that $\dim \vnull T$ must be at least 4.
+		
+		We now observe the following, for each vector $v \in \vnull T$:
+		\begin{align*}
+			x_{1} &= -x_{2} \\
+			x_{3} + x_{5} &= 0 \\
+			x_{1} - x_{4} - x_{5} &= 0 \\
+			\\
+			x_{2} &= -x_{1} \\
+			x_{5} &= - x_{3} \\
+			x_{4} &= x_{1} - x_{5} \\
+			&= x_{1} + x_{3}
+		\end{align*}
+	
+		So, we can rewrite each vector $(x_{1}, x_{2}, x_{3}, x_{4}, x_{5}, x_{6}) \in \vnull T$ as:
+		\begin{equation*}
+			(x_{1}, -x_{1}, x_{3}, x_{1} + x_{3}, -x_{3}, x_{6}),
+		\end{equation*}
+	
+		where $x_{1}, \ldots, x_{6} \in \RR$.
+		
+		Now, we observe that this vector can in fact be rewritten as
+		\begin{equation*}
+			x_{1}(1, -1, 0, 1, 0, 0) + x_{3}(0, 0, 1, 1, -1, 0) + x_{6}(0,0,0,0,0,1).
+		\end{equation*}
+	
+		Thus, we see that the following is a basis for $\vnull T$:
+		\begin{equation*}
+			\left\{  (1, -1, 0, 1, 0, 0),(0, 0, 1, 1, -1, 0) , (0,0,0,0,0,1) \right\}.
+		\end{equation*}
+	
+		However, this means then that $\dim \vnull T = 3$, which contradicts with what the Rank-Nullity theorem states. Thus, such a map does not exists.
+	\end{solution}
+
+	\newpage
+	
+	\section{Basis for Null and Range}
+	\begin{hw}
+		Suppose $T : \mathscr{P}_{3}(\RR) \rightarrow \mathscr{P}_{2}(\RR)$ is defined by the formula
+		\begin{equation*}
+			(Tf)(x) = 4xf''(x) - f'(x).
+		\end{equation*}
+	
+		Check that $T \in \mathcal L(\mathscr{P}_{3}(\RR), \mathscr{P}_{2}(\RR))$, and find a basis for the null space and range of $T$.
+	\end{hw}
+	\begin{solution}
+		Let us define $V \coloneq \mathscr{P}_{3}(\RR)$, and $W \coloneq \mathscr{P}_{2}(\RR)$.
+		
+		\begin{comment}
+			Now, let us define the following maps $T_{1}, T_{2}, T_{3} \in\mathcal L(V, W)$ to be:
+		\begin{enumerate}
+			\item $T_{1}$ is the multiplication by $4x$ map.
+			\item $T_{2}$ is the double differentiation map.
+			\item $T_{3}$ is the differentiation map.
+		\end{enumerate}
+	
+		We observe then that $T$ can be defined by a combination of these maps as follows:
+		\begin{equation*}
+			(Tf)(x) = ( (T_{1} T_{2})f)(x) - (T_{3}f)(x).
+		\end{equation*} 
+	
+		We know then that it must be that 
+		\end{comment}
+		
+		First, we check whether $T$ is indeed linear. That is, $T(\alpha f + \beta g) = \alpha T (f) + \beta T(g)$:
+		\begin{align*}
+			T(\alpha f + \beta g) &= 4x(\alpha f + \beta g)'' - (\alpha f + \beta g)' \\
+			&= 4x(\alpha f'' + \beta g'') - (\alpha f' + \beta g') \\
+			&= 4x\alpha f'' + 4x \beta g'' - \alpha f' - \beta g' \\
+			&= \alpha 4xf'' - \alpha f' + \beta 4x g'' - \beta g' \\
+			&= \alpha (4xf'' - f') + \beta (4x g'' - g') \\
+			&= \alpha T(f) + \beta T(g).
+		\end{align*}
+	
+		Thus, we see that $T$ is indeed linear. Next, we check to see whether it truly sends a polynomial $p \in \mathscr{P}_{3}(\RR)$ to $\mathscr{P}_{2}(\RR)$. To do this, we observe that for some $p = ax^{3} + bx^{2} + cx + d$, we have:
+		
+		\begin{align*}
+			(Tp)(x) &= (4xp'' - p')(x) \\
+			&= 4x(6ax + 2b) - (3ax^{2} + 2bx + c) \\
+			&= 24ax^{2} + 8bx - 3ax^{2} - 2bx - c \\
+			&= 21ax^{2} + 6bx - c
+		\end{align*}
+		
+		We see that $T$ does send any $p \in \mathscr{P}_{3}(\RR) \rightarrow \mathscr{P}_{2}(\RR)$. Thus, indeed, we have that $T \in \mathcal{L}(V,W)$.
+		
+		From here, let us consider the following basis vectors of $\mathscr{P}_{3}(\RR)$:
+		\begin{enumerate}
+			\item $f_{1} = 1$
+			\item $f_{2} = x$
+			\item $f_{3} = x^{2}$
+			\item $f_{4} = x^{3}$.
+		\end{enumerate}
+	
+		We will now look at how $T$ transform each of these vectors:
+		\begin{align*}
+			(Tf_{1})(x) &= 4x(0) - 0 \\
+			&= 0 \\
+			(Tf_{2}) (x)&= 4x(0) - 1 \\
+			&= -1 \\
+			(Tf_{3}) (x)&= 4x(2) - 2x \\
+			&= 8x - 2x \\
+			&= 6x \\
+			(Tf_{4}) (x)&= 4x(6x) - 3x^{2} \\
+			&= 24x^{2} - 3x^{2} \\
+			&= 21x^{2}
+		\end{align*}
+	
+		We observe that $\vnull T$ consists of vectors $v \in V$ such that $Tv = 0$. In this case, we observe that any $v \in \vspan(1)$ satisfies this condition. Thus, we have a basis for the null space of $T$ as $\left\{  1 \right\}$.
+	
+		For the basis for the range of $T$, we observe that any polynomial $p \in \vrange T$ will be of the form $21ax^{2} + 6bx - c$. We note that this means that any polynomial in $\vrange T$ can be written as a linear combination of $21x^{2}, 6x, -1$. Furthermore, we note that they are linearly independent. Thus, we have that $\left\{  -1, 6x, 21x^{2}\right\}$ forms a basis for $\vrange T$.
+		
+		\begin{comment}
+			$-1, 6x, 21x^{2}$ are all linearly independent, and thus $\left\{  -1, 6x, 21x^{2} \right\}$ is a basis for $\vrange T$.
+		\end{comment}
+	\end{solution}
+
+	\newpage
+	
+	\section{Matrix Representation}
+	Let $T: f(x) \mapsto (x-1)^{2}f'''(x) - 3(x-1)f''(x) +f'(x)$. Write down the following matrix representations:
+	\begin{hw}
+		$T$ as a map in $\mathcal L(\mathscr{P}_{3}, \mathscr{P}_{2})$ using the standard monomial bases for both the domain and codomain.
+	\end{hw}
+	\begin{solution}
+		We observe that $T$ maps the basis vectors of $\mathscr{P}_{3}$ as follows:
+		\begin{align*}
+			1 &\mapsto (x-1)^{2}(0) - 3(x-1)(0) + 0 \\
+			&= 0 \\
+			x &\mapsto (x-1)^{2}(0) - 3(x-1)(0) + 1 \\
+			&= 1 \\
+			x^{2} &\mapsto (x-1)^{2}(0) - 3(x-1)(2) + 2x \\
+			&= -6x + 6 + 2x \\
+			&= -4x + 6 \\
+			x^{3} &\mapsto (x-1)^{2}(6) - 3(x-1)(6x) + 3x^{2} \\
+			&= 6(x^{2} - 2x + 1) - 18(x^{2} - x) + 3x^{2} \\
+			&= -9x^{2} + 6x + 6
+		\end{align*}
+	
+		So, we know that the matrix representation for $T$ is as follows:
+		\begin{equation*}
+			\begin{bmatrix}
+				0 & 1 & 6 & 6 \\
+				0 & 0 & -4 & 6 \\
+				0 & 0 & 0 & -9
+			\end{bmatrix}
+		\end{equation*}
+	\end{solution}
+
+	\begin{hw}
+		$T$ as a map in $\mathcal L(\mathscr{P}_{3}, \mathscr{P}_{3})$ using the standard monomial bases for both the domain and codomain.
+	\end{hw}
+	\begin{solution}
+		For this, the matrix representation will be almost identical to the previous part. However, because we are mapping to $\mathscr{P}_{3}$, we need an extra row of 0's to indicate that the $x^{3}$ term always has a coefficient of 0.
+		
+		Thus, we can represent $T$ with the following matrix:
+		\begin{equation*}
+			\begin{bmatrix}
+				0 & 1 & 6 & 6 \\
+				0 & 0 & -4 & 6 \\
+				0 & 0 & 0 & -9 \\
+				0 & 0 & 0 & 0
+			\end{bmatrix}
+		\end{equation*}
+	\end{solution}
+	
+	\begin{hw}
+		$T$ as a map in $\mathcal L(\mathscr{P}_{3}, \mathscr{P}_{3})$ using the shifted monomial bases $1, x-1, (x-1)^{2}, (x-1)^{3}$ for both the domain and codomain.
+	\end{hw}
+	\begin{solution}
+		We first observe how $T$ transform each of the basis vectors as follows:
+		\begin{align*}
+			1 &\mapsto (x-1)^{2}(0) - 3(x-1)(0) + 0 \\
+			&= 0 \\
+			x-1 &\mapsto (x-1)^{2}(0) - 3(x-1)(0) + 1 \\
+			&= 1 \\
+			(x-1)^{2} &\mapsto (x-1)^{2}(0) - 3(x-1)(2) + 2(x-1) \\
+			&= -6(x-1) + 2(x-1) \\
+			&= -4(x-1) \\
+			(x-1)^{3} &\mapsto (x-1)^{2}(6) - 3(x-1)(6(x-1)) + 3(x-1)^{2} \\
+			&= 6(x-1)^{2} - 18(x-1)^{2} + 3(x-1)^{2} \\
+			&= -9(x-1)^{2}
+		\end{align*}
+	
+		Thus, the following is a matrix representation for $T$:
+		\begin{equation*}
+			\begin{bmatrix}
+				0 & 1 & 0 & 0 \\
+				0 & 0 & -4 & 0 \\
+				0 & 0 & 0 & -9 \\
+				0 & 0 & 0 & 0
+			\end{bmatrix}
+		\end{equation*}
+	\end{solution}
+	\newpage
+	
+	\section{Subspaces}
+	
+	\begin{hw}
+		Suppose $V$ and $W$ are finite-dimensional. Let $v$ be a fixed vector in $V$, and consider
+		\begin{equation*}
+			E_{v} \coloneq \left\{  T \in \mathcal L(V,W) : Tv = 0 \right\}.
+		\end{equation*}
+	
+		Show that $E_{v}$ is a subspace of $\mathcal{L}(V,W)$.
+	\end{hw}
+
+	\begin{solution}
+		To begin with, we check whether $E_{v}$ contains the zero vector $0_{\mathcal L(V,W)}$. We note that this zero vector is simply the zero map; that is, the linear map $T$ which maps all vectors $v \in V$ to $0 \in W$.
+		
+		We observe that because $0_{\mathcal L(V,W)}$ sends all vectors $v \in V$ to $0 \in W$, then by definition of $E_{v}$, we know that it is contained in $E_{v}$.
+		
+		Next, we want to check for closure under addition and scalar multiplication.
+		
+		First, suppose we let $v$ be some fixed vector within $V$. Next, we consider some $T, S \in E_{v}$. We now want to show that the map $S+T \in E_{v}$ as well for it to be closed under vector addition. Now, we observe the following:
+		\begin{align*}
+			(S+T)(v) &= S(v) + T(v) \\
+			&= 0 + 0 \\
+			&= 0
+		\end{align*}
+	
+		Thus, we see that $S+T$ is also in $E_{v}$. Now, we consider some $\lambda \in \mathbb{F}$, and see the following:
+		\begin{align*}
+			(\lambda T)( v) &= \lambda T(v) \\
+			&= \lambda (0) \\
+			&= 0
+		\end{align*}
+	
+		Thus, we see that $\lambda T$ is in $E_{v}$ too; it is closed under scalar multiplication as well. 
+		
+		Thus, we can conclude that $E_{v}$ is indeed a subspace of $\mathcal L(V,W)$.
+	\end{solution}
+
+	\begin{hw}
+		Suppose that $v \not= 0$. What is $\dim E_{v}$?
+	\end{hw}
+	\begin{comment}
+		\begin{solution}
+		We observe that if $v \not= 0$, then $E_{v}$ contains all the linear maps ...
+		$L(V,W) = dim(V) dim(W). E_{v} < L(V,W) = dim(V) dim(W).$
+		
+		\begin{equation*}
+			\begin{bmatrix}
+				a_{1, 1} & \cdots & a_{1, n} \\
+				\vdots & 		  & \vdots \\
+				a_{m, 1} & \cdots & a_{m, n}
+			\end{bmatrix}
+			\begin{bmatrix}
+				v_{1} \\
+				\vdots \\
+				v_{n}
+			\end{bmatrix}
+		=
+		\begin{bmatrix}
+			a_{1,1}v_{1} + \cdots + a_{1,n}v_{n} \\
+			\vdots \\
+			a_{m,1}v_{1} + \cdots + a_{m,n}v_{n}
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			0 \\
+			\vdots \\
+			0
+		\end{bmatrix}
+		\end{equation*}
+	\end{solution}
+	\end{comment}
+	\begin{solution}
+		
+		\begin{comment}
+			From here, we will show that $IP = PI$. To do this, we observe that $PI : U \rightarrow U$ sends some vector $u \in U$ to $v = u \in V$. From here, it then sends said vector back to $U$ with $v \rightarrow v - c_{1}v_{1}$. Thus we have $v \rightarrow u$.
+			
+			For $IP : V \rightarrow V$, we see that we send some $v \in V$ to $u = v - c_{1}v_{1} \in U$. From here, we then send each of these 
+		\end{comment}
+		
+		
+		\begin{comment}
+			We observe then that all matrices representations of $T$ must be of the following form:
+			\begin{equation*}
+				\begin{bmatrix}
+					0 & x_{1,2} & \cdots & x_{m} \\
+					\vdots & & \ddots & \cdots \\
+					0 & & & x_{}
+				\end{bmatrix}
+			\end{equation*}
+		\end{comment}
+		% Show that PI = IP = identity map
+	
+\begin{comment}
+			Now, without loss of generality, let us fix $v = v_{1}$. Then, we observe that the set $E_{v_{1}}$ consists of the linear maps from $V$ to $W$ which sends $v_{1}$ to $0_{W}$.
+		
+		Then, we see that $T(v) = T(a_{1}v_{1} + \ldots + a_{n}v_{n}) = T(a_{1}v_{1}) + T(a_{2}v_{2}) + \ldots + T(a_{n}v_{n}) = T(a_{2}v_{2}) + \ldots + T(a_{n}v_{n})$
+		\begin{comment}
+			a_{1}T(v_{1}) + a_{2}T(v_{2}) + \ldots + a_{n}T(v_{n}) = 0 + a_{2}w_{2} + \ldots + a_{n}w_{n}$.
+		
+		\end{comment}
+	
+\begin{comment}
+			However, since $v_{1}$ to always being mapped to $0_{W}$, we note then that each of these linear transformations $T : V \rightarrow W$ is in fact the same as mapping the basis vectors $v_{2}, \ldots, v_{n}$ to $W$.
+
+
+	Then, we see that this is the same as mapping the basis vectors $v_{2}, \ldots, v_{n}$ to $W$.
+		
+
+			 are the same as the transformations $T : V' \rightarrow W$, where $V'$ is an n-1 dimension subspace of $V$, with the basis $v_{2}, \ldots, v_{n}$.
+	
+		
+		Thus, we observe that the dimension of $E_{v}$ will be the same as $(\dim V - 1)\dim W$.
+\end{comment}
+	Let us consider the vector spaces $V$ and $W$, with dimensions $n$ and $m$ respectively. 
+	
+	First, we note that since $v \neq 0$, then that means that we can extend it to be a basis of $V$, with the basis being $v, v_{2}, \ldots, v_{n}$. Furthermore, since $W$ is finite-dimensional, then we know that it has a basis $w_{1}, \ldots, w_{m}$.
+	
+	Now, from here, we note then that $\mathcal L(V,W)$ is thus isomorphic to $\mathbb{F}^{m, n}$ under these bases. So, every map $T \in \mathcal L(V,W)$ can be represented with a $m \times n$ matrix $\mathcal M(T)$ which has $m$ rows and $n$ columns. In other words, we have
+	\begin{equation*}
+		\mathcal M(T) =
+		\begin{bmatrix}
+			a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+			\vdots & a_{2,2} & \cdots & \vdots \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{m,1} & a_{m,2} & \cdots & a_{m,n}
+		\end{bmatrix}
+	\end{equation*}
+
+	We note here that the $i^{th}$ column of $\mathcal M(T)$ consists of the scalars required to write $Tv_{i}$ as a linear combination of $w_{1}, \ldots, w_{m}$. However, since we have $Tv = 0$, this means then that $v$ gets mapped to the zero vector $0_{W}$. Furthermore, since we know that $w_{1}, \ldots, w_{m}$ are a basis for $W$, then they're linearly independent; thus, the only way to express $0_{W}$ as a linear combination of $w_{1}, \ldots, w_{m}$ is if all the scalars are zero.
+	
+	In other words, we have that the first column of $\mathcal M(T)$ must be equal to zero. So, we know that $\mathcal M(T)$ must have the form
+		\begin{equation*}
+		\mathcal M(T) =
+		\begin{bmatrix}
+			0 & a_{1,2} & \cdots & a_{1,n} \\
+			\vdots & a_{2,2} & \cdots & \vdots \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & a_{m,2} & \cdots & a_{m,n}
+		\end{bmatrix}
+	\end{equation*}
+
+	From here, we see then that we have $m(n-1)$ entries that can take on any values. Thus, we have then that $\dim E_{v} = m(n-1) = \dim W (\dim V - 1)$.
+	\end{solution}
+\end{document}

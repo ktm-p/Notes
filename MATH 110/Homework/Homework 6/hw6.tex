@@ -1,0 +1,594 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Homework 6}{Fall 2023}
+	
+	\section{Existence of Polynomial}
+	\begin{hw}
+		Suppose that $q \in \mathscr{P}(\RR)$. Prove that there exists a polynomial $p \in \mathscr{P}(\RR)$ such that
+		\begin{equation*}
+			q(x) = (x^{2} -3x)p''(x) + (2x-3)p'(x) + p(0).
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		Let us suppose that we have some $q \in \mathscr{P}(\RR)$. Then, we know that there exists some $n \in \NN$ such that $q \in \mathscr{P}_{n}(\RR)$.	
+		
+		Now, we consider the linear map $T$ such that $T(p) = (x^{2} - 3x)p'' + (2x-3)p' + p(0)$, where we send a degree $n$ polynomial $p$ to a degree $n$ polynomial $T(p)$. We note that $T$ is indeed linear as it is the sum and composition of linear maps.
+		
+		Now, we want to show that this linear map is surjective. To do this, we will first determine the null space of $T$. 
+		
+		\begin{comment}
+			We require $p(0) = 0$, $(2x-3)p' = 0$, and $(x^{2}-3x)p'' = 0$ for $Tp = 0$. 
+			
+			First, we want $p(0) = 0$. So, we know that for $p = \alpha x^{n} + \ldots + \beta x + \gamma$, we have $\gamma  = 0$ for $p(0) = 0$. Next, since $(2x-3)p' = 0$, then we see that $(2x-3)(n\alpha x^{n-1} + \ldots + \beta) = 2n \alpha x^{n} + \ldots + 2 \beta x - 3(n\alpha x^{n-1} + \ldots + \beta) = 0$. We observe then that for this to be the case, all of the coefficients $\alpha, \ldots, \beta, \gamma$ must all be equal to zero. In other words, we observe then that the only polynomial $p$ such that $Tp = 0$ is the zero-polynomial itself. Thus, we observe that $\vnull T = \left\{  0\right\}$.
+		\end{comment}
+	
+		Then, we first notice that $((x^{2} - 3x)p')' = (x^{2} - 3x)p'' + (2x-3)p'$. Then, we want $Tp = 0$; then, we want $((x^{2} - 3x)p')' + p(0) = 0$.
+		
+		Then, we observe that we can integrate from $0$ to $x$ of both sides to get:
+		\begin{align*}
+			(x^{2}-3x)p' + p(0)x &= 0 \\
+			(x^{2} - 3x)p' &= -p(0)x
+		\end{align*}
+	
+		Then, we let $p = \alpha x^{n} + \beta x^{n-1} + \ldots + \gamma x + \lambda$. Then, we see the following:
+		\begin{align*}
+			(x^{2} - 3x)p' &= -p(0)x \\
+			(x^{2} - 3x)(\alpha x^{n} + \beta x^{n-1} + \ldots + \gamma x + \lambda)' &= -\lambda x \\
+			(x^{2} - 3x)(n \alpha x^{n-1} + (n-1)\beta x^{n-2} + \ldots + \gamma) &= -\lambda x \\
+			(n\alpha x^{n+1} + (n-1)x^{n} + \ldots + \gamma x^{2}) - 3(n \alpha x^{n} + (n-1)\beta x^{n-1} + \ldots + \gamma x) &= - \lambda x
+		\end{align*}
+	
+		Then, we see that the only way for this to be possible is if all coefficients $\alpha, \beta, \ldots, \gamma, \lambda$ are all equal to zero. Thus, we see that only the zero polynomial is in the null space of $T$.
+		
+		Now, we note that this means that $\dim \vnull T = 0$. Now, by the Rank-Nullity theorem, we observe the following:
+		\begin{align*}
+			n &= \dim \vnull T + \dim\vrange T \\
+			&= 0 + \dim\vrange T 
+		\end{align*}
+	
+		Thus, we see that $\dim\vrange T = n$; in other words, we see that $T$ is indeed surjective, and thus for some $q \in \mathscr{P}_{n}(\RR)$, there exists a $p \in \mathscr{P}_{n}(\RR)$ which satisfies our requirement.
+	\end{solution}
+	
+	\newpage
+	
+	\section{Isomorphisms}
+	\begin{hw}
+		Let $V$ be a vector space over $\mathbb{F}$. Give a constructive proof that $V$ and $\mathcal L (\mathbb{F},V)$ are isomorphic.
+	\end{hw}
+	\begin{solution}
+		Before we begin, we make the following observation:
+		\begin{rmk}
+			For $T \in \mathcal L(\mathbb{F}, V)$, we have that $T(a) = T(a \cdot 1) = aT(1)$, for $a \in \mathbb{F}$.
+		\end{rmk}
+	
+		\begin{comment}
+			Now, with this in mind, let us define some $\varphi : V \rightarrow \mathcal L(\mathbb{F}, V)$ as follow:
+		\begin{equation*}
+			\varphi(v) \coloneq T_{v},
+		\end{equation*}
+		where we define $T_{v} : \mathbb{F} \rightarrow V $, for $a \in \mathbb{F}$, as:
+		\begin{equation*}
+			T_{v}(a) \coloneq av.
+		\end{equation*}
+	
+		Now, we will first for linearity of $\varphi$. First, we consider some $\alpha, \beta \in \mathbb{F}$ and $v, v' \in V$. Then,
+		\begin{align*}
+			\varphi(\alpha v + \beta v') &= T
+		\end{align*}
+		\end{comment}
+	
+		Now, with this in mind, let us define a map $\varphi : \mathcal L(\mathbb{F}, V) \rightarrow V$ by the following:
+		\begin{equation*}
+			\varphi(T) \coloneq T(1).
+		\end{equation*}
+	
+		Now, we will first check for linearity of $\varphi$. To do this, we consider some $\alpha, \beta \in \mathbb{F}$ and $T, T' \in \mathcal L(\mathbb{F}, V)$. Then,
+		\begin{align*}
+			\varphi(\alpha T + \beta T') &= (\alpha T + \beta T')(1) \\
+			&= \alpha T(1) + \beta T(1) \\
+			&= \alpha \varphi(T) + \beta \varphi(T').
+		\end{align*}
+	
+		Thus, we see that $\varphi$ is indeed linear.
+		
+		Now, we want to show that this map is bijective. To do this, we first look at injectivity.
+		
+		Let us suppose that for $T, T' \in \mathcal L(\mathbb{F}, V)$, we have that $\varphi (T) = \varphi(T')$. From here, for some $a \in \mathbb{F}$, we observe the following:
+		\begin{align*}
+			T(a) &= T(a \cdot 1) \\
+			&= a T(1) \\
+			&= a \varphi(T) \\
+			&= a\varphi(T') \\
+			&= a T'(1) \\
+			&= T'(a)
+		\end{align*}
+	
+		Thus, we see that for all $a \in \mathbb{F}$, we have that $T(a) = T'(a)$; in other words, $T = T'$. Therefore, we see that if $\varphi (T) = \varphi (T')$, then $T = T'$; $\varphi$ is indeed injective.
+		\begin{comment}
+			
+		Now, for surjectivity, we can proceed as follow: let us consider some $v \in V$, and some $T \in \mathcal{L} (\mathbb{F}, V)$ such that $T(a) = av$, for $a \in \mathbb{F}$.
+		
+		We will check for linearity of this $T$ as follows: suppose we have $\lambda, \mu, a,b \in \mathbb{F}$. Then, we have
+		\begin{align*}
+			T(\lambda a + \mu b) &= (\lambda a + \mu b)(v) \\
+			&= \lambda av + \mu bv \\
+			&= \lambda T(a) + \mu T(b)
+		\end{align*}
+		
+		Then, from here, we observe that
+		\begin{align*}
+			\varphi(T) &= T(1) \\
+			&= v
+		\end{align*}
+		\end{comment}
+	
+		Now, for surjectivity, suppose we have some $v \in V$. Now, we let $T : \mathbb{F} \rightarrow V$ such that $T(a) = av$, for $a \in \mathbb{F}$. Then, from here, we observe the following:
+		\begin{align*}
+			\varphi(T) &= T(1) \\
+			&= v
+		\end{align*}
+	
+		In other words, we see that for all $v \in V$, there is always some map $T \in \mathcal L(\mathbb{F}, V)$ such that $\varphi(T) = v$. Thus, we see that $\varphi$ is indeed surjective.
+		
+		Therefore, with this in mind, we see that we have created a bijection between $\mathcal{L}(\mathbb{F}, V)$ and $V$. Thus, the two are indeed isomorphic.
+		
+	\end{solution}
+
+	\newpage
+	
+	\section{Linear Functionals}
+	Which of the following maps on $\mathscr{P}(\RR)$ are linear functionals?
+	\begin{hw}
+		\begin{equation*}
+			p(x) \mapsto \int_{-1}^{x} p(t) \mathrm dt
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		No; we observe that the map doesn't map from $\mathscr{P}(\RR)$ to $\RR$.
+		\begin{comment}
+			\begin{align*}
+			\int_{-1}^{x} p(t)\mathrm dt &= P(t) \big|_{-1}^{x} \\
+			&= P(x) - P(-1)
+		\end{align*}
+	
+		We see that $P(x) - P(-1)$ doesn't evaluate to a real number. Thus, the map isn't a linear functional.
+		\end{comment}
+	\end{solution}
+
+	\begin{hw}
+		\begin{equation*}
+			p(x) \mapsto \int_0^{1} p(4t^{10} + t^{3} - 1) \mathrm dt
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		First, we note that the map above does indeed map from $\mathscr{P}(\RR)$ to $\RR$. Now, we want to check for linearity.
+		
+		To do this, we observe the following: consider $p,q \in \mathscr{P}(\RR)$ and $\alpha, \beta \in \RR$. Then, we see that $T(\alpha p+\beta q)$ is:
+		\begin{align*}
+			T(\alpha p+\beta q) &= \int_0^{1} (\alpha p+\beta q)(4t^{10} + t^{3} - 1) \mathrm dt \\
+			&= \int_0^{1} (\alpha p)(4t^{10} + t^{3} - 1) + (\beta q)(4t^{10} + t^{3} - 1) \mathrm dt \\
+			&= \alpha\int_0^{1} p(4t^{10} + t^{3} - 1) \mathrm dt + \beta\int_0^{1} q(4t^{10} + t^{3} - 1) \mathrm dt \\
+			&= \alpha T(p) +\beta T(q)
+		\end{align*}
+	
+		Thus, we see that $T$ is indeed linear as desired, and thus we can conclude that it is a linear functional.
+	\end{solution}
+
+	\begin{hw}
+		\begin{equation*}
+			p(x) \mapsto p(0)p''(\pi)
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		First, we see that $T$ does indeed map from $\mathscr{P}(\RR)$ to $\RR$. Now, we want to check for linearity.
+		
+		Again, let us consider $p,q \in \mathscr{P}(\RR)$ and $\alpha, \beta \in \RR$. Then, we see that $T(\alpha p+\beta q)$ is:
+		\begin{align*}
+			T(\alpha p + \beta q) &= (\alpha p + \beta q)(0) \cdot (\alpha p + \beta q)''(\pi) \\
+			&= (\alpha p(0) + \beta q(0))(\alpha p''(\pi) + \beta q''(\pi)) \\
+			&= \alpha p(0)\alpha p''(\pi) + \alpha p(0)\beta q''(\pi) + \beta q(0)\alpha p''(\pi) + \beta q(0) \beta q''(\pi) \\
+			&= \alpha (p(0)p''(\pi)) + \alpha\beta(p(0)q''(\pi) + q(0)p''(\pi)) + \beta(q(0)q''(\pi)) \\
+			&\neq \alpha(p(0)p''(\pi)) + \beta(q(0)q''(\pi)) \\
+			&= \alpha T(p) + \beta T(q)
+		\end{align*}
+	
+		Thus, since $T(\alpha p + \beta q) \neq \alpha T(p) + \beta T(q)$, we see that $T$ is not linear, and thus is not a linear functional.
+	\end{solution}
+
+	\begin{hw}
+		\begin{equation*}
+			p(x) \mapsto 2p(1)
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We observe that this map $T$ does indeed map from $\mathscr{P}(\RR)$ to $\RR$. So, we will check for linearity.
+		\begin{align*}
+			T(\alpha p + \beta q) &= 2(\alpha p + \beta q)(1) \\
+			&= 2(\alpha p(1) + \beta q(1)) \\
+			&= 2 \alpha p(1) + 2 \beta q(1) \\
+			&= \alpha 2p(1) + \beta 2q(1) \\
+			&= \alpha T(p) + \beta T(q)
+		\end{align*}
+	
+		Thus, we see that $T$ is indeed linear and therefore we see that it is indeed a linear functional.
+	\end{solution}
+
+	\newpage
+	
+	\section{Dual Basis}
+	\begin{hw}
+		Let $V = \mathscr{P}_{2}(\RR)$ and suppose that $\varphi_{j}(p) = p(j-1)$, $j = 1,2,3$. Prove that $(\varphi_1,\varphi_2,\varphi_3)$ is a basis for $\mathscr{P}_{2}(\RR)'$ and find a basis $(p_{1}, p_{2}, p_{3})$ of $\mathscr{P}_{2}(\RR)$ whose dual is $(\varphi_1,\varphi_2,\varphi_3)$.
+	\end{hw}
+	\begin{solution}
+		We observe the following:
+		\begin{equation*}
+			\begin{bmatrix}
+				\varphi_1(1) & \varphi_2(1) & \varphi_3(1) \\
+				\varphi_{1}(x) & \varphi_2(x) &\varphi_3(x) \\
+				\varphi_1(x^{2}) & \varphi_{2}(x^{2}) &\varphi_3(x^{2})
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				1 & 1 & 1 \\
+				0 & 1 & 2 \\
+				0 & 1 & 4
+			\end{bmatrix}
+		\end{equation*}
+	
+		From here, we see that this matrix is indeed invertible, as we can row reduce it down to the identity matrix
+		\begin{equation*}
+			\begin{bmatrix}
+				1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+			\end{bmatrix}
+		\end{equation*}
+	
+		Thus, we observe that, indeed, $\varphi_1, \varphi_2, \varphi_3$ are linearly independent, and thus they form a basis for $\mathscr{P}_{2}(\RR)'$. To find a basis $(p_{1}, p_{2}, p_{3})$ of $\mathscr{P}_{2}(\RR)$ which is dual to $(\varphi_1, \varphi_2, \varphi_3)$, we can choose the following:
+		\begin{align*}
+			p_{1} &= \dfrac{(x-1)(x-2)}{2} \\
+			&= \frac{1}{2}(x^{2} - 3x + 2) \\
+			p_{2} &= -x(x-2) \\
+		%	&= -x^{2} + 2x \\
+			&= -(x^{2} - 2x) \\
+			p_{3} &= \dfrac{x(x-1)}{2} \\
+			&= \dfrac{1}{2}(x^{2} - x)
+		\end{align*}
+	
+		First, we check that these are indeed linearly independent. To do this, we suppose that only the trivial solution satisfies the following:
+		\begin{equation*}
+			ap_{1} + bp_{2} + cp_{3} = 0.
+		\end{equation*}
+	
+		Then, we see that this gives us the following:
+		\begin{align*}
+			a\left(\frac{1}{2}(x^{2} - 3x + 2)\right) + b\left(-(x^{2} - 2x)\right) + c\left(\frac{1}{2}(x^{2} - x)\right) &= 0
+		\end{align*}
+	
+		With this, we see that we have:
+		\begin{align*}
+			\dfrac{a}{2}x^{2} -bx^{2} + \dfrac{c}{2}x^{2} &= 0 \\
+			-\dfrac{3a}{2} x + 2bx - \dfrac{c}{2}x  &= 0 \\
+			a &= 0
+		\end{align*}
+	
+		Then, from here, we have the following:
+		\begin{align*}
+			\dfrac{a}{2} - b + \dfrac{c}{2} &= 0 \\
+			-\dfrac{3a}{2} + 2b - \dfrac{c}{2} &= 0 \\
+			a &= 0 \\
+			\\
+			-b + \dfrac{c}{2} &= 0 \\
+			2b - \dfrac{c}{2} &= 0 \\
+			b &= 0
+			\\
+			\dfrac{c}{2} &= 0 \\
+			c &= 0
+		\end{align*}
+	
+		So, we know that these three vectors are indeed linearly independent, and thus forms a basis for $\mathscr{P}_{2}(\RR)$. Now, we want to verify that they are indeed dual to $\varphi_{1}, \varphi_{2}, \varphi_{3}$. To do this, we proceed as follows:
+			
+		\begin{align*}
+			\begin{bmatrix}
+				\varphi_{1}(p_{1}) & \varphi_{2}(p_{1}) & \varphi_{3}(p_{1}) \\
+				\varphi_1(p_{2}) & \varphi_2(p_{2}) & \varphi_{3}(p_{2}) \\
+				\varphi_1(p_{3}) & \varphi_2(p_{3}) & \varphi_3(p_{3})
+			\end{bmatrix}
+			&=
+		%	\begin{equation*}
+				\begin{bmatrix}
+					p_{1}(0) & p_{1}(1) & p_{1}(2) \\
+					p_{2}(0) & p_{2}(1) & p_{2}(2) \\
+					p_{3}(0) & p_{3}(1) & p_{3}(2)
+				\end{bmatrix} \\
+		%	\end{equation*}
+	&=
+		\begin{bmatrix}
+			1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+		\end{bmatrix}
+		\end{align*}
+	
+		Thus, we see that this basis $(p_{1}, p_{2}, p_{3})$ is dual to $(\varphi_{1}, \varphi_{2}, \varphi_3)$
+	\end{solution}
+	
+	\newpage
+	
+	\section{A Funny Title}
+	\begin{hw}
+		Let $V$ be a finite-dimensional vector space, and let $U$ be its proper subspace. Prove that there exists some $\varphi \in V'$ such that $\varphi(u) = 0$ for all $u \in U$ but $\varphi \neq 0$.
+	\end{hw}
+	\begin{solution}
+		Let us suppose that $V$ is finite-dimensional, and let $\dim V = n + m$.
+		
+		We begin by observing that since $U \subsetneq V$, and since $V$ is finite-dimensional, then we see that $U$ must be finite-dimensional too. So, let $v_{1}, \ldots, v_{n}$ be a basis for $U$.
+		
+		From here, we can extend this basis to be a basis of $V$. We denote this basis for $V$ by $v_{1}, \ldots, v_{n}, v_{n+1}, \ldots, v_{n+m}$.
+		
+		Now, we define a linear map $\varphi : V \rightarrow \mathbb{F}$ as follows:
+		\begin{equation*}
+			\varphi(v_{i}) =
+			\begin{cases}
+				0 & 1 \leq i \leq n \\
+				1 & n+1 \leq i \leq n+m
+			\end{cases}
+		\end{equation*}
+	
+		Thus, we see the following:
+		\begin{align*}
+			\varphi\left( \sum_{i=1}^{n} a_{i}v_{i} \right) &= \sum_{i=1}^{n} \varphi(a_{i} v_{i}) \\
+			&= \sum_{i=1}^{n} a_{i}\varphi(v_{i}) \\
+			&= 0
+		\end{align*}
+	
+		Thus, we see that there indeed exists some $\varphi \in V'$ such that $\varphi(u) = 0$ but $\varphi \neq 0$.
+	\end{solution}
+
+\end{document}

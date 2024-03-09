@@ -1,0 +1,506 @@
+\documentclass{article}
+%%%%%%% PREAMBLE %%%%%%%
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%%%
+
+%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{Span}
+\DeclareMathOperator*{\Null}{Null}
+\DeclareMathOperator*{\Range}{Range}
+\DeclareMathOperator*{\vspan}{span}
+\DeclareMathOperator*{\vnull}{null}
+\DeclareMathOperator*{\vrange}{range}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%%
+
+
+%%%%%
+%END_FOLD
+%%%%%
+
+\begin{document}
+	\mytitle{Homework 3}{Fall 2023}
+	
+	\section{Polynomial Basis}
+	Let $U \coloneq \left\{  p \in \mathscr{P}_{2}(\RR) : \int_{-1}^{1} (xp''(x) + p'(x)) \mathrm{d}x = 0 \right\}$.
+	\begin{hw}
+		Find a basis for $U$.
+	\end{hw}
+	\begin{solution}
+		First, we consider a polynomial of second degree
+		\begin{equation*}
+			p(x) = ax^{2} + bx + c.
+		\end{equation*}
+	
+		Now, we observe that $p'(x) = 2ax + b$, and $p''(x) = 2a$.
+		
+		With this in mind, we observe the following:
+		\begin{align*}
+			\int_{-1}^{1} (xp''(x) + p'(x)) \mathrm{d}x &= 0 \\
+			\int_{-1}^{1} (x(2a) + (2ax+b)) \mathrm{d}x &= 0 \\
+			ax^{2} + ax^{2} + bx \Big|_{-1}^{1} &= 0 \\
+			(2a + b) - (2a - b) &= 0 \\
+			2b &= 0 \\
+			b &= 0.
+		\end{align*}
+	
+		Then, if we let $p(x) = ax^{2} + c$, we observe that $p'(x) = 2ax$ and $p''(x) = 2a$. Therefore,
+		\begin{align*}
+			\int_{-1}^{1} (xp''(x) + p'(x)) \mathrm{d}x &= \int_{-1}^{1} (x(2a) + 2ax) \mathrm{d}x \\
+			&= \int_{-1}^{1} 4ax \mathrm{d}x \\
+			&= 4a \int_{-1}^{1} x \mathrm{d}x \\
+			&= 4a \cdot 0 \\
+			&= 0.
+		\end{align*}
+	
+		Therefore, everything in $U$ is of the form $ax^{2} + c$. So, $\left\{  1, x^{2}\right\}$ would form a basis for $U$.
+	\end{solution}
+
+	\begin{hw}
+		Extend your basis in part (a) to a basis of $\mathscr{P}_{3}(\RR)$.
+	\end{hw}
+	\begin{solution}
+		We can extend the basis we got from part (a) by adding the vectors $\left\{  x, x^{3}\right\}$ in order to get the basis for $\mathscr{P}_{3}(\RR)$:
+		\begin{equation*}
+			\left\{  1, x, x^{2}, x^{3} \right\}.
+		\end{equation*}
+	\end{solution}
+		
+	\begin{hw}
+		Find a subspace $W$ of $\mathscr{P}_{3}(\RR)$ such that $\mathscr{P}_{3}(\RR) = U \oplus W$.
+	\end{hw}
+	\begin{solution}
+		We can let $W \coloneq \Span\left\{  x, x^{3} \right\}$. We see then that $U + W$ would result in $\mathscr{P}_{3}(\RR)$. Furthermore, we know this sum is direct because neither $x$ nor $x^{3}$ are scalar multiples of $1$ and $x^{2}$; thus, $U \cap W = \left\{  0 \right\}$. Thus, we have that $U \oplus W = \mathscr{P}_{3}(\RR)$.
+	\end{solution}
+
+	\newpage
+	
+	\section{Linearly Independence}
+	\begin{hw}
+		Suppose $v_1, \ldots, v_m$ are linearly independent in $V$ and $w\in V$. Prove that
+		\begin{equation*}
+			\dim \Span (v_{1} - w, v_{2} - w, \ldots, v_{m} - w) \geq m -1
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		We begin by noting that $\Span(v_{1} - w, v_{2} - w, \ldots, v_{m} - w) = a_{1}(v_{1} - w) + a_{2}(v_{2} - w) + \ldots + a_{m}(v_{m} - w)$, for $a_{1}, a_{2}, \ldots, a_{m} \in \mathbb{F}$. 
+		
+		With this in mind, let us subtract $v_{1} - w$ from each of the vectors in the list $(v_{2} - w, \ldots, v_{m} - w)$. This then yields us the following list $(v_{2} - v_{1}, v_{3} - v_{1}, \ldots, v_{m} - v_{1})$. We also note that this list is a linear combination of the vectors in $(v_{1} - w, v_{2} - w, \ldots, v_{m} - w)$, meaning that
+		\begin{equation*}
+			(v_{2} - v_{1}, \ldots, v_{m} - v_{1}) \in \Span(v_{1} - w, v_{2} - w, \ldots, v_{m} - w).
+		\end{equation*}
+	
+		It follows then that
+		\begin{equation*}
+			\dim \Span(v_{2} - v_{1}, \ldots, v_{m} - v_{1}) \leq \dim \Span (v_{1} - w, v_{2} - w, \ldots, v_{m} - w).
+		\end{equation*}
+	
+		Now, we will look at the list $(v_{1}, v_{2} - v_{1}, \ldots, v_{m} - v_{1})$. We first note that $v_{1}, \ldots, v_{m}$ are all linearly independent. Then, we observe the following:
+		\begin{align*}
+			a_{1}v_{1} + a_{2}(v_{2} - v_{1}) + \ldots + a_{m}(v_{m} - v_{1}) &= 0 \\
+			a_{1}v_{1} + a_{2}v_{2} + \ldots + a_{m}v_{m} - (a_{2}v_{1} + \ldots + a_{m}v_{1}) &= 0 \\
+			a_{2}v_{2} + \ldots + a_{m}v_{m} &= a_{2}v_{1} + \ldots + a_{m}v_{1} - a_{1}v_{1}\\
+			a_{2}v_{2} + \ldots + a_{m}v_{m} &= (a_{2} + \ldots + a_{m} - a_{1})v_{1}
+		\end{align*}	
+	
+		And since $v_{1}, v_{2}, \ldots, v_{m}$ are linearly independent, it follows then that $a_{1}, a_{2}, \ldots, a_{m}$ must all be equal to zero for this equation to hold. But this then means that $v_{1}, v_{2} - v_{1}, \ldots, v_{m} - v_{1}$ are linearly independent.
+		
+		Since there are $m$ vectors in this list, $\dim \Span(v_{1}, v_{2} - v_{1}, \ldots, v_{m} - v_{1}) = m$. Now, we observe that if we remove $v_{1}$ from this list, because it's linearly independent, the span of the resulting list will be strictly less. In other words, $\dim \Span(v_{2} - v_{1}, \ldots, v_{m} - v_{1}) = m-1$.
+		
+		Therefore, we can conclude that
+		\begin{align*}
+			\dim \Span (v_{1} - w, v_{2} - w, \ldots, v_{m} - w) \geq m -1.
+		\end{align*}
+	\end{solution}
+	
+	\newpage
+	
+	\section{Inclusion-Exclusion of Subspaces?}
+	\begin{hw}
+		Does the `inclusion-exclusion formula' hold for three subspaces? In other words, is it always true that
+		\begin{align*}
+			\dim(U_{1} + U_{2} + U_{3}) &=\dim U_{1} + \dim U_{2} + \dim U_{3} \\
+			&-\dim (U_{1} \cap U_{2}) - \dim (U_{1} \cap U_{3}) - \dim (U_{2} \cap U_{3}) \\
+			&+\dim(U_{1} \cap U_{2} \cap U_{3}).
+		\end{align*}
+	
+		Prove this formula, or provide a counter example.
+	\end{hw}
+	\begin{solution}
+		Let us work in $V = \RR^{2}$. Now, let us consider the following subspaces:
+		\begin{align*}
+			U_{1} &\coloneq \Span\left\{  (1,0) \right\} \\
+			U_{2} &\coloneq \Span\left\{  (0,1) \right\} \\
+			U_{3} &\coloneq \Span\left\{  (1,1) \right\}.
+		\end{align*}
+	
+		We see that each of these subspaces are of dimension 1, as they're being spanned by only one vector. We also note that since none of the vectors are scalar multiples of each other, they're all linearly independent from one another. Thus, we see that
+		\begin{align*}
+			U_{1} \cap U_{2} = U_{1} \cap U_{3} = U_{2} \cap U_{3} &= \left\{  0 \right\} \\
+			U_{1} \cap U_{2} \cap U_{3} &= \left\{  0 \right\}.
+		\end{align*}
+	
+		Then, since this is the case, we observe the following:
+		\begin{equation*}
+			\dim (U_{1} \cap U_{2} \cap U_{3}) =\dim (U_{1} \cap U_{2}) = \dim (U_{1} \cap U_{3}) = \dim (U_{2} \cap U_{3}) = 0
+		\end{equation*}
+	
+		However, we see that $U_{1}$ and $U_{2}$ are each spanned by one of the canonical basis of $\RR^{2}$; it follows then that $U_{1} + U_{2} + U_{3}$ spans all of $\RR^{2}$, and thus $\dim (U_{1} + U_{2} + U_{3}) = 2$. But, this means then that we get the following:
+		\begin{align*}
+			2 &= 1 + 1 + 1 - 0 - 0 - 0 + 0 \\
+			2 &= 3
+		\end{align*}
+	
+		This is false, and thus we see that the `inclusion-exclusion formula' fails for three subspaces.
+	\end{solution}
+
+	\newpage
+	
+	\section{Canonical Bases}
+	For the following questions, what is the dimension and canonical basis?
+	\begin{hw}
+		$\CC$ as a vector space over $\CC$.
+	\end{hw}
+	\begin{solution}
+		The dimension is 1, and the canonical basis would be $\left\{  1 \right\}$.
+	\end{solution}
+
+	\begin{hw}
+		$\CC$ as a vector space over $\RR$.
+	\end{hw}
+	\begin{solution}
+		The dimension is 2, and the canonical basis would be $\left\{  1, i \right\}$.
+	\end{solution}
+
+	\begin{hw}
+		$\CC^{5}$ as a vector space over $\CC$.
+	\end{hw}
+	\begin{solution}
+		The dimension would be 5, and the canonical basis would be
+		\begin{equation*}
+			\left\{  (1,0,0,0,0), (0,1,0,0,0), (0,0,1,0,0), (0,0,0,1,0), (0,0,0,0,1) \right\}.
+		\end{equation*}
+	\end{solution}
+
+	\begin{hw}
+		$\CC^{7}$ as a vector space over $\RR$.
+	\end{hw}
+	\begin{solution}
+		The dimension would be 14, and the canonical basis would be
+		\begin{align*}
+			&\{(1,0,0,0,0,0,0), (0,1,0,0,0,0,0), (0,0,1,0,0,0,0), (0,0,0,1,0,0,0) \\
+			&(0,0,0,0,1,0,0), (0,0,0,0,0,1,0), (0,0,0,0,0,0,1), (i,0,0,0,0,0,0) \\
+			&(0,i,0,0,0,0,0), (0,0,i,0,0,0,0), (0,0,0,i,0,0,0), (0,0,0,0,i,0,0) \\
+			&(0,0,0,0,0,i,0), (0,0,0,0,0,0,i)\}.
+		\end{align*}
+	\end{solution}
+
+	\newpage
+	
+	\section{Basis Condition}
+	\begin{hw}
+		Suppose $U$ and $W$ are subspaces of $V$ such that $U+W=V$, suppose $u_1$, $\ldots$, $u_m$ is a basis of $U$ and $w_1$, $\ldots$, $w_n$ is a basis  of $W$. Disprove that $u_1$,\ldots, $u_m$, $w_1$, $\ldots$, $w_n$ is necessarily a basis of $V$.
+	\end{hw}
+	\begin{solution}
+		First, we will provide a counterexample for when $U + W = V$, but $u_{1}, \ldots, u_{m}, w_{1}, \ldots, w_{n}$ is not necessarily a basis of $V$.
+		
+		To do this, we consider $V = \RR^{3}$, and the following subspaces:
+		\begin{align*}
+			U &\coloneq \Span\left\{  (1,0,0), (0,1,0) \right\} \\
+			W &\coloneq \Span\left\{  (0,1,1), (0,0,1) \right\}.
+		\end{align*}
+	
+		We observe that the vectors $(1,0,0), (0,1,0)$ aren't scalar multiples of each other, so they're linearly independent. The same argument applies to $(0,1,1), (0,0,1)$.
+		
+		However, we observe that the list
+		\begin{equation*}
+			\left\{  (1,0,0), (0,1,0), (0,1,1), (0,0,1) \right\}
+		\end{equation*}
+		is not a basis for $V$. While it does span $V$ by virtue of having the canonical basis vectors $(1,0,0), (0,1,0), (0,0,1)$ (meaning that $U + W = V$), we observe the following:
+		\begin{equation*}
+			(0,1,0) + (0,0,1) = (0,1,1).
+		\end{equation*}
+	
+		Thus, the list isn't linearly independent, and therefore is not a basis.
+	\end{solution}
+
+	\begin{hw}
+		What additional condition on the sum $U+W$ makes this implication true? Explain.
+	\end{hw}
+	\begin{solution}
+		An additional condition we must require for the sum $U + W$ is that it must be direct; in other words, $U \cap W = \left\{  0 \right\}$. To see that this actually yields us a basis for $V$, we will proceed as follows:
+		
+		Suppose we have some vector space $V$, with subspaces $U, W$ such that $U \oplus W = V$. Next, we suppose that $u_{1}, \ldots, u_{m}$ is a basis of $U$, and $w_{1}, \ldots, w_{n}$ is a basis of $W$. We now want to show that the following is a basis for $V$:
+		\begin{equation*}
+			u_{1}, \ldots, u_{m}, w_{1}, \ldots, w_{n}.
+		\end{equation*}
+		
+		First, we will prove linear independence. We observe that if there exist some $a_{1}, \ldots, a_{m}, b_{1}, \ldots, b_{n} \in \mathbb{F}$ such that
+		\begin{equation*}
+			a_{1}u_{1} + \ldots + a_{m}u_{m} + b_{1}w_{1} + \ldots + b_{n}w_{n} = 0,
+		\end{equation*}
+		then we have that
+		\begin{equation*}
+			a_{1}u_{1} + \ldots + a_{m}u_{m} = -b_{1}w_{1} - \ldots - b_{n}w_{n}.
+		\end{equation*}
+		
+		Thus, we see that $a_{1}u_{1} + \ldots + a_{m}u_{m} = -b_{1}w_{1} - \ldots - b_{n}w_{n} \in (U \cap W)$. From here, we know that since we have $U \oplus W = V$, it follows then that $U \cap W = \left\{  0 \right\}$.
+		
+		Therefore, we observe that:
+		\begin{align*}
+			a_{1}u_{1} + \ldots + a_{m}u_{m} &= 0 \\
+			b_{1}w_{1} + \ldots + b_{n}w_{n} &= 0
+		\end{align*}
+		
+		However, we recall that since $u_{1}, \ldots, u_{m}$ is a basis of $U$ and $w_{1}, \ldots, w_{n}$ is a basis of $W$. It must be then that $a_{1} = \ldots = a_{m} = b_{1} = \ldots = b_{n} = 0$.
+		
+		Therefore, we see that $u_{1}, \ldots, u_{m}, w_{1}, \ldots, w_{n}$ is linearly independent.
+		
+		Next, we want to confirm that it does indeed span $V$. To do this, we know by definition of direct sum that any $v \in V$ can be written as $u + w$, for some $u \in U$ and $w \in W$.
+		
+		Now, since $u_{1}, \ldots, u_{m}$ and $w_{1}, \ldots, w_{n}$ are bases for $U$ and $W$ respectively, then there exists some $a_{1}, \ldots, a_{m}, b_{1}, \ldots, b_{n} \in \mathbb{F}$ such that
+		\begin{align*}
+			a_{1}u_{1} + \ldots + a_{m}u_{m} &= u \\
+			b_{1}w_{1} + \ldots + b_{n}w_{n} &= w.
+		\end{align*}
+		
+		Then, it follows that for any $v \in V$, we can express it as:
+		\begin{align*}
+			v &= u + w \\
+			&= a_{1}u_{1} + \ldots + a_{m}u_{m} + b_{1}w_{1} + \ldots + b_{n}w_{n} \\
+		\end{align*}
+		
+		Thus, we see that the list $u_{1}, \ldots, u_{m}, w_{1}, \ldots, w_{n}$ spans $V$. And since we have a list that is both linearly independent and spans $V$, we can thus conclude that $u_{1}, \ldots, u_{m}, w_{1}, \ldots, w_{n}$ is a basis of $V$ as desired.
+	\end{solution}
+	
+\end{document}

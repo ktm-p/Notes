@@ -1,0 +1,810 @@
+\documentclass[openany]{book}
+%%%%% PREAMBLE
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% basic %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% header/footer %
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+\setlength{\headheight}{15pt}
+\renewcommand{\chaptermark}[1]{\markright{#1}{}}
+\renewcommand{\sectionmark}[1]{}
+\fancypagestyle{contentpage}{%
+	\lhead{}
+	\rhead{\textit{\rightmark}}
+	\cfoot{\thepage}
+}
+\pagestyle{contentpage}
+
+% table of content %
+\makeatletter
+\newcommand\mytoc{%
+	\if@twocolumn
+	\@restonecoltrue\onecolumn
+	\else
+	\@restonecolfalse
+	\fi
+	\toctrue
+	\chapter*{\contentsname
+		\@mkboth{%
+			\contentsname}{\contentsname}}\addcontentsline{toc}{chapter}{Contents}%
+	\tocfalse
+	\@starttoc{toc}%
+	\if@restonecol\twocolumn\fi
+}
+\makeatother
+
+% chapter formatting %
+\newif\iftoc
+\titleformat
+{\chapter} % command
+[display] % shape
+{\cabin} % font
+{} % label
+{2in} % 
+{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Chapter}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}
+[
+\vspace{-20pt}%
+\rule{\textwidth}{0.1pt}
+\vspace{0.0in}
+]
+\titlespacing{\chapter}
+{0pt}
+{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}
+{0pt}
+
+% hyperlink formatting %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% purple box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% green box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% yellow box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% blue box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% red box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% purple boxes (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=chapter]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% green boxes (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% blue boxes (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=chapter]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% red boxes (remarks) %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+
+% yellow boxes (warnings) %
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%%%
+
+%%%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+%%%%%
+
+%%%%% REDEFINING COMMANDS
+\let\oldint\int
+\renewcommand{\int}[2]{\oldint\limits_{#1}^{#2}}
+\let\oldprod\prod
+\renewcommand{\prod}[2]{\oldprod\limits_{#1}^{#2}}
+\let\oldsum\sum
+\renewcommand{\sum}[2]{\oldsum\limits_{#1}^{#2}}
+%%%%%
+%END_FOLD
+%%%%%
+
+
+\begin{document}
+	\mytitle{CS70 Discussion}{Spring 2023}
+	
+\chapter{Discussion 0A}
+
+I am too lazy to do most of these problems, so uh, I'll just skip them :)
+
+\newpage
+
+\chapter{Discussion 0B}
+\section{Perfect Square}
+%%% PROBLEM 1A %%%
+\begin{hw}
+	Prove that if $n^2$ is odd, then $n$ must also be odd.
+\end{hw}
+\begin{solution}
+	We shall proceed by contraposition.
+	
+	Let us suppose that $n$ is even. Then, by definition, there exists a $k\in\ZZ$ such that $n=2k$. Now, we observe the following:
+	\begin{align*}
+		n &= 2k \\
+		n^2 &= (2k)^2 \\
+		&=4k^2 \\
+		&=2(2k^2) \\
+		&=2m, \text{ for some $m\in\ZZ$} \tag{$\ZZ$ is closed under multiplication}
+	\end{align*}
+	
+	As $n^2=2m$ for some $m\in\ZZ$ then, by definition, $n^2$ is also even. Thus, by contraposition, we can conclude that if $n^2$ is odd, then $n$ must also be odd.
+\end{solution}
+
+We can also approach this by using contradiction as follows:
+\begin{solution}
+	We will proceed by contradiction.
+	
+	Assume that $n$ is even and $n^2$ is odd. Then, we observe the following:
+	\begin{align*}
+		n &= 2k, \text{ for some $k\in\ZZ$} \tag{definition of evenness} \\
+		n^2 &= 4k^2 \\
+		&= 2(2k^2) \\
+		&= 2m, \text{ for some $m\in\ZZ$} \tag{$\ZZ$ is closed under multiplication}
+	\end{align*}
+	
+	As $n^2$ is both odd and even, we see that this is a contradiction. Then, we can conclude that if $n^2$ is odd, then $n$ must also be odd.
+\end{solution}
+
+%%% PROBLEM 1B %%%
+\begin{hw}
+	Prove that if $n^2$ is odd, then $n^2$ can be written in the form $8k+1$ for some $k\in\ZZ$
+\end{hw}
+
+Before proving this problem, we will introduce a lemma that will help us in our proof:
+\begin{lem}[Problem 2.1]
+	If $n^2$ is odd, then $n$ must also be odd.
+\end{lem}
+
+We will also introduce another lemma whose proof will be discussed later:
+\begin{lem}
+	The product of two consecutive integers is an even integer.
+\end{lem}
+
+Now, let us proceed with proving Problem 2.2:
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	Let us suppose that $n^2$ is odd. Then, by Lemma 2.1, we see that $n$ must also be odd. By definition, $n=2m+1$, for some $m\in\ZZ$. Now, we can see the following:
+	\begin{align*}
+		n &= 2m+1 \\
+		n^2 &= (2m+1)^2 \\
+		&= 4m^2 + 4m + 1 \\
+		&= 4m(m+1)+1
+	\end{align*}
+	
+	Now, notice here that $m$ and $m+1$ are two consecutive integers. Then, by Lemma 2.2, their product $m(m+1)$ is an even number. Thus, by definition, $m(m+1)=2k$ for some $k\in\ZZ$. This yields the following:
+	\begin{align*}
+		n^2 &= 4(2k)+1 \\
+		&= 8k + 1
+	\end{align*}
+	
+	Therefore, we can conclude that if $n^2$ is odd, then $n^2$ can be written in the form $8k+1$ for some $k\in\ZZ$.
+\end{solution}
+
+\section{Number of Friends}
+%%% PROBLEM 2 %%%
+\begin{hw}
+	Prove that if there are $n \geq 2$ people at a party, then at least $2$ of them have the same number of friends at the party. Assume that friendships are always reciprocated: that is, if Alice is friends with Bob, then Bob is also friends with Alice.
+\end{hw}
+In order to prove this problem, we will first introduce an important theorem that will be crucical to the proof:
+\begin{thm}[Pigeonhole Theorem]
+	If $n$ items are placed into $m$ containers, where $n > m$, then at least one container must contain more than one item.
+\end{thm}
+
+Now, let us proceed with Problem 2.3:
+\begin{solution}
+	We will proceed by contradiction.
+	
+	Let us assume that in a party with $n \geq 2$ people, nobody has the same number of friends as each other.
+	
+	We observe that in a party with $n \geq 2$ people, the most number of people an individual person can be friends with is $n-1$ (you can't be friends with yourself). Meanwhile, the least number of people an individual person can be friends with is $0$.
+	
+	Now, there are two cases:
+	\begin{enumerate}
+		\item Consider a situation where someone in the party is friends with everybody else (meaning they have $n-1$ friends); then it is impossible for somebody in the party to have $0$ friends. Thus, the number of friends a person can have is within the range $[1, n-1]$.
+		
+		\item If there's somebody in the party who is friends with nobody, then it is impossible for someone to be friends with everyone else in the party; the maximum number of friends a person can have is $n-2$. Thus, the number of friends a person can have in the party is in the range $[0,n-2]$.
+	\end{enumerate}
+	
+	In both cases, we see that there are most $n-1$ possibilities for how many friends a person can have. Then, by the Pigeonhole Theorem, it follows that there has to be at least $2$ people who have the same number of friends as each other, leading to a contradiction. Therefore, we can conclude that if there are $n \geq 2$ people at a party, then at least $2$ of them have the same number of friends at the party.
+\end{solution}
+
+\begin{rmk}
+	For our proof here, we let the number of people at the parties, $n$, be the ``items", and the $n-1$ possibilities for how many friends a person can have be the ``containers". As $n > n-1$, then we can apply the Pigeonhole Theorem.
+\end{rmk}
+
+\section{Pebbles}
+%%% PROBLEM 3 %%%
+\begin{hw}
+	Suppose you have a rectangular array of pebbles, where each pebble is either red or blue. Suppose that for every way of choosing one pebble from each column, there exists a red pebble among the chosen ones.
+	
+	Prove that there must exist an all-red column.
+\end{hw}
+\begin{solution}
+	We shall proceed by contraposition.
+	
+	Let us assume that there does not exist an all-red column. Now, as each pebble is either red or blue, then this must mean that every column must have at least one blue pebble. Therefore, there exists a way of choosing one pebble from each column such that there doesn't exist a red pebble among the chosen pebbles (by picking the blue pebble from every column).
+	
+	Therefore, by contraposition, we see that if, for every way of choosing one pebble from each column, there exists a red pebble among the chosen ones then there must exist an all-red column.
+\end{solution}
+
+\section{Preserving Set Operations}
+For a function $f$, define the image of a set $X$ to be the set $f(X) = \{y : y = f(x)$ for some $x\in X\}$. Define the inverse image or preimage of a set $Y$ to be the set $f^{-1}(Y) = \{x : f(x) \in Y\}.$ Prove the following statements, in which $A$ and $B$ are sets.
+
+\textit{Recall: For sets $X$ and $Y$, $X = Y$ if and only if $X \subseteq Y$ and $Y \subseteq X$. To prove that $X \subseteq Y$, it is sufficient to show that $(\forall x)((x \in X) \implies (y \in Y))$.}
+
+%%% PROBLEM 4A %%%
+\begin{hw}
+	$f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	We want to show that $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$. To do this, we have to show the following:
+	\begin{enumerate}
+		\item $f^{-1}(A \cup B) \subseteq f^{-1}(A) \cup f^{-1}(B)$, and
+		\item $f^{-1}(A) \cup f^{-1}(B) \subseteq f^{-1}(A \cup B)$
+	\end{enumerate} 
+	
+	Now, let $x$ be an element in $f^{-1}(A \cup B)$. Then,
+	\begin{align*}
+		x \in f^{-1}(A \cup B) &\iff f(x) \in (A \cup B) \\
+		&\iff f(x) \in A \lor f(x) \in B \\
+		&\iff x \in f^{-1}(A) \lor x \in f^{-1}(B) \\
+		&\iff x \in f^{-1}(A) \cup f^{-1}(B)
+	\end{align*}
+	
+	As $x \in f^{-1}(A \cup B)$ and $x \in f^{-1}(A) \cup f^{-1}(B)$, then we see that $f^{-1}(A \cup B) \subseteq f^{-1}(A) \cup f^{-1}(B)$. Similarly, since $x \in f^{-1}(A) \cup f^{-1}(B)$ and $x \in f^{-1}(A \cup B)$, we see that $f^{-1}(A) \cup f^{-1}(B) \subseteq f^{-1}(A \cup B)$.
+	
+	Therefore, because $f^{-1}(A \cup B) \subseteq f^{-1}(A) \cup f^{-1}(B)$ and $f^{-1}(A) \cup f^{-1}(B) \subseteq f^{-1}(A \cup B)$, we can conclude that $f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B)$.
+\end{solution}
+
+%%% PROBLEM 4B %%%
+\begin{hw}
+	$f(A \cup B) = f(A) \cup f(B)$
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	We want to show that $f(A \cup B) = f(A) \cup f(B)$. To do this, we have to show the following:
+	\begin{enumerate}
+		\item $f(A \cup B) \subseteq f(A) \cup f(B)$, and
+		\item $f(A) \cup f(B) \subseteq f(A \cup B)$
+	\end{enumerate}
+	
+	Now, let $y$ be an element in $f(A \cup B)$. Then, we observe the following:
+	\begin{align*}
+		y \in f(A \cup B) &\iff y=f(x) \in f(A \cup B) \tag{by definition} \\
+		&\iff x \in A \cup B \\
+		&\iff x \in A \lor x \in B \\
+		&\iff f(x) \in f(A) \lor f(x) \in f(B) \\
+		&\iff y \in f(A) \lor y \in f(B) \tag{by definition} \\
+		&\iff y \in f(A) \cup f(B)
+	\end{align*}
+	
+	Now, we see that since $y \in f(A \cup B)$ and $y \in f(A) \cup f(B)$, then $f(A \cup B) \subseteq f(A) \cup f(B)$. Similarly, as $y \in f(A) \cup f(B)$ and $y \in f(A \cup B)$, then $f(A) \cup f(B) \subseteq f(A \cup B)$.
+	
+	Therefore, as $f(A \cup B) \subseteq f(A) \cup f(B)$ and $f(A) \cup f(B) \subseteq f(A \cup B)$, we can conclude that $f(A \cup B) = f(A) \cup f(B)$.
+\end{solution}
+
+\newpage
+
+\chapter{Discussion 1A}
+\section{Natural Induction on Inequality}
+\begin{hw}
+	Prove that if $n \in \NN$ and $x > 0$, then $\left( 1+x \right)^{n} \geq 1+nx$.
+\end{hw}
+\begin{solution}
+	We shall proceed by induction on $n$.
+	
+	\underline{\textit{Base Case}}: We will first start with the base case $n=0$. We observe that $\left( 1+x \right)^{0}=1 \geq 1+(0)x$. Thus, our claim holds for the base case.
+	
+	\underline{\textit{Induction Hypothesis}}: Now, we shall introduce our induction hypothesis. Assume that for $n=k\geq0$ and $x > 0$, then $\left( 1+x \right)^{k} \geq 1+kx$.
+	
+	\underline{\textit{Inductive Step}}: We will now prove that our induction hypothesis holds for $n=k+1$. We see that for $k+1$, we have:
+	\begin{align*}
+		(1+x)^{k+1} &= (1+x)^{k}(1+x) \\
+		&\geq (1+kx)(1+x) \tag{by our induction hypothesis} \\
+		&= 1+x+kx+kx^{2} \\
+		&\geq 1+x+kx \tag{$1+(k+1)x=1+x+kx$}
+	\end{align*}
+
+	Since our induction hypothesis holds for $n=k+1$, we can conclude that, for all $n\in \NN$, our claim holds.
+\end{solution}
+
+\section{Make it Stronger}
+Suppose that the sequence $a_{1}, a_{2}, \ldots$ is defined by $a_{1}=1$ and $a_{n+1}=3a^{2}_{n}$ for $n \geq 1$. We want to prove the following, for every positive integer $n$:
+\begin{equation*}
+	a_{n} \leq 3^{2^{n}}
+\end{equation*}
+
+\begin{hw}
+	Suppose that we want to prove this statement using induction. Can we let our inductive hypothesis be simply $a_{n} \leq 3^{2^{n}}$? Attempt an induction proof with this hypothesis to show why this does not work.
+\end{hw}
+\begin{solution}
+	No, we can't.
+	
+	We see that for our inductive step, we have $a_{n+1}=3a^{2}_{n}$. Then, by our induction hypothesis:
+	\begin{align*}
+		3a^{2}_{n} &\leq 3\left( 3^{2^{n}} \right)^{2} \\
+		&= 3\left( 3^{2^{n+1}} \right) \\
+		&= 3^{2^{n+1}+1}
+	\end{align*}
+
+	However, we see that $3^{2^{n+1}+1} > 3^{2^{n+1}}$; we can't really make any conclusions from this.
+\end{solution}
+
+\begin{hw}
+	Try to instead prove the statement $a_{n} \leq 3^{2^{n}-1}$ using induction.
+\end{hw}
+\begin{solution}
+	We shall proceed by induction on $n$.
+	
+	\underline{\textit{Base Case}}: We have two base cases: $n=1$, and $n=2$.
+	\begin{enumerate}
+		\item 	We shall first start with our first base case $n=1$. We see that, by definition, $a_{1}=1 \leq 3^{2^{1}-1} = 3$.
+		
+		\item For our second base case of $n=2$, we see that $a_{2}=a_{1+1}=3\left( 1 \right)^{2}=3 \leq 3^{2^{2}-1}=27$ 
+	\end{enumerate}
+
+	Thus, our claim holds for the base cases of $n=1$ and $n=2$.
+	
+	\underline{\textit{Induction Hypothesis}}: For any $n=k\geq 1$, $a_{n} \leq 3^{2^{n}-1}$.
+	
+	\underline{\textit{Inductive Step}}: We shall now show that our induction hypothesis holds for $n=k+1$. By definition, $a_{k+1}=3a_{k}^{2}$. Now, we can observe the following:
+	\begin{align*}
+		3a^{2}_{k} &\leq 3\left( 3^{2^{k}-2} \right)^{2} \\
+		&= 3\left( 3^{2^{k+1}-2} \right) \\
+		&= 3^{2^{k+1}-1}
+	\end{align*}
+
+	Thus, we see that our induction hypothesis holds for $n=k+1$.
+	
+	Therefore, we can conclude that our claim holds for any positive integer $n$ by mathematical induction.
+\end{solution}
+
+\begin{hw}
+	Why does the hypothesis in part (b) imply the overall claim?
+\end{hw}
+\begin{solution}
+	We see that because $3^{2^{n}-1}$ is strictly less than $3^{2^{n}}$, then it means that if $a_{n}$ is less than $3^{2^{n}-1}$, then it must also be less than $3^{2^{n}}$.
+\end{solution}
+
+\section{Binary Numbers}
+\begin{hw}
+	Prove that every positive integer $n$ can be written in binary. In other words, prove that for $k \in \NN$ and $c_{i}\in\left\{  0, 1\right\}$, for all $i \leq k$ we can write:
+	\begin{equation*}
+		n = 2^{k}c_{k} + 2^{k-1}c_{k-1} + \ldots + 2^{1}c_{1} + 2^{0}c_{0},
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	We shall proceed by induction on $n$.
+	
+	\underline{\textit{Base Case}}: We first start with our base case of $n=1$. We see that we can write $1 = 1(2^{0})$. Thus, our base case holds for $n=1$.
+	
+	\underline{\textit{Induction Hypothesis}}: Now, we assume that for $n=k \geq 0$, we can write $k = 2^{m}c_{m} + \ldots + 2^{0}c_{0}$ where $m \in \NN$, and $c_{i} \in \left\{  0, 1\right\}$ for all $i \leq m$.
+	
+	\underline{\textit{Inductive Step}}: We will now show that our induction hypothesis holds for $n=k+1$. We observe the following:
+	\begin{align*}
+		k+1 &= \left( 2^{m}c_{m} + \ldots + 2^{0}c_{0} \right) + 1\tag{by our induction hypothesis} \\
+		&= \left( 2^{m}c_{m} + \ldots + 2^{0}c_{0} \right) + (1)2^{0} \\
+		&= \left( 2^{m}c_{m} + \ldots + 2^{0}(c_{0}+1) \right)
+	\end{align*}
+
+	From here, we see that there are two cases:
+	\begin{enumerate}
+		\item $c_{0}=0$, then we see that $2^{0}(c_{0}+1)=2^{0}$, and thus we can write $n+1 = 2^{m}c_{m} + \ldots + 2^{0}$.
+		
+		\item $c_{0}=1$, then we can see that $2^{0}(c_{0}+1)=2^{0}(2)=2^{1}$, and thus it becomes $n+1 = 2^{m}c_{m} + \ldots + 2^{1}c_{1} + 2^{1} + (0)2^{0} = 2^{m}c_{m} + \ldots + 2^{1}(c_{1} + 1) + (0)2^{0}$.
+	\end{enumerate}
+
+	From this, we see that this process will keep on repeating. If $c_{i} = 0$ for all $i \leq m$, then we see that it ends up becoming $n+1 = 2^{m+1}c_{m+1}+2^{m}(0)+\ldots+2^{0}(0)=2^{m+1}$. Thus, we see that our induction hypothesis holds for $n=k+1$.
+	
+	Then, by mathematical induction, we can conclude that our claim holds for all positive integer $n$.
+\end{solution}
+
+\section{Fibonacci for Home}
+\begin{hw}
+	Prove that every third Fibonacci number is even. For example, $F_{3}=2$ is even, and $F_{6}=8$.
+\end{hw}
+\begin{solution}
+	We shall proceed by induction on $n$.
+	
+	\underline{\textit{Base Case}}: We begin with our base case of $n=3$. We see that $F_{3} = F_{2} + F_{1} = 2$, which is an even number. Thus, our claim holds for the base case of $n-3$.
+	
+	\underline{\textit{Induction Hypothesis}}: Assume that for $n=k \geq 3$, $F_{3k}$ is even.
+	
+	\underline{\textit{Inductive Step}}: We will now show that our induction hypothesis holds for $n=k+1$. Now, observe the following:
+	\begin{align*}
+		F_{3(k+1)} &= F_{3k+3} \\
+		&= F_{3k+1} + F_{3k+2} \\
+		&= F_{3k+1} + (F_{3k} + F_{3k+1}) \\
+		&= 2F_{3k+1} + F_{3k} \\
+		&= 2F_{3k+1} + 2m \text{ for $m \in \ZZ$}\tag{by our induction hypothesis} \\
+	\end{align*}
+
+	From here, we see that as $F_{3k+1}$ is an integer, then $2F_{3k+1} = 2l$, for $l \in \ZZ$. Thus, we now have $2l + 2m = 2(l+m) = 2p$, for $p \in \ZZ$. By definition of evenness, $2p$ is an even number. Thus, we see that our induction hypothesis holds for $n=k+1$.
+	
+	Therefore, by mathematical induction, we can conclude that every third Fibonacci number is even.
+\end{solution}
+
+\chapter{Discussion 1B}
+\section{Stable Matching}
+\begin{hw}
+	Consider the set of jobs $J = \left\{  1,2,3\right\}$ and the set of candidates $C = \left\{  A, B, C\right\}$ with the following preferences:
+	
+	
+	
+\begin{tabular}{|c|c|}
+	\hline
+	Jobs & Candidates \\
+	\hline
+	1 & $A > B > C$ \\
+	\hline
+	2 & $B > A > C$ \\
+	\hline
+	3 & $A > B > C$ \\
+	\hline
+\end{tabular}
+$\qquad$
+\begin{tabular}{|c|c|}
+	\hline
+	Candidates & Jobs \\
+	\hline
+	A & $2 > 1 > 3$ \\
+	\hline
+	B & $1 > 3 > 2$ \\
+	\hline
+	C & $1 > 2> 3$ \\
+	\hline
+\end{tabular}
+
+Run the traditional propose-and-reject algorithm. How many days does it take and what is the resulting pairing?
+\end{hw}
+\begin{solution}
+	It takes five days, with the resulting pairings: $\left\{  \left( A, 2 \right), \left( B, 1 \right), \left( C,3 \right)\right\}$
+\end{solution}
+
+\section{Propose-and-Reject Proofs}
+Prove the following statements about the traditional propose-and-reject algorithms:
+\begin{hw}
+	In any execution of the algorithm, if a candidate receives a proposal on day $i$, then she receives some proposal on every day thereafter until termination.
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	By the Improvement Lemma, we see that if a candidate receives a proposal on day $i$, then every day thereafter they will keep on receiving a proposal from the same company until they receive an offer from a different company that's better.
+\end{solution}
+\begin{solution}
+	We shall proceed by induction.
+	
+	First, we see that for our base case of $i=k$, if the candidate receives a proposal on day $k$, then at t everyday after they will keep on receiving the same proposal from the company or better ones.
+	
+	Next, our induction hypothesis is that if a candidate receives a proposal on day $n=k$, then they will receive some proposal every day thereafter until termination.
+	
+	Now, our inductive step: we want to show that our induction hypothesis holds for day $n=k+1$. We see that if the 
+\end{solution}
+\begin{hw}
+	In any execution of the algorithm, if a candidate receives no proposal on day $i$, then she receives no proposal on any previous day $j$, $1 \leq j \leq i$.
+\end{hw}
+\begin{solution}
+	We proceed by contraposition.
+	
+	Let us assume that the candidate receives a proposal on day $j$. Then, by the Improvement Lemma, we see that the candidate must have also received a proposal on day $i$, where $1 \leq j \leq i$.
+\end{solution}
+\begin{hw}
+	In any execution of the algorithm, there is at least one candidate who only receives a single proposal.
+\end{hw}
+\begin{solution}
+	We shall proceed by direct proof.
+	
+	We observe that if a candidate 
+\end{solution}
+
+\section{Be a Judge}
+By stable matching instance, we mean a set of jobs and candidates and their preference lists. For each of the following statements, indicate whether the statement is True or False and justify your answer with a short 2-3 line explanation:
+\begin{hw}
+	There is a stable matching instance for $n$ jobs and $n$ candidates for $n > 1$, such that in a stable matching algorithm with jobs proposing, every job ends up with its least preferred candidate.
+\end{hw}
+\begin{solution}
+	False; we know that there will always be one applicant who only receives a single offer. Then, this means for that every job to end up with its least preferred candidate, every applicant must have rejected $n-1$ jobs.
+\end{solution}
+\begin{hw}
+	In a stable matching, if job $J$ and candidate $C$ each put each other at the top of their respective preferences, then $J$ must be paired with $C$ in every stable pairing.
+\end{hw}
+\begin{solution}
+	Proceed by contradiction.
+\end{solution}
+\begin{hw}
+	In a stable matching instance with at least two jobs and two candidates, if job $J$ and candidate $C$ each put each other at the bottom of their respective preference lists, then $J$ cannot be paired with $C$ in any stable pairing.
+\end{hw}
+\begin{solution}
+	False. Refer to Problem 4.1.
+\end{solution}
+\begin{hw}
+	For every $n > 1$, there is a stable matching instance for $n$ jobs and $n$ candidates which has an unstable pairing where every unmatched job-candidate pair is a rogue couple or pairing.
+\end{hw}
+\begin{solution}
+	I don't know.
+\end{solution}
+
+\section{Stable Matching III}
+True or False?
+\begin{hw}
+	If a candidate accidentally rejects a job she prefers on a given day, then the algorithm ends with a rogue couple.
+\end{hw}
+\begin{solution}
+	False.
+\end{solution}
+\begin{hw}
+	The Propose-and-Reject Algorithm never produces a candidate-optimal matching.
+\end{hw}
+\begin{solution}
+	True.
+\end{solution}
+\begin{hw}
+	If the same job is last on the preference list of every candidate, the job must end up with its least preferred candidate.
+\end{hw}
+\begin{solution}
+	...
+\end{solution}
+
+\chapter{Discussion 2A}
+\section{Introduction}
+We want to show that $\sum{v\in V}{} \text{deg($v$)} = 2 \lvert E \rvert$.
+
+We induct on the number of edges.
+
+\textbf{\underline{Base Case}}: Our base case is $n=0$: we see that for a graph with $0$ edges, there exists a single vertex with degree $0$. Therefore, our claim holds.
+
+\textbf{\underline{Induction Hypothesis}}: $\sum{v \in V}{} \text{deg($v$)} = 2\lvert E \rvert$.
+
+\textbf{\underline{Inductive Step}}: We want to show this holds true for $n+1$ edges. First, let us make a graph $G$ which has $n+1$ edges. Then, let us first remove an edge. We see then that by our induction hypothesis, we have $\sum{v \in V}{} \text{deg($v$)}=2 \lvert n \rvert$. Now, let us add back in the edge that we removed; from here, we see that by adding back in the edge which we removed earlier, the degree increases by 2. Therefore, our claim holds for $n+1$ edges.
+\end{document}
+
+\section{Eulerian Tour and Eulerian Walk}
+\begin{hw}
+	Is there an Eulerian tour in the graph above? If no, give justification. If yes, provide an example. 
+\end{hw}
+\begin{solution}
+	We observe that since the graph isn't even degree, then by Euler's theorem, there doesn't exist an Eulerian tour.
+\end{solution}
+\begin{hw}
+	Is there an Eulerian walk?
+\end{hw}
+\begin{solution}
+	We observe that there is an Eulerian walk by taking the path [insert path here].
+\end{solution}
+\begin{hw}
+	What is the condition for an Eulerian walk?
+\end{hw}
+\begin{solution}
+	We observe that if there are 0 or 2 odd degree vertices, then there exists an Eulerian walk.
+	
+	We observe that for in the case of a graph with 0 odd degree vertices then there is an Eulerian tour. This thus implies that there is an Eulerian walk as well.
+	
+	Next, we want to show that for a graph with 2 odd degree vertices, then there exists an Eulerian walk. First, let us construct a graph with 0 odd degree 
+	
+	If there is an Eulerian walk, then we can list down some Eulerian walk $a -> b -> \ldots -> z$, where $z$ could be the same as $a$.
+	
+	Now, we see that in the middle, we see that there is an edge into and out of each of the vertices inside. All of them are even degree. Now, we can include the first and last vertices; we see that the first vertex has an edge into the middle, and the one at the end has one edge out.
+	
+	Therefore, we see that the end vertices can either be 2 odd degree verticies, or 0.
+	
+	Now to prove the other direct: if there are 0 odd vertices, then we know that by definition there has to be an Eulerian tour. And we observe that every Eulerian tour is also an Eulerian walk.
+	
+	Now, if there are two odd degree vertices. Revisit the original graph. We see that if we add in a new node, we can then draw a path from each ends to the new node, making every node even degree. Thus, there is now an Eulerian tour. From here, we see that it's the path $a -> b -> \ldots -> z -> a$. But, if we remove the Eulerian tour, we now have $a -> b -> \ldots -> z$, which is an Eulerian walk! Crazy.
+\end{solution}
+
+\begin{hw}
+	We want to show that a tree with $\geq 2$ vertices is bipartite.
+\end{hw}
+\begin{solution}
+	Each layer of a tree is in a different group.
+	
+	We proceed by induction on $v$.
+	
+	First, for $n=2$, it's trivial to show that it's bipartite.
+	
+	Next, we assume that our claim holds true for $n+1$. First, have a tree with $n+1$ vertices. Now, remove one vertex which is a leaf of the tree, giving us $n$ vertices. Now, by our induction hypothesis, we have that the tree $G'$ is bipartite. And from here, we can get our two groups $A$ and $B$. Now, if we add back the removed vertex. If 9 was adjacent to a vertex in group $A$, then we have two new groups $A'$ and $B'$; in this case, 9 would be in the group $B'$. If 9 was adjacent to $B$
+\end{solution}

@@ -1,0 +1,465 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+\newcommand{\innerproduct}[2]{\left\langle{#1}, {#2}\right\rangle}
+\DeclareMathOperator*{\proj}{\mathrm{proj}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+\mytitle{Math 110: Homework 12}{Fall 2023}
+
+\section{Injectivity and Surjectivity}
+\begin{hw}
+	Let $T \in \mathcal{L}(V,W)$. Prove that
+	\begin{enumerate}
+		\item $T$ is injective if and only if $T^{*}$ is surjective.
+		\item $T^{*}$ is injective if and only if $T$ is surjective.
+	\end{enumerate}
+\end{hw}
+\begin{solution}
+	To prove the first statement, we will work in reverse and suppose that $T^{*}$ is surjective. From here, we recall that $\vrange T^{*} = (\vnull T)^{\perp}$. This means the following:
+	\begin{align*}
+		T^{*} \text{ is surjective} &\iff \vrange T^{*} = V \\
+		&\iff (\vnull T)^{\perp} = V \\
+		&\iff \vnull T = \left\{  0 \right\} \\
+		&\iff T \text{ is injective}
+	\end{align*}
+
+	For the second statement, we note that if we replaced $T$ with $T^{*}$, and note that $(T^{*})^{*} = T$, then we observe that first, $\vrange T = (\vnull T^{*})^{\perp}$, and also that this means then that:
+	\begin{align*}
+		T \text{ is surjective} &\iff \vrange T = V \\
+		&\iff (\vnull T^{*})^{\perp} = V \\
+		&\iff \vnull T^{*} = \left\{  0 \right\} \\
+		&\iff T^{*} \text{ is injective}
+	\end{align*}
+\end{solution}
+
+\newpage
+
+\section{Self-Adjointness}
+\begin{hw}
+	Suppose $S,T \in \mathcal{L}(V)$ are self-adjoint. Prove that $ST$ is self-adjoint if and only if $ST = TS$.
+\end{hw}
+\begin{solution}
+	To begin with, we proceed with the forwards direction. Suppose that $ST$ is self-adjoint. Then, by definition, we observe that $ST = (ST)^{*}$. Then, we observe the following:
+	\begin{align*}
+		ST &= (ST)^{*} \\
+		&= T^{*}S^{*}
+	\end{align*}
+
+	However, we note that $T,S$ are also self-adjoint, meaning that $T^{*} = T$ and $S^{*} = S$. So, we have that $T^{*}S^{*} = TS$. Thus, we see that $ST = TS$ as desired.
+	
+	For the backwards direction, suppose that $ST = TS$. Furthermore, we note that in fact, $S, T$ are self-adjoint, so we have:
+	\begin{align*}
+		ST &= TS \\
+		&= T^{*}S^{*} \\
+		&= (ST)^{*}
+	\end{align*}
+
+	And since $ST = (ST)^{*}$, we see that indeed, $ST$ is self-adjoint as desired.
+\end{solution}
+
+\newpage
+
+\section{Projector}
+\begin{hw}
+	Let $P \in \mathcal L(V)$ be such that $P^{2} = P$. Prove that there is a subspace $U$ of $V$ such that $P_{U} = P$ if and only if $P$ is self-adjoint.
+\end{hw}
+\begin{solution}
+	We shall begin with the forward direction. Suppose that $P$ is an orthogonal projection $P_{U}$ onto a subspace $U$ of $V$. From here, we observe the following:
+	\begin{align*}
+		\innerproduct{P_{U}v}{w} &= \innerproduct{P_{U}v}{P_{U}w + (I - P_{U})w} \tag{Rewriting $Iw$ as $P_{U} + (I - P_{U})w$}\\
+		&= \innerproduct{P_{U}v}{P_{U}w} + \innerproduct{P_{U}v}{(I - P_{U})w} \tag{Properties of Inner Product}\\
+		&= \innerproduct{P_{U}v}{P_{U}w} \tag{$P_{U}v \in U$, but $w - P_{U}w \in U^{\perp}$}\\
+		&= \innerproduct{P_{U}v}{P_{U}w} + \innerproduct{(I - P_{U})v}{P_{U}w} \\
+		&= \innerproduct{P_{U}v + (I - P_{U})v}{P_{U}w} \\
+		&= \innerproduct{v}{P_{U}w}
+	\end{align*}
+
+	Thus, we see that, indeed, $P$ is self-adjoint as desired.
+	
+	For the backwards direction, let us suppose that $P$ is self-adjoint. Then, by definition, we see that $P = P^{*} = P^{2}$. Furthermore, we have that $\innerproduct{Pv}{w} = \innerproduct{w}{Pv}$.
+	
+	Now, with this in mind, let us denote $U = \vrange P$. From here, let us take $v,w \in V$ and we observe the following:
+	\begin{align*}
+		\innerproduct{Pv}{(I - P)w} &= \innerproduct{(I-P)^{*}Pv}{w} \\
+		&= \innerproduct{(I-P)Pv}{w} \\
+		&= \innerproduct{Pv - P^{2}v}{w} \\
+		&= \innerproduct{Pv - Pv}{w} \\
+		&= \innerproduct{0}{w} \\
+		&= 0
+	\end{align*}
+
+	Then, we note that since the inner product is equal to zero, this maens then that $Pv$ and $(I - P)w$, for $v, w \in V$, are orthogonal to each other. Since $v,w$ are arbitrary, we observe that this means that $P$ is orthogonal to $I - P$.
+	
+	From here, we note that for any $v \in V$, we have that $v = u + w = Pv + (I - P)v$. And we note that since we let $U = \vrange P$, then $Pv \in U$, and $(I - P)v \in U^{\perp}$. Thus, by definition, we observe that, indeed, $P$ is an orthogonal projection $P_{U}$.
+\end{solution}
+
+\newpage
+
+\section{Anti-Hermitian}
+\begin{hw}
+	Let $n \in \NN$ be fixed. Consider the real space $V \coloneq \vspan\left\{  1, \cos x, \sin x,\ldots, \cos nx, \sin nx \right\}$, equipped with the inner product space
+	\begin{equation*}
+		\innerproduct{f}{g} \coloneq \int_{-\pi}^{\pi} f(x) g(x) \mathrm dx.
+	\end{equation*}
+
+	Show that the differentiation operator $D \in \mathcal L(V)$ satisfies $D^{*} = -D$. 
+\end{hw}
+\begin{solution}
+	To begin with, we note that all functions in $V$ are periodic with a period of $2\pi$. In other words, we have that $f(\pi) = f(-\pi)$ for $f \in V$.
+	
+	Now, with this in mind, we observe the following:
+	\begin{align*}
+		\innerproduct{Df}{g} &= \int_{-\pi}^{\pi} f'(x)g(x) \mathrm dx \\
+		&= f(x)g(x)\big|_{-\pi}^{\pi} - \int_{-\pi}^{\pi} f(x)g'(x) \mathrm dx \\
+		&= f(\pi)g(\pi) - f(-\pi)g(-\pi) - \int_{-\pi}^{\pi} f(x)g'(x)\mathrm dx \\
+		&= f(\pi)g(\pi) - f(\pi)g(\pi) - \int_{-\pi}^{\pi} f(x)g'(x)\mathrm dx \\
+		&= -\int_{-\pi}^{\pi} f(x)g'(x)\mathrm dx \\
+		&= \innerproduct{f}{(-D)g}
+	\end{align*}
+
+	Thus, we observe that, indeed, we have that $D^{*} = -D$ as desired.
+\end{solution}
+
+\newpage
+
+\section{A Normal Problem}
+\begin{hw}
+	Suppose that $T$ is normal. Prove that, for any $\lambda \in \mathbb{F}$ and any $k \in \NN$, we have:
+	\begin{equation*}
+		\vnull (T-\lambda I)^{k} = \vnull (T-\lambda I).
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	We note that since $T$ is normal, then we have that $S = (T - \lambda I)$ is normal as well. From here, we will first introduce the following lemma, then instead shall prove a more general result.
+	
+	To begin with, we introduce the following lemma:
+	\begin{lem}
+		Given that $T$ is a normal operator, and for any $k \in \NN$ then we have:
+		\begin{equation*}
+			(TT^{*})^{k} = T^{k}(T^{*})^{k}
+		\end{equation*}
+	\end{lem}
+	\begin{innerproof}
+		We shall proceed with induction.
+		
+		To begin with, we observe that for the base case of $k = 1$, we have:
+		\begin{equation*}
+			(TT^{*})^{1} = TT^{*} = T^{1}(T^{*})^{1}.
+		\end{equation*}
+	
+		Thus, our claim holds for $k = 1$. For $k = 2$, we see that
+		\begin{align*}
+			(TT^{*})^{2} &= TT^{*}TT^{*} \\
+			&= TTT^{*}T^{*} \\
+			&= T^{2}(T^{*})^{2}
+		\end{align*}
+		
+		Now, suppose that for $n = k > 2$, our claim holds. We now will show that it holds for $n = k + 1$ as well. To do this, we first observe the following:
+		\begin{align*}
+			(TT^{*})^{k+1} &= (TT^{*})^{k}(TT^{*}) \\
+			&= T^{k}(T^{*})^{k}(T^{*}T) \\
+			&= T^{k}(T^{*})^{k+1}T
+		\end{align*}
+	
+		Then from here, we can simply switch the $T$ and $T^{*}$ with each other repeatedly, moving the $T$ inside until we eventually get $T^{k+1}(T^{*})^{k+1}$. This is possible due to $T$ being normal.
+		
+		Thus, we have proven our claim.
+	\end{innerproof}
+
+	We note here that $(T^{*}T)^{k} = (T^{*})^{k}T^{k}$; we simply replace $T$ with $T^{*}$ in the lemma above (and use the fact that $(T^{*})^{*} = T$) to see that this is the case.
+
+	We will also introduce the following observation:
+	\begin{rmk}
+		If we have some $T$ which is self-adjoint, and we consider some $v$ such that $T^{k}v = 0$, then we see the following:
+		\begin{align*}
+			\innerproduct{T^{k}v}{T^{k-2}v} &= \innerproduct{T^{k-1}v}{T^{k-1}v} \\
+			&= 0
+		\end{align*}
+	
+		Then, we observe that $T^{k-1}v$ must be equal to $0$, since $\innerproduct{v}{v} = 0$ if and only if $v = 0$.
+		
+		Then, from here, we can simply keep on repeating this process recursively until we hit $Tv = 0$.
+	\end{rmk}
+
+	Now, we will prove a more generalised lemma:
+	\begin{lem}
+		Given that $T$ is a normal operator, then $\vnull T^{k} = \vnull T$.
+	\end{lem}
+	\begin{innerproof}
+		To do this, we first show that $\vnull T \subseteq \vnull T^{k}$.
+		
+		For this inclusion, we note that for any $v \in \vnull T$, we have that $Tv = 0$. Then, it follows that $T^{k} = T^{k-1}(Tv) = T^{k-1}(0) = 0$. Thus, we see that the inclusion holds.
+		
+		Next, for the other inclusion, we want to show that $\vnull T^{k} \subseteq \vnull T$. To do this, let us consider some $v \in \vnull T^{k}$.
+		
+		Then, from here, we have that $T^{k}v = 0$. Then, this means that $(T^{*}T)^{k}v = (T^{*})^{k}T^{k}v = (T^{*})^{k}0 = 0$.
+		
+		Thus, we have that $(T^{*}T)^{k}v = 0$.
+		
+		Now, we note here that since $T$ is normal, we have that $(T^{*}T)^{*} = T^{*}(T^{*})^{*} = T^{*}T$. In other words, $T^{*}T$ is self-adjoint.
+		
+		From our observation in Remark 5.2, we observe then that, in fact, we also have that $T^{*}Tv = 0$. Then, with this in mind, we do the following:
+		\begin{align*}
+			\innerproduct{T^{*}Tv}{v} &= \innerproduct{Tv}{Tv} \\
+			&= 0
+		\end{align*}
+	
+		And since $\innerproduct{v}{v} = 0$ if and only if $v = 0$, we see that, in fact, we have that $Tv = 0$. In other words, given that $v \in \vnull T^{k}$, we have that $v \in \vnull T$ as well.
+		
+		Thus, we have that $\vnull T^{k} \subseteq \vnull T$.
+	
+		Then, since we have these two inclusions, we can in fact conclude that they are equal.
+	\end{innerproof}
+
+	Now, with this lemma proven, we note that since $S$ is normal, then we can apply the lemma above to $S$ and thus we have proven our claim as desired.
+\end{solution}
+
+\end{document}

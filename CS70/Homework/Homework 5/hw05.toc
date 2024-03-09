@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Equivalent Polynomials}{3}{section.1}%
+\contentsline {section}{\numberline {2}One Point Interpolation}{4}{section.2}%
+\contentsline {section}{\numberline {3}The CRT and Lagrange Interpolation}{5}{section.3}%
+\contentsline {section}{\numberline {4}Trust No One}{8}{section.4}%
+\contentsline {section}{\numberline {5}Secret Sharing With Spies}{10}{section.5}%
+\contentsline {section}{\numberline {6}Error-Correcting Codes}{11}{section.6}%
+\contentsline {section}{\numberline {7}Alice and Bob}{12}{section.7}%

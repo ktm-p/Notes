@@ -1,0 +1,445 @@
+\documentclass[openany]{book}
+%%%%% PREAMBLE
+%BEGIN_FOLD
+%%%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%%%
+
+%%%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%%%
+
+%%%%% PAGE SETUP
+% basic %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% header/footer %
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+\setlength{\headheight}{15pt}
+\renewcommand{\chaptermark}[1]{\markright{#1}{}}
+\renewcommand{\sectionmark}[1]{}
+\fancypagestyle{contentpage}{%
+	\lhead{}
+	\rhead{\textit{\rightmark}}
+	\cfoot{\thepage}
+}
+\pagestyle{contentpage}
+
+% table of content %
+\makeatletter
+\newcommand\mytoc{%
+	\if@twocolumn
+	\@restonecoltrue\onecolumn
+	\else
+	\@restonecolfalse
+	\fi
+	\toctrue
+	\chapter*{\contentsname
+		\@mkboth{%
+			\contentsname}{\contentsname}}\addcontentsline{toc}{chapter}{Contents}%
+	\tocfalse
+	\@starttoc{toc}%
+	\if@restonecol\twocolumn\fi
+}
+\makeatother
+
+% chapter formatting %
+\newif\iftoc
+\titleformat
+{\chapter} % command
+[display] % shape
+{\cabin} % font
+{} % label
+{2in} % 
+{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Chapter}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}
+[
+\vspace{-20pt}%
+\rule{\textwidth}{0.1pt}
+\vspace{0.0in}
+]
+\titlespacing{\chapter}
+{0pt}
+{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}
+{0pt}
+
+% hyperlink formatting %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+%%%%%
+
+%%%%% ENVIRONMENTS STYLES
+% purple box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% green box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% yellow box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% blue box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% red box %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%%%
+
+%%%%% ENVIRONMENTS
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% INNER PROOF ENVIRONMENT %
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+
+% purple boxes (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=chapter]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% green boxes (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% blue boxes (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=chapter]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% red boxes (remarks) %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+
+% yellow boxes (warnings) %
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%%%
+
+%%%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%%%
+
+%%%%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+%%%%%
+
+%%%%% REDEFINING COMMANDS
+%\let\oldint\int
+%\renewcommand{\int}[2]{\oldint\limits_{#1}^{#2}}
+%\let\oldprod\prod
+%\renewcommand{\prod}[2]{\oldprod\limits_{#1}^{#2}}
+%\let\oldsum\sum
+%\renewcommand{\sum}[2]{\oldsum\limits_{#1}^{#2}}
+%%%%%
+%END_FOLD
+%%%%%
+
+
+\begin{document}
+\mytitle{Math 110: Introduction to Linear Algebra}{Fall 2023}
+
+\chapter{Vector Spaces}
+\section{$\RR^{n}$ and $\CC^{n}$}
+\subsection{Complex Numbers}
+The notion of complex numbers was created in order to deal with negative roots; by definition, we have $i \coloneq \sqrt{-1}$. The following is the formal definition:
+
+\begin{defn}[Complex Numbers]\label{Def: Complex Numbers}
+	A \textbf{complex number} is defined as an ordered pair $(a,b)$, where $a, b \in \RR$. However, we will write it as $a + bi$.
+	
+	The set of complex numbers is denoted by $\CC$, and is defined as:
+	\begin{equation*}
+		\CC = \left\{  a + bi : a, b \in \RR\right\}.
+	\end{equation*}
+
+	We define addition and multiplication on $\CC$ as follow, for $a,b,c,d \in \RR$:
+	\begin{align*}
+		(a+bi) + (c + di) &= (a+c) + (b+d)i \\
+		(a+bi)(c+di) &= (ac-bd)+(ad+bc)i.
+	\end{align*}
+\end{defn}
+
+\begin{rmk}
+	We note here that the reals $\RR$ can be thought of as a subset of $\CC$, where $b = 0$.
+\end{rmk}
+
+Using multiplication as defined above, one can verify that $i^{2} = -1$; we simply substitute in $a = 0$ and $b = 1$, and recall that $i = \sqrt{-1}$.
+
+Furthermore, when it comes to multiplying, we can simply rederive the formula by recalling that $i = \sqrt{-1}$ (and thus $i^{2} = -1$).
+
+\begin{thm}[Properties of Complex Arithmetic]\label{Thm: Complex Arithmetic}
+	The following are properties of complex arithmetic, for all $\alpha, \beta, \lambda \in \CC$:
+	
+	\begin{enumerate}
+		\item \textbf{Commutativity}: $\alpha + \beta = \beta + \alpha$ and $\alpha\beta = \beta\alpha$, for all $\alpha, \beta \in \CC$.
+		
+		\item \textbf{Associativity}: $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$ and $(\alpha\beta)\lambda = \alpha(\beta\lambda)$.
+		
+		\item \textbf{Identities}: $\lambda + 0 = \lambda$, and $\lambda(1) = \lambda$.
+		
+		\item \textbf{Additive Inverse}: For all $\alpha \in \CC$, there exists a $\beta \in \CC$ such that $\alpha + \beta = 0$.
+		
+		\item \textbf{Multiplicative Inverse}: For all $\alpha \in \CC$, where $\alpha \not= 0$, there exists a $\beta \in \CC$ such that $\alpha\beta = 1$.
+		
+		\item \textbf{Distributive Property}: $\lambda(\alpha + \beta) = \lambda\alpha + \lambda\beta$.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	We will now prove the properties presented above. Before we proceed, let us define $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$, where $a, b, c, d, e, f \in \RR$.
+	
+	\begin{enumerate}
+		\item \textbf{Commutativity}
+		\begin{innerproof}
+			We first observe the following:
+			\begin{align*}
+				\alpha + \beta &= (a + bi) + (c + di) \\
+				&= (a + c) + (b + d)i \\
+				\beta + \alpha &= (c + di) + (a + bi) \\
+				&= (c + a) + (d + b)i
+			\end{align*}
+		
+			By commutativity of real numbers, we observe then that $(a + c) + (b + d)i = (c + a) + (d + b)i$, and thus we have that $\alpha + \beta = \beta + \alpha$.
+			
+			Next, we observe that
+			\begin{align*}
+				\alpha\beta &= (a+bi)(c+di) \\
+				&= (ac - bd) + (ad + bc)i \\
+				\beta\alpha &= (c+di)(a+bi) \\
+				&= (ca - db) + (cb + da)i
+			\end{align*}
+		
+			Once again, we observe that by commutativity of real numbers, we have that $(ac - bd) + (ad + bc)i = (ca - db) + (cb + da)i$, and thus we have that $\alpha\beta = \beta\alpha$ as desired.
+		\end{innerproof}
+	
+		\item \textbf{Associativity}:
+		\begin{innerproof}
+			We first see the following:
+			\begin{align*}
+				(\alpha + \beta) + \lambda &= ( (a+bi) + (c + di)) + (e + fi) \\
+				&= ( (a+c) + (b+d)i) + (e + fi) \\
+				&= (a + c + e) + (b + d + f)i \\
+				\alpha + (\beta + \lambda) &= (a + bi) + ( (c + di) + (e+fi)) \\
+				&= (a+bi) + ( (c+e) + (d + f)i) \\
+				&= (a + c + e) + (b + d +f)i
+			\end{align*}
+		
+			Thus, we see that $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$.
+			
+			Next, we observe the following:
+			\begin{align*}
+				(\alpha\beta)\lambda &= ( (a+bi)(c+di))(e+fi) \\
+				&= ( (ac - bd) + (ad + bc)i)(e + fi) \\
+				&= (ace - bde - adf - bcf) + (ade + bce + acf - bdf)i \\
+				\alpha(\beta\lambda) &= (a + bi)( (c+di)(e+fi)) \\
+				&= (a+bi) ( (ce - df) + (cf + de)i) \\
+				&= (ace -bde -adf - bcf) + (ade+bce+acf-bdf)i
+			\end{align*}
+		
+			We get the last lines for $(\alpha\beta)\lambda$ and $\alpha(\beta\lambda)$ using commutativity of real numbers. Thus, we see the that $(\alpha\beta)\lambda = \alpha(\beta\lambda)$, as desired.
+		\end{innerproof}
+	
+		\item \textbf{Identities}:
+		\begin{innerproof}
+			We first note the following definitions $0 = 0 + 0i$, and $1 = 1 + 0i$. Now, with this in mind, we see then that:
+			\begin{align*}
+				\lambda + 0 &= (e + fi) + (0 + 0i) \\
+				&= (e+0) + (f+0)i \\
+				&= e + fi \\
+				&= \lambda \\
+				\lambda(1) &= (e+fi)(1 + 0i) \\
+				&= (e(1) - f(0)) + (e(0) + f(1))i \\
+				&= e + fi \\
+				&= \lambda
+			\end{align*}
+		\end{innerproof}
+	
+	\item \textbf{Additive Inverse}:
+	\begin{innerproof}
+		We observe that for every $\alpha \in \CC$, there exists an element $\beta = -\alpha = -(a + bi) = -a - bi$ such that $\alpha + (-\alpha) = 0$: 
+		\begin{align*}
+			\alpha + -\alpha &= (a + bi) + -(a + bi) \\
+			&= (a + -a) + (b + -b)i \\
+			&= 0 + 0i \\
+			&= 0
+		\end{align*}
+		
+		We note here that as $\CC$ is closed under addition and multiplication, then we have that $\beta = -\alpha \in \CC$.
+	\end{innerproof}
+
+	\item \textbf{Multiplicative Inverse}:
+	\begin{innerproof}
+		We observe that for every $\alpha \not= 0 \in \CC$, we have an element $\beta = \frac{1}{\alpha} = $
+	\end{innerproof}
+	\end{enumerate}
+
+\end{proof}
+
+\end{document}

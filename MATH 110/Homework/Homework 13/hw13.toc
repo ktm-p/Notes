@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Self-Adjoint Operators and Minimal Polynomials}{3}{section.1}%
+\contentsline {section}{\numberline {2}Positive Operators}{4}{section.2}%
+\contentsline {section}{\numberline {3}Non-negative Operators}{6}{section.3}%
+\contentsline {section}{\numberline {4}Isometries}{9}{section.4}%
+\contentsline {section}{\numberline {5}Singular Values}{10}{section.5}%

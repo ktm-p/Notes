@@ -1,0 +1,120 @@
+\contentsline {chapter}{Contents}{2}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Lecture - 8/24/2023}{6}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Complex Numbers}{6}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Addition of Complex Numbers}{6}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Multiplication of Complex Numbers}{6}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Complex Numbers, Polar Form, and Exponentials}{7}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2}Discussion - 8/25/2023}{7}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Vector Spaces}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Lecture - 8/29/2023}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Fields}{9}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Vector Spaces}{10}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Lecture - 8/31/2023}{12}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Subspaces}{12}{subsection.2.2.1}%
+\contentsline {chapter}{\numberline {3}Direct Sums and Linear Independence}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Lecture - 9/5/2023}{13}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Recap}{13}{subsection.3.1.1}%
+\contentsline {subsubsection}{A Little Thought Experiment}{14}{Item.24}%
+\contentsline {subsection}{\numberline {3.1.2}Direct Sums}{14}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Lecture - 9/7/2023}{15}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Recap}{15}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Extending to Multiple Subspaces}{15}{subsection.3.2.2}%
+\contentsline {subsubsection}{Intersections and Sum}{15}{subsection.3.2.2}%
+\contentsline {subsubsection}{Direct Sum}{15}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Linear Dependence and Independence}{15}{subsection.3.2.3}%
+\contentsline {subsubsection}{(Linear) Span(ning)}{15}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Independence}{16}{subsection.3.2.4}%
+\contentsline {subsubsection}{Another Look at Dependence}{17}{rmk.3.19}%
+\contentsline {section}{\numberline {3.3}Discussion - 9/8/2023}{17}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Independence and Bases}{20}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Lecture - 9/12/2023}{20}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Removing Independent Vectors}{20}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Basis}{20}{subsection.4.1.2}%
+\contentsline {subsubsection}{Recap}{20}{defn.4.1}%
+\contentsline {subsubsection}{Subspaces}{21}{cor.4.4}%
+\contentsline {section}{\numberline {4.2}Lecture - 9/14/2023}{22}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Recap}{22}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Linear Maps}{23}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Discussion - 9/15/2023}{24}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Linear Maps}{27}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Lecture - 9/19/2023}{27}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Linear Maps}{27}{subsection.5.1.1}%
+\contentsline {subsubsection}{A Little Thought Experiment (Save Me)}{27}{Item.44}%
+\contentsline {subsubsection}{The Set of Linear Maps}{28}{example.5.3}%
+\contentsline {subsubsection}{Special Spaces (actually, subspaces) Associated to a Linear Map}{29}{defn.5.6}%
+\contentsline {section}{\numberline {5.2}Lecture - 9/20/2023}{30}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}True or False?}{30}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Range}{30}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}The Fundamental Theorem of Linear Maps}{30}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Finite-Dimensional Domains}{32}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Matrices}{32}{subsection.5.2.5}%
+\contentsline {section}{\numberline {5.3}Discussion - 9/22/2023}{32}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Matrix Representation, Invertibility, and Isomorphisms}{36}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Lecture - 9/26/2023}{36}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Matrix Representations}{36}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Lecture - 9/28/2023}{37}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Invertibility}{37}{subsection.6.2.1}%
+\contentsline {subsubsection}{Linearity of Inverse}{37}{rmk.6.2}%
+\contentsline {subsubsection}{Dimensionality of W}{37}{thm.6.3}%
+\contentsline {subsection}{\numberline {6.2.2}Isomorphisms}{38}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Duality}{39}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Discussion - 9/29/2023}{40}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Coordinates}{40}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Definitions of Matrix}{40}{subsection.6.3.2}%
+\contentsline {chapter}{\numberline {7}Duality}{42}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Lecture - 10/3/2023}{42}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Lecture - 10/5/2023}{44}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Dual Maps}{44}{subsection.7.2.1}%
+\contentsline {chapter}{\numberline {8}Midterm Pain}{47}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Lecture - 10/12/2023}{47}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Matrix Representations v2}{48}{subsection.8.1.1}%
+\contentsline {chapter}{\numberline {9}Polynomials}{49}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Lecture - 10/17/2023}{49}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Lecture - 10/19/2023}{51}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Eigenvalues and Eigenvectors}{51}{subsection.9.2.1}%
+\contentsline {section}{\numberline {9.3}Discussion - 10/20/2023}{53}{section.9.3}%
+\contentsline {chapter}{\numberline {10}Eigenwhateverthefuck}{55}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Lecture - 10/24/2023}{55}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Recap}{55}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Applying Polynomials to Operators}{56}{subsection.10.1.2}%
+\contentsline {section}{\numberline {10.2}Lecture - 10/26/2023}{57}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Minimal Polynomials}{57}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Triangularisable Case}{59}{subsection.10.2.2}%
+\contentsline {section}{\numberline {10.3}Discussion - 10/27/2023}{59}{section.10.3}%
+\contentsline {chapter}{\numberline {11}Dialganalisation}{61}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Lecture - 10/31/2023}{61}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}Triangular Form}{61}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}Diagonal Form}{62}{subsection.11.1.2}%
+\contentsline {section}{\numberline {11.2}Lecture - 11/2/2023}{63}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}Commutativity}{64}{subsection.11.2.1}%
+\contentsline {section}{\numberline {11.3}Discussion - 11/3/2023}{64}{section.11.3}%
+\contentsline {subsection}{\numberline {11.3.1}How to Find Eigenvalues/Eigenvectors}{64}{subsection.11.3.1}%
+\contentsline {subsection}{\numberline {11.3.2}Is it Diagonalisable?}{65}{subsection.11.3.2}%
+\contentsline {chapter}{\numberline {12}Inner Products}{67}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Lecture - 11/7/2023}{67}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}Inner Products}{67}{subsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.1.2}Basic Consequences}{68}{subsection.12.1.2}%
+\contentsline {subsection}{\numberline {12.1.3}Orthogonality}{69}{subsection.12.1.3}%
+\contentsline {subsection}{\numberline {12.1.4}Projections (Onto 1D Subspaces)}{69}{subsection.12.1.4}%
+\contentsline {section}{\numberline {12.2}Lecture - 11/9/2023}{70}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}Some Corollaries}{70}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}Talks on Orthogonality}{71}{subsection.12.2.2}%
+\contentsline {subsection}{\numberline {12.2.3}Orthornomal Bases Properties}{72}{subsection.12.2.3}%
+\contentsline {subsection}{\numberline {12.2.4}Connection with Functionals}{72}{subsection.12.2.4}%
+\contentsline {chapter}{\numberline {13}More Inner Products}{73}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Lecture - 11/16/2023}{73}{section.13.1}%
+\contentsline {subsection}{\numberline {13.1.1}Recap}{73}{subsection.13.1.1}%
+\contentsline {subsection}{\numberline {13.1.2}Adjoints}{73}{subsection.13.1.2}%
+\contentsline {chapter}{\numberline {14}Adjoints And Stuff}{76}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Lecture - 11/21/2023}{76}{section.14.1}%
+\contentsline {subsection}{\numberline {14.1.1}Self-Adjoint Operators}{77}{subsection.14.1.1}%
+\contentsline {subsubsection}{Blast from the Past}{78}{Item.97}%
+\contentsline {chapter}{\numberline {15}More on Operators}{79}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Lecture - 11/28/2023}{79}{section.15.1}%
+\contentsline {subsection}{\numberline {15.1.1}Recap}{79}{subsection.15.1.1}%
+\contentsline {subsection}{\numberline {15.1.2}Nonnegative and Positive Operators}{79}{subsection.15.1.2}%
+\contentsline {subsection}{\numberline {15.1.3}SVDs}{80}{subsection.15.1.3}%
+\contentsline {section}{\numberline {15.2}Lecture - 11/30/2023}{81}{section.15.2}%
+\contentsline {subsection}{\numberline {15.2.1}Isometry}{82}{subsection.15.2.1}%
+\contentsline {subsection}{\numberline {15.2.2}Jordan Normal Form}{82}{subsection.15.2.2}%

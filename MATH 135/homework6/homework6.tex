@@ -1,0 +1,321 @@
+\documentclass{article}
+\usepackage{homework}
+\usepackage{macros}
+
+%% LIST OF PROBLEMS SETUP %%
+\renewcommand\thmtformatoptarg[1]{:\enspace#1}
+\makeatletter
+\def\ll@homework{
+	\thmt@thmname~
+	\protect\numberline{\csname the\thmt@envname\endcsname}%
+	\ifx\@empty
+	\thmt@shortoptarg
+	\else
+	\protect\thmtformatoptarg{\thmt@shortoptarg}
+	\fi
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\numberline}[1]{\hb@xt@3em{#1}}
+\makeatother	
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\listoftheorems
+	\newpage
+}
+
+\begin{document}
+\mytitle{Math 135: Homework 6}{Spring 2024}
+
+\setcounter{section}{3}
+\section{Natural Numbers}
+\begin{hw}{19}[0][0]
+	Prove that if $m$ is a natural number, and $d$ is a nonzero number, then there exists numbers $q$ and $r$ such that $m = (dq) + r$, with $r < d$.
+\end{hw}
+\begin{solution}
+	We will proceed by induction. First, let us construct a set $A$ as follows:
+	\begin{equation*}
+		A \coloneq \brc{n \in \omega : \exists q \exists r \br{ \pr{n = dq + r} \land \pr{r < d}}}.
+	\end{equation*}
+
+	Now, we first look at $n = 0$. We observe that if $n = 0$, then for any $d > 0$, we have $0 = 0d + 0$. And we note that $0 < d$ by definition of $d$. Thus, we see that, indeed, $n \in A$.
+	
+	Next, suppose that $k \in A$. Then, we look at $k^{+}$. We note that by our induction hypothesis, we have $k = dq + r$. Then, this means that $k^{+} = \pr{dq + r}^{+} = dq + r^{+}$.
+	
+	Next, we note that $r < d$ by our induction hypothesis, and thus we have that $r^{+} < d^{+}$. If $r^{+} < d^{+}$, then by definition we have that $r <= d$.
+	
+	Then there are two cases. In the first one, if $r < d$, then $k^{+}$ satisfy the condition as desired.
+	
+	On the other hand, $r = d$, then we have the following:
+	\begin{align*}
+		k^{+} = dq + r^{+} = dq + d = d(q+1) + 0.
+	\end{align*}
+
+	And we see that since $d$ is nonzero, it follows that $0 < d$. Thus, we see that indeed, $k^{+} \in A$.
+	
+	Therefore, we conclude that $A$ is an inductive set as desired, and thus our claim holds.
+\end{solution}
+
+\begin{hw}{20}[0][0]
+	Let $A$ be a nonempty subset of $\omega$ such that $\bigcup A = A$. Show that $A = \omega$.
+\end{hw}
+\begin{solution}
+	We want to show that $A$ is an inductive subset of $\omega$ in order for them to be equal.
+	
+	First, we observe that because $A \neq \emptyset$, then for any $a \in A$, we see that $0 \in a$. Then, $0 \in \bigcup A = A$. Thus, $0 \in A$ as desired.
+	
+	Next, suppose that $k \in A$. Then, we look at $k^{+} \in A$. We note that by our induction hypothesis, since $k \in A = \bigcup A$, then that means that there exists some $a \in A$ such that $k \in a$.
+	
+	Then, that means that we have three options for $k^{+}$. First, if $a \in k^{+}$, we note that this can't happen because then this means that $a = k$ or $a \in k$ by definition of $k^{+} = k \cup \brc{k}$. If this happened, then we would violate trichotomy. 
+	
+	From here, if $k^{+} = a$, then we see that $k^{+} = a \in A$, so $k^{+} \in A$ as desired. Finally, if $k^{+} \in a$, then we observe that $k^{+} \in \bigcup A = A$. Thus, we have $k^{+} \in A$ too.
+	
+	Therefore, we see that $k^{+} \in A$, and thus $A$ is indeed an inductive subset of $\omega$. Therefore, we conclude that, in fact, $A = \omega$.
+\end{solution}
+
+\begin{hw}{21}[0][0]
+	Show that no natural number is a subset of any of its elements.
+\end{hw}
+\begin{solution}
+	First, we observe that if $n = 0$, then $n = \emptyset$. Then, since there are no elements in $n$, $n$ can't be a subset of its elements.
+	
+	Now, suppose that $n > 0$. Take $m \in n$. Now, suppose for the sake of contradiction that $n \subseteq m$. However, if this is the case, then it follows that $n \ineq m$. However, this would violate trichotomy then, and thus we conclude that $n \not\subseteq m$.
+\end{solution}
+
+\begin{hw}{26}[0][0]
+	Assume that $n \in \omega$ and $f: n^{+} \rightarrow \omega$. Show that $\ran f$ has a largest element.
+\end{hw}
+\begin{solution}
+	We shall proceed by induction.
+	
+	To begin with, let us define the set $A$ to be as follows:
+	\begin{equation*}
+		A \coloneq \brc{n \in \omega : f : n^{+} \rightarrow \omega,\enskip \ran f \text{ has a largest element}}
+	\end{equation*}
+
+	First, we observe that for $n = 0$, then $n^{+} = 1 = 0 \cup \brc{0} = \emptyset \cup \brc{\emptyset}$. Then, we note that $\ran f = \brc{f(0)}$ will have only one element, and thus it follows that it has a largest element.
+	
+	Now, suppose that $k \in A$. Then, we want to show that $k^{+} \in A$ as well.
+	
+	We observe that $\pr{k^{+}}^{+} = k^{+} \cup \brc{k^{+}}$. Now, we look at $f : k^{+} \cup \brc{k^{+}}$. By our induction hypothesis, $f\image{k^{+}}$ contains a largest element $K$. So, we now have to consider $f(k^{+})$.
+	
+	For $f(k^{+})$, we note that there are there cases for it:
+	\begin{enumerate}
+		\item $f(k^{+}) \in K$. In this case, we see that $K$ is the largest element of $\ran f$.
+		\item $f(k^{+}) = K$. In this case as well, we see then that $K$ is the largest element of $\ran f$.
+		\item $K \in f(k^{+}) = K'$. In this case then, we observe that the largest element of $\ran f$ will then be $K'$.
+	\end{enumerate}
+
+	Thus, in all three cases, we see that, indeed, $\ran f$ has a maximum element. Thus, $k^{+} \in A$. And therefore, by induction, we conclude that the claim is true.
+\end{solution}
+
+\begin{hw}{27}[0][0]
+	Assume that $A$ is a set, $G$ is a function, and $f_{1}$ and $f_{2}$ map $\omega$ into $A$. Further assume that for each $n$ in $\omega$, both $f_{1} \restriction n$ and $f_{2} \restriction n$ belong to $\dom G$ and
+	\begin{equation*}
+		f_{1}(n) = G(f_{1} \restriction n) \land f_{2}(n) = G(f_{2} \restriction n).
+	\end{equation*}
+
+	Show that $f_{1} = f_{2}$.
+\end{hw}
+\begin{solution}
+	In order for $f_{1} = f_{2}$, we require that for all $n \in \omega$, we have that $f_{1}(n) = f_{2}(n)$. So, we will proceed by induction.
+	
+	Let us define a set $A$ to be as follows:
+	\begin{equation*}
+		A \coloneq \brc{n \in \omega : f_{1}(n) = f_{2}(n)}.
+	\end{equation*}
+
+	Now, we first show that $0 \in A$. To do this, we observe that $f_{1}(0) = G(f_{1} \restriction 0)$. However, we note that $0 = \emptyset$. Then, by definition of $\restriction$, we have that $f_{1} \restriction 0 = \brc{\ang{u,v} : \ang{u,v} \in f_{1} \land u \in \emptyset}$. Then, we see that in fact, $f_{1} \restriction 0 = \emptyset$. The same applies to $f_{2}(0)$.
+	
+	Then, with this in mind, we see that $f_{1}(0) = G(f_{1} \restriction 0) = G(\emptyset) = G(f_{2} \restriction 0) = f_{2}(0)$. Thus, $0 \in A$.
+	
+	Next, suppose $k \in A$. Then, we look at $k^{+}$.
+	
+	We note that $f_{1}(k^{+}) = f_{1}(k \cup \brc{k}) = G(f_{1} \restriction \pr{k \cup \brc{k}}) = G(f_{1} \restriction k) \cup G(f_{1} \restriction \brc{k})$.
+	
+	Similarly, $f_{2}(k^{+}) = f_{2}(k \cup \brc{k}) = G(f_{2} \restriction \pr{k \cup \brc{k}}) = G(f_{2} \restriction k) \cup G(f_{2} \restriction \brc{k})$.
+	
+	By our induction hypothesis, we observe that $f_{1}(k) = G(f_{1} \restriction k) = G(f_{2} \restriction k) = f_{2}(k)$.
+	
+	Furthermore, we note that $G(f_{1} \restriction \brc{k}) = f_{1}\pr{ \brc{k} } = \ang{k, f_{1}(k)}$, and $G(f_{2} \restriction \brc{k}) = f_{2}\pr{ \brc{k} } = \ang{k, f_{2}(k)}$. And by our induction hypothesis, we have that $\ang{k, f_{1}(k)} = \ang{k, f_{2}(k)}$. So, $G(f_{1} \restriction \brc{k}) = G(f_{2} \restriction \brc{k})$.
+	
+	Putting this all together then, we see that $f_{1}(k^{+}) = G(f_{1} \restriction k) \cup G(f_{1} \restriction \brc{k}) = G(f_{2} \restriction k) \cup G(f_{2} \restriction \brc{k}) = f_{2}(k^{+})$.
+	
+	Thus, we conclude that $k^{+} \in A$, and thus $A$ is inductive. Therefore, we see that, indeed, $f_{1} = f_{2}$ as desired.
+\end{solution}
+
+\section{Construction of the Real Numbers}
+\begin{hw}{1}[0][0]
+	Is there a function $F : \ZZ \rightarrow \ZZ$ satisfying the equation
+	\begin{equation*}
+		F\pr{\br{\ang{m,n}}} = \br{\ang{m+n, n}}?
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	No.
+	
+	For our counterexample, let us first define the following function:
+	\begin{equation*}
+		G : \pr{\omega \times \omega} \rightarrow \pr{\omega \times \omega} : \ang{m, n} \mapsto \ang{m+n, n}
+	\end{equation*}
+	Then, if we show that $G$ isn't compatible with $\sim$, then such a function $F$ as described above won't exist.
+	
+	So, let us look at $\ang{1,0}$ and $\ang{3,2}$. First, we see that $\ang{1,0} \sim \ang{3,2}$. However, $G\pr{\ang{1, 0}} = \ang{1+0, 0} = \ang{1,0} \not\sim \ang{5,2} = \ang{3+2,2} = G\pr{\ang{3,2}}$.
+	
+	Thus, we see that $G$ is not compatible with $\sim$, and thus $F$ does not exist.
+\end{solution}
+
+\begin{hw}{7}[0][0]
+	Show that $a \cdot_{Z} (-b) = (-a) \cdot_{Z} b = - (a \cdot_Z b)$.
+\end{hw}
+\begin{solution}
+	First, let $a = \br{\ang{m,n}}$ and $b = \br{\ang{p,q}}$.
+	
+	Then, we observe the following:
+	\begin{align*}
+		a \cdot_Z (-b) &= \br{\ang{m,n}} \cdot_Z \br{\ang{q,p}} \\
+		&= \br{\ang{mq + np, mp + nq}} \\
+		(-a) \cdot_Z b &= \br{\ang{n,m}} \cdot_Z \br{\ang{p,q}} \\
+		&= \br{\ang{np + mq, nq + mp}} \\
+		&= \br{\ang{mq + np, mp + nq}}
+	\end{align*}
+
+	So, we see that $a \cdot_Z (-b) = (-a) \cdot_Z b$. Next, we observe the following:
+	\begin{align*}
+		a \cdot_Z b + a\cdot_Z (-b) &= \br{\ang{m,n}} \cdot_Z \br{\ang{p,q}} + \br{\ang{mq + np, mp + nq}} \\
+		&= \br{\ang{mp + nq, mq + np}} + \br{\ang{mq + np, mp + nq}} \\
+		&= \br{\ang{mp+nq+mq+np, mq+np+mp+nq}} \\
+		&= 0_{Z}
+	\end{align*}
+
+	Thus, we see that $a\cdot_Z (-b)$ is the unique additive inverse of $a\cdot_{Z} b$. So, $a\cdot_Z(-b) = -(a\cdot_Z b)$ as desired.
+	
+	Therefore, we have the following:
+	\begin{align*}
+		a\cdot_Z (-b) &= (-a)\cdot_Z b \\
+		(-a)\cdot_{Z} b &= -(a \cdot_Z b)
+	\end{align*}
+
+	Putting it together, we have $a \cdot_{Z} (-b) = (-a) \cdot_{Z} b = - (a \cdot_Z b)$.
+\end{solution}
+
+\begin{hw}{9}[0][0]
+	Show that for all natural numbers $m, n$, we have:
+	\begin{equation*}
+		\br{\ang{m,n}} = E(m) - E(n)
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	We proceed as follows:
+	\begin{align*}
+		\br{\ang{m,n}} &= \br{\ang{m,0}} +_{Z} \br{\ang{0,n}} \\
+		&= \br{\ang{m,0}} - \br{\ang{n,0}} \\
+		&= E(m) - E(n)
+	\end{align*}
+\end{solution}
+
+\begin{hw}{14}[0][0]
+	Show that the ordering of rationals is dense. In other words, between any two rationals, there exists a third one:
+	\begin{align*}
+		p <_{Q} s \implies (\exists r)(p <_{Q} r <_{Q} s).
+	\end{align*}
+\end{hw}
+\begin{solution}
+	We proceed as follows: first, let $p = \br{\ang{a,b}}$ and $s = \br{\ang{c,d}}$ (with $b,d > 0_{Z}$).
+	
+	Now, because $p <_{Q} s$, we note then that we have $\br{\ang{a,b}} <_{Q} \br{\ang{c,d}} \iff ad < cb$.
+	
+	Now, we define $r$ to be as follows:
+	\begin{align*}
+		r &\coloneq (p +_{Q} s) \div \br{\ang{2,1}} \\
+		&= \br{\ang{ad+cb, bd}} \div \brc{\ang{2,1}} \\
+		&= \br{\ang{ad+cb, bd}} \cdot_{Q} \br{\ang{1,2}} \\
+		&= \br{\ang{ad+cb, 2bd}}
+	\end{align*}
+
+	Then, we note that since $b,d > 0_{Z}$, we have the following:
+	\begin{enumerate}
+		\item $adb < cbb$, and
+		\item $add < cbd$.
+	\end{enumerate}
+
+	With these inequalities in mind, we observe the following:
+	\begin{align*}
+		2abd = adb + adb &< adb + cbb = b(ad+cb) \\
+		\iff \br{\ang{a,b}} &<_{Q} \br{\ang{ad+cb, 2bd}}
+	\end{align*}
+
+	So, we have that $p <_{Q} r$ as desired.
+	
+	We also observe the following:
+	\begin{align*}
+		d(ad+cb) = add + cbd &< cbd + cbd = 2cbd \\
+		\iff \br{\ang{ad+cb, 2bd}} &<_{Q} \br{\ang{c,d}}
+	\end{align*}
+
+	So, we have $r <_{Q} s$ as desired.
+	
+	Thus, we have shown that indeed, there exists an $r$ that satisfies our claim.
+\end{solution}
+
+\begin{hw}{15}[0][0]
+	Show that $\bigcup A$ is closed downward and has no largest element.
+\end{hw}
+\begin{solution}
+	First, we note that $A$ is the set of real numbers.
+	
+	Now, by definition, $A$ is the set of all Dedekind cuts $x$.
+	
+	So, we first will show that $\bigcup A$ is closed downwards.
+	
+	To do this, let us look at some $q \in \bigcup A$. We note that for $q \in \bigcup A$, it means that there exists some $x \in A$ such that $q \in x \in A$.
+	
+	Next, take some $r < q$. Then, by definition, because $x$ is a Dedekind cut, it is closed downwards, and thus we have that $r \in x$ as well. But if this is the case, it follows then that $r \in \bigcup A$, and so we see that $\bigcup A$ is also closed downwards.
+	
+	Now, we will show that it has no largest elements.
+	
+	Let us take some $p \in \bigcup A$. Then, we see that there exists an $x$ such that $p \in x \in A$. But, we note that since $x$ is a Dedekind cut, then by definition, it has no largest member. So, there exists some $q \in x$ such that $p < q$.
+	
+	However, we observe that if $q \in x$, then it follows that $q \in \bigcup A$ as well.
+	
+	This means then that for any $p \in \bigcup A$, we can find some $q \in \bigcup A$ such that $p < q$; in other words, $\bigcup A$ does not have a largest element.
+\end{solution}
+
+\begin{hw}{19}[0][0]
+	Assume that $p$ is a positive rational number. Show that for any real number $x$ there is a rational number $q$ in $x$ such that 
+	\begin{equation*}
+		p + q \not\in x.
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	To prove this, we will introduce the following lemma:
+	\begin{lem*}[Archimedean Property with Rationals]
+		For any positive rational $p$ and any rational $q$, there exists a natural $n$ such that $np > q$ (this is the Archimedean Property)
+	\end{lem*}
+	\begin{innerproof}
+		We note that the proof for this lemma was completed in class previously.
+	\end{innerproof}
+	
+	Now, we first note that for any real number $x$, there exists a rational $r$ such that $r \not\in x$. 
+	
+	Then, by our lemma, we observe that there exists some integer $n$ such that $np > r$. We also note then that $np \not\in x$.
+	
+	Then, by the well-ordering of the naturals, there exists a least $n$ such that $np \not\in x$. But this means then that $(n-1)p \in x$.
+	
+	So, let $q = (n-1)p$ and observe that:
+	\begin{align*}
+		p + q &= p + (n-1)p \\
+		&= p + np - p \\
+		&= np \not\in x
+	\end{align*}
+
+	Thus, we have shown that there indeed exists such a $q$ as desired.
+\end{solution}
+\end{document}

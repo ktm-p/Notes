@@ -1,0 +1,724 @@
+\documentclass{article}
+\usepackage{homework}
+\usepackage{macros}
+
+
+%% LIST OF PROBLEMS SETUP %%
+\renewcommand\thmtformatoptarg[1]{:\enspace#1}
+\makeatletter
+\def\ll@homework{
+	\thmt@thmname~
+	\protect\numberline{\csname the\thmt@envname\endcsname}%
+	\ifx\@empty
+	\thmt@shortoptarg
+	\else
+	\protect\thmtformatoptarg{\thmt@shortoptarg}
+	\fi
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\numberline}[1]{\hb@xt@3em{#1}}
+\makeatother	
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\listoftheorems
+	\newpage
+}
+
+\begin{document}
+\mytitle{Data 100: Homework 5}{Spring 2024}
+
+\section{Sampling}
+\begin{dshw}{1}[1][1]
+	In Shiny's survey, which of the following is the population of interest?
+	\begin{enumerate}[label = \Alph*.]
+		\item All UC Berkeley Students
+		\item All students enrolled in Data 100 across all semesters (Spring 2024
+		and previous)
+		\item All students enrolled in Data 100 for this semester (Spring 2024)
+		\item All students who fill out Shiny’s survey
+	\end{enumerate}
+\end{dshw}
+\begin{solution}
+	C -- All students enrolled in Data 100 for this semester (Spring 2024).
+\end{solution}
+
+\begin{dshw}{1}[1][2]
+	Which of the following is the sampling frame?
+	\begin{enumerate}[label = \Alph*.]
+		\item All UC Berkeley Students
+		\item All students enrolled in Data 100 across all semesters (Spring 2024
+		and previous)
+		\item All students enrolled in Data 100 for this semester (Spring 2024)
+		\item All students who fill out Shiny’s survey
+	\end{enumerate}
+\end{dshw}
+\begin{solution}
+	C -- All students enrolled in Data 100 for this semester (Spring 2024).
+\end{solution}
+
+\begin{dshw}{1}[1][3]
+	Which of the following is the sample?
+	\begin{enumerate}[label = \Alph*.]
+		\item All UC Berkeley Students
+		\item All students enrolled in Data 100 across all semesters (Spring 2024
+		and previous)
+		\item All students enrolled in Data 100 for this semester (Spring 2024)
+		\item All students who fill out Shiny’s survey
+	\end{enumerate}
+\end{dshw}
+\begin{solution}
+	D -- All students who fill out Shiny’s survey.
+\end{solution}
+
+\newpage
+
+\begin{dshw}{1}[2][1]
+	In this sampling scheme, which of the following is the population of
+	interest?
+	\begin{enumerate}[label=\Alph*.]
+		\item UC Berkeley students
+		\item All students enrolled in Data 100 across all semesters (Spring 2024
+		and previous)
+		\item All students enrolled in Data 100 for this semester (Spring 2024)
+		\item All students enrolled in Shiny’s discussion section
+		\item All students who fill out Shiny’s pre-contest survey
+	\end{enumerate}
+\end{dshw}
+\begin{solution}
+	C -- All students enrolled in Data 100 for this semester (Spring 2024).
+\end{solution}
+
+\begin{dshw}{1}[2][2]
+	In this sampling scheme, which of the following is the sampling
+	frame?
+	\begin{enumerate}[label=\Alph*.]
+		\item UC Berkeley students
+		\item All students enrolled in Data 100 across all semesters (Spring 2024
+		and previous)
+		\item All students enrolled in Data 100 for this semester (Spring 2024)
+		\item All students enrolled in Shiny’s discussion section
+		\item All students who fill out Shiny’s pre-contest survey
+	\end{enumerate}
+\end{dshw}
+\begin{solution}
+	D -- All students enrolled in Shiny's discussion section.
+\end{solution}
+
+\begin{dshw}{1}[2][3]
+	Which of the following is the sample?
+	\begin{enumerate}[label=\Alph*.]
+		\item UC Berkeley students
+		\item All students enrolled in Data 100 across all semesters (Spring 2024
+		and previous)
+		\item All students enrolled in Data 100 for this semester (Spring 2024)
+		\item All students enrolled in Shiny’s discussion section
+		\item All students who fill out Shiny’s pre-contest survey
+	\end{enumerate}
+\end{dshw}
+\begin{solution}
+	E -- All students who fill out Shiny’s pre-contest survey.
+\end{solution}
+
+\begin{dshw}{1}[2][4]
+	Which of the following best characterizes the sample?
+	\begin{enumerate}[label=\Alph*.]
+		\item Simple Random Sample
+		\item Convenience Sample
+		\item Probability Sample
+	\end{enumerate}
+\end{dshw}
+\begin{solution}
+	B -- Convenience Sample.
+\end{solution}
+
+\newpage
+
+\section{Properties of a Linear Model with No Constant Term}
+\begin{dshw}{1}[0][0]
+	Suppose that we don't include an intercept term in
+	our model. That is, our model is now
+	$$\hat{y} = \theta x,$$
+	where $\theta$ is the single parameter for our model that we need to optimize. (In this equation, $x$ is a scalar, corresponding to a single observation.)
+	
+	As usual, we are looking to find the value $\hat{\theta}$ that minimizes the average $L_2$ loss (MSE) across our observed data $\{(x_i, y_i)\}, for\ i\in \{1, \ldots, n\}$:
+	
+	$$R(\theta) = \frac{1}{n}\sum_{i=1}^n (y_i - \theta x_i)^2$$
+	
+	The estimating equations derived in the lecture no longer hold. In this problem, we'll derive a solution to this simpler model. We'll see that the least squares estimate of the slope in this model differs from the simple linear regression model.
+	
+	
+	Use calculus to find the minimizing $\hat{\theta}$. 
+	
+	That is, simply prove that: 
+	$$ \hat{\theta} = \frac{\sum x_iy_i}{\sum x_i^2}$$
+\end{dshw}
+\begin{solution}
+	To begin with, we want to minimize the following:
+	\begin{equation*}
+		\frac{1}{n} \sum_{i=1}^{n} \pr{y_{i} - \theta x_{i}}^{2}.
+	\end{equation*}
+
+	We do this by setting the partial derivative to zero. That is, we find the following:
+	\begin{align*}
+		\pd{\theta} \frac{1}{n} \sum_{i=1}^{n} \pr{y_{i} - \theta x_{i}}^{2} &= 0.
+	\end{align*}
+
+	So, we proceed as follows:
+	\begin{align*}
+			\pd{\theta} \frac{1}{n} \sum_{i=1}^{n} \pr{y_{i} - \theta x_{i}}^{2} &= \frac{1}{n} \sum_{i=1}^{n} \pd{\theta} \pr{y_{i} - \theta x_{i}}^{2} \\
+			&= \frac{1}{n} \sum_{i=1}^{n} 2\pr{y_{i} - \theta x_{i}}\pr{-x_{i}} \\
+			&= -\frac{2}{n} \sum_{i=1}^{n} \pr{y_{i} - \theta x_{i}}x_{i}
+	\end{align*}
+
+	So, we want to find
+	\begin{align*}
+		-\frac{2}{n} \sum_{i=1}^{n} \pr{y_{i} - \theta x_{i}}x_{i} &= 0
+	\end{align*}
+
+	From here, we observe the following:
+	\begin{align*}
+		-\frac{2}{n} \sum_{i=1}^{n} \pr{y_{i} - \theta x_{i}}x_{i} &= 0 \\
+		\sum_{i=1}^{n} \pr{y_{i} - \theta x_{i}}x_{i} &= 0 \\
+		\sum_{i=1}^{n} \pr{y_{i}x_{i} - \theta x_{i}^{2}} &= 0 \\
+		\sum_{i=1}^{n} y_{i}x_{i} - \sum_{i=1}^{n} \theta x_{i}^{2} &= 0 \\
+		\sum_{i=1}^{n} y_{i}x_{i} - \theta \sum_{i=1}^{n} x_{i}^{2} &= 0 \\
+		\theta\sum_{i=1}^{n} x_{i}^{2} &= \sum_{i=1}^{n} y_{i}x_{i} \\
+		\theta &= \frac{\sum_{i=1}^{n} y_{i}x_{i}}{\sum_{i=1}^{n} x_{i}^{2}}
+	\end{align*} 
+
+	Thus, we observe that the value $\hat{\theta}$ that minimizes the average $L_{2}$ loss across our observed data is indeed:
+	\begin{equation*}
+		\hat\theta = \frac{\sum x_{i} y_{i}}{\sum x_{i}^{2}}
+	\end{equation*}
+\end{solution}
+
+\newpage
+
+\section{MSE ``Minimizer"}
+Recall from calculus that given some function $g(x)$, the $x$ you get from solving $\frac{d g(x)}{dx} = 0$ is called a \textit{critical point}
+of $g$ -- this means it could be a minimizer or a maximizer for $g$. In this question, we will explore some basic properties and 
+build some intuition on why, for certain loss functions such as squared $L_2$ loss, the critical point of the empirical risk function (defined as an average loss on the observed data) will always be the minimizer.
+
+Given some linear model $f(x) = \theta x$ for some real scalar $\theta$, we can write the empirical risk of the model $f$ given the observed data $\{x_i, y_i\}, \ for \ i\in \{ 1, \dots, n\}$ as the average $L_2$ loss (MSE):
+\begin{equation*}
+	\frac{1}{n}\sum_{i=1}^n (y_i - \theta x_i)^2 = \sum_{i=1}^n \frac{1}{n}(y_i - \theta x_i)^2
+\end{equation*}
+\begin{dshw}{1}[1][0]
+	Let's investigate one of the $n$ functions in the summation in the MSE. 
+	Define $g_i(\theta) = \frac{1}{n}(y_i - \theta x_i)^2$ for $i \in \{1, \dots, n\}$. In this case, note that the MSE can be written as $\sum_{i=1}^{n} g_i(\theta)$.
+	
+	Recall from calculus that we can use the 2nd derivative of a function to describe its curvature about a certain point (if it is facing concave up, down, or possibly a point of inflection). 
+	You can take the following as a fact: a function is convex if and only if the function's 2nd derivative is non-negative on its domain.
+	
+	Based on this property, verify that $g_i(\theta)$ is a \textbf{convex function}.
+\end{dshw}
+\begin{solution}
+	We check that $g_{i}(\theta)$ is convex by taking the second derivative with respect to its domain. In this case, note that the domain for $g_{i}$ is $\theta$. So, we proceed as follows:
+	\begin{align*}
+		\pd{\theta}[2] &= \pd{\theta}\pr{\frac{2}{n} \pr{y_{i} - \theta x_{i}}(-x_{i})} \\
+		&= \frac{2x_{i}^{2}}{n}
+	\end{align*}
+
+	Then, we note that since $x_{i}$ is being squared, it will always be non-negative. Furthermore, since $n \geq 0$, it follows that it will also always be non-negative as well. Therefore, the second derivative is non-negative, and thus we conclude that $g_{i}(\theta)$ is a convex function as desired.
+\end{solution}
+
+\begin{dshw}{1}[2][1]
+	Let's look at the formal definition of a \textbf{convex function}.  Algebraically speaking, a function $g(\theta)$ is convex if for any two points $(\theta_i, g(\theta_i))$ and $(\theta_j, g(\theta_j))$ on the function,
+	\begin{align*}
+		g(c\times\theta_i + (1-c)\times\theta_j) \le c\times g(\theta_i) + (1-c)\times g(\theta_j)
+	\end{align*}
+	for any real constant $0 \le c \le 1$.
+	
+	Using the definition above, show that if $g(\theta)$ and $h(\theta)$ are both convex functions, their sum $g(\theta) + h(\theta)$ will also be a convex function.
+\end{dshw}
+\begin{solution}
+	Using the definition given, we have the following for any two points $\theta_i, \theta_j$ in the functions $g$ and $h$'s domain, along with any real constant $0 \leq c \leq 1$:
+	\begin{align*}
+		g(c\times\theta_i + (1-c)\times\theta_j) &\leq c\times g(\theta_i) + (1-c)\times g(\theta_j) \\
+		h(c\times\theta_i + (1-c)\times\theta_j) &\leq c\times h(\theta_i) + (1-c)\times h(\theta_j)
+	\end{align*}
+
+	Then with this in mind, we observe the following:
+	\begin{align*}
+		(g + h)(c\times\theta_i + (1-c)\times\theta_j) &= g(c\times\theta_i + (1-c)\times\theta_j) + h(c\times\theta_i + (1-c)\times\theta_j) \\
+		&\leq c\times g(\theta_i) + (1-c)\times g(\theta_j) + h(c\times\theta_i + (1-c)\times\theta_j) \\
+		&\leq c\times g(\theta_i) + (1-c)\times g(\theta_j) + c\times h(\theta_i) + (1-c)\times h(\theta_j)
+	\end{align*}
+\end{solution}
+
+\begin{dshw}{1}[2][2]
+	Based on what you have shown in the previous part, explain intuitively why a (finite) sum of $n$ convex functions is still a convex function when $n > 2$.
+\end{dshw}
+\begin{solution}
+	We observe that a function $g = f_{1} + f_{2} + \ldots + f_{n}$ where $f_{1}, f_{2}, \ldots, f_{n}$ are convex functions and $n > 2$, when we evaluate it at some point $c\times\theta_i + (1-c)\times\theta_j$, this is equivalent to evaluating the sum of each of the functions $f_{i}$ where $i \in \brc{1, 2, \ldots, n}$ evaluated at that point.
+	
+	Then, we can iteratively apply the definition for a function to be convex onto each of the functions $f_{i}$ and eventually see that $g$ itself will satisfy the convex condition.
+\end{solution}
+
+\begin{dshw}{1}[3][0]
+	Remember from part (a) that the MSE can be written as:
+	$$\frac{1}{n}\sum_{i=1}^n (y_i - \theta x_i)^2 = \sum_{i=1}^n \frac{1}{n}(y_i - \theta x_i)^2 = \sum_{i=1}^{n} g_i(\theta)$$
+	
+	We solve for its critical point by taking the gradient with respect to parameter $\theta$ and setting that expression to $0$. Explain why this solution is guaranteed to minimize the MSE.
+\end{dshw}
+\begin{solution}
+	We observe that each of the $g_{i}$'s are convex functions. As such, their sum will also be a convex function. From here, we see that taking the gradient with respect to $\theta$ and setting it equal to zero will thus find the minimum value of the function.
+\end{solution}
+
+\newpage
+
+\section{Geometric Perspective of Simple Linear Regression}
+In Lecture 12, we viewed both the simple linear regression model and the multiple linear regression model through the lens of linear algebra. The key geometric insight was that if we train a model on some design matrix $\Bbb{X}$ and true response vector $\Bbb{Y}$, our predicted response $\hat{\Bbb{Y}} = \Bbb{X} \hat{\theta}$ is the vector in $\text{span}(\Bbb{X})$ that is closest to $\Bbb{Y}$. 
+
+In the simple linear regression case, our optimal vector $\theta$ is $\hat{\theta} = [\hat{\theta_0}, \hat{\theta_1}]$, and our design matrix is
+
+$$\Bbb{X} = \begin{bmatrix} 1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_n \end{bmatrix} = \begin{bmatrix} | & | \\ 1_n & \Bbb{X}_{:,1} \\ | & | \end{bmatrix}$$
+
+This means we can write our predicted response vector as $\hat{\Bbb{Y}} = \Bbb{X} \begin{bmatrix} \hat{\theta_0} \\ \hat{\theta_1} \end{bmatrix} = \hat{\theta_0} 1_n + \hat{\theta_1} \Bbb{X}_{:,1}$. 
+
+In this problem, $1_n$ is the $n$-vector of all $1$'s
+and $\Bbb{X}_{:,1}$ refers to the $n$-length vector 
+$$[x_1, x_2, ..., x_n]^{\top}$$. 
+
+Note, $\Bbb{X}_{:,1}$ is a feature, not an observation.
+
+For this problem, assume we are working with the \textbf{simple linear regression model}, though the properties we establish here hold for any linear regression model that contains an intercept term.
+\begin{dshw}{1}[1][0]
+	Explain why $\sum\limits_{i = 1}^n e_i = 0$ using a geometric property.
+\end{dshw}
+\begin{solution}
+	Recall that $\vec{e}$ is orthogonal to the span of $\mathbb X$. Furthermore, we note that $\mathbb X$ is defined to be:
+	\begin{equation*}
+		\mathbb X = \begin{bmatrix}
+			1 & x_{1} \\ 1 & x_{2} \\ \vdots & \vdots \\ 1 & x_{n}
+		\end{bmatrix}
+	\end{equation*} 
+
+	Then, we see that $1_{n} \in \vspan{\mathbb X}$.
+	
+	Next, recall that $\vec e$ is defined to be
+	\begin{equation*}
+		\vec{e} = \begin{bmatrix}
+			e_{1} \\ e_{2} \\ \vdots \\ e_{n}
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we note that because $\vec e$ is orthogonal to $\vspan{\mathbb X}$, it follows then that $\vec e$ is orthogonal to $1_{n}$; in other words, we have:
+	\begin{align*}
+		\vec e \cdot 1_{n} &= 0 \\
+		\vec{e}^{\intercal}1_{n} &= 0 \\
+		\begin{bmatrix} e_{1} & e_{2} & \cdots & e_{n} \end{bmatrix} \begin{bmatrix}
+			1 \\ 1 \\ \vdots \\ 1
+		\end{bmatrix} &= 0 \\
+		\sum_{i=1}^{n} e_{i} &= 0
+	\end{align*}
+\end{solution}
+
+\begin{dshw}{1}[2][0]
+	Similarly, explain why $\sum\limits_{i = 1}^n e_ix_i = 0$ using a geometric property.
+\end{dshw}
+\begin{solution}
+	As stated in the previous question, $\vec{e}$ is orthogonal to $\vspan{\mathbb X}$. Then, we note that 
+	\begin{equation*}
+		\mathbb X = \begin{bmatrix}
+			1 & x_{1} \\ 1 & x_{2} \\ \vdots & \vdots \\ 1 & x_{n}
+		\end{bmatrix}
+	\end{equation*} 
+
+	Then, we see that $\vec{x} = \begin{bmatrix} x_{1} & x_{2} & \cdots & x_{n} \end{bmatrix}^{\intercal}$ is in $\vspan{\mathbb X}$; in other words, $\vec e$ and $\vec{x}$ are orthogonal to each other. Then, by definition, their dot product will be equal to zero, so we see that:
+	\begin{align*}
+		\vec e \cdot x &= 0 \\
+		\vec{e}^{\intercal}x &= 0 \\
+		\begin{bmatrix} e_{1} & e_{2} & \cdots & e_{n} \end{bmatrix} \begin{bmatrix}
+			x_{1} \\ x_{2} \\ \vdots \\ x_{n}
+		\end{bmatrix} &= 0 \\
+		\sum_{i=1}^{n} e_{i}x_{i} &= 0
+	\end{align*}
+\end{solution}
+
+\begin{dshw}{1}[3][0]
+	Briefly explain why the vector $\hat{\Bbb{Y}}$ must also be orthogonal to the residual vector $\vec{e}$. 
+\end{dshw}
+\begin{solution}
+	Finally, we observe that by definition, we have that $\hat{\mathbb Y} = \mathbb X \begin{bmatrix}
+		\hat{\theta}_{0} \\ \hat{\theta}_{1}
+	\end{bmatrix} = \hat{\theta}_{0} 1_{n} + \hat{\theta}_{1} \mathbb {X}_{:,1}$.
+
+	Then, we observe the following:
+	\begin{align*}
+		\vec e \cdot \hat{\mathbb Y} &= \vec{e}^{\intercal} \hat{\mathbb Y} \\
+		&= \vec e \cdot \pr{\mathbb X \begin{bmatrix}
+				\hat{\theta}_{0} \\ \hat{\theta}_{1}
+		\end{bmatrix}} \\
+	&= \vec{e} \cdot \pr{\hat{\theta}_{0} 1_{n} + \hat{\theta}_{1} \mathbb X_{:, 1}} \\
+	&= \vec{e} \cdot \pr{\hat\theta_0 1_{n}} + \vec e \cdot \pr{\hat\theta_1 \mathbb X_{:, 1}} \\
+	&= \hat\theta_0 \pr{\vec e \cdot 1_{n}} + \hat\theta_1 \pr{\vec e \cdot \mathbb X_{:,1}} \\
+	&= \hat\theta_0 (0) + \hat\theta_1 (0) \\
+	&= 0
+	\end{align*}
+
+	And since their dot product is equal to zero, it follows that the two must be orthogonal as desired.
+\end{solution}
+
+\newpage
+
+\section{A Special Case of Linear Regression}
+In this question, we fit two models:
+
+$$y^{S} = \theta_0^{S} + \theta_1^{S} x_1$$
+$$y^{O} = \theta_0^{O} + \theta_1^{O} x_1 +  \theta_2^{O} x_2$$
+
+using L2 loss. The superscript S is to denote a Simple Linear Regression (SLR) and O is used to denote an Ordinary Least Square (OLS) with two features, respectively. 
+
+The data are given below:
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		$\Bbb{Y}$ & bias & $\Bbb{X}_{:,1}$ & $\Bbb{X}_{:,2}$ \\
+		\hline
+		-1 & 1 & 1 & -1\\
+		3 & 1 & -2 & 0\\
+		4 & 1 & 1 & 1\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{dshw}{1}[1][0]
+	Find $\hat{\theta_0^{S}}$ and $\hat{\theta_1^{S}}$ using the formulas derived in lecture 10
+	($\hat{\theta}_1^S = r\frac{\sigma_y}{\sigma_x}$ and $\hat{\theta}_0^S = \bar{y} - \hat{\theta}_1^S \bar{x}$). Show all steps.
+\end{dshw}
+\begin{solution}
+	Before we start, we calculate some important values. First, we observe that
+	\begin{align*}
+		\bar x_{1} &= (1+1-2)/3 \\
+		&= 0 \\
+		\bar y &= (-1+3+4)/3 \\
+		&= 2 \\
+		\sigma_x &= \sqrt{\dfrac{\pr{1^{2} + (-2)^{2} + 1^{2}}}{3}} \\
+		&= \sqrt{2} \\
+		\sigma_y &= \sqrt{\dfrac{\pr{(-1 - 2)^{2} + (3-2)^{2} + (4-2)^{2}}}{3}} \\
+		&= \sqrt{14/3} \\
+		r &= \frac{1}{3} \pr{ \pr{\dfrac{1}{\sqrt 2}}\pr{\dfrac{-1-2}{\sqrt {14/3}}} + \pr{\dfrac{-2}{\sqrt 2}}\pr{\dfrac{3-2}{\sqrt {14/3}}} + \pr{\dfrac{1}{\sqrt 2}}\pr{\dfrac{4-2}{\sqrt {14/3}}} } \\
+		&= \dfrac{1}{3}\pr{\dfrac{-3}{\sqrt 2 \sqrt {14/3}}} \\
+		&= -\dfrac{1}{\sqrt 2 \sqrt {14/3}}
+	\end{align*}
+	
+	Then, from here, we observe that:
+	\begin{align*}
+		\hat\theta_1^{S} &= r \frac{\sigma_y}{\sigma_x} \\
+		&= -\dfrac{1}{\sqrt 2 \sqrt{14/3}} \cdot \dfrac{\sqrt{14/3}}{\sqrt 2} \\
+		&= -\dfrac{1}{2} \\
+		\hat\theta_0^{S} &= \bar y - \hat\theta_1^{S} \bar x \\
+		&= 2 + \frac{1}{2}(0) \\
+		&= 2
+	\end{align*}
+\end{solution}
+
+\begin{dshw}{1}[2][0]
+	Find $\hat{\theta}^S = \begin{bmatrix} \hat{\theta}_0^{S} \\ \hat{\theta}_1^{S} \end{bmatrix}$ using the formula derived in lecture 12:
+	$\hat{\theta}^S = (\mathbb{X}^{\top} \mathbb{X})^{-1} \mathbb{X}^{\top} \mathbb{Y}$. Explicitly write out the matrix $\mathbb{X}$ for this problem and show all steps. How does it compare to your answer to part a)?
+\end{dshw}
+\begin{solution}
+	From the data given, we observe that $\mathbb X$ is equal to
+	\begin{equation*}
+		\mathbb X \coloneq \begin{bmatrix}
+			1 & 1 \\ 1 & -2 \\ 1 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we see that
+	\begin{equation*}
+		\mathbb X^{\intercal} = \begin{bmatrix}
+			1 & 1 & 1 \\ 1 & -2 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	Also, we have
+	\begin{equation*}
+		\mathbb Y = \begin{bmatrix}
+			-1 \\ 3 \\ 4
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we see the following:
+	\begin{align*}
+		\mathbb X^{\intercal} \mathbb X &= \begin{bmatrix}
+				1 & 1 & 1 \\ 1 & -2 & 1
+			\end{bmatrix}\begin{bmatrix}
+			1 & 1 \\ 1 & -2 \\ 1 & 1
+		\end{bmatrix} \\
+		&= \begin{bmatrix}
+			1(1) + 1(1) + 1(1) & 1(1) + 1(-2) + 1(1) \\ 1(1) + -2(1) + 1(1) & 1(1) + -2(-2) + 1(1)
+		\end{bmatrix} \\
+		&= \begin{bmatrix}
+			3 & 0 \\ 0 & 6
+		\end{bmatrix} \\
+	\pr{\mathbb X^{\intercal} \mathbb X}^{-1} &= \begin{bmatrix}
+	1/3 & 0 \\ 0 & 1/6
+	\end{bmatrix} \\
+	\end{align*}
+
+	And we also observe that
+	\begin{align*}
+		\mathbb X^{\intercal} \mathbb Y &= \begin{bmatrix}
+			1 & 1 & 1 \\ 1 & -2 & 1
+		\end{bmatrix} \begin{bmatrix}
+		-1 \\ 3 \\ 4
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		1(-1) + 1(3) + 1(4) \\ 1(-1) + -2(3) + 1(4)
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		6 \\ -3
+	\end{bmatrix}
+	\end{align*}
+
+	Putting this all together, we see then that
+	\begin{align*}
+		\hat\theta^{S} &= \pr{\mathbb X^{\intercal} \mathbb X}^{-1} \mathbb X^{\intercal} \mathbb Y \\
+		&= \begin{bmatrix}
+			1/3 & 0 \\ 0 & 1/6
+		\end{bmatrix} \begin{bmatrix}
+		6 \\ -3
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		2 \\ -\frac{1}{2}
+	\end{bmatrix}
+	\end{align*}
+
+	We observe that the entries in $\hat\theta^{S} = \begin{bmatrix}
+		\hat\theta_{0}^{S} \\ \hat\theta_1^{S}
+	\end{bmatrix}$ coincides with the values we got for $\hat\theta_0^{S}$ and $\hat\theta_1^{S}$ found in the previous question.
+\end{solution}
+
+\begin{dshw}{1}[3][0]
+	Find the MSE for the SLR model above.
+\end{dshw}
+\begin{solution}
+	First, note that we have
+	\begin{equation*}
+		y^{S} = 2 - \dfrac{1}{2}x_{1}
+	\end{equation*}
+
+	So, we observe the following:
+	\begin{align*}
+		y_{1}^{S} &= 2-(1/2)(1) = 3/2 \\
+		y_{2}^{S} &= 2-(1/2)(-2) = 3 \\
+		y_{3}^{S} &= 2-(1/2)(1) = 3/2
+	\end{align*}
+
+	Then, the MSE is:
+	\begin{align*}
+		\frac{1}{3}\pr{ \pr{-1 - (3/2)}^{2} + \pr{3 - 3}^{2} + \pr{4 - (3/2)}^{2}} &= \dfrac{1}{3} \pr{ 25/4 + 0 + 25/4} \\
+		&= \dfrac{1}{3}\pr{25/2} \\
+		&= \dfrac{25}{6}
+	\end{align*}
+\end{solution}
+
+\begin{dshw}{1}[4][0]
+	Find $\hat{\theta}^O = \begin{bmatrix} \hat{\theta}_0^{O} \\ \hat{\theta}_1^{O} \\  \hat{\theta}_2^{O} \end{bmatrix}$ using the formula derived in lecture 12:
+	$\hat{\theta}^O = (\mathbb{X}^{\top} \mathbb{X})^{-1} \mathbb{X}^{\top} \mathbb{Y}$. Explicitly write out the matrix $\mathbb{X}$ for this problem and \textbf{show all steps}.
+\end{dshw}
+\begin{solution}
+	We observe the following:
+	\begin{equation*}
+		\mathbb X = \begin{bmatrix}
+			1 & 1 & -1 \\ 1 & -2 & 0 \\ 1 & 1 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	So, we have
+	\begin{equation*}
+		\mathbb X^{\intercal} = \begin{bmatrix}
+			1 & 1 & 1\\
+			1 & -2 & 1 \\
+			-1 & 0 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	And we also have
+	\begin{equation*}
+		\mathbb Y = \begin{bmatrix}
+			-1 \\ 3 \\ 4
+		\end{bmatrix}
+	\end{equation*}
+
+	With this in mind, we see:
+	\begin{align*}
+		\mathbb X^{\intercal} \mathbb X &= \begin{bmatrix}
+			1 & 1 & 1\\
+			1 & -2 & 1 \\
+			-1 & 0 & 1
+		\end{bmatrix}\begin{bmatrix}
+		1 & 1 & -1 \\ 1 & -2 & 0 \\ 1 & 1 & 1
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		1(1) + 1(1) + 1(1) & 1(1) + 1(-2) + 1(1) & 1(-1) + 1(0) + 1(1) \\
+		1(1) + -2(1) + 1(1) & 1(1) + -2(-2) + 1(1) & 1(-1) + -2(0) + 1(1) \\
+		-1(1) + 0(1) + 1(1) & -1(1) + 0(-2) + 1(1) & -1(-1) + 0(0) + 1(1)
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		3 & 0 & 0 \\
+		0 & 6 & 0 \\
+		0 & 0 & 2
+	\end{bmatrix}
+	\end{align*}
+
+	Then, we see that the inverse is simply
+	\begin{equation*}
+		\pr{\mathbb X^{\intercal} \mathbb X}^{-1} = \begin{bmatrix}
+			1/3 & 0 & 0 \\ 0 & 1/6 & 0 \\ 0 & 0 & 1/2
+		\end{bmatrix}
+	\end{equation*}
+
+	Furthermore, we observe that
+	\begin{align*}
+		\mathbb X^{\intercal}\mathbb Y &=  \begin{bmatrix}
+			1 & 1 & 1\\
+			1 & -2 & 1 \\
+			-1 & 0 & 1
+		\end{bmatrix}\begin{bmatrix}
+		-1 \\ 3 \\ 4
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		1(-1) + 1(3) + 1(4) \\
+		1(-1) + -2(3) + 1(4) \\
+		-1(-1) + 0(3) + 1(4)
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		6 \\
+		-3 \\
+		5
+	\end{bmatrix}
+	\end{align*}
+
+	Putting this all together, we get
+	\begin{align*}
+		\pr{\mathbb X^{\intercal} \mathbb X}^{-1}	\mathbb X^{\intercal}\mathbb Y  &=  \begin{bmatrix}
+			1/3 & 0 & 0 \\ 0 & 1/6 & 0 \\ 0 & 0 & 1/2
+		\end{bmatrix}\begin{bmatrix}
+			6 \\
+			-3 \\
+			5
+		\end{bmatrix} \\
+		&= \begin{bmatrix}
+			2 \\
+			-1/2 \\
+			5/2
+		\end{bmatrix}
+	\end{align*}
+\end{solution}
+
+\begin{dshw}{1}[5][0]
+	Show that MSE for the OLS is 0. What is the relationship between $\mathbb{Y}$ and $\text{span}(\mathbb{X})$?
+\end{dshw}
+\begin{solution}
+	From the previous question, we see then that we have the following:
+	\begin{equation*}
+		y^{O} = \theta_0^{O} + \theta_1^{O}x_{1} + \theta_2^{O}x_{2}
+	\end{equation*}
+
+	And we see that $\theta_0^{O} = 2, \theta_1^{O} = -1/2, \theta_2^{O} = 5/2$.
+	
+	Then, with this in mind, we see the following:
+	\begin{align*}
+		y_{1}^{O} &= 2 - (1/2)(1) + (5/2)(-1) = -1 \\
+		y_{2}^{O} &= 2 - (1/2)(-2) + (5/2)(0) = 3 \\
+		y_{3}^{O} &= 2 - (1/2)(1) + (5/2)(1) = 4
+	\end{align*}
+
+	Then, to find the MSE, we do:
+	\begin{align*}
+		\dfrac{1}{3}\pr{ \pr{-1 - (-1)}^{2} + \pr{3 - 3}^{2} + \pr{4 - 4}^{2}} &= \dfrac{1}{3}\pr{0} \\
+		&= 0
+	\end{align*}
+
+	Thus, we see that the MSE for the OLS is indeed 0 as desired. Since the MSE is equal to zero, it means then that $\mathbb Y$ is in fact in the span of $\mathbb X$, and that our model used is perfect.
+\end{solution}
+
+\begin{dshw}{1}[6][0]
+	Instead of using $\mathbb{X}_{:,2}$ as a feature in our second model, we decided to transform it and use $\mathbb{X}_{:,2}^2$ instead. That is, the dataset we use is modified as follows:
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			$\mathbb{Y}$ & bias & $\mathbb{X}_{:,1}$ & $\mathbb{X}_{:,2}^2$ \\
+			\hline
+			$-1$ & $1$ & $1$ & $(-1)^2 = 1$\\
+			$3$ & $1$ & $-2$ & $0^2 = 0$\\
+			$4$ & $1$ & $1$ & $1^2 = 1$\\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	Accordingly, we calculate a single prediction using the new model as specified below:
+	
+	$$y^{new} = \theta_0^{new} + \theta_1^{new} x_1 +  \theta_2^{new} x_2^2$$
+	
+	Is it possible to find a unique optimal solution in this case? If so, compute $\hat{\theta}^{new}$ and the corresponding value of MSE. If not, explain why this is not possible. Regardless of which way you answer, similar to part d), explicitly write out the matrix $\mathbb{X}_{new}$ for this problem and \textbf{show all steps}.
+\end{dshw}
+\begin{solution}
+	No, it is not possible. We note that $\hat\theta^{new} = \pr{\mathbb X^{\intercal} \mathbb X}^{-1} \mathbb X^{\intercal} \mathbb Y$.
+	
+	Then, with the given definition, we see that $\mathbb X$ will be equal to:
+	\begin{equation*}
+		\mathbb X \coloneq \begin{bmatrix}
+			1 & 1 & 1 \\ 1 & -2 & 0 \\ 1 & 1 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we note that because $\mathbb X$ is not full column rank (note that $-2c_{1} + 3c_{3}$, where $c_{i}$ is the $i^{th}$ column of $\mathbb X$), we note that it is not invertible. Then, $\mathbb X^{\intercal}$ isn't either, and thus we observe that we can't get $(\mathbb X^{\intercal} \mathbb X)^{-1}$. Thus, we see that $\hat\theta^{new}$ doesn't exist.
+	\begin{comment}
+		Yes, it's possible to find a unique optimal solution in this case still. To do this, we proceed as follows:
+		
+		First, we see that $\mathbb X$ will be equal to:
+		\begin{equation*}
+			\mathbb X \coloneq \begin{bmatrix}
+				1 & 1 & 1 \\ 1 & -2 & 0 \\ 1 & 1 & 1
+			\end{bmatrix}
+		\end{equation*}
+		
+		Then, we have
+		\begin{equation*}
+			\mathbb X^{\intercal} \coloneq \begin{bmatrix}
+				1 & 1 & 1 \\ 1 & -2 & 1 \\ 1 & 0 & 1
+			\end{bmatrix}
+		\end{equation*}
+		
+		And we have
+		\begin{equation*}
+			\mathbb Y \coloneq \begin{bmatrix}
+				-1 \\ 3 \\ 4
+			\end{bmatrix}
+		\end{equation*}
+		
+		So, we observe the following:
+		\begin{align*}
+			\mathbb X^{\intercal}\mathbb X &= \begin{bmatrix}
+				1 & 1 & 1 \\ 1 & -2 & 1 \\ 1 & 0 & 1
+			\end{bmatrix}\begin{bmatrix}
+				1 & 1 & 1 \\ 1 & -2 & 0 \\ 1 & 1 & 1
+			\end{bmatrix} \\
+			&= \begin{bmatrix}
+				1(1) + 1(1) + 1(1) & 1(1) + 1(-2) + 1(1) & 1(1) + 1(0) + 1(1) \\
+				1(1) + 1(-2) + 1(1) & 1(1) + -2(-2) + 1(1) & 1(1) + -2(0) + 1(1) \\
+				1(1) + 0(1) + 1(1) & 1(1) + 0(-2) + 1(1) & 1(1) + 0(0) + 1(1)
+			\end{bmatrix} \\
+			&= \begin{bmatrix}
+				3 & 0 & 2
+			\end{bmatrix}
+		\end{align*}
+	\end{comment}
+\end{solution}
+
+\end{document}

@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Maybe Lossy Maybe Not}{3}{section.1}%
+\contentsline {section}{\numberline {2}Class Enrollment}{4}{section.2}%
+\contentsline {section}{\numberline {3}Swaps and Cycles}{6}{section.3}%
+\contentsline {section}{\numberline {4}Throwing Frisbees}{8}{section.4}%
+\contentsline {section}{\numberline {5}Balls and Bins}{9}{section.5}%
+\contentsline {section}{\numberline {6}Will I Get My Package?}{10}{section.6}%

@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Complex Solutions to Polynomials}{3}{section.1}%
+\contentsline {section}{\numberline {2}Finding $\lambda $}{4}{section.2}%
+\contentsline {section}{\numberline {3}Fields}{5}{section.3}%
+\contentsline {section}{\numberline {4}Differentiable Functions}{7}{section.4}%
+\contentsline {section}{\numberline {5}Functions and Vector Spaces}{9}{section.5}%

@@ -1,0 +1,546 @@
+	\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+\newcommand{\innerproduct}[2]{\left\langle{#1}, {#2}\right\rangle}
+\DeclareMathOperator*{\proj}{\mathrm{proj}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Math 110: Homework 11}{Fall 2023}
+	\section{Riesz's Theorem}
+	\begin{hw}
+		Find a polynomial $p \in \mathscr{P}_{3}(\RR)$ such that
+		\begin{equation*}
+			q'(1) = \int_{0}^{1} p(t) q(t) \mathrm{d}t \qquad \forall q \in \mathscr{P}_{3}(\RR).
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		To begin with, let us define the following inner product for our space:
+		\begin{equation*}
+			\innerproduct{p}{q} \coloneq \int_{0}^{1} p(t) q(t) \mathrm dt.
+		\end{equation*}
+		
+		Then, let us orthonormalise the standard basis $1, x, x^{2}, x^{3}$ of our space using Gram-Schmidt as follows:
+		\begin{align*}
+			e_{1} &= \frac{1}{\norm{1}} = \frac{1}{\sqrt{\innerproduct{1}{1}}} = \frac{1}{\sqrt{\int_{0}^{1} 1 \mathrm{d}x}} = \frac{1}{\sqrt{1}} = 1 \\
+			e_{2} &= \frac{x - \innerproduct{x}{1}(1)}{\norm{x - \innerproduct{x}{1}(1)}} = \frac{x - \int_{0}^{1} x \mathrm dx}{\norm{x - \int_0^{1} x \mathrm dx}} = \frac{x - \frac{1}{2}}{\norm{x - \frac{1}{2}}} = \frac{x - \frac{1}{2}}{\sqrt{\innerproduct{x-\frac{1}{2}}{x - \frac{1}{2}}}} \\
+			&= \frac{x - \frac{1}{2}}{\sqrt{\int_{0}^{1} (x-\frac{1}{2})^{2} \mathrm dx}} = \frac{x - \frac{1}{2}}{\sqrt{\int_{0}^{1} x^{2} - x + \frac{1}{4}}} = \frac{x - \frac{1}{2}}{\sqrt{\frac{1}{3} - \frac{1}{2} + \frac{1}{4}}} = \frac{x - \frac{1}{2}}{\sqrt{\frac{1}{12}}} = \sqrt{12}\left(x - \frac{1}{2}\right) \\
+			e_{3} &= \frac{x^{2} - \innerproduct{x^{2}}{e_{2}}e_{2} - \innerproduct{x^{2}}{e_{1}}e_{1} }{\norm{x^{2} - \innerproduct{x^{2}}{e_{2}}e_{2} - \innerproduct{x^{2}}{e_{1}}e_{1}}} = \frac{x^{2} - \sqrt{12}\left( x - \frac{1}{2} \right)\int_{0}^{1} \sqrt{12}x^{2}\left( x - \frac{1}{2} \right) \mathrm dx- \int_{0}^{1} x^{2}\mathrm dx}{\norm{x^{2} - \sqrt{12}\left( x - \frac{1}{2} \right)\int_{0}^{1} \sqrt{12}x^{2}\left( x - \frac{1}{2} \right)\mathrm dx - \int_{0}^{1} x^{2} \mathrm dx}} \\
+			&= \frac{x^{2} - \sqrt{12}(x - \frac 1 2)\int_{0}^{1}\sqrt{12}x^{3} - 	\frac{\sqrt{12}}{2}x^{2} \mathrm dx - \int_{0}^{1}x^{2} \mathrm dx}{\norm{x^{2} - \sqrt{12}(x - \frac 1 2)\int_{0}^{1}\sqrt{12}x^{3} - \frac{\sqrt{12}}{2}x^{2} \mathrm dx - \int_{0}^{1}x^{2} \mathrm dx}} = \frac{x^{2} - \sqrt{12}(x-\frac 1 2)(\frac{\sqrt{12}}{4} - \frac{\sqrt{12}}{6}) - \frac{1}{3}}{\norm{x^{2} - \sqrt{12}(x-\frac 1 2)(\frac{\sqrt{12}}{4} - \frac{\sqrt{12}}{6}) - \frac{1}{3}}} \\
+			&= \frac{x^{2} - x + \frac{1}{6}}{\norm{x^{2} - x + \frac{1}{6}}} = \frac{x^{2} - x + \frac{1}{6}}{\sqrt{\innerproduct{x^{2} - x + \frac{1}{6}}{x^{2} - x + \frac{1}{6}}}} = \frac{x^{2} - x + \frac{1}{6}}{\sqrt{\int_{0}^{1} (x^{2} - x + \frac{1}{6})^{2} \mathrm dx}} \\
+			& = \frac{x^{2} - x + \frac{1}{6}}{\sqrt{\int_{0}^{1} x^{4} - 2x^{3} + \frac{4}{3}x^{2} - \frac{1}{3}x + \frac{1}{36} \mathrm dx}} = \frac{x^{2} - x + \frac{1}{6}}{\sqrt{\frac{1}{5} - \frac{2}{4} + \frac{4}{9} - \frac{1}{6} + \frac{1}{36}}} = \frac{x^{2} - x + \frac{1}{6}}{\sqrt{\frac{1}{180}}} = \sqrt{180}\left( x^{2} - x + \frac{1}{6} \right) \\
+			e_{4} &= \frac{x^{3} - \innerproduct{x^{3}}{e_{3}}e_{3} - \innerproduct{x^{3}}{e_{2}}e_{2} - \innerproduct{x^{3}}{e_{1}}e_{1}}{\norm{x^{3} - \innerproduct{x^{3}}{e_{3}}e_{3} - \innerproduct{x^{3}}{e_{2}}e_{2} - \innerproduct{x^{3}}{e_{1}}e_{1}}} = \cdots = \sqrt{2800}\left(x^{3} - \frac{3}{2}x^{2} + \frac{3}{5}x - \frac{1}{20}\right)
+		\end{align*}
+		
+		Thus, $e_{1}, e_{2}, e_{3}, e_{4}$ is an orthonormal basis for our vector space. From here, let us define $\varphi(p) = p'(1)$.
+		
+		Then, using Riesz's Representation Theorem, we know that there exists a unique $p$ such that $\varphi(q) = \innerproduct{q}{p} = \innerproduct{p}{q}$.
+		
+		Then, using our orthonormal basis for $\mathscr{P}_{3}(\RR)$, we have
+		\begin{align*}
+			p &= \varphi(e_{1})e_{1} + \varphi(e_{2})e_{2} + \varphi(e_{3})e_{3} + \varphi(e_{4})e_{4} \\
+			&= e_{1}'(1)e_{1} + e_{2}'(1)e_{2} + e_{3}'(1)e_{3} + e_{4}'(1)e_{4} \\
+			&= 12\left( x-\frac{1}{2} \right) + 180\left( x^{2} - x + \frac{1}{6} \right) + 1680\left( x^{3} - \frac{3}{2}x^{2} + \frac{3}{5}x - \frac{1}{20} \right) \\
+			&= 1680x^{3} - 2340x^{2} + 840x - 60
+		\end{align*}
+		
+		Thus, we have that $p(x) = 1680x^{3} - 2340x^{2} + 840x - 60$.
+	\end{solution}
+	
+	\newpage
+	
+	\section{Finding the Orthonormal Projection}
+	\begin{hw*}[Setup]
+		For the next questions in this section, let $V = C[-\pi, \pi]$ with the inner product
+		\begin{equation*}
+			\innerproduct{f}{g} \coloneq \int_{-\pi}^{\pi} f(t)\overline{g(t)}\mathrm dt
+		\end{equation*}
+		
+		We will want to determine the orthogonal projection of the function $h(x) = \exp(2ix)$ on the given subspaces.
+	\end{hw*}
+	
+	Before we proceed, we will first make note of the fact that all of the subspaces given will be of the form $\vspan(1, \cos x, \sin x, \ldots, \cos nx, \sin nx)$.
+	
+	Next, by Euler's formula, we have that $e^{2ix} = \cos(2x) + i\sin(2x)$.
+	
+	Next, we make the following claim:
+	\begin{lem}
+		The list $1, \sin(x), \cos(x), \ldots, \sin(nx), \cos(nx)$ is orthogonal under our given inner product $\int_{-\pi}^{\pi} f(t)\overline{g(t)}\mathrm dt$.
+	\end{lem}
+	\begin{innerproof}
+		To begin with, we note that since our bounds are $[-\pi, \pi]$, then $\overline{\sin x} = \sin x$ and $\overline{\cos x} = \cos x$. Furthermore, $\overline{1} = 1$. So, we can disregard the conjugation sign and instead see that our inner product is simply
+		\begin{equation*}
+			\innerproduct{f}{g} = \int_{-\pi}^{\pi} f(t)g(t) \mathrm dt.
+		\end{equation*}
+		
+		Then, first we note that $\int_{-\pi}^{\pi} \cos(ax) \mathrm dx = \int_{-\pi}^{\pi} \sin(ax) \mathrm dx = 0$. Thus, we see that $1$ is orthogonal to the rest of our list.
+		
+		From here, we observe that $\sin(a(-x))\cos(b(-x)) = \sin(-ax)\cos(-bx) = -\sin(ax)\cos(bx)$. Thus, we see that $\sin(ax)\cos(bx)$ is an odd function. It follows then that
+		\begin{equation*}
+			\innerproduct{\sin(ax)}{\cos(bx)} = \int_{-\pi}^{\pi}\sin(ax)\cos(bx) \mathrm dx = 0.
+		\end{equation*}
+		
+		We see then that $\sin(ax)$ and $\cos(bx)$ are thus orthogonal to each other.
+		
+		Next, we note that for $a\neq b$, we have that $\sin(ax)\sin(bx) = \frac{1}{2}\left[ \cos\left( (a-b)x  \right) - \cos\left( (a+b)x \right) \right]$. Then, we see that
+		\begin{align*}
+			\innerproduct{\sin(ax)}{\sin(bx)} &= \int_{-\pi}^{\pi} \sin(ax)\sin(bx) \mathrm dx = \int_{-\pi}^{\pi} \frac{1}{2}\left[ \cos\left( (a-b)x  \right) - \cos\left( (a+b)x \right) \right] \mathrm dx \\
+			&= \frac{1}{2}\int_{-\pi}^{\pi} \cos\left( (a-b)x \right) \mathrm dx - \frac{1}{2}\int_{-\pi}^{\pi} \cos\left( (a+b)x \right)\mathrm dx = 0
+		\end{align*}
+		
+		Then, it follows that $\sin(ax)$ and $\sin(bx)$ are orthogonal to each other as well, where $a \neq b$.
+		
+		Similarly, we see that $\cos(ax)\cos(bx) = \frac{1}{2}\left[ \cos\left( (a-b)x  \right) + \cos\left( (a+b)x \right) \right]$. Then, we observe that
+		\begin{align*}
+			\innerproduct{\cos(ax)}{\cos(bx)} &= \int_{-\pi}^{\pi}\cos(ax)\cos(bx) \mathrm dx = \int_{-\pi}^{\pi} \frac{1}{2}\left[ \cos\left( (a-b)x  \right) + \cos\left( (a+b)x \right) \right] \mathrm dx \\
+			&= \frac{1}{2}\int_{-\pi}^{\pi} \cos\left( (a-b)x \right) \mathrm dx + \frac{1}{2}\int_{-\pi}^{\pi} \cos\left( (a+b)x \right)\mathrm dx = 0
+		\end{align*}
+		
+		Thus, we see that $\cos(ax), \cos(bx)$ are orthogonal to each other too. Therefore, we can conclude then that indeed, our list is orthogonal under the given inner product.
+	\end{innerproof}
+	
+	\begin{comment}
+		From here then, we want to simply normalise the basis for our given subspace. To do this, we make note of the following observation:
+	\begin{lem}
+		For $\cos(ax)$ and $\sin(ax)$, we have the following:
+		\begin{align*}
+			\norm{\cos(ax)} = \norm{\sin(ax)} = \sqrt{\pi}.
+		\end{align*}
+	\end{lem}
+	\begin{innerproof}
+		We observe the following:
+		\begin{align*}
+			\norm{\cos(ax)} &= \sqrt{\innerproduct{\cos(ax)}{\cos(ax)}} \\
+			&= \sqrt{\int_{-\pi}^{\pi} \cos(ax)^{2}} \\
+			&= \sqrt{\pi} \\
+			&= \sqrt{\int_{-\pi}^{\pi} \sin(ax)^{2}} \\
+			&= \sqrt{\innerproduct{\sin(ax)}{\sin(ax)}} \\
+			&= \norm{\sin(ax)}.
+		\end{align*}
+	\end{innerproof}
+	
+	We also note here that $\norm{1} = \sqrt{\innerproduct{1}{1}} = \sqrt{2\pi}$.
+	\end{comment}
+	
+	We will now keep all of this in mind as we proceed with answering the following questions.
+	\begin{hw}
+		Determine the orthogonal projection of $h(x)$ on the subspace $\vspan(1, \cos x, \sin x)$.
+	\end{hw}
+	\begin{solution}
+		To begin with, by our lemma from earlier, we know that $1, \cos x, \sin x, \ldots, \cos nx, \sin nx$ are all orthogonal to each other. Then, because $h(x) = e^{2ix} = \cos 2x + i\sin 2x$, we note then that it is in fact orthogonal to the given subpsace. Therefore, we see that the orthogonal projection of $h(x)$ onto $U$ is simply $0$.
+	\end{solution}
+	
+	\begin{hw}
+		Determine the orthogonal projection of $h(x)$ onto the subspace
+		\begin{equation*}
+			U \coloneq \vspan(1, \cos x, \sin x, \cos 2x, \sin 2x).
+		\end{equation*} 
+	\end{hw}
+	\begin{solution}
+		\begin{comment}
+			First, we can orthonormalise the basis to get:
+		\begin{equation*}
+			e_{1}, e_{2}, e_{3}, e_{4}, e_{5} = \frac{1}{\sqrt{2\pi}}, \frac{\cos x}{\sqrt{\pi}}, \frac{\sin x}{\sqrt{\pi}}, \frac{\cos 2x}{\sqrt{\pi}}, \frac{\sin 2x}{\sqrt{\pi}}.
+		\end{equation*}
+		
+		From here, we observe that to find the orthogonal projection of $h(x)$ onto $U$, we consider the following:
+		\begin{equation*}
+			\innerproduct{h(x)}{e_{1}}e_{1} + \innerproduct{h(x)}{e_{2}}e_{2} + \ldots + \innerproduct{h(x)}{e_{5}}e_{5}.
+		\end{equation*}
+		
+		However, using the property of inner product along with orthogonality of each of the $1, \cos x, \ldots, \sin 2x$, we can rewrite the above expression to the following:
+		\begin{equation*}
+			\innerproduct{\cos(2x)}{\frac{\cos(2x)}{\sqrt{\pi}}}\frac{\cos(2x)}{\sqrt{\pi}} + \innerproduct{i\sin(2x)}{\frac{\sin(2x)}{\sqrt{\pi}}}\frac{\sin(2x)}{\sqrt{\pi}}.
+		\end{equation*}
+		
+		From here, we note that this becomes:
+		\begin{align*}
+			\frac{\cos(2x)}{\pi}\innerproduct{\cos(2x)}{\cos(2x)} + \frac{i\sin(2x)}{\pi}\innerproduct{\sin(2x)}{\sin(2x)} &= \frac{\cos(2x)}{\pi}\int_{-\pi}^{\pi} \cos(2x)^{2}\mathrm dx + \frac{i\sin(2x)}{\pi} \int_{-\pi}^{\pi} \sin(2x) \mathrm dx \\
+			&= \frac{\pi\cos(2x)}{\pi} + i \frac{\pi\sin(2x)}{\pi} \\
+			&= \cos(2x) + i\sin(2x) \\
+			&= e^{2ix} \\
+			&= h(x)
+		\end{align*}
+		\end{comment}
+		We observe that since $h(x) = \cos 2x + i\sin 2x$, it in fact is an element of our given subspace. Thus, the orthogonal projection of $h(x)$ onto $U$ is simply $h(x) = \cos 2x + i\sin 2x$.
+	\end{solution}
+	
+	\begin{hw}
+		Determine the orthogonal projection of $h(x)$ onto the subspace
+		\begin{equation*}
+			U \coloneq \vspan(1, \cos x, \sin x, \ldots, \cos nx, \sin nx) \tag{for $n > 2$.}
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		Again, we note that since $h(x)$ is in fact in the span of $U$, then the orthogonal projector of $h(x)$ onto $U$ will simply be $h(x)$ itself.
+	\end{solution}
+	
+	\newpage
+	
+	\section{Minimisation I}
+	\begin{hw}
+		Find $p \in \mathscr{P}_{3}(\RR)$ such that $p(-1) = 0$, $p'(-1) = 0$, and the following is minimised:
+		\begin{equation*}
+			\int_{0}^{1} (1-5x-p(x))^{2} \mathrm dx.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		To begin with, let us define the inner product of our space to be
+		\begin{equation*}
+			\innerproduct{f}{g} = \int_{0}^{1} f(t)g(t) \mathrm dt.
+		\end{equation*}
+		
+		From here, we want to minimise $\norm{1-5x-p(x)}$. To do this, we first define $U$ to be
+		\begin{equation*}
+			U \coloneq \left\{  p \in \mathscr{P}_{3}(\RR) : p(-1) = 0, p'(-1) = 0 \right\}.
+		\end{equation*}
+		
+		Then, we can see that a basis for $U$ must be $(x+1)^{2}, (x+1)^{3}$.
+		
+		Now, using Gram-Schmidt, we can orthonormalise these vectors to get the following:
+		\begin{align*}
+			e_{1} &= \frac{(x+1)^{2}}{\norm{(x+1)^{2}}} = \sqrt{\frac{5}{31}}(x + 1)^{2} \\
+			e_{2} &= \frac{(x+1)^{3} - \innerproduct{(x+1)^{3}}{e_{1}}e_{1}}{\norm{(x+1)^{3} - \innerproduct{(x+1)^{3}}{e_{1}}e_{1}}} = 2\sqrt{\frac{217}{313}}\left( (x+1)^{3} - \frac{105}{62}(x+1)^{2} \right).
+		\end{align*}
+		
+		From here, let $q(x) = 1 - 5x$. Then, the closest point $p \in U$ to $q$ is:
+		\begin{equation*}
+			p = \innerproduct{q}{e_{1}}e_{1} + \innerproduct{q}{e_{2}}e_{2}.
+		\end{equation*}
+		
+		Through computations, we get then that
+		\begin{equation*}
+			p(x) = - \frac{95}{124}(x+1)^{2} - \frac{791}{626}\left( (x+1)^{3} - \frac{105}{62}(x+1)^{2} \right).
+		\end{equation*}
+	\end{solution}
+	
+	\newpage
+	
+	\section{Minimisation II}
+	\begin{hw}
+		Find $p \in \mathscr{P}_{3}(\RR)$ such that $p(-1) = 0$, $p'(-1) = 0$, and the following is minimised:
+		\begin{equation*}
+			p(0)^{2} + \int_{0}^{1} (1-5x - p'(x))^{2} \mathrm dx.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		\begin{comment}
+			To begin with, we will define the following inner product for our space:
+			\begin{equation*}
+				\innerproduct{f}{g} \coloneq f(0)g(0) + \int_{0}^{1} f'(t)g'(t) \mathrm dt. 
+			\end{equation*}
+			
+			From here, we note that once again, the basis for $U$ will once again be $(x+1)^{2}, (x+1)^{3}$. Then, we let $q(x) = x - \frac{5}{2}x^{2}$ as before, and let
+			\begin{equation*}
+				p = \frac{\innerproduct{q}{(x+1)^{2}}}{\innerproduct{(x+1)^{2}}{(x+1)^{2}}}(x+1)^{2} + \frac{\innerproduct{q}{(x+1)^{3}}}{\innerproduct{(x+1)^{3}}{(x+1)^{3}}}(x+1)^{3}.
+			\end{equation*}
+			
+			Through some computations, we will see then that we will get:
+			\begin{equation*}
+				p(x) = -\frac{16}{31}(x+1)^{2} - \frac{285}{1136}(x+1)^{3}. 
+			\end{equation*}
+		\end{comment}
+		
+		To begin with, we will define the following inner product for our space:
+		\begin{equation*}
+			\innerproduct{f}{g} \coloneq f(0)g(0) + \int_{0}^{1} f'(t)g'(t) \mathrm dt. 
+		\end{equation*}
+		
+		From here, we note that once again, the basis for $U$ will once again be $(x+1)^{2}, (x+1)^{3}$. Then, we orthonormalise it again with Gram-Schmidt to get:
+		\begin{align*}
+			e_{1} &= \frac{(x+1)^{2}}{\norm{(x+1)^{2}}} = \sqrt{\frac{3}{31}}(x+1)^{2} \\
+			e_{2} &= \frac{(x+1)^{3} - \innerproduct{(x+1)^{3}}{e_{1}}e_{1}}{\norm{(x+1)^{3} - \innerproduct{(x+1)^{3}}{e_{1}}e_{1}}} = 2\sqrt{\frac{155}{2081}}\left( (x+1)^{3} - \frac{141}{62}(x+1)^{2} \right).
+		\end{align*}
+		
+		From here, we let $q(x) = x - \frac{5}{2}x^{2}$ as before, and let
+		\begin{equation*}
+			p = \innerproduct{q}{e_{1}}e_{1} + \innerproduct{q}{e_{2}}e_{2}.
+		\end{equation*}
+		
+		Through some computations, we will see then that we will get:
+		\begin{equation*}
+			p(x) = -\frac{16}{31}(x+1)^{2} - \frac{1315}{2081}\left( (x+1)^{3} - \frac{141}{62}(x+1)^{2} \right).
+		\end{equation*}
+		
+	\end{solution}
+	
+	\newpage
+	
+	\section{Orthogonal Projector}
+	\begin{hw}
+		Let $V = \RR^{3}$ equipped with the standard inner product. Prove or disprove: any linear operator $P \in \mathcal{L}(V)$ such that $P^{2} = P$ is an orthogonal projector.
+	\end{hw}
+	\begin{solution}
+		This is false. Let us consider the following example:
+		\begin{equation*}
+			P = \begin{bmatrix}
+				1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 1
+			\end{bmatrix}
+		\end{equation*}
+		
+		First, note that
+		\begin{equation*}
+			P^{2} = P(P) = \begin{bmatrix}
+				1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 1
+			\end{bmatrix}
+			\begin{bmatrix}
+				1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 1
+			\end{bmatrix}
+			= \begin{bmatrix}
+				1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 1
+			\end{bmatrix}
+		\end{equation*}
+		
+		However, to confirm that it is not an orthogonal projector, we can consider the vector $v = (0,2,2)$. We note here that $\norm{v} = \sqrt{0(0) + 2(2) + 2(2)} = \sqrt{8}$.
+		
+		However, note that $Pv = (0,0,4)$. Note then that $\norm{Pv} = \sqrt{0^{2} + 0^{2} + 4^{2}} = \sqrt{16}$. Then, we see that $\norm{Pv} > \norm{v}$, thus violating one of the properties of an orthogonal projector (more concretely, it doesn't follow $\norm{Pv} \leq \norm{v}$ for all $v \in V$).
+		
+		Therefore, we can conclude that $P$ is not an orthogonal projector.
+	\end{solution}
+\end{document}

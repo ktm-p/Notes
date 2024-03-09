@@ -1,0 +1,711 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Homework 4}{Fall 2023}
+	
+	\section{When Does Linearity Occur}
+	\begin{hw}
+		Let $a,b \in \RR$. Define $T: \mathscr{P}(\RR) \rightarrow \RR^{2}$ by 
+		\begin{equation*}
+			Tp \coloneq (2p(1) + 5p'(2) + ap(-1)p(3), \int_{-1}^{1} x^{3}p(x)\mathrm d x + b\sin p(0)).
+		\end{equation*}
+	
+		Under what conditions on $a,b$ is the map $T$ linear?
+	\end{hw}
+	\begin{solution}
+		We observe that for a map to be linear, it must be that for all $p, q \in \mathscr{P}(\RR)$, and $\alpha, \beta \in \RR$, we have:
+		\begin{equation*}
+			T(\alpha p + \beta q) = \alpha T(p) + \beta T(q).
+		\end{equation*}
+	
+		Now, suppose we had some polynomial $p$ such that $p(1) = 1, p'(2) = 1, p(-1) = -1, p(3) = 3$. 
+		
+		Similarly, suppose we had a polynomial $q$ such that $q(1) = 2, p'(2) = 1, p(-1) = 0, p(3) = 4$.
+		
+		Then, we observe the following for the first component of $T(p+q)$:
+		\begin{align*}
+			T(p+q) &= 2( (p+q)(1)) + 5((p+q)'(2)) + a( (p+q)(-1))( (p+q)(3)) \\
+			&= 2(1+2) + 5(1+1) + a(-1 + 0)(3 + 4) \\
+			&= 6 + 10 - 7a \\
+			&= 16 - 7a.
+		\end{align*}
+	
+		However, we observe that $T(p) + T(q)$ we have:
+		\begin{align*}
+			T(p) + T(q) &= 2p(1) + 5p'(2) + ap(-1)p(3) + 2q(1) + 5q'(2) + aq(-1)q(3) \\
+			&= 2(1) + 5(1) + a(-1)(3) + 2(2) + 5(1) + a(0)(4) \\
+			&= 2 + 5 -3a + 4 + 5 + 0a \\
+			&= 16 -3a
+		\end{align*}
+	
+		However, we see that for $16 - 7a = 16 - 3a$, we must have that $4a = 0 \implies a = 0$.
+		
+		Now, we consider some polynomial $p$ such that $p(0) = \frac{\pi}{2}$.
+		
+		Similarly, let us have some polynomial $q$ such that $q(0) = \frac{\pi}{2}$.
+		
+		For the second component of $Tp$, we know that $\int_{-1}^{1} x^{3}p(x) \mathrm dx$ isn't multiplied by $b$, so we can instead just look at the $b \sin p(0)$ portion of it. Then, we observe the following for part of the second component of $T(p+q)$, we have that:
+		\begin{align*}
+			b\sin ( (p+q)(0)) &= \sin(\pi) \\
+			&= 0b
+		\end{align*} 
+	
+		However, for $T(p) + T(q)$, we see that we get:
+		\begin{align*}
+			b\sin (p(0)) + b\sin (q(0)) &= b\sin(\frac{\pi}{2}) + b\sin(\frac{\pi}{2}) \\
+			&= b + b\\ 
+			&= 2b
+		\end{align*}
+	
+		Then, we see that for $2b = 0$, we must have that $b = 0$.
+		
+		So, we know that if we want $T$ to possibly be linear, we need $a = b = 0$. Then, we have the following for $Tp$
+		\begin{equation*}
+			Tp \coloneq (2p(1) + 5p'(2), \int_{-1}^{1} x^{3}p(x)\mathrm d x).
+		\end{equation*}
+	
+		Now, we will confirm that this is, indeed, linear. To do so, we observe the following:
+		\begin{align*}
+			T(\alpha p + \beta q) &= \left( 2((\alpha p+\beta q)(1)) + 5((\alpha p + \beta q)'(2)), \int_{-1}^{1} x^{3} ((\alpha p + \beta q)(x)) \mathrm dx \right) \\
+			&= \left( 2(\alpha p(1) + \beta q(1)) + 5( \alpha p'(2) + \beta q'(2)), \int_{-1}^{1} x^{3} (\alpha p(x) + \beta q(x)) \mathrm dx \right) \\
+			&= \left( 2\alpha p(1) + 2 \beta q(1) + 5\alpha p'(2) + 5\beta q'(2), \int_{-1}^{1} x^{3}\alpha p(x) + x^{3}\beta q(x) \mathrm dx \right) \\
+			&= \left( \left( 2\alpha p(1) + 5\alpha p'(2) \right) + \left( 2\beta q(1) + 5\beta q'(2) \right), \int_{-1}^{1} x^{3}\alpha p(x) \mathrm dx + \int_{-1}^{1} x^{3}\beta q(x) \mathrm dx \right) \\
+			&= \left( 2\alpha p(1) + 5\alpha p'(2), \int_{-1}^{1} x^{3}\alpha p(x) \mathrm dx \right) + \left( 2 \beta q(1) + 5 \beta q'(2), \int_{-1}^{1} x^{3}\beta q(x) \mathrm dx \right) \\
+			&= \left( \alpha (2p(1) + 5p'(2)), \alpha \int_{-1}^{1} x^{3}p(x) \mathrm dx \right) + \left( \beta(2q(1) + 5q'(2)), \beta\int_{-1}^{1} x^{3}q(x) \mathrm dx \right) \\
+			&= \alpha \left( 2p(1) + 5p'(2), \int_{-1}^{1} x^{3}p(x) \mathrm dx \right) + \beta\left( 2q(1) + 5q'(2), \int_{-1}^{1} x^{3}q(x) \mathrm dx  \right) \\
+			&= \alpha Tp + \beta Tq.
+		\end{align*}
+	
+		Thus, we see that since $T(\alpha p + \beta q) = \alpha Tp + \beta Tq$ for $a=b=0$, then it follows that $T$ is a linear map.
+	
+	
+	\begin{comment}
+			In order for the map to be linear, it must be that for $p,q \in \mathscr{P}(\RR)$ and $\alpha, \beta \in \RR$, we have the following:
+		\begin{equation*}
+			T(\alpha p + \beta q) = \alpha Tp + \beta Tq \\
+		\end{equation*}
+	
+		For the sake of legibility, we will be looking at the first and second component of the vector yielded by $T_{p}$ separately.
+		
+		First, we observe that for $T_{p}(\alpha p + \beta q)$, we get for the first component:
+		\begin{align*}
+			2(\alpha p + \beta q)(2) + 5(\alpha p + \beta q)'(2) + a(\alpha p + \beta q)(-1)(\alpha p + \beta q)(3) \\
+			2\alpha p(1) + 2\beta q(1) + 5\alpha p'(2) + 5\beta q'(2) + a(\alpha p(-1) + \beta q(-1))(\alpha p(3) + \beta q(3)) %\\
+		%	2\alpha p(1) + 2\beta q(1) + 5\alpha p'(2) + 5\beta q'(2) + a(\alpha p(-1)\alpha p(3) + \alpha p(-1)\beta q(3) + \beta q(-1)\alpha p(3) + \beta q(-1)\beta q(3))
+		\end{align*}
+	
+		However, for $\alpha T_{p}(p) + \beta T_{p}(q)$, we get:
+		\begin{align*}
+			\alpha(2p(1) + 5p'(2) + ap(-1)p(3)) + \beta(2q(1) + 5q'(2) + aq(-1)q(3)) \\
+			2\alpha p(1) + 5\alpha p'(2) + a\alpha p(-1)p(3) + 2\beta q(1) + 5\beta q'(2) + a\beta q(-1)q(3) \\
+			2\alpha p(1) + 2\beta q(1) + 5\alpha p'(2) + 5\beta q'(2) + a(\alpha p(-1)p(3) + \beta q(-1)q(3))
+		\end{align*}
+	
+		We see then that the $a(\alpha p(-1)p(3) + \beta q(-1)q(3)) \not= a(\alpha p(-1) + \beta q(-1))(\alpha p(3) + \beta q(3))$, for $a \not= 0$. Thus, we must have that $a = 0$ for the map to be linear (for the first component)
+		
+		For the second component, we see that for $T_{p}(\alpha p + \beta q)$, we get:
+		\begin{align*}
+			\int_{-1}^{1} x^{3}(\alpha p + \beta q)(x)\mathrm dx + b \sin (\alpha p + \beta q)(0) \\
+			\alpha \int_{-1}^{1} x^{3} p(x) \mathrm dx + \beta \int_{-1}^{1} x^{3} q(x) \mathrm dx + b \sin (\alpha p(0) + \beta q(0))
+		\end{align*}
+	
+		Meanwhile, for $\alpha T_{p}(p) + \beta T_{p}(q)$, we have:
+		\begin{align*}
+			\alpha \int_{-1}^{1} x^{3} p(x)\mathrm dx + \alpha b \sin p(0) + \beta \int_{-1}^{1} x^{3} q(x) \mathrm dx + \beta b \sin q(0) \\
+			\alpha \int_{-1}^{1} x^{3} p(x)\mathrm dx + \beta\int_{-1}^{1} x^{3} q(x) \mathrm dx + b (\alpha  \sin p(0)  + \beta \sin q(0))
+		\end{align*}
+	
+		We see that $b \sin(\alpha p(0) + \beta q(0)) \not= b (\alpha \sin p(0) + \beta \sin q(0))$ for $b \not= 0$. Thus, we must have that $b = 0$ for the map to be linear (for the second component).
+		
+		Then, with $a, b = 0$, we have:
+		\begin{align*}
+			T_{p}(\alpha p + \beta q) &= \left( 2\alpha p(1) + 2\beta q(1) + 5\alpha p'(2) + 5\beta q'(2), \alpha \int_{-1}^{1} x^{3} p(x)\mathrm dx + \beta\int_{-1}^{1} x^{3} q(x) \mathrm dx \right) \\
+			&= \alpha T_{p}(p) + \beta T_{p}(q)
+		\end{align*}
+		\begin{comment}
+			Then, with this in mind, we observe that for $T_{p}(\alpha p + \beta q)$, we get:
+			\begin{align*}
+				\left(2(\alpha p + \beta q)(2) + 5(\alpha p + \beta q)'(2) + a(\alpha p + \beta q)(-1)(\alpha p + \beta q)(3), \int_{-1}^{1} x^{3}(\alpha p + \beta q)(x)\mathrm dx + b \sin (\alpha p + \beta q)(0)\right) \\
+				\left( 2\alpha p(2) + 2\beta q(2) + 5\alpha p'(2) + 5\beta q'(2) + a(\alpha p(-1) + \beta q(-1))(\alpha p(3) + \beta q(3)), 
+				int_{-1}^{1} x^{3}\alpha p(x) \mathrm dx + \int_{-1}^{1} x^{3}\beta q(x) \mathrm dx + b\sin(\alpha p(0) + \beta q(0))\right)
+			\end{align*}
+	\end{comment}
+
+	\end{solution}
+
+	\newpage
+	
+	\section{Linear Maps and Span}
+	\begin{hw}
+		Suppose $T \in \mathcal{L} (V,W), v_{1}, \ldots, v_{w} \in V$ and the list $Tv_{1}, \ldots Tv_{m}$ spans $W$. Prove or disprove that the list $v_{1}, \ldots, v_{m}$ spans $V$.
+	\end{hw}
+	\begin{solution}
+		We shall disprove this statement.
+		
+		Let us consider the vector spaces $V = \RR^{3}$ and $W = \RR^{2}$ over the field $\mathbb{F} = \RR$.
+		 
+		Then, let us consider the following linear map $T$ which sends any vector $(a,b,c)$ in $V$ to the vector $(a,b)$ in $W$.
+		
+		To verify that $T$ is indeed linear, we observe that for vectors $v_{1} \coloneq (a,b,c), v_{2} \coloneq (d,e,f) \in V$, along with scalars $\alpha, \beta \in \RR$, we have:
+		\begin{align*}
+			T(\alpha v_{1} + \beta v_{2}) &= T(\alpha (a,b,c) + \beta (d,e,f)) \\
+			&= T( (\alpha a, \alpha b, \alpha c) + (\beta d, \beta e, \beta f)) \\
+			&= T( (\alpha a + \beta d, \alpha b + \beta e, \alpha c + \beta f)) \\
+			&= (\alpha a + \beta d, \alpha b + \beta e)
+			\\
+			\alpha T(v_{1}) + \beta T(v_{2}) &= \alpha T( (a,b,c)) + \beta T( (d,e,f)) \\
+			&= \alpha (a,b) + \beta(d,e) \\
+			&= (\alpha a, \alpha b) + (\beta d , \beta e) \\
+			&= (\alpha a + \beta d, \alpha b + \beta e)
+		\end{align*}
+	
+		Therefore, since $T(\alpha v_{1} + \beta v_{2}) = \alpha T(v_{1}) + \beta T(v_{2})$, we observe that $T$ is indeed a linear map.
+				
+		Next, let us consider the following vectors in $V$:
+		\begin{equation*}
+			(1,0,0), (0,1,0).
+		\end{equation*}
+	
+		Then, applying $T$ on these vectors, we get:
+		\begin{equation*}
+			(1,0), (0,1).
+		\end{equation*}
+	
+		We observe that since these two vectors $Tv_{1}, Tv_{2}$ are the canonical basis for $\RR^{2}$, it follows that they span $W$. However, we observe that the list $v_{1}, v_{2}$ does not span $V$, as a spanning list for $V$ must be at least length 3.
+	\end{solution}
+
+	\newpage
+	
+	\section{Maps and Linear Independence}
+	\begin{hw}
+		Let $V = \mathscr{P}_{2}(\RR), W = \RR$. Are the maps
+		\begin{equation*}
+			T_{1}: f\mapsto f(0), \quad T_{2}: f \mapsto f'(1), \quad T_{3}: f \mapsto \int_0^{1} f(x) \mathrm d x
+		\end{equation*}
+	
+		in $\mathcal L(V,W)$? Are they linearly independent?
+	\end{hw}
+	\begin{solution}
+		\begin{comment}
+			First, we will test whether $T_{1}, T_{2}, T_{3} \in \mathcal L(V,W)$. Suppose we have $p = ax^{2} + bx + c, q = dx^{2} + ex + f \in \mathscr{P}_{2}(\RR)$, and $\alpha, \beta \in \RR$. Then, we observe the following:
+			\begin{align*}
+				T_{1}(\alpha p + \beta q) &= [\alpha (ax^{2} + bx + c) + \beta(dx^{2} + ex + f)](0) \\
+				&=\alpha (a(0)^{2} + b(0) + c) + \beta(d(0)^{2} + e(0) + f) \\
+				&= \alpha c + \beta f \\
+				&= \alpha 
+				\\
+				T_{2}(\alpha p + \beta q) &= (\alpha p + \beta q)'(1) \\
+				&= \alpha p'(1) + \beta q'(1) \\
+				&= \alpha T_{2}p + \beta T_{2}q
+			\end{align*}
+		\end{comment}
+	
+		First, we will test whether $T_{1}, T_{2}, T_{3} \in \mathcal L(V,W)$. Suppose we have $p, q \in \mathscr{P}_{2}(\RR)$, and $\alpha, \beta \in \RR$. Then, we observe the following:
+		\begin{align*}
+			T_{1}(\alpha p + \beta q) &= (\alpha p + \beta q)(0) \\
+			&= \alpha p(0) + \beta q(0) \\
+			&= \alpha T_{1}p + \beta T_{1}q\\
+			\\
+			T_{2}(\alpha p + \beta q) &= (\alpha p + \beta q)'(1) \\
+			&= \alpha p'(1) + \beta q'(1) \\
+			&= \alpha T_{2}p + \beta T_{2}q
+			\\
+			T_{3}(\alpha p + \beta q) &= \int_0^{1} (\alpha p + \beta q)(x) \mathrm d x \\
+			&= \int_0^{1} \alpha p(x) + \beta q(x) \mathrm d x \\
+			&= \int_{0}^{1} \alpha p(x) \mathrm d x + \int_0^{1} \beta q(x) \mathrm d x \\
+			&= \alpha \int_0^{1} p(x) \mathrm d x + \beta \int_0^{1} q(x) \mathrm d x \\
+			&= \alpha T_{3}p + \beta T_{3}q
+		\end{align*}
+		
+	\begin{comment}
+		Now, we want to prove linear independence. To do this, we want to show that the following equation is true only when $a_{1} = a_{2} = a_{3} = 0$:
+		\begin{equation*}
+			a_{1}T_{1} + a_{2}T_{2} + a_{3}T_{3} = 0.
+		\end{equation*}
+		
+		Then, we observe that for a polynomial $p = ax^{2} + bx + c \in \mathscr{P}(\RR)$, we have:
+		\begin{align*}
+			T_{1}p &= p(0) \\
+			&= a(0)^{2} + b(0) + c \\
+			&= c \\
+			\\
+			T_{2}p &= p'(1) \\
+			&= (ax^{2} + bx + c)'(1) \\
+			&= (2ax + b)(1) \\
+			&= 2a + b \\
+			\\
+			T_{3}p &= \int_0^{1} p(x) \mathrm d x \\
+			&= \int_0^{1} ax^{2} + bx + c \mathrm d x \\
+			&= \frac{1}{3}ax^{3} + \frac{1}{2}bx^{2} + cx \big|_0^{1} \\
+			&= \frac{1}{3}a + \frac{1}{2}b + c
+		\end{align*}
+		
+		Then from here, we have the following:
+		\begin{equation*}
+			a_{1}c + a_{2}(2a+b) + a_{3}\left( \frac{1}{3}a + \frac{1}{2}b + c \right) = 0
+		\end{equation*}
+	
+		However, if we let $a = b = c = 1$, and we set $a_{3} = 0$, then we see that $a_{1} + 3a_{2} = 0$; $a_{1} = -3a_{2}$. So if $a_{2} = 1$, we set $a_{1} = -3$.
+	\end{comment}
+	\begin{comment}
+		To prove linear independence, we first note that $\dim W = 1$. Then, it follows that any list of length $l > 1$ must be linearly dependent. Therefore, we observe that the list $T_{1}, T_{2}, T_{3}$ cannot be linearly independent.
+	\end{comment}
+	\begin{comment}
+		Now, we want to prove linear independence. We note here that each of these linear maps all send our polynomials to $\RR$. Then, because $\dim \RR = 1$, we know that any list of length greater than one must be linearly dependent. It follows then that $T_{1}, T_{2}, T_{3}$ are not linearly independent.
+	\end{comment}
+	
+	Now, we want to prove linear independence. We observe that for linear independence to hold, only the trivial solution satisfies the following equation:
+	\begin{align*}
+		a_{1}T_{1} + a_{2}T_{2} + a_{3}T_{3} &= T_{0} \\
+		(a_{1}T_{1} + a_{2}T_{2} + a_{3}T_{3})(p) &= T_{0}(p) \\
+		&= 0,
+	\end{align*}
+
+	where $T_{0}$ is the linear map such that for all $p \in V$, we have $T_{0}(p) = 0$.
+	
+	\begin{comment}
+		However, we observe here that since none of these functions are scalar multiples of each other, we can't get to the zero function using a linear combination of them. Thus, we see that $T_{1}, T_{2}, T_{3}$ are linearly independent.
+	\end{comment}
+
+	To do this, let us first consider $p_{1} = 1$. Applying the different transformations, we get:
+	\begin{align*}
+		T_{1}(p_{1}) &= 1 \\
+		T_{2}(p_{1}) &= 0 \\
+		T_{3}(p_{1}) &= 1
+	\end{align*}
+
+	Then, putting $p_{1}$ into our equation we get $a_{1} + a_{3} = 0$.
+	
+	Next, consider $p_{2} = 2x$. We see that
+	\begin{align*}
+		T_{1}(p_{2}) &= 0 \\
+		T_{2}(p_{2}) &= 2 \\
+		T_{3}(p_{2}) &= 1
+	\end{align*}
+
+	Thus, putting $p_{2}$ into our equation yields us $2a_{2} + a_{3} = 0$.
+	
+	Finally, for $p_{3} = 3x^{2}$, we observe that
+	\begin{align*}
+		T_{1}(p_{3}) &= 0 \\
+		T_{2}(p_{3}) &= 6 \\
+		T_{3}(p_{3}) &= 1
+	\end{align*}
+
+	So, putting $p_{3}$ into our equation yields us $6a_{2} + a_{3} = 0$.
+	
+	Then from here, we can construct the following system of linear equations:
+	\begin{align*}
+		a_{1} + a_{3} &= 0 \\
+		2a_{2} + a_{3} &= 0 \\
+		6a_{2} + a_{3} &= 0 \\
+		\\
+		4a_{2} &= 0 \\
+		a_{2} & = 0 \\
+		\\
+		2a_{2} + a_{3} &= 0 \\
+		2(0) + a_{3} &= 0 \\
+		a_{3} &= 0 \\
+		\\
+		a_{1} + a_{3} &= 0 \\
+		a_{1} + 0 &= 0 \\
+		a_{1} &= 0
+	\end{align*}
+
+	Thus, we see that since $a_{1} = a_{2} = a_{3} = 0$, it follows then that $T_{1}, T_{2}, T_{3}$ are linearly independent.
+	\end{solution}
+
+	\newpage
+	
+	\section{Testing for Commutativity}
+	\begin{hw}
+		Suppose that $V$ is a vector space and $S, T \in \mathcal L(V,V)$ are such that
+		\begin{equation*}
+			\vrange S \subset \vnull T.
+		\end{equation*}
+	
+		Prove or disprove that $ST = TS = 0$.
+	\end{hw}
+	\begin{solution}
+		\begin{comment}
+		We first note that $\vnull T = \left\{  v \in V : Tv = 0 \right\}$, and $\vrange S = \left\{  Sv : v \in V \right\}$.
+		
+		In other words, $\vnull T$ is the set of vectors $v$ that gets mapped to 0, and $S$ is the set of vectors of the form $Sv$ in $V$.
+		
+		We observe here that because $\vrange S \subset \vnull T$, this implies then that the set of vectors $Sv$ are also ones where $T(Sv) = 0$. Then, we observe that $T(Sv) = 0$.
+		
+		Now, we observe that $ST(v) = S(T(v))$. $TS(v) = $
+		\end{comment}
+		We first note that, by definition, we have that $\vnull T = \left\{  v \in V : Tv = 0\right\}$, and $\vrange S = \left\{  Sv : v \in V \right\}$.
+	
+		Then, from these definitions, we observe that because $\vrange S \subset \vnull T$, then this implies that every vector in the form of $Sv$, for $v \in V$, gets mapped to $0$ by $T$. In other words, we have that $TS(v) = T(Sv) = 0$.
+		
+		Now, we shall show that it is possible to have $ST \not= TS = 0$. To do this, let us first consider the vector space $V = \RR^{2}$. Now, we recall that a linear map between two finite-dimensional vector spaces can be represented with a matrix. So, let us consider some linear map $T$ defined by:
+		\begin{equation*} T \coloneq
+			\begin{bmatrix}
+				1 & -1 \\
+				1 & -1
+			\end{bmatrix}
+		\end{equation*}
+	
+		Then, we want to find some linear map $S$ such that $TS = 0$. In other words, we have:
+		\begin{equation*}
+			\begin{bmatrix}
+				1 & -1 \\ 1 & -1
+			\end{bmatrix}
+			\begin{bmatrix}
+				a & b \\ c & d
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				a - c & b - d \\
+				a - c & b - d
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				0 & 0 \\
+				0 & 0
+			\end{bmatrix}
+		\end{equation*}
+	
+		With this in mind, we see that we have the following system of equations:
+		\begin{align*}
+			a - c &= 0 \\
+			b - d &= 0
+		\end{align*}
+	
+		Thus, $a = c$ and $b = d$. Then, we can let $a = c = 2$, and $b = d = 3$. This then yields us the following:
+		\begin{equation*}
+			S \coloneq 
+			\begin{bmatrix}
+				2 & 3 \\ 2 & 3
+			\end{bmatrix}
+		\end{equation*}
+		
+		We then observe:
+		\begin{equation*}
+			\begin{bmatrix}
+				1 & -1 \\ 1 & -1
+			\end{bmatrix}
+			\begin{bmatrix}
+				2 & 3 \\
+				2 & 3
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				2 - 2 & 3 - 3 \\ 2 - 2 & 3 - 3
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				0 & 0 \\ 0 & 0
+			\end{bmatrix}
+		\end{equation*}
+	
+		However, we see that
+		\begin{equation*}
+			\begin{bmatrix}
+				2 & 3 \\ 2 & 3
+			\end{bmatrix}
+			\begin{bmatrix}
+				1 & -1 \\ 1 & -1
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				2 + 3 &  -2 + -3 \\ 2 + 3 & -2 + -3
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				5 & -5 \\ 5 & -5
+			\end{bmatrix}
+		\end{equation*}
+		
+		Therefore, we see that while $TS = 0$, we have that $ST \not= 0$.
+	\end{solution}
+
+	\newpage
+	
+	\section{Linear Maps and Dimensionality}
+	\begin{hw}
+		Suppose $V$ is a nonzero finite-dimensional vector space, and $\mathcal{L}(V,W)$ is finite-dimensional for some vector space $W$. Prove or disprove that $W$ is finite-dimensional.
+	\end{hw}
+	\begin{solution}
+		Let us suppose for the sake of contradiction that $W$ is infinite-dimensional.
+		
+		As $W$ is infinite-dimensional, then we have infinitely many linearly independent vectors $w_{1}, w_{2}, \ldots, w_{n}, \ldots$. 
+		
+		Now, let us consider some vector space $V$, where $\dim(V) = n > 0$. We now consider some basis $\left\{  v_{1}, \ldots, v_{n} \right\}$ of $V$.
+		
+		Now, let us define some linear map $T_{i}$ to be as follows:
+		\begin{equation*}
+			T_{i}(v_{j}) = 
+			\begin{cases}
+				w_{i}, & j = 1 \\
+				0, & 2 \leq j \leq n
+			\end{cases}
+		\end{equation*}
+	
+		We observe then that each $T_{i}$ maps $v_{1}$ to a vector $w_{i}$. Now, we will show that $T_{1}, T_{2}, \ldots, T_{n}, \ldots$ is also linearly independent. To do this, we observe the following:
+		\begin{align*}
+			a_{1}T_{1}(v_{1}) + a_{2}T_{2}(v_{1}) + \ldots + a_{n}T_{n}(v_{1}) + \ldots &= 0 \\
+			a_{1}w_{1} + a_{2}w_{2} + \ldots + a_{n}w_{n} + \ldots &= 0
+		\end{align*}
+	
+		And since $w_{1}, w_{2}, \ldots, w_{n}, \ldots$ is linearly independent, it follows then that $a_{1} = a_{2} = \cdots = a_{n} = \cdots = 0$.
+		
+		So, we see that $T_{1}, \ldots, T_{n}, \ldots$ is linearly independent.
+		
+		%
+		
+		It follows then that since $T_{1}, T_{2}, \ldots, T_{n}, \ldots \subset \mathcal L(V, W)$, then $\mathcal L(V,W)$ must be infinite-dimensional. However, this is a contradiction as we said that $\mathcal L(V,W)$ is finite-dimensional+.
+		
+		Therefore, we see that $W$ must be finite-dimensional.
+	\end{solution}
+\end{document}

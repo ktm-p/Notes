@@ -1,0 +1,798 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+\newcommand{\innerproduct}[2]{\left\langle{#1}, {#2}\right\rangle}
+\DeclareMathOperator*{\proj}{\mathrm{proj}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+\mytitle{The Final Homework}{Fall 2023}
+\section{Self-Adjoint Operators and Minimal Polynomials}
+\begin{hw}
+	Let $T$ be a self-adjoint operator on a finite-dimensional inner product space (real or complex) such that $\lambda_{1}, \lambda_{2}, \lambda_{3} \in \RR$ be the only eigenvalues of $T$. 
+	
+	Prove that $p(T) = 0$, where $p(\lambda) \coloneq (\lambda - \lambda_1)(\lambda - \lambda_{2})(\lambda - \lambda_3)$.
+\end{hw}
+\begin{solution}
+	To begin with, we note that since $T$ is a self-adjoint operator and its only eigenvalues are $\lambda_1, \lambda_2, \lambda_3 \in \RR$, then it has a minimal polynomial of the form:
+	\begin{equation*}
+		p(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2)(\lambda - \lambda_3).
+	\end{equation*}
+
+	From here, we recall that by definition of a minimal polynomial, we have that $p(T) = 0$. Then, since we define $p(\lambda) = (z- \lambda_1)(z-\lambda_2)(z-\lambda_3)$, we see then that in fact, it is the minimal polynomial. Thus, we see that $p(T) = 0$ as desired.
+\end{solution}
+\begin{hw}
+	Give a counterexample to this statement for an operator which is not self-adjoint.
+\end{hw}
+\begin{solution}
+	Suppose that we have the following $T$ with a matrix representation under some orthonormal basis as follows, with $\lambda_1, \lambda_2, \lambda_3 \in \RR$:
+	\begin{equation*}
+		\mathcal{M}(T) = \begin{bmatrix}
+			\lambda_1 & 1 & 0 & 0 \\
+			0 & \lambda_1 & 0 & 0 \\
+			0 & 0 & \lambda_2 & 0 \\
+			0 & 0 & 0 & \lambda_3
+		\end{bmatrix}
+	\end{equation*}
+
+	Now, we note that since the matrix representation of $T^{*}$ is the conjugate transpose of $T$, we have then that
+	\begin{equation*}
+		\mathcal{M}(T^{*}) = \begin{bmatrix}
+			\lambda_{1} & 0 & 0 & 0 \\
+			1 & \lambda_{1} & 0 & 0 \\
+			0 & 0 & \lambda_2 & 0 \\
+			0 & 0 & 0 & \lambda_3
+		\end{bmatrix}
+	\end{equation*}
+
+	Now, since the two matrices aren't equal to each other, we see that, indeed, $T$ is not self-adjoint. Now, we note that $T$ is upper-triangular, so the eigenvalues are precisely $\lambda_1, \lambda_2, \lambda_3$.
+	
+	Now, we note then that $p(T) = (T - \lambda_1 I)(T-\lambda_2 I)(T-\lambda_3 I)$, we get:
+	\begin{align*}
+		\begin{bmatrix}
+			0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & \lambda_2 - \lambda_1 & 0 \\ 0 & 0 & 0 & \lambda_3 - \lambda_1
+		\end{bmatrix}
+	\begin{bmatrix}
+		\lambda_1 - \lambda_2 & 1 & 0 & 0 \\ 0 & \lambda_1-\lambda_2 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & \lambda_3 - \lambda_2
+	\end{bmatrix}
+\begin{bmatrix}
+	\lambda_1 - \lambda_3 & 1 & 0 & 0 \\ 0 & \lambda_1 - \lambda_3& 0 & 0 \\ 0 & 0 & \lambda_2-\lambda_3 & 0 \\ 0 & 0 & 0 & 0
+\end{bmatrix}
+	\end{align*}
+
+	And we note that this evaluates to the matrix
+	\begin{equation*}
+		\begin{bmatrix}
+			0 & (\lambda_1-\lambda_2)(\lambda_1-\lambda_3) & 0 & 0 \\
+			0 & 0 & 0 & 0 \\ 
+			0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	And we see that since it isn't equal to the zero matrix, we have then that $p(T) \neq 0$, and thus have found a counterexample as desired. We further note here that in order to annihilate $T$, we in fact need $p(z) = (z- \lambda_{1})^{2}(z-\lambda_2)(z-\lambda_3)$.
+%	To begin with, we note that the matrix representation of $T^{*}$ is equal to the conjugate transpose of $T$. In other words, we have
+%	\begin{equation*}
+%		\mathcal{M}(T^{*}) = \begin{bmatrix}
+%			1 & 0 & 0 & 0 \\
+%			0 & 0 & 0 & 0 \\
+%			3 & 2 & 0 & 1 \\
+%			0 & 3 & 0 & 2
+%		\end{bmatrix}
+%	\end{equation*}
+%
+%	Since these two matrices aren't equal to each other, we see that, in fact, $T$ is not self-adjoint. Now, we want to first find the eigenvalues of $T$, and then show that $p(T) \neq 0$, where $p(z) \coloneq (z-\lambda_1)(z-\lambda_2)(z-\lambda_3)$.
+%	
+%	Now, we will find its eigenvalues. To do this, we want to calculate the determinant $\lvert T - \lambda I \rvert$ and set it to zero.
+%	
+%	With some calculations, we observe that the determinant is
+%	
+%	First, let us consider the basis $(1,0,0,0), (0,1,0,1), (1,1,0,1), (0,0,1,0)$. Then, let us look at the vector $e_{2} = (0,1,0,1)$. Then, we see the following:
+%	\begin{enumerate}
+%		\item $e_{2} = e_{2}$,
+%		\item $Te_{2} = e_{4}$,
+%		\item $T^{2}e_{2} = $
+%	\end{enumerate}
+%	
+%	First, we can compute the minimal polynomial of $T$. Let us consider the basis vector $e_{3} = (0,0,1,0)$. Then, we see the following:
+%	\begin{enumerate}
+%		\item $Te_{3} = 3e_{1} + 2e_{2} + e_{4}$.
+%		\item $T^{2}e_{3} = T^{2}(3e_{1} + 2e_{2} + e_{4}) = 3e_{1} + 3e_{2} + 2e_{4}$.
+%		\item $T^{3}e_{3} = $
+%	\end{enumerate}
+%	
+%	
+%	
+%	From here, we want to determine its eigenvalues. We note that the eigenvalues are the $\lambda$'s such that $Av = \lambda v$. In other words, we have $(A- \lambda I)v = 0$, for $v \neq 0$.
+%	
+%	Then, this yields us:
+%	\begin{equation*}
+%		\begin{bmatrix}
+%			1 - \lambda & 0 & 3 & 0 & \aug & 0 \\
+%			0 & -\lambda & 2 & 3 & \aug & 0 \\
+%			0 & 0 & -\lambda & 0 & \aug & 0 \\
+%			0 & 0 & 1 & 2 - \lambda & \aug & 0
+%		\end{bmatrix}
+%	\end{equation*}
+	
+\end{solution}
+
+\newpage
+
+\section{Positive Operators}
+\begin{hw}
+	Let $T \in \mathcal L(V)$. Show that the following is an inner product on $V$ if and only if $T$ is positive:
+	\begin{equation*}
+		\innerproduct{v}{u}_{T} \coloneq \innerproduct{Tv}{u}
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	Now, let us prove the backwards direction. Suppose that $T$ is positive. This means then that, by definition, we have that $\innerproduct{Tv}{v} > 0$ for all $v \in V \setminus \left\{  0 \right\}$. Furthermore, we note that $T$ must be self-adjoint.
+	
+	Then, we will show that $\innerproduct{v}{u}_{T} \coloneq \innerproduct{Tv}{u}$ is indeed an inner product:
+	\begin{enumerate}
+		\item \textbf{Positivity}: We first note that for all $v \in V \setminus \left\{  0 \right\}$, we have by definition that $\innerproduct{Tv}{v} > 0$. Then, we note that if $v = 0$, then $\innerproduct{Tv}{v} = \innerproduct{T(0)}{0} = \innerproduct{0}{0} = 0$. Thus, positivity holds.
+		
+		\item \textbf{Definiteness}: We note that from the previous part, we see that if $v = 0$, then we have that $\innerproduct{v}{v}_{T} = \innerproduct{Tv}{v} = 0$. On the other hand, if $\innerproduct{v}{v}_{T} = \innerproduct{Tv}{v} = 0$, we recall then that since $T$ is positive, this can only occur when $v = 0$ or else $\innerproduct{Tv}{v} > 0$. Thus, we have shown that $\innerproduct{Tv}{v} = 0$ if and only if $v = 0$.
+		
+		\item \textbf{Additivity} We observe the following:
+		\begin{align*}
+			\innerproduct{u+v}{w}_{T} &= \innerproduct{T(u+v)}{w} \\
+			&= \innerproduct{Tu + Tv}{w} \\
+			&= \innerproduct{Tu}{w} + \innerproduct{Tv}{w} \\
+			&= \innerproduct{u}{w}_{T} + \innerproduct{v}{w}_{T}
+		\end{align*}
+		
+		Thus, we have additivity (in the first slot).
+		
+		\item \textbf{Homogeneity}: Consider some $\lambda \in \mathbb{F}$. Then, we see the following:
+		\begin{align*}
+			\innerproduct{\lambda v}{w}_{T} &= \innerproduct{T(\lambda v)}{w} \\
+			&= \innerproduct{\lambda T(v)}{w} \\
+			&= \lambda \innerproduct{Tv}{w} \\
+			&= \lambda \innerproduct{v}{w}_{T}
+		\end{align*}
+	
+		As such, we have homogeneity in the first slot as desired.
+	
+		\item \textbf{Conjugate Symmetry}: For this, we see that
+		\begin{align*}
+			\innerproduct{v}{w}_{T} &= \innerproduct{Tv}{w} \\
+			&= \overline{\innerproduct{w}{Tv}} \\
+			&= \overline{\innerproduct{Tw}{v}} \\
+			&= \overline{\innerproduct{w}{v}}_{T}
+		\end{align*}
+	
+		Thus, we have conjugate symmetry as desired.
+	\end{enumerate}
+
+	Therefore, we have shown that if $T$ is positive, then indeed $\innerproduct{v}{u}_{T} = \innerproduct{Tv}{u}$ is an inner product.
+	
+	Now we will prove the forward direction. Let us suppose that $\innerproduct{v}{u}_{T} = \innerproduct{Tv}{u}$ is an inner product on $V$. 
+	
+	First, we will show that $T$ is self-adjoint. That is, $T = T^{*}$. To do this, we observe the following:
+	\begin{align*}
+		\innerproduct{v}{u}_{T} &= \overline{\innerproduct{u}{v}_{T}} \\
+		\innerproduct{Tv}{u} &= \overline{\innerproduct{Tu}{v}} \\
+		&= \innerproduct{v}{Tu} \\
+		&= \innerproduct{T^{*}v}{u}.
+	\end{align*}
+
+	So, we have that $\innerproduct{Tv}{u} = \innerproduct{T^{*}v}{u}$. To show that this is true for all $u,v \in V$ and verify that $T = T^{*}$, we proceed as follows:
+	\begin{align*}
+		\innerproduct{Tv}{u} - \innerproduct{T^{*}v}{u} &= 0 \\
+		\innerproduct{Tv - T^{*}v}{u} &= 0 \\
+		\innerproduct{(T-T^{*})v}{u} &= 0
+	\end{align*}
+
+	Then, let us set $u = (T-T^{*})v$. Then, we get
+	\begin{equation*}
+		\innerproduct{(T-T^{*})v}{(T-T^{*})v} = 0
+	\end{equation*}
+
+	Then, we note here that since $\innerproduct{x}{x} = 0$ if and only if $x = 0$, we have then that $(T-T^{*})v = 0$. However, this holds for all $v \in V$, it follows then that we must have that $T-T^{*} = 0 \implies T = T^{*}$. Thus, we see that $T$ is self-adjoint as desired.
+	
+	From here, we have that for $\innerproduct{v}{v}_{T} = \innerproduct{Tv}{v} \geq 0$, for all $v \in V$. Thus, we see that $T$ is a non-negative operator.
+	
+	Furthermore, we note that $\innerproduct{v}{v}_{T} = \innerproduct{Tv}{v} = 0$ if and only if $v = 0$. Then, it follows that $\innerproduct{v}{v}_{T} = \innerproduct{Tv}{v} > 0$ for all $v \in V \setminus \left\{  0 \right\}$. Thus, we observe that, indeed, $T$ is positive as desired.
+\end{solution}
+
+\newpage
+
+\section{Non-negative Operators}
+\begin{hw}
+	Show that the operator $T = -D^{2}$ is non-negative on the space $V \coloneq \vspan (1, \cos x, \sin x)$ over $\RR$, with the inner product
+	\begin{equation*}
+		\innerproduct{f}{g} \coloneq \int_{-\pi}^{\pi} f(x)g(x) \mathrm dx.
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	\begin{comment}
+		First, we want to show that $T$ is indeed self-adjoint. To do this, we first recall that all $f \in V$ have the property that $f(\pi) = f(-\pi)$. Furthermore, note that since differentiation of $f \in V$ results in a new vector $Df \in V$ as well, we note then that it will also have the same property. Now, with this in mind, we see that
+	\begin{align*}
+		\innerproduct{Tf}{g} &= \int_{-\pi}^{\pi} -f''(x)g(x) \mathrm dx \\
+		&= -\int_{-\pi}^{\pi} f''(x)g(x)\mathrm dx \\
+		&= -\left(f'(x)g(x)\big|_{-\pi}^{\pi} - \int_{-\pi}^{\pi} g'(x)f'(x)\mathrm dx\right) \\
+		&= \int_{-\pi}^{\pi} g'(x)f'(x) \mathrm dx \\
+		&= f(x)g'(x)\big|_{-\pi}^{\pi} - \int_{-\pi}^{\pi} f(x)g''(x) \mathrm dx \\
+		&= \int_{-\pi}^{\pi} f(x)(-g''(x)) \mathrm dx \\
+		&= \innerproduct{f}{Tg}.
+	\end{align*}
+
+	Next, we want to show that $\innerproduct{Tf}{g} \geq 0$ for all $f,g \in V$. First, we make the following observation:
+	\begin{align*}
+		-(\sin x)'' &= \sin x \\
+		-(\cos x)'' &= \cos x \\
+		-(1)'' &= 0
+	\end{align*}
+
+	In other words, for $f = \cos x$ or $\sin x$, we see that $Tf = f$. Next, we recall that since $1, \cos x, \sin x$ are all orthogonal to each other with respect to the given inner product above, it follows then that the their inner products must be equal to zero. Thus, we have to consider the following three cases:
+	\begin{enumerate}
+		\item $\innerproduct{T(1)}{1}$,
+		\item $\innerproduct{T(\sin x)}{\sin x}$,
+		\item $\innerproduct{T(\cos x)}{\cos x}$.
+	\end{enumerate}
+
+	In the first case, we note that since $T(1) = 0$, it follows then that $\innerproduct{T(1)}{1} = 0$. For the other two cases, we observe that:
+	\begin{align*}
+		\innerproduct{T(\sin x)}{\sin x} &= \int_{-\pi}^{\pi} \sin^{2} (x) \mathrm dx \\
+		&= \pi \\
+		\innerproduct{T(\cos x)}{\cos x} &= \int_{-\pi}^{\pi} \cos^{2}(x) \mathrm dx \\
+		&= \pi
+	\end{align*}
+	
+	Thus, we see that, indeed, since $T$ is both self-adjoint and $\innerproduct{Tf}{g} \geq 0$ for all $f \in V$, it follows then that it is in fact a non-negative operator as desired.
+	\end{comment}
+	To begin with, we will show that $T$ is self-adjoint. To do this, we can orthonormalise our basis to get the following orthonormal basis: $\frac{1}{\sqrt{2\pi}}, \frac{\cos x}{\sqrt{\pi}}, \frac{\sin x}{\sqrt{\pi}}$. So, we get then that the matrix representation for $T$ must be:
+	\begin{equation*}
+		\mathcal{M}(T) = \begin{bmatrix}
+			0 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we note that since $T$ is in fact a diagonal matrix, its conjugate transpose (and thus its adjoint) $T^{*}$ is equal to $T$. Thus, since $T = T^{*}$, we have that it is self-adjoint.
+	
+	Next, we want to show that $\innerproduct{Tf}{g} \geq 0$ for all $f,g \in V$. First, we make the following observation:
+	\begin{align*}
+		-(\sin x)'' &= \sin x \\
+		-(\cos x)'' &= \cos x \\
+		-(1)'' &= 0
+	\end{align*}
+	
+	In other words, for $f = \cos x$ or $\sin x$, we see that $Tf = f$. Next, we recall that since $1, \cos x, \sin x$ are all orthogonal to each other with respect to the given inner product above, it follows then that the their inner products must be equal to zero. Thus, we have to consider the following three cases:
+	\begin{enumerate}
+		\item $\innerproduct{T(1)}{1}$,
+		\item $\innerproduct{T(\sin x)}{\sin x}$,
+		\item $\innerproduct{T(\cos x)}{\cos x}$.
+	\end{enumerate}
+	
+	In the first case, we note that since $T(1) = 0$, it follows then that $\innerproduct{T(1)}{1} = 0$. For the other two cases, we observe that:
+	\begin{align*}
+		\innerproduct{T(\sin x)}{\sin x} &= \int_{-\pi}^{\pi} \sin^{2} (x) \mathrm dx \\
+		&= \pi \\
+		\innerproduct{T(\cos x)}{\cos x} &= \int_{-\pi}^{\pi} \cos^{2}(x) \mathrm dx \\
+		&= \pi
+	\end{align*}
+	
+	Thus, we see that, indeed, since $T$ is both self-adjoint and $\innerproduct{Tf}{g} \geq 0$ for all $f \in V$, it follows then that it is in fact a non-negative operator as desired.
+\end{solution}
+
+\begin{hw}
+	Find its square root operator, $\sqrt{T}$.
+\end{hw}
+\begin{solution}
+	Recall that the matrix representation for $T$ under our orthonormal basis is
+	\begin{equation*}
+		\mathcal{M}(T) = \begin{bmatrix}
+			0 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	So, we let $R = \sqrt{T}$ to have the following matrix representation:
+	\begin{equation*}
+		\mathcal{M}(R) = \begin{bmatrix}
+			0 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	And we note that, indeed, $R$ is non-negative as desired, and $R^{2} = T$.
+\end{solution}
+
+\begin{hw}
+	Find a self-adjoint operator $R \neq \sqrt{T}$ such that $R^{2} = T$. 
+\end{hw}
+\begin{solution}
+	We recall that $T(1) = 0$, and $Tf = f$ for $f = \sin x$ or $\cos x$.
+	
+	Then, from here, we observe that we can define $R = D^{2}$. We observe then that $R(1) = 0 = T(1)$. So, we have then that $R^{2}(1) = R(R(1)) = R(0) = 0 = T(1)$.
+	
+	Meanwhile, for $f = \sin x$ or $\cos x$, we have that $Rf = -f$. Then, $R^{2}f = R(Rf) = R(-f) = -Rf = f = Tf$, as desired.
+	
+	To check for self-adjointness, we observe the following:
+	\begin{align*}
+		\innerproduct{Rf}{g} &= \int_{-\pi}^{\pi} f''(x)g(x) \mathrm dx \\
+		&= f'(x)g(x) \big|_{-\pi}^{\pi} - \int_{-\pi}^{\pi} f'(x) g'(x) \mathrm dx \\
+		&= - \int_{-\pi}^{\pi} f'(x) g'(x) \mathrm dx \\
+		&= -\left( f(x)g'(x)\big|_{-\pi}^{\pi} - \int_{-\pi}^{\pi} f(x)g''(x) \mathrm dx \right) \\
+		&= \int_{-\pi}^{\pi} f(x) g''(x) \mathrm dx \\
+		&= \innerproduct{f}{Rg}
+	\end{align*}
+
+	However, we note that this isn't $\sqrt{T}$ since it fails the non-negativity check. Specifically, we note that if we had:
+	\begin{align*}
+	\innerproduct{R(\sin x)}{\sin x} &= \int_{-\pi}^{\pi} -\sin^{2}(x) \mathrm dx \\
+	&= - \int_{-\pi}^{\pi} \sin^2(x) \mathrm dx \\
+	&= -\pi \not\geq 0.
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Find a non-self-adjoint operator $S$ such that $S^{*}S = T$.
+\end{hw}
+\begin{solution}
+	We first recall that $S^{*}$ is the conjugate transpose of $S$. Then, with this in mind, we find that the matrix representation of $T$ with respect to the orthonormal basis from the previous parts is:
+	\begin{equation*}
+		\mathcal{M}(T) = \begin{bmatrix}
+			0 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we want to find matrices $S, S^{*}$ (who are not equal to each other, else $S$ would be self-adjoint) such that their product is equal to $T$. In this case, we define $S, S^{*}$ to be the following:
+	\begin{equation*}
+		\mathcal{M}(S) = \begin{bmatrix}
+			0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+		\end{bmatrix}, \mathcal{M}(S^{*}) = \begin{bmatrix}
+			0 & 0 & 0 \\
+			1 & 0 & 0 \\
+			0 & 1 & 0
+		\end{bmatrix}.
+	\end{equation*}
+
+	Then, from here, we note that, indeed, we have
+	\begin{equation*}
+		S^{*}S = \begin{bmatrix}
+			0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0
+		\end{bmatrix} \begin{bmatrix}
+		0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+	\end{bmatrix} = \begin{bmatrix}
+	 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+\end{bmatrix}
+	= T.
+	\end{equation*}
+\end{solution}
+
+\newpage
+
+\section{Isometries}
+\begin{hw}
+	Let $T_{1}$ and $T_{2}$ be normal operators on an $n$-dimensional inner product space $V$. Suppose both have $n$ distinct eigenvalues $\lambda_1,\ldots,\lambda_n$. Show that there is an isometry $S \in \mathcal L(V)$ such that $T_{1} = S^{*}T_{2}S$.
+\end{hw}
+\begin{solution}
+	\begin{comment}
+		To begin with, we note that since $T_{1}, T_{2}$ are normal operators on an $n$-dimensional inner product space $V$, and they both have $n$ distinct eigenvalues $\lambda_{1}, \ldots, \lambda_n$, we observe then that each of the eigenvectors of $T_{1}, T_{2}$ corresponding to each of the distinct eigenvalues are thus orthogonal, and thus form a basis for $V$.
+	
+	Now, with this in mind, we observe then that since $V$ has a basis formed by the eigenvectors of $T_{1}, T_{2}$, it follows then they are diagonalisable. Furthermore, they have a diagonal matrix representation $D$. Note that they share a diagonal matrix representation due to sharing the same eigenvalues.
+	
+	From here, since $T_{1}, T_{2}$ are diagonalisable, it means then that there exists some invertible matrix $P$ such that $T_{1} = P_{1}DP_{1}^{-1}$ and $T_{2} = P_{2}DP_{2}^{-1}$.
+	
+	Next, we recall that for a unitary matrix $S$, we have that $S^{-1} = S^{*}$. Then, from here, we observe that there exists unitary matrices $S_{1}, S_{2}$ such that we have the following:
+	\begin{align*}
+		T_{1} &= S_{1} D S_{1}^{*} \\
+		T_{2} &= S_{2} D S_{2}^{*}
+	\end{align*} 
+
+	Then, we observe that since $S$ is unitary, it follows that $SS^{*} = S^{*}S = I$. So, we have:
+	\begin{align*}
+		S_{2}^{*}T_{2}S_{2} &= S_{2}^{*}S_{2} D S_{2}^{*}S_{2} \\
+		&= IDI \\
+		&= D
+	\end{align*}
+
+	And with this in mind, we thus see that:
+	\begin{align*}
+		T_{1} &= S_{1}DS_{1}^{*} \\
+		&= S_{1}(S_{2}^{*} D S_{2})S_{1}^{*} \\
+		&= (S_{1}S_{2}^{*}) D (S_{2}S_{1}^{*}) \\
+		&= (S_{2}S_{1}^{*})^{*} D (S_{2}S_{1}^{*})
+	\end{align*}
+
+	From here, we observe that if we let $S = S_{2}S_{1}^{*}$, we see then that $S^{*} = (S_{2}S_{1}^{*})^{*} = S_{1}S_{2}^{*}$. Furthermore, we have $S^{*}S = (S_{1}S_{2}^{*})(S_{2}S_{1}^{*}) = I$. Thus, we see that, indeed, we have that $S$ is an isometry, and that
+	\begin{equation*}
+		T_{1} = S^{*}DS.
+	\end{equation*}
+	\end{comment}
+
+	To begin with, we note that since $T_{1}, T_{2}$ are normal operators on an $n$-dimensional inner product space $V$, and they both have $n$ distinct eigenvalues $\lambda_1, \ldots, \lambda_n$, we observe then that the eigenvectors of $T_{1}$ and $T_{2}$ are orthogonal and thus form a basis for $V$.
+	
+	Now, with this in mind, we note then that there exists an orthonormal basis $e_{1}, \ldots, e_{n}$ and $f_{1}, \ldots, f_{n}$ such that $T_{1}e_{i} = \lambda_ie_i$ and $T_{2}f_{i} = \lambda_if_i$, for $i = 1, \ldots, n$.
+	
+	From here, by the linear map lemma, we note then that we can define a unitary operator $S$ such that $Se_{i} = f_{i}$. Note here that since $S$ is a unitary operator, we know then that it's invertible, and that $S^{-1} = S^{*}$ and that $S^{*}f_{i} = e_{i}$.
+	
+	Also, note that a unitary operator is simply an invertible isometry.
+	
+	Then, with this in mind, we note that we get:
+	\begin{align*}
+		T_{1}e_{i} &= S^{*}T_{2}Se_{i} \\
+		&= S^{*}T_{2}f_{i} \\
+		&= S^{*}\lambda_if_i \\
+		&= \lambda_i S^{*}f_{i} \\
+		&= \lambda_i e_{i}
+	\end{align*}
+
+	And we note that since a linear map is defined by its action on a basis, since the above holds for $i = 1, \ldots, n$, we observe then that we in fact have $T_{1} = S^{*}T_{2}S$, where $S$ is an isometry as desired.
+\end{solution}
+
+\newpage
+
+\section{Singular Values}
+\begin{hw}
+	Find the singular values of the operator $T \in \mathscr{P}_{3}(\CC) : p(x) \mapsto 2xp'(x) - x^{2}p''(x)$ if the inner product on $\mathscr{P}_{3}(\CC)$ is defined as
+	\begin{equation*}
+		\innerproduct{p}{q} \coloneq \int_{-1}^{1} p(x) \overline{q(x)} \mathrm dx.
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	\begin{comment}
+		To begin with, we will find the matrix representation of $T$. We note the following:
+	\begin{enumerate}
+		\item $T(1) \mapsto 0$.
+		\item $T(x) \mapsto 2x$.
+		\item $T(x^{2}) \mapsto 4x^{2} - 2x^{2} = 2x^{2}$.
+		\item $T(x^{3}) \mapsto 6x^{3} - 6x^{3} = 0$.
+	\end{enumerate}
+
+	So, we have the following matrix representation for $T$:
+	\begin{equation*}
+		\mathcal{M}(T) = \begin{bmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 2 & 0 & 0 \\
+			0 & 0 & 2 & 0 \\
+			0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	% answer: 5,3,0,0
+	To find the adjoint $T^{*}$, we can determine it by finding $T^{*}$ such that $\innerproduct{Tp}{q} = \innerproduct{p}{T^{*}q}$.
+	
+	First, we see that
+	\begin{align*}
+		\innerproduct{Tp}{q} &= \int_{-1}^{1} Tp(x)\overline{q(x)}\mathrm dx \\
+		&= \int_{-1}^{1} \left(2xp'(x)-x^{2}p''(x)\right)q(x) \mathrm dx \\
+		&= \int_{-1}^{1} 2xp'(x)q(x) \mathrm dx - \int_{-1}^{1} x^{2}p''(x)q(x)\mathrm dx \\
+		&= 2xp(x)q(x) \big|_{-1}^{1} - \int_{-1}^{1} 2p(x)q'(x) \mathrm dx - x^{2}p'(x)q(x) \big|_{-1}^{1} + \int_{-1}^{1} 2xq'(x)p'(x)\mathrm dx \\
+		&= 2xp(x)q(x) \big|_{-1}^{1} - \int_{-1}^{1} p(x)q'(x) \mathrm dx - x^{2}p'(x)q(x) \big|_{-1}^{1} + 2xq'(x)p(x)\big|_{-1}^{1} - \int_{-1}^{1} 2q''(x)p(x)\mathrm dx
+	\end{align*}
+	
+	
+	Then, using the fact that the matrix representation of $T^{*}$ is the conjugate transpose of $T$, we have:
+	\begin{equation*}
+		\mathcal{M}(T) = \begin{bmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 2 & 0 & 0 \\
+			0 & 0 & 2 & 0 \\
+			0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	We observe then that:
+	\begin{equation*}
+		\mathcal{M}(T^{*}T) = \begin{bmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 4 & 0 & 0 \\
+			0 & 0 & 4 & 0 \\
+			0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	From here, we note that we have the following for each of the eigenvalues:
+	\begin{enumerate}
+		\item For $\lambda = 0$, we see that the associated eigenvectors are $1, x^{3}$ (as seen from previous calculations).
+		\item For $\lambda = 4$, we see that the associated eigenvectors are $2x, 2x^{2}$ (since we know that $T(x) = 2x$, then $T(2x) = 2T(x) = 4x$, and a similar process is used for $x^{2}$).
+	\end{enumerate}
+
+	Thus, we observe that $\dim(4, T^{*}T) = 2$ and $\dim(0, T^{*}T) = 2$. Therefore, we have then that the singular values of $T$ are $2,2,0,0$. 
+	\end{comment}
+	To begin with, from previous homeworks, we can see that the orthonormal basis with respect to this inner product for the given space is: $\frac{1}{\sqrt{2}}, \sqrt{\frac{3}{2}}x, \sqrt{\frac{45}{8}}\left( x^{2} - \frac{1}{3} \right), \sqrt{\frac{175}{8}}\left( x^{3} - \frac{3x}{5} \right)$. Let us denote this as $e_{1}, e_{2}, e_{3}, e_{4}$ respectively.
+	
+	Then, from here, we observe the following:
+	\begin{enumerate}
+		\item $Te_{1} = 0$.
+		\item $Te_{2} = 2\sqrt{\frac{3}{2}}x = 2e_{2}$.
+		\item $Te_{3} = 4\sqrt{\frac{45}{8}}x^{2} - 2\sqrt{\frac{45}{8}}x^{2} = 2\sqrt{\frac{45}{8}}x^{2} = 2e_{3} + \sqrt{5}e_{1}$.
+		\item $Te_{4} = 2\sqrt{\frac{175}{8}}x(3x^{2} - \frac{3}{5}) - \sqrt{\frac{175}{8}}x^{2}(6x) = -\frac{6}{5}\sqrt{\frac{175}{8}}x = -\sqrt{21}e_{2}$.
+	\end{enumerate}
+	
+	So, from here, we have then that
+	\begin{equation*}
+		\mathcal{M}(T) = \begin{bmatrix}
+			0 & 0 & \sqrt{5} & 0 \\ 0 & 2 & 0 & -\sqrt{21} \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+	
+	Now, we note that since $e_{1}, \ldots, e_{4}$ is an orthonormal basis, then the matrix representation of $T^{*}$ is simply the conjugate transpose of $T$. Thus, we have:
+	\begin{equation*}
+		\mathcal{M}(T^{*}) = \begin{bmatrix}
+			0 & 0 & 0 & 0 \\ 0 & 2 & 0 & 0 \\ \sqrt{5} & 0 & 2 & 0 \\ 0 & -\sqrt{21} & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	From here, we observe then that we have:
+	\begin{equation*}
+		\mathcal{M}(T^{*}T) = \begin{bmatrix}
+			0 & 0 & 0 & 0 \\
+			0 & 4 & 0 & -2\sqrt{21} \\
+			0 & 0 & 9 & 0 \\
+			0 & -2\sqrt{21} & 0 & 21
+		\end{bmatrix}
+	\end{equation*}
+
+	Next, we want to find the eigenvalues of $T^{*}T$. To do this, we will compute the determinant of $T^{*}T - \lambda I$. That is, we find the determinant of the following matrix:
+	\begin{equation*}
+		\begin{bmatrix}
+			-\lambda & 0 & 0 & 0 \\
+			0 & 4-\lambda & 0 & -2\sqrt{21} \\
+			0 & 0 & 9-\lambda & 0 \\
+			0 & -2\sqrt{21} & 0 & 21-\lambda
+		\end{bmatrix}
+	\end{equation*}
+
+	Through computations, we see that we get $-\lambda^{2}(9-\lambda)(25 - \lambda)$. Then, we see that the eigenvalues of $T^{*}T$ are $25, 9, 0, 0$.
+	
+	Then, we note that the singular values are the square roots of the eigenvalues of $T^{*}T$. Thus, we have the singular values as $5, 3, 0, 0$.
+\end{solution}
+
+\end{document}

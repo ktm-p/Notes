@@ -1,0 +1,495 @@
+\documentclass{article}
+%%%% PREAMBLE %%%%
+%BEGIN_FOLD
+%%% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cabin} % section title font
+\usepackage[default]{cantarell} % default font
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[scr]{rsfso} % power set symbol
+\usepackage{tasks} % vaguely remember this being important for something...?
+\usepackage{tikz} % diagrams
+\usepackage{titlesec}
+\usepackage{thmtools}
+\usepackage{varwidth}
+\usepackage{verbatim} % longer comments
+\usepackage{xcolor}
+%%%
+
+%%% COLOURS
+\definecolor{darkgreen}{HTML}{19A514}
+\definecolor{lightgreen}{HTML}{9DFF9A}
+\definecolor{darkblue}{HTML}{3E5FE4}
+\definecolor{lightblue}{HTML}{BCDEFF}
+\definecolor{darkred}{HTML}{CC3333}
+\definecolor{lightred}{HTML}{FFA9A9}
+\definecolor{darkpurple}{HTML}{A933CD}
+\definecolor{lightpurple}{HTML}{F0BAFF}
+\definecolor{darkyellow}{HTML}{D2D22A}
+\definecolor{lightyellow}{HTML}{FFFFAE}
+\definecolor{hyperlinkblue}{HTML}{3366CC}
+%%%
+
+%%% PAGE SETUP
+% BASIC %
+\setlength\parindent{0pt} % paragraph indentation
+\setlength{\parskip}{5pt} % spacing between paragraphs
+\usepackage[margin=1in]{geometry} % margin size
+
+% HEADER/FOOTER %
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage} % page number on bottom right
+\fancyhead[R]{\textit{\leftmark}} % section title
+\renewcommand{\headrulewidth}{0pt} % removing horizontal line at the top
+
+% HYPERLINK FORMATTING %
+\hypersetup{
+	colorlinks,    
+	linkcolor=hyperlinkblue,
+	urlcolor=hyperlinkblue,
+	pdftitle={...},
+	pdfauthor={Michael Pham},
+}
+
+%%%
+
+%%% ENVIRONMENTS STYLES
+% SOLUTION ENVIRONMENT %
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% PURPLE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightpurple,
+	linecolor=darkpurple,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkpurple}
+]{purplebox}
+
+% GREEN BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightgreen,
+	linecolor=darkgreen,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkgreen}
+]{greenbox}
+
+% YELLOW BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightyellow,
+	linecolor=darkyellow,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkyellow}
+]{yellowbox}
+
+% BLUE BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightblue,
+	linecolor=darkblue,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkblue}
+]{bluebox}
+
+% RED BOX %
+\declaretheoremstyle[
+mdframed={
+	backgroundcolor=lightred,
+	linecolor=darkred,
+	rightline=false,
+	topline=false,
+	bottomline=false,
+	linewidth=2pt,
+	innertopmargin=8pt,
+	innerbottommargin=8pt,
+	innerleftmargin=8pt,
+	leftmargin=-2pt,
+	skipbelow=2pt,
+	nobreak
+},
+headfont=\normalfont\bfseries\color{darkred}
+]{redbox}
+%%%
+
+%%% ENVIRONMENTS
+% PURPLE BOXES (theorems, propositions, lemmas, and corollaries) %
+\declaretheorem[style=purplebox,name=Theorem,within=section]{thm}
+\declaretheorem[style=purplebox,name=Theorem,sibling=thm]{theorem}
+\declaretheorem[style=purplebox,name=Theorem,numbered=no]{thm*, theorem*}
+\declaretheorem[style=purplebox,name=Proposition,sibling=thm]{prop, proposition}
+\declaretheorem[style=purplebox,name=Proposition,numbered=no]{prop*, proposition*}
+\declaretheorem[style=purplebox,name=Lemma,sibling=thm]{lem, lemma}
+\declaretheorem[style=purplebox,name=Lemma,numbered=no]{lem*, lemma*}
+\declaretheorem[style=purplebox,name=Corollary,sibling=thm]{cor, corollary}
+\declaretheorem[style=purplebox,name=Corollary,numbered=no]{cor*, corollary*}
+
+% GREEN BOXES (definitions) %
+\declaretheorem[style=greenbox,name=Definition,sibling=thm]{definition, defn}
+\declaretheorem[style=greenbox,name=Definition,numbered=no]{definition*, defn*}
+
+% BLUE BOXES (problems) %
+\declaretheorem[style=bluebox,name=Problem,numberwithin=section]{homework, hw}
+\declaretheorem[style=bluebox,name=Problem,numbered=no]{homework*, hw*}
+
+% RED BOXES %
+\declaretheorem[style=redbox,name=Remark,sibling=thm]{remark, rmk}
+\declaretheorem[style=redbox,name=Remark, numbered=no]{remark*, rmk*}
+\declaretheorem[style=yellowbox,name=Warning,sibling=thm]{warn}
+\declaretheorem[style=yellowbox,name=Warning,numbered=no]{warn*}
+%%%
+
+%%% PROOF FORMATTING
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{innerproof}{\renewcommand{\qedsymbol}{$\square$}\proof}{\endproof}
+%%%
+
+%% CUSTOM COMMANDS
+% basic %
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\norm}[1]{\left\lVert{#1}\right\rVert}
+
+% logic %
+\newcommand*\xor{\oplus}
+\newcommand{\all}{\forall}
+\newcommand{\bland}{\bigwedge}
+\newcommand{\blor}{\bigvee}
+\newcommand*{\defeq}{\mathrel{\rlap{\raisebox{0.3ex}{$\m@th\cdot$}}\raisebox{-0.3ex}{$\m@th\cdot$}}=} \makeatother
+
+% matrices %
+\newcommand\aug{\fboxsep=- \fboxrule\!\!\!\fbox{\strut}\!\!\!}\makeatletter 
+
+% sets %
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+% probability stuff %
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+
+% linalg stuff %
+\DeclareMathOperator*{\Span}{\mathrm{Span}}
+\DeclareMathOperator*{\Null}{\mathrm{Null}}
+\DeclareMathOperator*{\Range}{\mathrm{Range}}
+\DeclareMathOperator*{\vspan}{\mathrm{span}}
+\DeclareMathOperator*{\vnull}{\mathrm{null}}
+\DeclareMathOperator*{\vrange}{\mathrm{range}}
+\newcommand{\innerproduct}[2]{\left\langle{#1}, {#2}\right\rangle}
+\DeclareMathOperator*{\proj}{\mathrm{proj}}
+
+% title %
+\newcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+}
+%%
+
+
+%%%
+%END_FOLD
+%%%
+
+\begin{document}
+	\mytitle{Math 110: Homework 10}{Fall 2023}
+	
+	\section{Inner Product Validity}
+	\begin{hw}
+		Determine whether or not the function taking the pair $( (x_{1}, x_{2}, x_{3}), (y_{1}, y_{2}, y_{3})) \in \RR^{3} \times \RR^{3}$ to $x_{1}y_{1} + x_{2}y_{2} - 3x_{2}y_{3} + 3x_{3}y_{2} + x_{3}y_{3}$ is an inner product.
+	\end{hw}
+	\begin{solution}
+		We will provide a counterexample to show that such a function isn't an inner product.
+		
+		To do this, consider the pair $((0,1,0), (0,0,1)) \in \RR^{3} \times \RR^{3}$. Then, we observe that the inner product will be:
+		\begin{align*}
+			\innerproduct{(0,1,0)}{(0,0,1)} &= (0)(0) + (1)(0) - 3(1)(1) + 3(0)(0) + (0)(1) \\
+			&= -3
+		\end{align*}
+	
+		On the other hand, observe that the pair $( (0,0,1), (0,1,0))$ will get us:
+		\begin{align*}
+			\innerproduct{(0,0,1)}{(0,1,0)} &= (0)(0) + 0(1) - 3(1)(0) + 3(1)(1) + (0)(0) \\
+			&= 3
+		\end{align*}
+	
+		But, note that $\overline{\innerproduct{(0,0,1)}{(0,1,0)}} = \overline{3} = 3$. So, we have that $\innerproduct{(0,1,0)}{(0,0,1)} \neq \overline{\innerproduct{(0,0,1)}{(0,1,0)}}$. Thus, this function fails to satisfy the conjugate symmetry requirement of an inner product.
+	\end{solution}
+
+	\newpage
+	
+	\section{Orthogonal Subspace and Orthonormal Basis}
+	\begin{hw}
+		Consider a complex vector space $V = \vspan(1, \cos x, \sin x, \cos 2x, \sin 2x)$ with an inner product
+		\begin{equation*}
+			\innerproduct{f}{g} \coloneq \int_{-\pi}^{\pi} f(t) \overline{g(t)} \mathrm dt.
+		\end{equation*}
+	
+		Let $U$ be the subspace of odd functions in $V$. What is $U^{\perp}$? Find an orthonormal basis for $U$ and $U^{\perp}$.
+	\end{hw}
+	\begin{solution}
+		To begin with, we note that each $1, \cos x, \sin x, \cos 2x, \sin 2x$ are linearly independent. To do this, we note that $\cos 2x = \cos^{2} x - \sin^{2} x$, and $\sin 2x = 2\sin x \cos x$ by the addition formula for $\cos$ and $\sin$. From here, we note the following:
+		\begin{align*}
+			a_{0}(1) + a_{1}\cos x + a_{2} \sin x + a_{3}\cos 2x + a_{4}\sin 2x &= 0 \\
+			a_{0} + a_{1}\cos x + a_{2}\sin x + a_{3}(\cos^{2} x - \sin^{2} x) + a_{4}(2\sin x \cos x) &= 0
+		\end{align*}
+	
+		and we see that this only holds when $a_{0} = \cdots = a_{4} = 0$. In other words, they are linearly independent.
+		
+		Then, from here, we note that since $U$ consists of the odd functions in $V$, then a basis for it must be $\sin x, \sin 2x$. From here, we can orthonormalise it using the Gram-Schmidt process we get the following vectors:
+		\begin{align*}
+			e_{1} &= \frac{\sin x}{\norm{\sin x}} = \frac{\sin x}{\sqrt{\innerproduct{\sin x}{\sin x}}} = \frac{\sin x}{\sqrt{\int_{-\pi}^{\pi} \sin x \overline{\sin x} \mathrm dx}} = \frac{\sin x}{\sqrt \pi} \\
+			e_{2} &= \frac{\sin 2x - \innerproduct{\sin 2x}{\frac{\sin x}{\sqrt{\pi}}} \frac{\sin x}{\sqrt \pi}}{\norm{\sin 2x - \innerproduct{\sin 2x}{\frac{\sin x}{\pi}}\frac{\sin x}{\sqrt{\pi}}}} = \frac{\sin 2x - \int_{-\pi}^{\pi} \frac{2\sin^{2} x \cos x}{\sqrt{\pi}} \mathrm dx \frac{\sin x}{\sqrt \pi}}{\norm{\sin 2x - \int_{-\pi}^{\pi} \frac{2\sin^{2} x \cos x}{\sqrt{\pi}} \mathrm dx \frac{\sin x}{\sqrt \pi}}} = \frac{\sin 2x}{\norm{\sin 2x}} = \frac{\sin 2x }{\sqrt{\int_{-\pi}^{\pi} \sin 2x \overline{\sin 2x} \mathrm dt}} = \frac{\sin 2x}{\sqrt \pi}
+		\end{align*} 
+	
+		From here, we note that $V = U \oplus U^{\perp}$. Furthermore, since $\dim V = \dim U \oplus \dim U^{\perp}$, we see then that since $\dim U = 2$, and $1, \cos x, \cos 2x \not\in U$ and also that these three vectors are also linearly independent, it follows then that a basis for $U^{\perp}$ would be $1, \cos x, \cos 2x$.
+		
+		From here, once more, by Gram-Schmidt, we observe that an orthonormal basis for $U^{\perp}$ would be:
+		\begin{align*}
+			e_{3} &= \frac{1}{\norm{1}} = \frac{1}{\sqrt{\int_{-\pi}^{\pi} 1 \mathrm dx}} = \frac{1}{\sqrt{2\pi}} \\
+			e_{2} &= \frac{\cos x - \innerproduct{\cos x}{e_{3}}e_{3}}{\norm{\cos x - \innerproduct{\cos x}{e_{3}}e_{3}}} = \frac{\cos x}{\sqrt \pi} \\
+			e_{3} &= \frac{\cos 2x - \innerproduct{\cos 2x}{e_{3}}e_{3} - \innerproduct{\cos 2x}{e_{4}}e_{4}}{\norm{\cos 2x - \innerproduct{\cos 2x}{e_{3}}e_{3} - \innerproduct{\cos 2x}{e_{4}}e_{4}}} = \frac{\cos 2x}{\sqrt \pi}.
+		\end{align*}
+		
+		So, an orthonormal basis for $U$ would be $\frac{\sin x}{\sqrt{\pi}}$ and $\frac{\sin 2x}{\sqrt \pi}$.
+		
+		Meanwhile, an orthonormal basis for $U^{\perp}$ would be $\frac{1}{\sqrt{2\pi}}, \frac{\cos x}{\sqrt{\pi}}, \frac{\cos 2x}{\sqrt{\pi}}$.
+	\end{solution}
+	
+	\newpage
+	
+	\section{Gram-Schmidt Pain}
+	\begin{hw}
+		Consider the space $\mathscr{P}_{3}(\RR)$ with an inner product
+		\begin{equation*}
+			\innerproduct{f}{g} = \int_{-1}^{1} f(x)g(x) \mathrm dx.
+		\end{equation*}
+	
+		Use the Gram-Schmidt algorithm to orthonormalize the basis $1, x, x^{2}, x^{3}$.
+	\end{hw}
+	\begin{solution}
+		Using Gram-Schmidt, we get the following:
+		\begin{align*}
+			e_{1} &= \frac{1}{\norm{1}} = \frac{1}{\sqrt{\innerproduct{1}{1}}} = \frac{1}{\sqrt{\int_{-1}^{1} 1(1) \mathrm dx}} = \frac{1}{\sqrt{2}} \\
+			e_{2} &= \frac{x - \innerproduct{x}{\frac{1}{\sqrt 2}} \frac{1}{\sqrt 2}}{\norm{x - \innerproduct{x}{\frac{1}{\sqrt 2}} \frac{1}{\sqrt 2}}} = \frac{x}{\norm{x}} = \frac{x}{\sqrt{\innerproduct{x}{x}}} = \frac{x}{\sqrt{\int_{-1}^{1} x^{2} \mathrm dx}} = \sqrt{\frac{3}{2}} x \\
+			e_{3} &= \frac{x^{2} - \innerproduct{x^{2}}{\frac{1}{\sqrt 2}}\frac{1}{\sqrt 2} - \innerproduct{x^{2}}{\sqrt{\frac{3}{2}}x} \sqrt{\frac{3}{2}} x}{\norm{x^{2} - \innerproduct{x^{2}}{\frac{1}{\sqrt 2}}\frac{1}{\sqrt 2} - \innerproduct{x^{2}}{\sqrt{\frac{3}{2}}x} \sqrt{\frac{3}{2}} x}} = \frac{x^{2} - \frac{1}{3}}{\norm{x^{2} - \frac{1}{3}}} = \sqrt{\frac{45}{8}}\left( x^{2} - \frac{1}{3} \right) \\
+			e_{4} &= \frac{x^{3} - \innerproduct{x^{3}}{e_{1}}e_{1} - \innerproduct{x^{3}}{e_{2}} e_{2} - \innerproduct{x^{3}}{e_{3}} e_{3}}{\norm{x^{3} - \innerproduct{x^{3}}{e_{1}}e_{1} - \innerproduct{x^{3}}{e_{2}} e_{2} - \innerproduct{x^{3}}{e_{3}} e_{3}}} = \frac{x^{3} - \frac{3x}{5}}{\norm{x^{3} - \frac{3x}{5}}} = \sqrt{\frac{175}{8}}\left( x^{3} - \frac{3x}{5} \right)
+		\end{align*}
+	
+		Thus, we have $e_{1}, e_{2}, e_{3}, e_{4}$ defined as above as the orthonormalised basis for $\mathscr{P}_{3}(\RR)$ under the standard basis.
+	\end{solution}
+	
+	
+	\newpage
+	
+	\section{An Orthonormal List of Vectors}
+	\begin{hw}
+		Let $e_{1}, \ldots, e_{m}$ be an orthonormal list of vectors. Prove that $v \in \vspan(e_{1}, \ldots, e_{m})$ if and only if
+		\begin{equation*}
+			\norm{v}^{2} = \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2}.
+		\end{equation*}
+	\end{hw}
+	\begin{solution}
+		To begin with, we will proceed with the forward direction. Let us suppose that $v \in \vspan(e_{1}, \ldots, e_{m})$. We note then that since $e_{1}, \ldots, e_{m}$ are orthonormal, then they are also linearly independent.
+		
+		Then, let us define the subspace $U \coloneq \vspan(e_{1}, \ldots, e_{m})$. And since $e_{1}, \ldots, e_{m}$ are linearly independent, they in fact form a basis for $U$.
+		
+		Now, since $v \in U$, then it means that $v$ can be expressed as a unique linear combination of the vectors $e_{i}$, for $i = 1, \ldots, m$. In other words, we have:
+		\begin{equation*}
+			v = a_{1}e_{1} + \ldots + a_{m}e_{m}.
+		\end{equation*}
+	
+		From here, we observe the following:
+		\begin{align*}
+			\sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2} &= \sum_{j=1}^{m} \lvert \innerproduct{a_{1}e_{1} + \ldots + a_{m}e_{m}}{e_{j}} \rvert^{2} \\
+			&= \sum_{j=1}^{m} \left\lvert \sum_{k=1}^{m} \innerproduct{a_{k}e_{k}}{e_{j}} \right\rvert^{2} \\
+			&= \sum_{j=1}^{m} \left\lvert \sum_{k=1}^{m} a_{k}\innerproduct{e_{k}}{e_{j}} \right\rvert^{2} \\
+			&= \sum_{j=1}^{m} \lvert a_{j} \rvert^{2} \\
+			&= \lvert a_{1} \rvert^{2} + \ldots + \lvert a_{m} \rvert^{2} \\
+			&=\norm{a_{1}e_{1} + \ldots + a_{m}e_{m}}^{2} \\
+			&= \norm{v}^{2}
+		\end{align*}
+	
+		For the backward direction, let us suppose that 
+		\begin{equation*}
+			\norm{v}^{2} = \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2}.
+		\end{equation*}
+	
+		From here, let us define $w = v - \sum_{j=1}^{m} \innerproduct{v}{e_{j}}e_{j}$. Then, we observe that this vector is in fact orthogonal to each $e_{1}, \ldots, e_{m}$. In other words, $w \perp \vspan(e_{1}, \ldots, e_{m})$. Then, from here, we see that, in fact, we have:
+		\begin{align*}
+			v &= \sum_{j=1}^{m} \innerproduct{v}{e_{j}}e_{j} + w \\
+			\norm{v}^{2} &= \norm{\sum_{j=1}^{m} \innerproduct{v}{e_{j}}e_{j}}^{2} + \norm{w}^{2} \tag{Pythagorean Theorem} \\
+			&= \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2} + \norm{w}^{2}.
+		\end{align*}
+	
+		However, we note here that we assumed that
+		\begin{equation*}
+			\norm{v}^{2} = \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2}.
+		\end{equation*}
+	
+		So, we now have 
+		\begin{align*}
+			\sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2} &= \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2} + \norm{w}^{2} \\
+			\norm{w}^{2} &= 0 \\
+			\norm{w} &= 0 \\
+			w &= 0
+		\end{align*}
+	
+		Thus, we have that
+		\begin{equation*}
+			v = \sum_{j=1}^{m} \innerproduct{v}{e_{j}}e_{j}.
+		\end{equation*}
+		\begin{comment}
+			let us proceed with contraposition instead. Suppose that $v \not\in \vspan(e_{1}, \ldots, e_{m})$. Then, we observe that for all $a_{i} \in \mathbb{F}$, we have:
+		\begin{align*}
+			v &\neq a_{1}e_{1} + \ldots + a_{m}e_{m} \\
+			\norm{v}^{2} &\neq \norm{a_{1}e_{1} + \ldots + a_{m}e_{m}}^{2} \\
+			\norm{v}^{2} &\neq \lvert a_{1} \rvert^{2} + \ldots + \lvert a_{m} \rvert^{2} \\
+			\norm{v}^{2} = \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2}.
+		\end{align*}
+		\end{comment}
+	
+		
+	
+		\begin{comment}
+			Now, we note that since $e_{1}, \ldots, e_{m}$ are an orthonormal list of vectors in $V$, we can in fact extend it to be an orthonormal basis for $V$. Let us denote this basis as $e_{1}, \ldots, e_{m}, e_{m+1}, \ldots, e_{n}$.
+		
+		Now, since $v \in V$, it follows then that we can express it as a unique linear combination of $e_{1}, \ldots, e_{n}$:
+		\begin{equation*}
+			v = a_{1}e_{1} + \ldots + a_{m}e_{m} + a_{m+1}e_{m+1} + \ldots + a_{n}e_{n}.
+		\end{equation*}
+	
+		Then, we note the following:
+		\begin{align*}
+			\norm{v}^{2} &= \norm{a_{1}e_{1} + \ldots + a_{m}e_{m} + a_{m+1}e_{m+1} + \ldots + a_{n}e_{n}} \\
+			&= \lvert a_{1} \rvert^{2} + \ldots + \lvert a_{m} \rvert^{2} + \lvert a_{m+1} \rvert^{2} + \ldots + \lvert a_{n} \rvert^{2} \\
+			&= \sum_{j=1}^{n} \lvert a_{j} \rvert^{2}
+		\end{align*}
+	
+		Furthermore, we have:
+		\begin{align*}
+			\sum_{j=1}^{n} \lvert \innerproduct{v}{e_{j}} \rvert^{2} &= \sum_{j=1}^{n} \lvert \innerproduct{a_{1}e_{1} + \ldots + a_{m}e_{m} + a_{m+1}e_{m+1} + \ldots + a_{n}e_{n}}{e_{j}} \rvert^{2} \\
+			&= \sum_{j=1}^{n} \left\lvert \sum_{k=1}^{n} \innerproduct{a_{k}e_{k}}{e_{j}} \right\rvert^{2} \\
+			&= \sum_{j=1}^{n} \left\lvert \sum_{k=1}^{n} \overline{a_{k}}\innerproduct{e_{k}}{e_{j}} \right\rvert^{2} \\
+			&= \sum_{j=1}^{n} \lvert \overline{a_{j}} \rvert^{2} \\
+			&= \sum_{j=1}^{n} \lvert a_{j} \rvert^{2}
+		\end{align*}
+	
+		However, we note that we have:
+		\begin{align*}
+			\norm{v}^{2} &= \sum_{j=1}^{n} \lvert \innerproduct{v}{e_{j}} \rvert^{2} \\
+			&= \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2}
+		\end{align*}
+	
+		Then, we have
+		\begin{align*}
+			\sum_{j=1}^{n} \lvert \innerproduct{v}{e_{j}} \rvert^{2} &= \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2} + \sum_{j=m+1}^{n} \lvert \innerproduct{v}{e_{j}} \rvert^{2} \\
+			&= \sum_{j=1}^{m} \lvert \innerproduct{v}{e_{j}} \rvert^{2} \\
+			\sum_{j=m+1}^{n} \lvert \innerproduct{v}{e_{j}} \rvert^{2} &= 0
+		\end{align*}
+	
+		From here, we observe that each $\lvert \innerproduct{v}{e_{i}} \rvert^{2} \geq 0$ for $i = m+1, \ldots, n$. Then, for the equality to hold, we must have that each $\lvert \innerproduct{v}{e_{i}} \rvert^{2} = 0$, meaning that $\innerproduct{v}{e_{i}} = 0$, for each $i = m+1, \ldots, n$.
+		
+		However, since we have that $\innerproduct{v}{e_{i}} = 0$ for $i = m+1, \ldots, n$, this means then that $v$ is orthogonal to each $e_{m+1}, \ldots, e_{n}$, meaning that it can't be in $\vspan(e_{m+1},\ldots, e_{n}) \setminus \left\{  0 \right\}$.
+		\end{comment}
+		
+		In other words, we have that $v \in \vspan(e_{1}, \ldots, e_{m})$ as desired.
+	\end{solution}
+
+	\newpage
+	
+	\section{Deja Vu? Almost.}
+	\begin{hw}
+		Suppose that $e_{1}, \ldots, e_{n}$ is a list of vectors in $V$ of length 1 such that, for all $v \in V$, we have:
+		\begin{equation*}
+			\norm{v}^{2} = \lvert \innerproduct{v}{e_{1}} \rvert^{2} + \ldots + \lvert \innerproduct{v}{e_{n}} \rvert^{2}. 
+		\end{equation*}
+	
+		Prove that $e_{1}, \ldots, e_{n}$ is an orthonormal basis of $V$.
+	\end{hw}
+	\begin{solution}
+		To begin with, we will show that $e_{1}, \ldots, e_{n}$ is in fact an orthonormal list of vectors in $V$. To do this, we first note that we have:
+		\begin{equation*}
+			\norm{v}^{2} = \lvert \innerproduct{v}{e_{1}} \rvert^{2} + \ldots + \lvert \innerproduct{v}{e_{n}} \rvert^{2}.
+		\end{equation*}
+	
+		Now, without loss of generality, let $v = \alpha e_{1}$, where $\alpha \in \mathbb{F}$. Then, we observe the following:
+		\begin{align*}
+			\norm{v}^{2} &= \lvert \innerproduct{v}{e_{1}} \rvert^{2} + \ldots + \lvert \innerproduct{v}{e_{n}} \rvert^{2} \\
+			\norm{\alpha e_{1}}^{2} &= \lvert \innerproduct{\alpha e_{1}}{e_{1}} \rvert^{2} + \ldots + \lvert \innerproduct{\alpha e_{1}}{e_{n}} \rvert^{2} \\
+			\norm{\alpha e_{1}}^{2} &= \left( \norm{\alpha e_{1}} \norm{e_{1}} \right)^{2} + \ldots + \lvert \innerproduct{\alpha e_{1}}{e_{n}} \rvert^{2} \tag{Cauchy-Schwarz Inequality} \\
+			\norm{\alpha e_{1}}^{2} &= \norm{\alpha e_{1}}^{2} + \lvert \innerproduct{\alpha e_{1}}{e_{2}} \rvert^{2} + \ldots + \lvert \innerproduct{\alpha e_{1}}{e_{n}} \rvert^{2} \\
+			0 &= \lvert \innerproduct{\alpha e_{1}}{e_{2}} \rvert^{2} + \ldots + \lvert \innerproduct{\alpha e_{1}}{e_{n}} \rvert^{2}
+		\end{align*}
+	
+		From here, we note that since $\innerproduct{\cdot}{\cdot}$ satisfies non-negativity, this implies then that $\lvert \innerproduct{\cdot}{\cdot} \rvert^{2} \geq 0$ as well. Then, it follows that in order for $\sum_{i=2}^{n} \lvert \innerproduct{\alpha e_{1}}{e_{i}} \rvert^{2} = 0$, we must have that $\innerproduct{\alpha e_{1}}{e_{i}} = 0$ as well.
+		
+		Thus, we have that each vectors $e_{1}$ is orthogonal to the other vectors in $\left\{  e_{2}, \ldots, e_{n} \right\}$. We note that we can let $v = \alpha e_{i}$, for $i = 1, \ldots, n$ and we will get that $e_{i}$ is orthogonal to the other vectors.
+		
+		Then, we have established that $e_{1}, \ldots, e_{n}$ is a list of orthogonal vectors in $V$. Furthermore, since each of their length is 1, it follows then that they are in fact orthonormal.
+		
+		From here, using our result from Question 4, we see that in fact we have that any $v \in V$ must be in $\vspan(e_{1}, \ldots, e_{n})$. Then, we see that $e_{1}, \ldots, e_{m}$ spans $V$. Furthermore, since it is an orthonormal list of vectors, they must be linearly independent as well.
+		
+		Therefore, we can conclude that, indeed, $e_{1}, \ldots, e_{n}$ is an orthonormal basis of $V$ as desired.
+	\end{solution}
+\end{document}

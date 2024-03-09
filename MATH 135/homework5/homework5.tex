@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{homework}
+\usepackage{macros}
+
+%% LIST OF PROBLEMS SETUP %%
+\renewcommand\thmtformatoptarg[1]{:\enspace#1}
+\makeatletter
+\def\ll@homework{
+	\thmt@thmname~
+	\protect\numberline{\csname the\thmt@envname\endcsname}%
+	\ifx\@empty
+	\thmt@shortoptarg
+	\else
+	\protect\thmtformatoptarg{\thmt@shortoptarg}
+	\fi
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\numberline}[1]{\hb@xt@3em{#1}}
+\makeatother	
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\listoftheorems
+	\newpage
+}
+
+\begin{document}
+\mytitle{Math 135: Homework 5}{Spring 2024}
+
+\setcounter{section}{3}
+\section{The Natural Numbers}
+\begin{hw}{2}
+	Show that if $a$ is a transitive, then $a^{+}$ is also a transitive set.
+\end{hw}
+\begin{solution}
+	Let us suppose that $a$ is a transitive set. Then, it follows that for all $a_{1}, a_{2}$, if $a_{1} \in a_{2}$ and $a_{2} \in a$, then $a_{1} \in a$ as well. But we see that this means then that for all $a_{2} \in a$, we have that $a_{2} \subseteq a$.
+	
+	%Now, with this in mind, if $a^{+}$ is a transitive set, then for all $x \in a^{+}$, we have that $x \subseteq a^{+}$.
+	
+	So, let us take some $x \in a^{+}$. Then, either $x\in a$ or $x \in \brc{a}$. In the first case, we observe that since $a$ is a transitive set, then if $x \in a$ it follows that $x \subseteq a \subseteq a^{+}$. So, we see that $x \subseteq a^{+}$ as desired.
+	
+	On the other hand, if $x \in \brc{a}$, we observe that $x = a$, and thus $x = a \subseteq a^{+}$ as desired.
+	
+	Therefore, we see that, indeed, $a^{+}$ is a transitive set.
+\end{solution}
+
+\begin{hw}{4}
+	Show that if $a$ is a transitive set, then $\bigcup a$ is also a transitive set.
+\end{hw}
+\begin{solution}
+	Let us suppose that $a$ is a transitive set. Then, we observe that for all $a_{1}, a_{2}$, if $a_{1} \in a_{2}$ and $a_{2} \in a$, it follows that $a_{1} \in a$.
+	
+	Now, with this in mind, we see that $\bigcup a$ consists of the elements of the elements of $a$. Then, as $a$ is transitive, the elements of the elements of $a$ are also elements of $a$; we have that $\bigcup a \subseteq a$.
+	
+	From here, let us take some $a_{2} \in \bigcup a$. Since $\bigcup a \subseteq a$, it follows that $a_{2} \in a$ as well.
+	%And we note that since $a$ is transitive, we have that $a_{2} \subseteq a$ as well.
+	
+	Then, let us take some $a_{1} \in a_{2} \in a$. By definition, we note that $\bigcup a$ consists of the elements of the elements of $a$, so we see that $a_{1} \in \bigcup a$ as well, and thus we see that $\bigcup a$ is transitive as desired.
+\end{solution}
+
+\begin{hw}{6}[0][0]
+	Prove that if $\bigcup (a^{+}) = a$, then $a$ is a transitive set.
+\end{hw}
+\begin{solution}
+	Suppose that $\bigcup (a^{+}) = a$. Then, we observe the following:
+	\begin{align*}
+		a &= \bigcup (a^{+}) \\
+		&= \bigcup \pr{a \cup \brc{a}} \\
+		&= \bigcup a \cup \bigcup \brc{a} \\
+		&= \bigcup a \cup a
+	\end{align*}
+
+	Then, from this, we see that $\bigcup a \subseteq a$. In other words, the elements of the elements of $a$ are also elements of $a$, meaning that $a$ is a transitive set as desired.
+\end{solution}
+
+\begin{hw}{8}[0][0]
+	Let $f$ be a one-to-one function from $A$ into $A$, and assume that $c \in A - \ran f$. Define $h : \omega \rightarrow A$ by recursion:
+	\begin{align*}
+		h(0) &= c \\
+		h(n^{+}) &= f(h(n)).
+	\end{align*}
+
+	Show then that $h$ is also one-to-one.
+\end{hw}
+\begin{solution}
+	We shall show that $h$ is one-to-one by induction.
+	
+	First, let us define the following set:
+	\begin{equation*}
+		S \coloneq \brc{n \in \omega : \pr{\forall m, n} h(m) = h(n) \implies m = n}.
+	\end{equation*}
+
+	We note that the condition for our set can also be written as $\forall m, n \pr{m \neq n \implies h(m) \neq h(n)}$.
+
+	Now, let us suppose that $m \neq 0$. Then, it follows that $m$ is the successor of some natural number $p \in \omega$. That is, $m = p^{+}$. Then, we observe that
+	\begin{equation*}
+		h(m) = h(p^{+}) = f(h(p)).
+	\end{equation*}
+
+	And we note that $c \in A - \ran f$, meaning that it isn't in $\ran f$. So, we know that $f(h(p)) \neq c$. This, we see that $h(0) = c \neq h(m)$ for all $m \neq 0$. Thus, we see that, indeed, $0 \in S$.
+	
+	Next, let us suppose that $k \in S$. Then, we look at $m = k^{+}$. We observe the following:
+	\begin{equation*}
+		f(h(k)) = h(k^{+}) = h(m) = h(p^{+}) = f(h(p)).
+	\end{equation*}
+
+	Now, because $f$ is one-to-one, it follows that $h(k) = h(p)$. And by our induction hypothesis, we have that $k = p$. Then, because $k = p$, we see then that $k^{+} = p^{+} = m$. So, we see that indeed, $h(k^{+}) = h(m) \implies k^{+} = m$, meaning that $k^{+} \in S$, and thus $S$ is inductive.
+	
+	Therefore, we see that $h$ is one-to-one.
+\end{solution}
+
+\begin{hw}{9}[0][0]
+	Let $f$ be a function from $B$ into $B$, and assume that $A \subseteq B$. We have two possible methods for constructing the ``closure" $C$ of $A$ under $f$. First, define $C^{*}$ to be the intersection of the closed supersets of $A$:
+	\begin{equation*}
+		C^{*} = \bigcap \brc{X : A \subseteq X \subseteq B \land f\image X \subseteq X}
+	\end{equation*}
+
+	Alternatively, we could apply the recursion theorem to obtain the function $h$ for which
+	\begin{align*}
+		h(0) &= A \\
+		h(n^{+}) &= h(n) \cup f\image{h(n)}
+	\end{align*}
+
+	Clearly $h(0) \subseteq h(1) \subseteq \cdots,$ define $C_{*}$ to be $\bigcup \ran h$; in other words
+	\begin{equation*}
+		C_{*} = \bigcup_{i\in\omega} h(i)
+	\end{equation*}
+
+	Show that $C^{*} = C_{*}$.
+\end{hw}
+\begin{solution}
+	First, we show that $C^{*} \subseteq C_{*}$ by showing that $f\image{C_{*}} \subseteq C_{*}$.
+	\begin{innerproof}
+		We first observe that, by definition, we have that for all $n \in \omega$, we have that $f\image{h(n)} \subseteq h(n^{+})$. Then, we have the following:
+		\begin{equation*}
+			f\image{C_{*}} = f\image{\bigcup_{i \in \omega} h(i)} = \bigcup_{i\in\omega} f\image{h(i)} \subseteq \bigcup_{i \in \omega} h(i^{+}) \subseteq \bigcup_{i\in\omega} h(i) = C_{*}.
+		\end{equation*}
+		
+		Thus, we see that $f\image{C_{*}} \subseteq C_{*}$, and thus we have that $C^{*} \subseteq C_{*}$.
+	\end{innerproof}
+	
+	Next, we will show that $C_{*} \subseteq C^{*}$ by using induction to show that $h(n) \subseteq C^{*}$. 
+	\begin{innerproof}
+		Let us construct a set $S$ to be as follows:
+		\begin{equation*}
+			S \coloneq \brc{n \in \omega : h(n) \subseteq C^{*}}.
+		\end{equation*}
+		
+		We also define the set $C'$ to be
+		\begin{equation*}
+			C' \coloneq \brc{X : A \subseteq X \subseteq B \land f\image{X} \subseteq X}.
+		\end{equation*}
+		
+		We see then that $C^{*} = \bigcap C'$.
+		
+		Now, we first see that $h(0) = A$. Then, we observe that by definition, for all $X \in C'$, $A \subseteq X$. Then, since $C^{*} = \bigcap C'$, it follows that $A \subseteq C^{*}$. So, we have that $h(0) = A \subseteq C^{*}$, meaning that $0 \in S$.
+		
+		Next, suppose that $k \in S$. Then, we look at $k^{+}$.
+		
+		We see that $h(k^{+}) = h(k) \cup f\image{h(k)}$. Then, by our induction hypothesis, we have that $h(k) \subseteq C^{*}$, and by definition of $C^{*}$ it must be that $h(k) \subseteq X$ for all $X \in C'$.
+		
+		Then, we note that because $h(k) \subseteq X$ for all $X \in C'$, it follows then that $f\image{h(k)} \subseteq f\image X \subseteq X$, for all $X \in C'$. But this means then that $f\image{h(k)} \subseteq C*$ by definition.
+		
+		Therefore, we have that $k^{+} \in S$ as desired, meaning that $S$ is inductive. So we have that $h(n) \subseteq C^{*}$, and thus $C_{*} \subseteq C^{*}$.
+	\end{innerproof}
+
+	Then, since we have shown that $C^{*} \subseteq C_{*}$ and $C_{*} \subseteq C^{*}$, it follows that these two sets are indeed the same.
+\end{solution}
+
+\begin{hw}{10}[0][0]
+	In Exercise 9, assume that $B$ is the set of real numbers, $f(x) = x^{2}$, and $A$ is the closed interval $\br{\dfrac{1}{2}, 1}$. What is the set called $C^{*}$ and $C_{*}$.
+\end{hw}
+\begin{solution}
+	Using our recursion definition, we observe that $h(0) = A = \br{\dfrac{1}{2}, 1}$. Then, we see that $h(1) = h(0) \cup f\image{h(0)} = h(0) \cup \br{\dfrac{1}{4}, 1}$.
+	
+	We observe then that we can keep on repeating this process and see that the lower bound will converges to 0.
+	
+	Thus, we see that $C_{*} = \br{0,1} = C^{*}$.
+\end{solution}
+\end{document}
