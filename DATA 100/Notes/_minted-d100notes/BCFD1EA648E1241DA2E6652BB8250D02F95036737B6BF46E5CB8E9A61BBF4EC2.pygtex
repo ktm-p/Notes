@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Create a Series of the length of each name}
+\PYG{n}{babyname\PYGZus{}lengths} \PYG{o}{=} \PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{len}\PYG{p}{()}
+
+\PYG{c+c1}{\PYGZsh{} Approach 1: Create a temporary column}
+\PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZus{}lengths\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{babyname\PYGZus{}lengths} \PYG{c+c1}{\PYGZsh{} Add a column named \PYGZdq{}name\PYGZus{}lengths\PYGZdq{} that includes the length of each name}
+\PYG{n}{babynames} \PYG{o}{=} \PYG{n}{babynames}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{n}{by}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}name\PYGZus{}lengths\PYGZdq{}}\PYG{p}{,} \PYG{n}{ascending}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Approach 2: Sorting using the key Argument}
+\PYG{n}{babynames}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{,} \PYG{n}{key}\PYG{o}{=}\PYG{k}{lambda} \PYG{n}{x}\PYG{p}{:} \PYG{n}{x}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{len}\PYG{p}{(),} \PYG{n}{ascending}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Approach 3: Sorting using the map Function}
+\PYG{k}{def} \PYG{n+nf}{dr\PYGZus{}ea\PYGZus{}count}\PYG{p}{(}\PYG{n}{string}\PYG{p}{):}
+  \PYG{k}{return} \PYG{n}{string}\PYG{o}{.}\PYG{n}{count}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}dr\PYGZsq{}}\PYG{p}{)} \PYG{o}{+} \PYG{n}{string}\PYG{o}{.}\PYG{n}{count}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}ea\PYGZsq{}}\PYG{p}{)}
+
+\PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}dr\PYGZus{}ea\PYGZus{}count\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}\PYG{n}{dr\PYGZus{}ea\PYGZus{}count}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Use map to apply dr\PYGZus{}ea\PYGZus{}count to each name in the \PYGZdq{}Name\PYGZdq{} column}
+\PYG{n}{babynames} \PYG{o}{=} \PYG{n}{babynames}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{n}{by}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}dr\PYGZus{}ea\PYGZus{}count\PYGZdq{}}\PYG{p}{,} \PYG{n}{ascending}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\end{Verbatim}

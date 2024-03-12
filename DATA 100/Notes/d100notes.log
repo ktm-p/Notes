@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  1 MAR 2024 13:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  12 MAR 2024 09:07
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1375,72 +1375,101 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 runsystem(if not exist _minted-d100notes mkdir _minted-d100notes)...executed.
 
 ))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/paracol\paracol.sty
+Package: paracol 2018/12/31 v1.35 
+\pcol@currcol=\count406
+\pcol@nextcol=\count407
+\pcol@ncol=\count408
+\pcol@ncolleft=\count409
+\pcol@page=\count410
+\pcol@basepage=\count411
+\pcol@toppage=\count412
+\pcol@footnotebase=\count413
+\pcol@nfootnotes=\count414
+\pcol@mcid=\count415
+\pcol@prevdepth=\dimen338
+\pcol@colht=\dimen339
+\pcol@textfloatsep=\dimen340
+\pcol@lrmargin=\dimen341
+\pagerim=\dimen342
+\pcol@topskip=\skip155
+\belowfootnoteskip=\skip156
+\pcol@topfnotes=\box150
+\pcol@prespan=\box151
+\pcol@rightpage=\box152
+\pcol@colorstack@saved=\box153
+\pcol@tempboxa=\box154
+\pcol@tempboxb=\box155
+\pcol@colorins=\insert252
+\pcol@everyvbox=\toks58
+)
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count406
-\Gm@cntv=\count407
-\c@Gm@tempcnt=\count408
-\Gm@bindingoffset=\dimen338
-\Gm@wd@mp=\dimen339
-\Gm@odd@mp=\dimen340
-\Gm@even@mp=\dimen341
-\Gm@layoutwidth=\dimen342
-\Gm@layoutheight=\dimen343
-\Gm@layouthoffset=\dimen344
-\Gm@layoutvoffset=\dimen345
-\Gm@dimlist=\toks58
+\Gm@cnth=\count416
+\Gm@cntv=\count417
+\c@Gm@tempcnt=\count418
+\Gm@bindingoffset=\dimen343
+\Gm@wd@mp=\dimen344
+\Gm@odd@mp=\dimen345
+\Gm@even@mp=\dimen346
+\Gm@layoutwidth=\dimen347
+\Gm@layoutheight=\dimen348
+\Gm@layouthoffset=\dimen349
+\Gm@layoutvoffset=\dimen350
+\Gm@dimlist=\toks59
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 100.
+Package hyperref Info: Option `colorlinks' set `true' on input line 101.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightpurple
 , linecolor=darkpurple, rightline=false, topline=false, bottomline=false, linew
 idth=2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftm
 argin=-2pt, skipbelow=2pt, nobreak ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=purplebox' on input line 142.
+(thmtools)             that uses `style=purplebox' on input line 143.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightgreen,
  linecolor=darkgreen, rightline=false, topline=false, bottomline=false, linewid
 th=2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftmar
 gin=-2pt, skipbelow=2pt, nobreak ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=greenbox' on input line 161.
+(thmtools)             that uses `style=greenbox' on input line 162.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightyellow
 , linecolor=darkyellow, rightline=false, topline=false, bottomline=false, linew
 idth=2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftm
 argin=-2pt, skipbelow=2pt, nobreak ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=yellowbox' on input line 180.
+(thmtools)             that uses `style=yellowbox' on input line 181.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightblue, 
 linecolor=darkblue, rightline=false, topline=false, bottomline=false, linewidth
 =2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftmargi
 n=-2pt, skipbelow=2pt, nobreak ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=bluebox' on input line 199.
+(thmtools)             that uses `style=bluebox' on input line 200.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightred, l
 inecolor=darkred, rightline=false, topline=false, bottomline=false, linewidth=2
 pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftmargin=
 -2pt, skipbelow=2pt, nobreak ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=redbox' on input line 218.
+(thmtools)             that uses `style=redbox' on input line 219.
 Package thmtools Info: Automatically pulling in `thmdef-mdframed' on input line
- 224.
+ 225.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thmdef-mdfra
 med.sty
 Package: thmdef-mdframed 2023/05/04 v0.76
 )
-\c@thm=\count409
-\c@homework=\count410
-\c@hw=\count411
+\c@thm=\count419
+\c@homework=\count420
+\c@hw=\count421
+\c@tcb@cnt@casestudy=\count422
 )
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/animate\animate.sty
 Package: animate 2023/06/18 PDF & SVG animations from files and inline graphics
@@ -1451,30 +1480,49 @@ Package: ifdraft 2016/05/16 v1.4 Detect class options draft and final (HO)
 ) (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/media9\pdfbase.sty
 Package: pdfbase 2022/08/04 v0.55 driver independent access to low-level PDF fe
 atures
-\g_pbs_page_int=\count412
-\g_pbs_oc_int=\count413
+\g_pbs_page_int=\count423
+\g_pbs_oc_int=\count424
 )
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/ocgx2\ocgbase.sty
 Package: ocgbase 2022/08/04 v0.22 support package for ocgx2.sty
-\g_ocgbase_nd_int=\count414
+\g_ocgbase_nd_int=\count425
 )
-\@anim@box=\box150
-\@anim@measbox=\box151
-\@anim@tmpdima=\dimen346
-\@anim@tmpdimb=\dimen347
-\@anim@num=\count415
-\@anim@curframe=\count416
-\@anim@curframe@zb=\count417
-\@anim@resizeflags=\count418
-\@anim@skipfram=\count419
-\@anim@mulframecnt=\count420
+\@anim@box=\box156
+\@anim@measbox=\box157
+\@anim@tmpdima=\dimen351
+\@anim@tmpdimb=\dimen352
+\@anim@num=\count426
+\@anim@curframe=\count427
+\@anim@curframe@zb=\count428
+\@anim@resizeflags=\count429
+\@anim@skipfram=\count430
+\@anim@mulframecnt=\count431
 \@anim@@tmlnfile=\read6
-\@anim@tmpcnt=\count421
-\c@@anim@ltxcnt=\count422
-\@anim@curlayer=\count423
-\@anim@lineno=\count424
-\@anim@curfield=\count425
-\@anim@@resizeflags=\count426
+\@anim@tmpcnt=\count432
+\c@@anim@ltxcnt=\count433
+\@anim@curlayer=\count434
+\@anim@lineno=\count435
+\@anim@curfield=\count436
+\@anim@@resizeflags=\count437
+)
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+)
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
+s\pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/anyfontsize\anyfontsi
+ze.sty
+Package: anyfontsize 2007/11/22 anyfontsize.sty by pts
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
@@ -1484,52 +1532,52 @@ runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > d1
 runsystem(del d100notes.aex)...executed.
 
 LaTeX Font Info:    Trying to load font information for OT1+cantarell-TLF on in
-put line 42.
+put line 47.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/cantarell\ot1cantarel
 l-tlf.fd
 File: OT1cantarell-TLF.fd 2019/06/24 Font definitions for OT1/cantarell-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 42.
+(Font)              scaled to size 10.0pt on input line 47.
  (d100notes.aux)
 \openout1 = `d100notes.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
-LaTeX Font Info:    ... okay on input line 42.
-\c@mv@tabular=\count427
-\c@mv@boldtabular=\count428
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+\c@mv@tabular=\count438
+\c@mv@boldtabular=\count439
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
 mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count429
-\scratchdimen=\dimen348
-\scratchbox=\box152
-\nofMPsegments=\count430
-\nofMParguments=\count431
-\everyMPshowfont=\toks59
-\MPscratchCnt=\count432
-\MPscratchDim=\dimen349
-\MPnumerator=\count433
-\makeMPintoPDFobject=\count434
-\everyMPtoPDFconversion=\toks60
+\scratchcounter=\count440
+\scratchdimen=\dimen353
+\scratchbox=\box158
+\nofMPsegments=\count441
+\nofMParguments=\count442
+\everyMPshowfont=\toks60
+\MPscratchCnt=\count443
+\MPscratchDim=\dimen354
+\MPnumerator=\count444
+\makeMPintoPDFobject=\count445
+\everyMPtoPDFconversion=\toks61
 )
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
 -base.sty
@@ -1541,7 +1589,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 .cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 42.
+Package hyperref Info: Link coloring ON on input line 47.
  (d100notes.out) (d100notes.out)
 \@outlinefile=\write6
 \openout6 = `d100notes.out'.
@@ -1550,12 +1598,12 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count435
+\c@lstlisting=\count446
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks61
-\inpenc@posthook=\toks62
+\inpenc@prehook=\toks62
+\inpenc@posthook=\toks63
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1592,127 +1640,135 @@ Package: inputenc 2021/02/14 v1.3d Input encoding file
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 43.
+(Font)              scaled to size 20.74pt on input line 71.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 43.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 43.
+(Font)              scaled to size 25.0pt on input line 74.
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
+(Font)              scaled to size 25.0pt on input line 74.
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
+(Font)              scaled to size 14.4pt on input line 80.
 
-(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 43.
+LaTeX Font Warning: Font shape `OT1/cantarell-TLF/m/sc' undefined
+(Font)              using `OT1/cantarell-TLF/m/n' instead on input line 80.
 
-
-(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Trying to load font information for U+stmry on input line 4
-3.
-
-(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/stmaryrd\ustmry.fd)
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
+(Font)              scaled to size 17.28pt on input line 83.
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
+(Font)              scaled to size 17.28pt on input line 83.
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/it' in size <10> not availa
+ble
+(Font)              Font shape `OT1/cantarell-TLF/m/sl' tried instead on input 
+line 86.
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
+(Font)              scaled to size 10.0pt on input line 86.
 [1
-
 
 {C:/Users/Michael/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Mi
 chael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_imucfy.enc}]
 LaTeX Font Info:    Trying to load font information for OT1+Cabin-TLF on input 
-line 43.
+line 86.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/cabin\ot1cabin-tlf.fd
 File: OT1Cabin-TLF.fd 2020/07/15 (autoinst) Font definitions for OT1/Cabin-TLF.
 
 )
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/n' aliased to
-(Font)              `OT1/Cabin-TLF/regular/n' on input line 43.
+(Font)              `OT1/Cabin-TLF/regular/n' on input line 86.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/regular/n' will be
-(Font)              scaled to size 10.0pt on input line 43.
+(Font)              scaled to size 10.0pt on input line 86.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/n' aliased to
-(Font)              `OT1/Cabin-TLF/regular/n' on input line 43.
+(Font)              `OT1/Cabin-TLF/regular/n' on input line 86.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/regular/n' will be
-(Font)              scaled to size 24.88pt on input line 43.
+(Font)              scaled to size 24.88pt on input line 86.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/sc' aliased to
-(Font)              `OT1/Cabin-TLF/regular/sc' on input line 43.
+(Font)              `OT1/Cabin-TLF/regular/sc' on input line 86.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/regular/sc' will be
-(Font)              scaled to size 24.88pt on input line 43.
+(Font)              scaled to size 24.88pt on input line 86.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/b/sc' aliased to
-(Font)              `OT1/Cabin-TLF/bold/sc' on input line 43.
+(Font)              `OT1/Cabin-TLF/bold/sc' on input line 86.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/bold/sc' will be
-(Font)              scaled to size 24.88pt on input line 43.
+(Font)              scaled to size 24.88pt on input line 86.
  (d100notes.toc
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 1.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 3
+.
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/stmaryrd\ustmry.fd)
+[2
+
+{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cabin/cbn_vqopx
+p.enc}])
 \tf@toc=\write7
 \openout7 = `d100notes.toc'.
 
- [2
-
-{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cabin/cbn_vqopx
-p.enc}]
+ [3{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_
+dr4czt.enc}]
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/n' aliased to
-(Font)              `OT1/Cabin-TLF/regular/n' on input line 45.
+(Font)              `OT1/Cabin-TLF/regular/n' on input line 90.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/regular/n' will be
-(Font)              scaled to size 17.28pt on input line 45.
+(Font)              scaled to size 17.28pt on input line 90.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/sc' aliased to
-(Font)              `OT1/Cabin-TLF/regular/sc' on input line 45.
+(Font)              `OT1/Cabin-TLF/regular/sc' on input line 90.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/regular/sc' will be
-(Font)              scaled to size 17.28pt on input line 45.
+(Font)              scaled to size 17.28pt on input line 90.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 46.
+(Font)              scaled to size 9.0pt on input line 91.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/it' in size <9> not availab
 le
 (Font)              Font shape `OT1/cantarell-TLF/m/sl' tried instead on input 
-line 46.
+line 91.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
-(Font)              scaled to size 9.0pt on input line 46.
+(Font)              scaled to size 9.0pt on input line 91.
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
+(Font)              scaled to size 14.4pt on input line 93.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 48.
+(Font)              scaled to size 12.0pt on input line 96.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 48.
-LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 51.
+(Font)              scaled to size 12.0pt on input line 96.
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 53.
+(hyperref)                be the same. Added a new anchor on input line 98.
 
 LaTeX Font Info:    Trying to load font information for TS1+cantarell-TLF on in
-put line 60.
+put line 105.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/cantarell\ts1cantarel
 l-tlf.fd
 File: TS1cantarell-TLF.fd 2019/06/24 Font definitions for TS1/cantarell-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 60.
- [3
+(Font)              scaled to size 10.0pt on input line 105.
+ [4
 
-{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_dr4
-czt.enc}{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantare
-ll/a_tv3tjz.enc}]
-Package mdframed Info: mdframed works in twoside mode on input line 73.
+{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_tv3
+tjz.enc}]
+Package mdframed Info: mdframed works in twoside mode on input line 118.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 73.
+(mdframed)              on input line 118.
 Package hyperref Info: bookmark level for unknown defn defaults to 0 on input l
-ine 73.
+ine 118.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 90.
+(hyperref)                be the same. Added a new anchor on input line 135.
 
-LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/it' in size <10> not availa
-ble
-(Font)              Font shape `OT1/cantarell-TLF/m/sl' tried instead on input 
-line 148.
-LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
-(Font)              scaled to size 10.0pt on input line 148.
-[4]
-LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 20.74pt on input line 189.
+[5]
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
-(Font)              scaled to size 20.74pt on input line 189.
- [5]
+(Font)              scaled to size 20.74pt on input line 236.
+ [6]
 Missing character: There is no s in font nullfont!
 <a0,fr0>
 Missing character: There is no s in font nullfont!
@@ -1762,22 +1818,682 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no s in font nullfont!
 <a0,fr23>
 Missing character: There is no s in font nullfont!
-<a0,fr24> [6] (d100notes.aux)
+<a0,fr24> [7]
+LaTeX Font Info:    Font shape `OT1/Cabin-TLF/b/n' aliased to
+(Font)              `OT1/Cabin-TLF/bold/n' on input line 450.
+LaTeX Font Info:    Font shape `OT1/Cabin-TLF/bold/n' will be
+(Font)              scaled to size 10.0pt on input line 450.
+LaTeX Font Info:    Font shape `OT1/Cabin-TLF/b/n' aliased to
+(Font)              `OT1/Cabin-TLF/bold/n' on input line 450.
+LaTeX Font Info:    Font shape `OT1/Cabin-TLF/bold/n' will be
+(Font)              scaled to size 5.0pt on input line 450.
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
+(Font)              scaled to size 9.0pt on input line 451.
+<C:/Users/Michael/Pictures/pandas.png, id=369, 2569.6pt x 1038.88126pt>
+File: C:/Users/Michael/Pictures/pandas.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/pandas.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/pandas.png  used on input li
+ne 452.
+(pdftex.def)             Requested size: 140.7207pt x 56.9055pt.
+Package mdframed Info: mdframed works in twoside mode on input line 465.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 465.
+Package mdframed Info: mdframed works in twoside mode on input line 469.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 469.
+\g__tcobox_out_iow=\write8
+\openout8 = `d100notes.listing'.
+
+ (_minted-d100notes/default.pygstyle)
+(_minted-d100notes/AD9937486DF2CC0FB04DC83FB2BBC19CF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 1.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2.
+)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/4125B6FC4C7CFA72F6F8026E671035DCF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex) [8{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/
+cabin/cbn_jjp77t.enc} <C:/Users/Michael/Pictures/pandas.png>]
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/5D5B947D2A1A41E32B360592BD362EE8F95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex)
+<C:/Users/Michael/Pictures/dataframe1.png, id=386, 612.48825pt x 187.29974pt>
+File: C:/Users/Michael/Pictures/dataframe1.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/dataframe1.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/dataframe1.png  used on inpu
+t line 530.
+(pdftex.def)             Requested size: 325.6546pt x 99.58464pt.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/5329C89B9808895CE60E459952F03F32B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex) [9 <C:/Users/Michael/Pictures/dataframe1.png>]
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/9A1588FA8E4194267A615622161F7628F95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex
+LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
+(Font)              scaled to size 5.0pt on input line 13.
+)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/025440F7BB38BAC4ABB9ED80161E309FB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+<C:/Users/Michael/Pictures/dataframe2.png, id=395, 546.843pt x 199.947pt>
+File: C:/Users/Michael/Pictures/dataframe2.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/dataframe2.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/dataframe2.png  used on inpu
+t line 577.
+(pdftex.def)             Requested size: 273.42082pt x 99.97325pt.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/49078401C62768B994AEDF5DC8F8B228B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/6983677CC90101ACAB1B28653668235CB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/5B60E7DD1286E1165C247EF36BCA983CF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex) [10 <C:/Users/Michael/Pictures/dataframe2.png>]
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 605.
+
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/C195A2ABE7C36523EC7FEBB7A00396A0B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/D2876E07A100E838CAC10769011C3AE1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/56F95F4E30C8FAD8B1A4C64C64452115B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/B397A9A61C3EAE5DE5BD4F9D17C22A64F95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex) [11]
+<C:/Users/Michael/Pictures/dataframe3.png, id=410, 597.432pt x 157.7895pt>
+File: C:/Users/Michael/Pictures/dataframe3.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/dataframe3.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/dataframe3.png  used on inpu
+t line 645.
+(pdftex.def)             Requested size: 448.0729pt x 118.34183pt.
+
+Overfull \hbox (9.61583pt too wide) in paragraph at lines 645--646
+ [][] 
+ []
+
+<C:/Users/Michael/Pictures/dataframe4.png, id=411, 572.73975pt x 128.27925pt>
+File: C:/Users/Michael/Pictures/dataframe4.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/dataframe4.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/dataframe4.png  used on inpu
+t line 649.
+(pdftex.def)             Requested size: 429.55376pt x 96.2092pt.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/28BC7291638C8B7FF49FF07084701FAFB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/1A430F61726108DEEA79050AAA1185C1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/28BC7291638C8B7FF49FF07084701FAFB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/28BC7291638C8B7FF49FF07084701FAFB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/28BC7291638C8B7FF49FF07084701FAFB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex) [12 <C:/Users/Michael/Pictures/dataframe3.png> <C:/Users/Michael/P
+ictures/dataframe4.png>]
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/28BC7291638C8B7FF49FF07084701FAFB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+Package mdframed Info: mdframed works in twoside mode on input line 675.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 675.
+Package hyperref Info: bookmark level for unknown example defaults to 0 on inpu
+t line 675.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/28BC7291638C8B7FF49FF07084701FAFB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/F6AE5C5BEB67A1613E6BFD25AAFB063CF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex) [13]
+Chapter 2.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/EB452A5FA80C6FFC40699C2B7CA4AC5EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/4D980982CDF0901899D47101EE384990F95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex)
+<C:/Users/Michael/Pictures/dataframe5.png, id=427, 238.491pt x 153.57375pt>
+File: C:/Users/Michael/Pictures/dataframe5.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/dataframe5.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/dataframe5.png  used on inpu
+t line 723.
+(pdftex.def)             Requested size: 119.2452pt x 76.78668pt.
+ [14
+
+ <C:/Users/Michael/Pictures/dataframe5.png>]
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/70065D4DA04A1672F7CC25DBB16B3743B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/A1036E3423AE57529E579BF485E870C0B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/FE2AAA026AC816EED78E8459D14D757EB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/7D33EDD9CC46E6835F2FDE4DBB159235B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/D8AAB9314E296F175DB84C4B88531BE8F95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex)
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 770.
+
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/55ED07C8BDF8DB973025BD60DA9696B8B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/798A98A6BE6B61DAB6596201DC96F4DEF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex) [15]
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/44BF815D6420C3B2FF481DA8A14234A1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/44BF815D6420C3B2FF481DA8A14234A1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/B1643E3C9FCCDE033A500BCB03945949B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/653979F1B25620DB66392C816DC8D1FFF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/3B4822F967EEE3D9739E1C49DE2EA37CB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/9170F9D627AC590D89B652FBA6DFA887B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/DE6688D324227CF267568876E3A92C49B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/C3A79A5C6380C4D8B9C4061F10C310A1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/91E9EA3E607C4F9699866B17DC63793AB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/880664FE60485F74790EBB9F3144BA62B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/41D7B2C17F80741302E755EC15D92668B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 3.
+)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/86BB7841B191575217792D82754B5BD1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/A06C266215B0A11D8118F3676A0EA07FB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex) [16]
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/DB09BBF20A7B7E7FE00D8478F543DF98B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/94B0082C3ED04D6DDF62F54139FF0629B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/1FEF99CCFA464B3C0B52B9FC9F71D7CDB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/DB09BBF20A7B7E7FE00D8478F543DF98B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/3C3E159D6E19AF0C83C2FE7A54E290E9B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 843.
+
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/BCFD1EA648E1241DA2E6652BB8250D02F95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex) [17]
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 885.
+
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/B2A981E2E3BCF50323E814FD838C497FB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/B2A981E2E3BCF50323E814FD838C497FB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/B2A981E2E3BCF50323E814FD838C497FB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/E0966D872FF3A924EC43D6CCC8A1D475B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/B2A981E2E3BCF50323E814FD838C497FB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/12A4C0AB0487FF658A16AD66148E87D5B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/0873CF93A4519AF0279893B1744A8138B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+<C:/Users/Michael/Pictures/groupby_demo.png, id=457, 534.19576pt x 171.64125pt>
+
+File: C:/Users/Michael/Pictures/groupby_demo.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/groupby_demo.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/groupby_demo.png  used on in
+put line 900.
+(pdftex.def)             Requested size: 400.64584pt x 128.7306pt.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/E0966D872FF3A924EC43D6CCC8A1D475B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/267BD4CB65F66BA93FCF16A666B31096B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/4FCE5B2D59F5EBEDF3D4185983CC8D8FB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/DFABF435A6CB8B934AA81C27060B07EFB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/8570F8B89937A05013EE17747EABBCD4B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/01A295965D33AD59CC5F04E985D74AE2B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/DBDB43C6D60552EA4BCE9561DBB5EA32B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/47AAAE8076978488142F54529CC858F9B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/52BDC7EE147457CBE1C9E15262DCC88AB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/E6F370EAD4CD9FE6AB30EE596E0ADFC9B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/CB4AEDC84488884E2446EDEF550F4F70B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/6E0BB3F2C41C05A01FD46C8C2E0146E1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/06B56296A1274068D20AD439EFE1C798B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/5CC7178307A1EB10D5A42C9EACF6FF72B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex) [18 <C:/Users/Michael/Pictures/groupby_demo.png>]
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/CAEA581F6B663A4F19A4B30F40B6D278F95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/894534B206A6D8827FFB0BF74E7C0CFBF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex)
+<C:/Users/Michael/Pictures/jennifer_popularity.png, id=464, 507.69675pt x 179.4
+705pt>
+File: C:/Users/Michael/Pictures/jennifer_popularity.png Graphic file (type png)
+
+<use C:/Users/Michael/Pictures/jennifer_popularity.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/jennifer_popularity.png  use
+d on input line 957.
+(pdftex.def)             Requested size: 380.77162pt x 134.60252pt.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/87A04BBC2633F71BFE9E730CF32128A6B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout8 = `d100notes.listing'.
+
+
+(_minted-d100notes/D38ABEFB5C192A3E30BA9BA2905DA8EDF95036737B6BF46E5CB8E9A61BBF
+4EC2.pygtex)
+<C:/Users/Michael/Pictures/ten_lowest_rtp.png, id=465, 478.1865pt x 149.358pt>
+File: C:/Users/Michael/Pictures/ten_lowest_rtp.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/ten_lowest_rtp.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/ten_lowest_rtp.png  used on 
+input line 995.
+(pdftex.def)             Requested size: 358.63898pt x 112.0182pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19 <C:/Users/Michael/Pictures/jennifer_popularity.png>]
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/E0966D872FF3A924EC43D6CCC8A1D475B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/1F97C49191ECF66CE92C42496E3E7206B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/BF7C1D49F514AD0DE1B5C451F509A422B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/113DB9FBE47F014ACCBA13AA441519A8B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/E4FA214B1A4E2BBEDD37386AAB167F69B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/36874634F128D99ED1EDAC7326045795B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/788E2C61660EF70E01A59A18269BC0F6B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/E5E81CE0E28C68D525F458E80B11CAB7B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/A458F5F294FEFFBA8940F59052EBA489B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/AB84D8D0E83CC57F0A3CB27CB6E6D1D1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+Overfull \hbox (5.0806pt too wide) in paragraph at lines 1019--1020
+[][] 
+ []
+
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/72AC02DF56C741526B5861F63D183A23B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/7806FAE4F230EAFEEBE063E3AFA55810B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+Overfull \hbox (43.45108pt too wide) in paragraph at lines 1027--1028
+\OT1/cantarell-TLF/m/n/10 One of the more sub-tle dif-fer-ences be-tween some f
+unc-tions is that of [] and []. 
+ []
+
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/CD191A0CAD4B2133516CECBF7F2507AEB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [20 <C:/Users/Michael/Pictures/ten_lowest_rtp.png>]
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/86BB7841B191575217792D82754B5BD1B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+Overfull \hbox (21.49791pt too wide) in paragraph at lines 1029--1030
+[][] \OT1/cantarell-TLF/m/n/10 re-turns a \OT1/cmtt/m/n/10 Series \OT1/cantarel
+l-TLF/m/n/10 ob-ject count-ing the num-ber of rows in each group. This is sim-i
+-lar to [],
+ []
+
+<C:/Users/Michael/Pictures/groupby_size.png, id=481, 583.58025pt x 305.943pt>
+File: C:/Users/Michael/Pictures/groupby_size.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/groupby_size.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/groupby_size.png  used on in
+put line 1032.
+(pdftex.def)             Requested size: 437.6841pt x 229.45667pt.
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/75EC5D9C8943393F5298E802BA97B52CB4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+<C:/Users/Michael/Pictures/groupby_count.png, id=482, 570.33075pt x 305.34074pt
+>
+File: C:/Users/Michael/Pictures/groupby_count.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/groupby_count.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/groupby_count.png  used on i
+nput line 1038.
+(pdftex.def)             Requested size: 427.74701pt x 229.00499pt.
+ [21 <C:/Users/Michael/Pictures/groupby_size.png> <C:/Users/Michael/Pictures/gr
+oupby_count.png>]
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/4F07128BA9746AC76019828C607F8837B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+\openout5 = `d100notes.pyg'.
+
+
+(_minted-d100notes/0FE11136F111C508D3D5AD36BFDA0CE2B4FB211F1D642C6EBFACD6C12E44
+192C.pygtex)
+<C:/Users/Michael/Pictures/groupby_filter.png, id=489, 517.935pt x 307.1475pt>
+File: C:/Users/Michael/Pictures/groupby_filter.png Graphic file (type png)
+<use C:/Users/Michael/Pictures/groupby_filter.png>
+Package pdftex.def Info: C:/Users/Michael/Pictures/groupby_filter.png  used on 
+input line 1066.
+(pdftex.def)             Requested size: 388.45029pt x 230.36005pt.
+ [22 <C:/Users/Michael/Pictures/groupby_filter.png>] (d100notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `d100notes.out' has not changed.
-(rerunfilecheck)             Checksum: A584138C738DD41D3CBC015764D46C9A;1808.
+(rerunfilecheck)             Checksum: DE12F90EF199B1A4CD85E146D85F3C77;6093.
+runsystem(del d100notes.pyg)...executed.
+
  ) 
 Here is how much of TeX's memory you used:
- 39223 strings out of 474541
- 799508 string characters out of 5743481
- 1950978 words of memory out of 5000000
- 60711 multiletter control sequences out of 15000+600000
- 591208 words of font info for 108 fonts, out of 8000000 for 9000
+ 42026 strings out of 474541
+ 903020 string characters out of 5743481
+ 1970978 words of memory out of 5000000
+ 63148 multiletter control sequences out of 15000+600000
+ 599844 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 124i,12n,145p,548b,989s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 124i,13n,145p,575b,1781s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/impallari/cabin/C
 abin-Bold.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/impal
 lari/cabin/Cabin-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fo
@@ -1785,10 +2501,20 @@ nts/type1/gnome/cantarell/Cantarell-Bold.pfb><C:/Users/Michael/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Regular.pfb><C:/Users/Micha
 el/AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Regular.
 pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmtt10.pfb>
-Output written on d100notes.pdf (6 pages, 207775 bytes).
+/cm/cmitt10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Michael/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Michael/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Michael/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Mi
+chael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C
+:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+tt10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmtt8.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmtt9.pfb>
+Output written on d100notes.pdf (22 pages, 1048159 bytes).
 PDF statistics:
- 279 PDF objects out of 1000 (max. 8388607)
- 21 named destinations out of 1000 (max. 500000)
- 451 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 587 PDF objects out of 1000 (max. 8388607)
+ 77 named destinations out of 1000 (max. 500000)
+ 711 words of extra memory for PDF output out of 10000 (max. 10000000)
 

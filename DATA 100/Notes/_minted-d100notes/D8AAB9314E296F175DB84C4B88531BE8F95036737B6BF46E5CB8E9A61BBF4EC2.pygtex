@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{names} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Bella\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Alex\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Narges\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Lisa\PYGZdq{}}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} .isin}
+\PYG{n}{babynames}\PYG{p}{[}\PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{isin}\PYG{p}{(}\PYG{n}{names}\PYG{p}{)]} \PYG{c+c1}{\PYGZsh{} Returns a Series whose entry is True if the corresponding name in babynames is found in the names list}
+
+\PYG{c+c1}{\PYGZsh{} .str.startswith}
+\PYG{n}{babynames}\PYG{p}{[}\PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{startswith}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}N\PYGZdq{}}\PYG{p}{)]} \PYG{c+c1}{\PYGZsh{} Returns a Series whose entry is True if the corresponding name starts with N}
+\end{Verbatim}

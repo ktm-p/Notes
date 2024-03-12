@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{dataframe}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{n}{column\PYGZus{}name}\PYG{p}{)}\PYG{o}{.}\PYG{n}{agg}\PYG{p}{(}\PYG{n}{aggregation\PYGZus{}function}\PYG{p}{)}
+\end{Verbatim}

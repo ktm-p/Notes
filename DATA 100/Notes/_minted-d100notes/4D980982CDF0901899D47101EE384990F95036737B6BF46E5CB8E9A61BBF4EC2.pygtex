@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Getting first ten rows}
+\PYG{n}{babynames\PYGZus{}first\PYGZus{}10\PYGZus{}rows} \PYG{o}{=} \PYG{n}{babynames}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[:}\PYG{l+m+mi}{9}\PYG{p}{,} \PYG{p}{:]}
+
+\PYG{c+c1}{\PYGZsh{} Selection with []}
+\PYG{n}{babynames\PYGZus{}first\PYGZus{}10\PYGZus{}rows}\PYG{p}{[[}\PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{]]}
+
+\PYG{c+c1}{\PYGZsh{} Selection with .loc}
+\PYG{n}{babynames\PYGZus{}first\PYGZus{}10\PYGZus{}rows}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[[}\PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{,} \PYG{k+kc}{False}\PYG{p}{],} \PYG{p}{:]}
+\end{Verbatim}

@@ -1,0 +1,250 @@
+\documentclass{article}
+\usepackage{homework}
+\usepackage{macros}
+\usepackage{amsmath}
+
+%% LIST OF PROBLEMS SETUP %%
+\renewcommand\thmtformatoptarg[1]{:\enspace#1}
+\makeatletter
+\def\ll@homework{
+	\thmt@thmname~
+	\protect\numberline{\csname the\thmt@envname\endcsname}%
+	\ifx\@empty
+	\thmt@shortoptarg
+	\else
+	\protect\thmtformatoptarg{\thmt@shortoptarg}
+	\fi
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\numberline}[1]{\hb@xt@3em{#1}}
+\makeatother	
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\listoftheorems
+	\newpage
+}
+
+\begin{document}
+\mytitle{Math 135: Homework 7}{Spring 2024}
+
+\setcounter{section}{5}
+\section{Cardinal Numbers and the Axiom of Choice}
+\begin{hw}{1}[0][0]
+	Show that the equation
+	\begin{equation*}
+		f(m,n) = 2^{m} (2n + 1) - 1
+	\end{equation*}
+defines a one-to-one correspondence between $\omega \times \omega$ and $\omega$.
+\end{hw}
+\begin{solution}
+	We will want to show that $f(m,n)$ is both one-to-one and onto.
+	
+	First, we will show that it is one-to-one. Suppose that we have $f(m, n) = f(m', n')$. We want to show then that $(m,n) = (m', n')$.
+	
+	To do this, we observe the following:
+	\begin{align*}
+		f(m,n) &= 2^{m}(2n + 1) - 1 \\
+		f(m', n') &= 2^{m'}(2n' + 1) - 1
+	\end{align*}
+	
+	Then, we have:
+	\begin{align*}
+		f(m,n) &= f(m', n') \\
+		2^{m}(2n + 1) - 1 &= 2^{m'}(2n' + 1) - 1 \\
+		2^{m-m'}(2n+1) &= 2n' + 1
+	\end{align*}
+
+	From here, we note that for any $n \in \omega$, $2n+1$ and $2n' + 1$ are both odd numbers; they can't have $2$ as one of their factors. In other words, we require for $2^{m-m'} = 2^{0} = 1$ for the equality above to be true.
+	
+	Then, this yields us:
+	\begin{align*}
+		m-m' &= 0 \\
+		m &= m'
+	\end{align*}
+
+	Furthermore, since this is the case, we have:
+	\begin{align*}
+		2n+1 &= 2n' + 1 \\
+		2n - 2n' &= 0 \\
+		2(n-n') &= 0 \\
+		n-n' &= 0 \\
+		n &= n'
+	\end{align*}
+
+	Thus, we have $m = m'$ and $n = n'$; in other words, we have that if $f(m,n) = f(m', n')$, then $(m,n) = (m', n')$ as desired. Thus, $f$ is indeed one-to-one.
+	
+	Next, to show onto, we want to show that for any $k \in \omega$, there exists $(m, n) \in \omega \times \omega$ such that $f(m,n) = k$.
+	
+	For the case of $k = 0$, we observe that if we let $m = n = 0$, then we have:
+	\begin{align*}
+		2^{0}(2(0) + 1) - 1 &= 1(0 + 1) - 1 \\
+		&= 1 - 1 \\
+		&= 0
+	\end{align*}
+
+	So, there exists $m,n$ such that $f(m,n) = k = 0$.
+	
+	And for $k = 1$, we observe that if we let $m = 1$ and $n = 0$, then we have:
+	\begin{align*}
+		2^{1}(2(0) + 1) - 1 &= 2(0 + 1) - 1 \\
+		&= 2 - 1 \\
+		&= 1
+	\end{align*}
+
+	So, there exists $m, n$ such that $f(m,n) = k = 1$.
+	
+	Now, for $k > 1$, we note that by the Fundamental Theorem of Arithmetic, $k$ has some unique prime factorisation:
+	\begin{equation*}
+		k = \prod_{i=1}^{j} p_i^{n_i},
+	\end{equation*}
+	where $p_1 < p_2 < \cdots < p_n$, and the $n_i$ are positive integers.
+	
+	Note that this prime factorisation will contain a $2^{m}$ term, where $m$ is non-negative (with $m = 0$ if $k$ is odd). Then, the product of the remaining primes in the unique factorisation of $k$ will be an odd number; i.e. there exists some $n \in \omega$ such that $2n + 1 = \prod_{i=2}^{j} p_i^{n_i}$.
+	
+	Now with this in mind, we first note that all $k' \in \omega$ must have some unique prime factorisation which we can rewrite as $k' = 2^{m}(2n + 1)$, for some $m, n \in \omega$.
+	
+	And if this is the case, then we have that for all $k \in \omega$, we have $k = k' - 1 = 2^{m}(2n + 1) - 1$. Thus, we have shown that for all $k \in \omega$, there exists $(m,n) \in \omega \times \omega$ such that $f(m,n) = k$. Thus, $f$ is indeed onto.
+	
+	Therefore, we can conclude that $f$ is a one-to-one correspondence between $\omega \times \omega$ and $\omega$.
+\end{solution}
+
+\begin{hw}{2}[0][0]
+	Show that in Fig. 32 we have:
+	\begin{align*}
+		J(m,n) &= \br{1 + 2 + \cdots + (m+n)} + m \\
+		&= \frac{1}{2}\br{(m+n)^{2} + 3m + n}
+	\end{align*}
+\end{hw}
+\begin{solution}
+	\begin{comment}
+	First, we observe that the sum $1 + 2 + \cdots + (m+n)$ is equal to:
+	\begin{align*}
+		1 + 2 + \cdots + (m+n) &= \frac{1}{2}(m+n)(1 + (m+n)) \\
+		&= \frac{1}{2}( (m+n) + (m+n)^{2})
+	\end{align*}
+	\end{comment}
+	We want to show that $J$ is a one-to-one correspondence between $\omega \times\omega$ and $\omega$.
+	
+	First, we show that $J$ is one-to-one. To do this, let us suppose that $J(m,n) = J(m', n')$. Now, suppose for the sake of contradiction that $(m,n) \neq (m', n')$. 
+	
+	Without loss of generality, we suppose that $m + n < m' + n'$.
+	
+	Then, we note that:
+	\begin{align*}
+		J(m,n) &= J(m', n') \\
+		\frac{1}{2}\br{(m+n)^{2} + (m+n)} + m &= \dfrac{1}{2}\br{(m'+n')^{2} + (m'+n')} + m' \\
+		m - m' &= \dfrac{1}{2}\br{(m'+n')^{2} + (m'+n')} - \frac{1}{2}\br{(m+n)^{2} + (m+n)} \\
+		&= \sum_{k=m+n+1}^{m'+n'} k \\
+		% m &= \sum_{k=m+n+1}^{m'+n'} k + m'
+		&< n' - n
+	\end{align*}
+
+	Then, with this in mind, we have:
+	\begin{align*}
+		\frac{1}{2}\br{(m+n)^{2} + (m+n)} &< \dfrac{1}{2}\br{(m'+n')^{2} + (m'+n')}
+	\end{align*}
+
+	But this contradicts with our assumption that $J(m,n) = J(m', n')$. Thus, we conclude that we must have $(m,n) = (m', n')$. Therefore, $J$ is indeed one-to-one.
+	
+	To show that it is onto, we note that 
+\end{solution}
+
+\begin{hw}{3}[0][0]
+	Find a one-to-one correspondence between the open unit interval $(0,1)$ and $\RR$ that takes rationals to rationals and irrationals to irrationals.
+\end{hw}
+\begin{solution}
+	We can construct a function as follows:
+	\begin{equation*}
+		f(x) = \begin{cases}
+			\dfrac{1}{x} - 2 & 0 < x \leq \dfrac{1}{2} \\
+			\dfrac{1}{x-1} + 2 & \dfrac{1}{2} < x < 1
+		\end{cases}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}{4}[0][0]
+	Construct a one-to-one correspondence between the closed unit interval
+	\begin{equation*}
+		\br{0,1} = \brc{x \in \RR : 0 \leq x \leq 1},
+	\end{equation*}
+	and the open unit interval $(0,1)$.
+\end{hw}
+\begin{solution}
+	We can construct the following function, where $n \in \omega$:
+	\begin{equation*}
+		f(x) = \begin{cases}
+			\dfrac{1}{2} & x = 0 \\
+			\dfrac{1}{2^{n+2}} & x = \dfrac{1}{2^{n}} \\
+			x & \text{otherwise}
+		\end{cases}
+	\end{equation*}
+\end{solution}
+
+\begin{hw}{6}[0][0]
+	Let $\kappa$ be a nonzero cardinal number. Show that there does not exist a set to which every set of cardinality $\kappa$ belongs.
+\end{hw}
+\begin{solution}
+	We can let $\kappa = 1$. Then, suppose for the sake of contradiction that there exists a set to which every set of cardinality $\kappa = 1$ belongs to. 
+	
+	We note that a set with cardinality $\kappa = 1$ is a singleton. And we have proven in a previous homework that the set of all singletons cannot exist.
+\end{solution}
+
+\begin{hw}{7}[0][0]
+	Assume that $A$ is finite and $f : A \rightarrow A$. Show that $f$ is one-to-one iff $\ran f = A$.
+\end{hw}
+\begin{solution}
+	First, suppose that $f$ is one-to-one. Then, if $x \neq x'$, then $f(x) \neq f(x')$. This means then that every element in $A$ must be mapped by $f$ to some other element in $A$. Then, because $A$ is finite, this means then that $\ran f = A$.
+	
+	On the other hand, suppose that $\ran f = A$. Now, since $A$ is finite, it has a cardinality of $n$, for some $n \in \omega$.
+	
+	From here, let's suppose for the sake of contradiction that there exists some $y \in A$ such that for $x \neq x'$, we have $f(x) = f(x') = y$.
+	
+	Then, there's $n-2$ elements left in the domain and $n-1$ in the range that need to be paired with each other. However, since $f$ is a function, an element in $\dom f$ can't be mapped to two elements in $\ran f$. By the Pigeonhole Principle then, there's at least one element in $A$ which doesn't have a pre-image.
+	
+	Thus, we have a contradiction. So, we conclude that $f$ is indeed one-to-one.
+\end{solution}
+
+\begin{hw}{13}[0][0]
+	Show that a finite union of finite sets is finite.
+\end{hw}
+\begin{solution}
+	We can proceed by induction.
+	
+	First, we observe that for a set $A$ with cardinality $0$, we have then that $A = \emptyset$. Then, $\bigcup A = \emptyset$, so, indeed, we have that $\bigcup A$ is finite as well.
+	
+	Next, suppose that our claim holds for set $A$ with cardinality $n$.
+	
+	Now, we look at $A$ whose cardinality is $n^{+}$. Observe then that because $A$ is finite, it follows that there exists a bijection between $A$ and $n^{+}$, and thus some bijective function $f : n^{+} \rightarrow A$.
+	
+	Then, we have:
+	\begin{align*}
+		\bigcup A &= \bigcup_{k \in n^{+}} f(k) \\
+		&= \bigcup_{k \in n} f(k) \cup f(n)
+	\end{align*}
+
+	By our induction hypothesis, we have that $\bigcup_{k \in n} f(k)$ is finite. And since $f(n)$ is also finite, we thus have that $\bigcup_{k \in n} f(k) \cup f(n)$ is finite too.
+	
+	Therefore, by induction, we conclude that the claim holds as desired.
+\end{solution}
+
+\begin{hw}{14}[0][0]
+	Define a permutation of $K$ to be any one-to-one function from $K$
+	onto $K$. We can then define the factorial operation on cardinal numbers by the equation
+	\begin{equation*}
+		\kappa ! = \mathrm{card} \brc{f : f \text{ is a permutation of $K$}}
+	\end{equation*}
+	where $K$ is any set of cardinality $\kappa$. Show that $\kappa !$ is well defined.
+\end{hw}
+\begin{solution}
+	content...
+\end{solution}
+
+\end{document}

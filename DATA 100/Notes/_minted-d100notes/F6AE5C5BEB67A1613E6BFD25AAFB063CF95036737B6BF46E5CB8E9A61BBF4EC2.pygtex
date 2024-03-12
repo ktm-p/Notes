@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Using a slice of row integers}
+\PYG{n}{elections}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{:}\PYG{l+m+mi}{7}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Using a list of column labels}
+\PYG{n}{elections}\PYG{p}{[[}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Candidate\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Result\PYGZdq{}}\PYG{p}{]]}
+
+\PYG{c+c1}{\PYGZsh{} Using a single column label}
+\PYG{n}{elections}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Candidate\PYGZdq{}}\PYG{p}{]}
+\end{Verbatim}

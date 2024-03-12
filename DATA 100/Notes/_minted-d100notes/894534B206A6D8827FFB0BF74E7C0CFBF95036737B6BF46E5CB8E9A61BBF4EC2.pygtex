@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{f\PYGZus{}babynames} \PYG{o}{=} \PYG{n}{babynames}\PYG{p}{[}\PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Sex\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}F\PYGZdq{}}\PYG{p}{]}
+\PYG{n}{f\PYGZus{}babynames} \PYG{o}{=} \PYG{n}{f\PYGZus{}babynames}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{([}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{])}
+\PYG{n}{jenn\PYGZus{}counts\PYGZus{}series} \PYG{o}{=} \PYG{n}{f\PYGZus{}babynames}\PYG{p}{[}\PYG{n}{f\PYGZus{}babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}Jennifer\PYGZdq{}}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}Count\PYGZdq{}}\PYG{p}{]}
+\end{Verbatim}

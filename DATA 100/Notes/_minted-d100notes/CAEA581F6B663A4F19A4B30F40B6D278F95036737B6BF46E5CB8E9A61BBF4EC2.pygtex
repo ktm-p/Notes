@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Approach 1: Using .agg(sum)}
+\PYG{n}{babynames}\PYG{p}{[[}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Count\PYGZdq{}}\PYG{p}{]]}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{agg}\PYG{p}{(}\PYG{n+nb}{sum}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Approach 2: Using .sum()}
+\PYG{n}{babynames}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{)[[}\PYG{l+s+s2}{\PYGZdq{}Count\PYGZdq{}}\PYG{p}{]]}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{()}
+
+\PYG{c+c1}{\PYGZsh{} Approach 3: Using .sum(numeric\PYGZus{}only=True)}
+\PYG{n}{babynames}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{numeric\PYGZus{}only}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{Verbatim}

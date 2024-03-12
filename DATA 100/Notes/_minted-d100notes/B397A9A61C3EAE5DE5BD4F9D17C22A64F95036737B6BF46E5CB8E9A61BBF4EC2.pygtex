@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{c+c1}{\PYGZsh{} Using a list}
+	\PYG{n}{elections}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[[}\PYG{l+m+mi}{87}\PYG{p}{,} \PYG{l+m+mi}{25}\PYG{p}{,} \PYG{l+m+mi}{179}\PYG{p}{],} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Candidate\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Result\PYGZdq{}}\PYG{p}{]]}
+	
+	\PYG{c+c1}{\PYGZsh{} Using a slice}
+	\PYG{n}{elections}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[[}\PYG{l+m+mi}{87}\PYG{p}{,} \PYG{l+m+mi}{25}\PYG{p}{,} \PYG{l+m+mi}{179}\PYG{p}{],} \PYG{l+s+s2}{\PYGZdq{}Popular vote\PYGZdq{}}\PYG{p}{:}\PYG{l+s+s2}{\PYGZdq{}\PYGZpc{}\PYGZdq{}}\PYG{p}{]}
+	\PYG{n}{elections}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[:,} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Candidate\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Result\PYGZdq{}}\PYG{p}{]]} \PYG{c+c1}{\PYGZsh{} Gets all rows}
+	\PYG{n}{elections}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[[}\PYG{l+m+mi}{87}\PYG{p}{,} \PYG{l+m+mi}{25}\PYG{p}{,} \PYG{l+m+mi}{179}\PYG{p}{],} \PYG{p}{:]} \PYG{c+c1}{\PYGZsh{} Gets all columns}
+	
+	\PYG{c+c1}{\PYGZsh{} Using a single value.}
+	\PYG{n}{elections}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[[}\PYG{l+m+mi}{87}\PYG{p}{,} \PYG{l+m+mi}{25}\PYG{p}{,} \PYG{l+m+mi}{179}\PYG{p}{],} \PYG{l+s+s2}{\PYGZdq{}Popular vote\PYGZdq{}}\PYG{p}{]} \PYG{c+c1}{\PYGZsh{} Note that this returns the Popular vote series, with only the select indices}
+	\PYG{n}{elections}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Candidate\PYGZdq{}}\PYG{p}{]} \PYG{c+c1}{\PYGZsh{} This returns the string value at index 0 from the Candidate column}
+\end{Verbatim}

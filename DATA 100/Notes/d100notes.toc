@@ -1,12 +1,37 @@
 \contentsline {chapter}{Contents}{2}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}Introduction to Data Science}{3}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Lecture 1 -- 01/16/24}{3}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Course Overview}{3}{subsection.1.1.1}%
-\contentsline {subsubsection}{Why Data Science Matters}{3}{section*.2}%
-\contentsline {subsubsection}{What is Data Science?}{4}{section*.2}%
-\contentsline {subsection}{\numberline {1.1.2}Course Outline}{4}{subsection.1.1.2}%
-\contentsline {subsubsection}{Prerequisites}{4}{section*.3}%
-\contentsline {subsubsection}{Topics (Tentative)}{4}{section*.3}%
-\contentsline {subsubsection}{Course Components}{5}{section*.3}%
-\contentsline {subsubsection}{Grading}{5}{section*.3}%
-\contentsline {subsection}{\numberline {1.1.3}The Data Science Lifecycle}{6}{subsection.1.1.3}%
+\contentsline {chapter}{\numberline {1}Introduction to Data Science}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Lecture 1 -- 01/16/24}{4}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Course Overview}{4}{subsection.1.1.1}%
+\contentsline {subsubsection}{Why Data Science Matters}{4}{section*.2}%
+\contentsline {subsubsection}{What is Data Science?}{5}{section*.2}%
+\contentsline {subsection}{\numberline {1.1.2}Course Outline}{5}{subsection.1.1.2}%
+\contentsline {subsubsection}{Prerequisites}{5}{section*.3}%
+\contentsline {subsubsection}{Topics (Tentative)}{5}{section*.3}%
+\contentsline {subsubsection}{Course Components}{6}{section*.3}%
+\contentsline {subsubsection}{Grading}{6}{section*.3}%
+\contentsline {subsection}{\numberline {1.1.3}The Data Science Lifecycle}{7}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Lecture 2 -- 01/18/24}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Tabular Data}{8}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}DataFrames and Series}{8}{subsection.1.2.2}%
+\contentsline {subsubsection}{The Series Object}{8}{defn.1.3}%
+\contentsline {subsubsection}{DataFrames}{9}{Item.6}%
+\contentsline {subsection}{\numberline {1.2.3}Data Extraction}{11}{subsection.1.2.3}%
+\contentsline {subsubsection}{.head and .tail}{11}{section*.4}%
+\contentsline {subsubsection}{Label-based Extraction (.loc)}{11}{section*.4}%
+\contentsline {subsubsection}{Integer-based Extraction (.iloc)}{12}{figure.1.5}%
+\contentsline {subsubsection}{.loc versus .iloc}{13}{figure.1.5}%
+\contentsline {subsubsection}{Context-dependent Extraction ([])}{13}{example.1.4}%
+\contentsline {chapter}{\numberline {2}Pandas, and more Pandas!}{14}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Lecture 3 -- 01/23/24}{14}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Conditional Selection}{14}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Adding, Removing, and Modifying Columns}{15}{subsection.2.1.2}%
+\contentsline {subsubsection}{Adding and Modifying Columns}{15}{section*.5}%
+\contentsline {subsubsection}{Removing Columns}{16}{Item.8}%
+\contentsline {subsection}{\numberline {2.1.3}Useful Utility Functions}{16}{subsection.2.1.3}%
+\contentsline {subsubsection}{Custom Sorting}{17}{section*.6}%
+\contentsline {section}{\numberline {2.2}Lecture 4 -- 01/25/24}{17}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Grouping}{17}{subsection.2.2.1}%
+\contentsline {subsubsection}{Group Basics}{18}{section*.7}%
+\contentsline {subsubsection}{Aggregation Functions}{18}{figure.2.2}%
+\contentsline {subsubsection}{groupby.size() versus groupby.count()}{21}{figure.2.4}%
+\contentsline {subsubsection}{Filtering by Groups}{22}{figure.2.6}%

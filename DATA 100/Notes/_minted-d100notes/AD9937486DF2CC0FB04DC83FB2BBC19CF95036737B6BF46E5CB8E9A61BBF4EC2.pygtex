@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+
+\PYG{c+c1}{\PYGZsh{} Creating a Series object}
+\PYG{n}{s} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{Series}\PYG{p}{([}\PYG{l+s+s2}{\PYGZdq{}Welcome\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}to\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}data 100\PYGZdq{}}\PYG{p}{])}
+\PYG{n}{s}\PYG{o}{.}\PYG{n}{index} \PYG{c+c1}{\PYGZsh{} RangeIndex(start=0, stop=3, step=1)}
+\PYG{n}{s}\PYG{o}{.}\PYG{n}{values} \PYG{c+c1}{\PYGZsh{} array([\PYGZsq{}welcome\PYGZsq{}, \PYGZsq{}to\PYGZsq{}, \PYGZsq{}data 100\PYGZsq{}], dtype=\PYGZsq{}object\PYGZsq{})}
+\end{Verbatim}

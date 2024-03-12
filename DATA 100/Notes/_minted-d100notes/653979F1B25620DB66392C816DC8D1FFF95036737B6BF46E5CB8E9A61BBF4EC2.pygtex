@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Does NOT modify babynames DataFrame}
+\PYG{n}{babynames}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Length\PYGZdq{}}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}columns\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Does modify babynames (through reassignment)}
+\PYG{n}{babynames} \PYG{o}{=} \PYG{n}{babynames}\PYG{o}{.}\PYG{n}{drop}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Length\PYGZdq{}}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}columns\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}

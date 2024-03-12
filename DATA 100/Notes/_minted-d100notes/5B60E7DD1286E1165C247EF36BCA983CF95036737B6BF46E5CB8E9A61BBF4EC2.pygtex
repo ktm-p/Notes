@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Getting the row labels}
+\PYG{n}{elections}\PYG{o}{.}\PYG{n}{index}
+
+\PYG{c+c1}{\PYGZsh{} Getting the column labels}
+\PYG{n}{elections}\PYG{o}{.}\PYG{n}{columns}
+
+\PYG{c+c1}{\PYGZsh{} Getting the shape of the DataFrame, given in the form (row, col)}
+\PYG{n}{elections}\PYG{o}{.}\PYG{n}{shape}
+\end{Verbatim}
