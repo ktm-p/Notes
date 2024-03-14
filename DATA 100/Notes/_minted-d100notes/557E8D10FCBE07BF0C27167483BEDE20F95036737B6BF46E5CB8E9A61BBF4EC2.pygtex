@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn.model\PYGZus{}selection} \PYG{k+kn}{import} \PYG{n}{train\PYGZus{}test\PYGZus{}split}
+
+\PYG{c+c1}{\PYGZsh{} We can specify the size of the testing data. The size shouldn\PYGZsq{}t be too small nor too large.}
+
+\PYG{c+c1}{\PYGZsh{} We can shuffle the data set before using it; this is to prevent there being any biases. The default is set to True.}
+
+\PYG{c+c1}{\PYGZsh{} random\PYGZus{}state sets the seed so every time we run the function, we get the same split of the data.}
+
+\PYG{n}{train\PYGZus{}test\PYGZus{}split}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,} \PYG{n}{Y}\PYG{p}{,} \PYG{n}{test\PYGZus{}size} \PYG{o}{=} \PYG{l+m+mf}{0.2}\PYG{p}{,} \PYG{n}{shuffle} \PYG{o}{=} \PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{random\PYGZus{}state} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{)}
+\end{Verbatim}

@@ -3,6 +3,8 @@
 \usepackage{macros}
 \usepackage{amsmath}
 
+\graphicspath{{C:/Users/Michael/Pictures/}}
+
 %% LIST OF PROBLEMS SETUP %%
 \renewcommand\thmtformatoptarg[1]{:\enspace#1}
 \makeatletter
@@ -125,36 +127,132 @@ defines a one-to-one correspondence between $\omega \times \omega$ and $\omega$.
 \end{hw}
 \begin{solution}
 	\begin{comment}
-	First, we observe that the sum $1 + 2 + \cdots + (m+n)$ is equal to:
-	\begin{align*}
-		1 + 2 + \cdots + (m+n) &= \frac{1}{2}(m+n)(1 + (m+n)) \\
-		&= \frac{1}{2}( (m+n) + (m+n)^{2})
-	\end{align*}
+		To begin with, let us define $I: \omega \times \omega \rightarrow \omega \times \omega$ to be as follows:
+		\begin{equation*}
+			\ang{m,n} \mapsto \begin{cases}
+				\ang{m+1, n-1} & n \neq 0 \\
+				\ang{0, m+1} & n = 0
+			\end{cases}
+		\end{equation*}
+		
+		Then, let $f: \omega \rightarrow \omega \times \omega$ to be defined as:
+		\begin{align*}
+			f(0) &= \ang{0,0} \\
+			f(n^{+}) &= I(f(n))
+		\end{align*} 
+		
+		Now, for $J$ to indeed be a bijection, we require that the following holds:
+		\begin{enumerate}
+			\item $J \circ f = 1_\omega$
+			\item $f \circ J = 1_{\omega \times \omega}$
+		\end{enumerate}
+		
+		First, we will show that $J\circ f = 1_\omega$.
+		\begin{innerproof}
+			We proceed by induction on $n$.
+			
+			Observe that $(J \circ f)(0) = 0$. So, we now suppose that our claim holds for $n$, and we look at $n^{+}$.
+			
+			We observe that $(J \circ f)(n^{+}) = J\circ I(f(n))$. Then, for $b \neq 0$ we have:
+			\begin{align*}
+				J \circ I(f(n)) &= g(I(\ang{a,b})) \\
+				&= \dfrac{1}{2}\pr{ \pr{a+1+b-1}^{2} + 3(a+1) + (b-1)} \\
+				&= J(\ang{a,b}) + 1 \\
+				&= n + 1 \\
+				&= n^{+}
+			\end{align*}
+			
+			And if $b = 0$, then we have:
+			\begin{align*}
+				g(I(\ang{a,b})) &= g(\ang{0, a+1}) \\
+				&= \dfrac{1}{2}\pr{ (a+1)^{2} + 3(0) + (a+1)} \\
+				&= \dfrac{1}{2}\pr{a^{2} + a + 1} \\
+				&= g\pr{\ang{0,a}} + 1 \\
+				&= n+1\\
+				&= n^{+}
+			\end{align*}
+			
+			Thus, we conclude that $J \circ f = 1_\omega$ as desired.
+		\end{innerproof}
+		
+		For the other direction, proceed as follows:
+		\begin{innerproof}
+			We induct on $n$.
+			
+			We see that for $n = 0$, we have $(f \circ J)(0, 0) = 0$.
+			
+			Then, suppose that our claim holds for $n$. So, we now check $n^{+}$.
+			
+			Observe that:
+			\begin{align*}
+				(f \circ J)(0, n^{+}) &= (f \circ J)(0, n+1) \\
+				&= f(J(0, n+1)) \\
+				&= f\pr{ \dfrac{1}{2}\br{ \pr{n+1}^{2} + 3(0) + n+1} } \\
+				&= f\pr{\dfrac{1}{2}}
+			\end{align*}
+		\end{innerproof}
 	\end{comment}
-	We want to show that $J$ is a one-to-one correspondence between $\omega \times\omega$ and $\omega$.
+	We will proceed by showing that $J$ is both one-to-one and onto.
 	
-	First, we show that $J$ is one-to-one. To do this, let us suppose that $J(m,n) = J(m', n')$. Now, suppose for the sake of contradiction that $(m,n) \neq (m', n')$. 
+	First, we note that in the $0^{th}$ column of the diagram, each of the entry corresponds to the sum $\sum_{i=0}^{k} i$, where $k$ is the $k^{th}$ row of the entry, starting at $k = 0$. This column is circled in blue below:
 	
-	Without loss of generality, we suppose that $m + n < m' + n'$.
-	
-	Then, we note that:
-	\begin{align*}
-		J(m,n) &= J(m', n') \\
-		\frac{1}{2}\br{(m+n)^{2} + (m+n)} + m &= \dfrac{1}{2}\br{(m'+n')^{2} + (m'+n')} + m' \\
-		m - m' &= \dfrac{1}{2}\br{(m'+n')^{2} + (m'+n')} - \frac{1}{2}\br{(m+n)^{2} + (m+n)} \\
-		&= \sum_{k=m+n+1}^{m'+n'} k \\
-		% m &= \sum_{k=m+n+1}^{m'+n'} k + m'
-		&< n' - n
-	\end{align*}
-
-	Then, with this in mind, we have:
-	\begin{align*}
-		\frac{1}{2}\br{(m+n)^{2} + (m+n)} &< \dfrac{1}{2}\br{(m'+n')^{2} + (m'+n')}
-	\end{align*}
-
-	But this contradicts with our assumption that $J(m,n) = J(m', n')$. Thus, we conclude that we must have $(m,n) = (m', n')$. Therefore, $J$ is indeed one-to-one.
-	
-	To show that it is onto, we note that 
+	\begin{center}
+		\includegraphics[scale=0.5]{135_hw7_omegatimesomega}
+	\end{center}
+	 
+	 Now, we will prove injectivity. To do this, we will want to show that if $\ang{m,n} \neq \ang{m', n'}$, then it follows that $J(m,n) \neq J(m', n')$.
+	 
+	 Now, we note that for $\ang{a,b}$, we have $a+b = k$. With this in mind, we observe that if $\ang{m,n} \neq \ang{m', n'}$, then this means that $m+n = k \neq k' = m'+n'$.
+	 
+	 With this in mind then, without loss of generality we will assume that $m+n < m' + n'$. In other words, $k < k'$.
+	 
+	 Now, we observe that if $k < k'$, then it follows that $k+1 \leq k'$.
+	 
+	 Next, referring back to the diagram, we note that $m+n = k$ represents each diagonal. For example, if $m+n = 2$, then it will be the second diagonal (which has values $3,4,5$).
+	 
+	 From here, we observe that for $m+n = k$, the minimum value that $J(m,n)$ can be will be the first value of the $k^{th}$ diagonal. In other words, it'll be $\frac{1}{2}k(k+1)$. Note that this is $J(0, k)$
+	 
+	 On the other hand, we observe that the maximum value that $J(m,n)$ can be will be at the bottom of the diagonal; in other words, it'll be $\frac{1}{2}k(k+1) + k$. This will be equal to $J(k, 0)$
+	 
+	 Now, for injectivity, we want to show that for $k < k'$, we have that $J(m,n) < J(m', n')$. In other words, the maximum value of $J(m,n)$ will be less than the minimum value of $J(m',n')$.
+	 
+	 To do this, we note then that we have for $m+n = k$ and $m'+n' = k'$ where $k < k'$ (i.e. $k+1 \leq k'$):
+	 \begin{align*}
+	 	J(m', n') &\geq J(0, k') \\
+	 	&= \frac{1}{2}\br{ k'(k'+1)} \\
+	 	&\geq \frac{1}{2}\br{ (k+1)(k+2)} \\
+	 	&= \frac{1}{2}k^{2} + \frac{3}{2}k + 1 \\
+	 	&= \frac{1}{2}k^{2} + \frac{1}{2}k + \frac{2}{2}k + 1 \\
+	 	&= \frac{1}{2}k(k+1) + k + 1 \\
+	 	&> \frac{1}{2}k(k+1) + k \\
+	 	&= J(k, 0) \\
+	 	&\geq J(m,n)
+	 \end{align*}
+ 
+ 	In other words, we see that, indeed, $J(m',n') > J(m,n)$. Following through with similar steps, we can then also show that if $m+n = k > m'+n' = k'$, then $J(m,n) > J(m',n')$. In other words, we have shown that if $\ang{m,n} \neq \ang{m', n'}$, then $J(m,n) \neq J(m', n')$; $J$ is injective as desired.
+ 	
+ 	Next, to show surjectivity, we observe that for every $y = J(m,n)$, we note that $y$ will be on some $k^{th}$ diagonal of the diagram. Then, we can do the following:
+ 	\begin{enumerate}
+ 		\item We let $m = y - \frac{1}{2}k(k+1)$.
+ 		\item We let $n = k - m$.
+ 	\end{enumerate}
+ 
+ 	Thus, we observe then that:
+ 	\begin{align*}
+ 		J(m,n) &= \frac{1}{2}\br{(m+n)^{2} + 3m + n} \\
+ 		&= \frac{1}{2}\br{(m + k - m)^{2} + 3m + (k-m)} \\
+ 		&= \frac{1}{2}\br{k^{2} + 2m + k} \\
+ 		&= \frac{1}{2}\br{k^{2} + 2\pr{y - \frac{1}{2}k(k+1)} + k} \\
+ 		&= \frac{1}{2}\br{k^{2} + 2y -k^{2} - k + k} \\
+ 		&= \frac{1}{2}\br{2y} \\
+ 		&= y
+ 	\end{align*}
+ 
+ 	Thus, we see that, indeed, for every $y \in \omega$, there exists some $\ang{m,n} \in \omega \times \omega$ such that $J(m,n) = y$.
+ 	
+ 	In other words, $J$ is surjective.
+ 	
+ 	Thus, we conclude that, indeed, $J(m,n)$ is a one-to-one correspondence between $\omega \times \omega$ and $\omega$ as desired.
 \end{solution}
 
 \begin{hw}{3}[0][0]
@@ -168,6 +266,56 @@ defines a one-to-one correspondence between $\omega \times \omega$ and $\omega$.
 			\dfrac{1}{x-1} + 2 & \dfrac{1}{2} < x < 1
 		\end{cases}
 	\end{equation*}
+
+	We note then that every rational will get mapped to a rational, whereas every irrational will get mapped to an irrational, by this function.
+	
+	To check that it's a bijection, we see that if $f(x) = f(y)$, then:
+	\begin{align*}
+		\frac{1}{x} - 2 &= \frac{1}{y} - 2 \\
+		y - 2xy &= x - 2xy \\
+		y &= x
+	\end{align*}
+
+	Or, we have:
+	\begin{align*}
+		\frac{1}{x-1} + 2 &= \frac{1}{y-1} + 2 \\ (y-1) + 2(x-1)(y-1) &= (x-1) + 2(x-1)(y-1) \\
+		y &= x
+	\end{align*}
+
+	In either cases, we have $x = y$, so $f$ is indeed injective.
+	
+	And to prove surjectivity, we see that if $y \geq 0$, then:
+	\begin{align*}
+		y &= \dfrac{1}{x} - 2 \\
+		y + 2 &= \dfrac{1}{x} \\
+		x &= \dfrac{1}{y+2}
+	\end{align*}
+
+	And we see that
+	\begin{align*}
+		f(x) &= \frac{1}{\dfrac{1}{y+2}} - 2 \\
+		&= y + 2 - 2 \\
+		&= y
+	\end{align*}
+
+	And we see that if $y < 0$, then we have:
+	\begin{align*}
+		y &= \frac{1}{x-1} + 2 \\
+		y - 2 &= \dfrac{1}{x-1} \\
+		x &= \dfrac{1}{y-2} + 1
+	\end{align*}
+
+	And so we see:
+	\begin{align*}
+		f(x) &= \frac{1}{\dfrac{1}{y-2} +1 - 1} + 2 \\
+		&= \dfrac{1}{\dfrac{1}{y-2}} + 2 \\
+		&= y - 2 + 2 \\
+		&= y
+	\end{align*}
+
+	So, we see that for every $y \in \RR$, there exists some $x \in \pr{0,1}$ such that $f(x) = y$.
+	
+	Therefore, we see that $f$ is bijective as desired. 
 \end{solution}
 
 \begin{hw}{4}[0][0]
@@ -186,6 +334,31 @@ defines a one-to-one correspondence between $\omega \times \omega$ and $\omega$.
 			x & \text{otherwise}
 		\end{cases}
 	\end{equation*}
+	
+	To check injectivity, we observe that if $f(x) = f(y)$, then, either both $f(x) = \frac{1}{2}$ and $f(y) = \frac{1}{2}$, in which case $x = y = 0$.
+
+	Or:
+	\begin{align*}
+		\frac{1}{2^{n+2}} &= \frac{1}{2^{m+2}} \\
+		2^{m+2} &= 2^{n+2} \\
+		m+2 &= n+2 \\
+		m &= n \\
+	\end{align*}
+	meaning that $x = \frac{1}{2^{m}} = \frac{1}{2^{n}} = y$.
+
+	Or, $x = f(x) = f(y) = y$. 
+
+	In all cases, we see that $x = y$.
+	
+	Then, to show surjectivity, we observe that if $y \in (0,1)$, if $y = \frac{1}{2}$, then we let $x = 0$ for $f(x) = y$.
+	
+	If $y$ is a negative power of two which is not $2^{-1}$, then we can simply let $x = 4y$.
+	
+	And if $y$ is otherwise, we let $x = y$.
+	
+	Thus, for every $y$ we see there exists an $x$ such that $f(x) = y$. Therefore, $f$ is surjective.
+
+	Thus, we see that this is indeed bijective. 
 \end{solution}
 
 \begin{hw}{6}[0][0]
@@ -194,14 +367,16 @@ defines a one-to-one correspondence between $\omega \times \omega$ and $\omega$.
 \begin{solution}
 	We can let $\kappa = 1$. Then, suppose for the sake of contradiction that there exists a set to which every set of cardinality $\kappa = 1$ belongs to. 
 	
-	We note that a set with cardinality $\kappa = 1$ is a singleton. And we have proven in a previous homework that the set of all singletons cannot exist.
+	We note that a set with cardinality $\kappa = 1$ is a singleton. And we have proven in a previous homework that the set of all singletons cannot exist. In other words, a set to which every set of cardinality $\kappa = 1$ belongs to doesn't exist.
 \end{solution}
 
 \begin{hw}{7}[0][0]
 	Assume that $A$ is finite and $f : A \rightarrow A$. Show that $f$ is one-to-one iff $\ran f = A$.
 \end{hw}
 \begin{solution}
-	First, suppose that $f$ is one-to-one. Then, if $x \neq x'$, then $f(x) \neq f(x')$. This means then that every element in $A$ must be mapped by $f$ to some other element in $A$. Then, because $A$ is finite, this means then that $\ran f = A$.
+	First, suppose that $f$ is one-to-one. Then, let $B = f\image{A}$. Then, we have $B \subseteq A$ and $B \approx A$.
+	
+	However, note that if $B \subset A$, then $\mathrm{card} B < \mathrm{card} A$. But, we have that $B \approx A$, so it follows that $B = A$. Therefore, we see that $f$ is indeed onto; i.e. $\ran f = A$.
 	
 	On the other hand, suppose that $\ran f = A$. Now, since $A$ is finite, it has a cardinality of $n$, for some $n \in \omega$.
 	
@@ -244,7 +419,15 @@ defines a one-to-one correspondence between $\omega \times \omega$ and $\omega$.
 	where $K$ is any set of cardinality $\kappa$. Show that $\kappa !$ is well defined.
 \end{hw}
 \begin{solution}
-	content...
+	Suppose we have sets $K_0$ and $K_1$. Let $\card K_0 = \kappa = \card K_1$. 
+	
+	Then, because the cardinalities of $K_0$ and $K_1$ are the same, we can thus construct a bijection between them.
+	
+	To show that $\kappa!$ is well-defined, we will have to show then that there exists a bijection between the set of permutations of $K_0$ (which we will denote at $K_0'$) and permutations of $K_1$ (which we denote as $K_1$').
+	
+	Then to do this, we recall that there exists a bijection $g$ between $K_0$ and $K_1$. So, for each permutation $f$ of $K_1$, we can first send this permutation to $K_0$ with our bijection $g$, which we then permute. After, we can send the permutation of $K_0$ back to $K_1$ using $g^{-1}$.
+	
+	Thus, we observe then that there exists a bijection between the set of permutations $f$ of $K_0$ and of $K_1$; i.e., we have shown that $\kappa!$ is well-defined.
 \end{solution}
 
 \end{document}

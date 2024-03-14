@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{sklearn.linear\PYGZus{}model} \PYG{k}{as} \PYG{n+nn}{lm}
+\PYG{n}{ridge\PYGZus{}model} \PYG{o}{=} \PYG{n}{lm}\PYG{o}{.}\PYG{n}{Ridge}\PYG{p}{(}\PYG{n}{alpha} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} alpha represents the hyperparameter lambda}
+\PYG{n}{ridge\PYGZus{}model}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{X\PYGZus{}train}\PYG{p}{,} \PYG{n}{Y\PYGZus{}train}\PYG{p}{)}
+\PYG{n}{ridge\PYGZus{}model}\PYG{o}{.}\PYG{n}{coef\PYGZus{}}
+
+\end{Verbatim}

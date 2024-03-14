@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Split X\PYGZus{}train further into X\PYGZus{}train\PYGZus{}mini and X\PYGZus{}val.}
+
+\PYG{n}{X\PYGZus{}train\PYGZus{}mini}\PYG{p}{,} \PYG{n}{X\PYGZus{}val}\PYG{p}{,} \PYG{n}{Y\PYGZus{}train\PYGZus{}mini}\PYG{p}{,} \PYG{n}{Y\PYGZus{}val} \PYG{o}{=} \PYG{n}{train\PYGZus{}test\PYGZus{}split}\PYG{p}{(}\PYG{n}{X\PYGZus{}train}\PYG{p}{,} \PYG{n}{Y\PYGZus{}train}\PYG{p}{,} \PYG{n}{test\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mf}{0.2}\PYG{p}{,} \PYG{n}{random\PYGZus{}state}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\end{Verbatim}

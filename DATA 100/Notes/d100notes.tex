@@ -45,10 +45,6 @@
 }
 
 \begin{document}
-%\mytitle{Data 100: Principles and Techniques of Data Science}{Spring 2024}
-%\pagestyle{empty}
-
-% Background color
 \begin{tikzpicture}[remember picture,overlay]
 	\fill[BlueViolet] (current page.south west) rectangle (current page.north east);
 	
@@ -1065,4 +1061,563 @@ Another common use for groups is to filter data.
 \begin{figurebox}[]{Filtering by groups demo.}
 	\centering\includegraphics[scale=0.75]{groupby_filter}
 \end{figurebox}
+
+\chapter{idk yet}
+\section{Lecture 16 -- 03/12/24}
+Recall from the end of Lecture 14 that we had two lingering thoughts:
+\begin{itemize}
+	\item The idea of ``unseen" data -- this is data which our model didn't encounter during data.
+	\item The idea of ``model complexity" -- this influences if it underfits or overfits.
+\end{itemize}
+
+\begin{comment}
+\begin{figurebox}[]{Model Complexity versus Error/Variance}
+	\centering\includegraphics[scale=0.75]{model_graph}
+\end{figurebox}
+\end{comment}
+
+Our goal for this lecture is to find this spot between underfitting and overfitting.
+\subsection{Cross-Validation}
+A complex model may not perform well on data which it hasn't encountered during training. The figure below demonstrates this:
+
+\begin{comment}
+	\begin{figurebox}[]{Complex model on unseen data}
+		\centering\includegraphics[scale=0.5]{complex_on_unseen}
+	\end{figurebox}
+\end{comment}
+
+We can quantify the performance of the model on unseen data via \textbf{test sets}.
+
+\begin{defn}[Test Set]
+	A \textbf{test set} is a portion of our data set that is set aside for testing purposes.
+	
+	We don't consider the test set when fitting/training the model.
+	
+	Furthermore, the test set is only ever touched \textit{once} to compute the performance (MSE/RMSE/etc.) of the model after all the fine-tuning is completed.
+\end{defn}
+
+Our workflow for modeling is as follows: First, we perform a test-train split. We consider only the training set when designing the model. Then, we evaluate the test set.
+
+\begin{figurebox}[]{New workflow for modeling.}
+	\centering\includegraphics[scale=0.75]{train_test_split}
+\end{figurebox}
+
+Below, we demonstrate how we can actually perform a train-test split:
+\begin{code}{python}{Performing a train-test split.}
+from sklearn.model_selection import train_test_split
+
+# We can specify the size of the testing data. The size shouldn't be too small nor too large.
+
+# We can shuffle the data set before using it; this is to prevent there being any biases. The default is set to True.
+
+# random_state sets the seed so every time we run the function, we get the same split of the data.
+
+train_test_split(X, Y, test_size = 0.2, shuffle = True, random_state = 100)
+\end{code}
+
+And from this, we can then 
+
+Right now, we have two segments in our data set: training and testing.
+
+But we need a third segment, a ``validation set."
+
+Consider the following: suppose we've ran our model, but then we are dissatisfied with the test set performance. In our current workflow, we'd be stuck; we can't just go back to our model and adjust it, since we'd be using information from the test set to improve the model. Then, this test set would no longer be unseen data.
+
+To remedy this, we can introduce a third segment: a ``validation set."
+
+\begin{defn}[Validation Set]
+	A \textbf{validation set} is a portion of our training set that we set aside for assessing model performance while it is still being developed.
+	
+	We train the model on the training set, and assess performance on the validation set. We then adjust the data and repeat.
+	
+	After \textit{all} model development is complete, we assess final performance on the test set.
+\end{defn}
+
+\begin{figurebox}[]{Workflow for modeling with validation.}
+	\centering\includegraphics[scale=0.75]{train_test_validation}
+\end{figurebox}
+
+\begin{code}{python}{Validation sets.}
+# Split X_train further into X_train_mini and X_val.
+
+X_train_mini, X_val, Y_train_mini, Y_val = train_test_split(X_train, Y_train, test_size=0.2, random_state=100)
+\end{code}
+
+Furthermore, we can fit different models of varying complexity, compute their errors, and find the best complexity for our model:
+\begin{code}{python}{Finding the optimal model complexity.}
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+
+def fit_model_dataset(degree):
+pipelined_model = Pipeline([
+('polynomial_transformation', PolynomialFeatures(degree)),
+('linear_regression', lm.LinearRegression())    
+])
+
+pipelined_model.fit(X_train_mini[["hp"]], Y_train_mini)
+return mean_squared_error(Y_val, pipelined_model.predict(X_val[["hp"]]))
+
+errors = [fit_model_dataset(degree) for degree in range(0, 18)]
+MSEs_and_k = pd.DataFrame({"k": range(0, 18), "MSE": errors})
+
+plt.figure(dpi=120)
+plt.plot(range(0, 18), errors)
+plt.xlabel("Model Complexity (degree of polynomial)")
+plt.ylabel("Validation MSE")
+plt.xticks(range(0, 18));
+\end{code}
+
+Below, we see that as complexity increases, the error decreases... until a certain point. But then, the validation error starts increasing after a certain point; our model is overfitting!
+
+\subsection{K-Fold Cross-Validation}
+Introducing a validation set gives us one extra chance to assess our model performance.
+
+Specifically, we now understand how the model performs on \textit{one} particular set of unseen data.
+
+However, it's possible that we may have, by random chance, selected a set of validation points that was \textit{not} representative of other unseen data that the model might encounter.
+
+Ideally, we want to assess our model performance on several different validation sets before touching on our test set.
+
+\subsubsection{Validation Folds}
+In our original validation split, we set aside x\% of the training data to be used for validation.
+
+However, we could have selected any x\% of the training data for validation -- we could've used any of these portions once!
+
+The algorithm for K-Fold Cross-Validation is as follows:
+\begin{itemize}
+	\item We split our data into $K$ folds.
+	\item Pick one fold to be the validation fold.
+	\item Train the model on data from every other fold.
+	\item Compute the model's error on the validation fold and record it.
+	\item Repeat this for each of the $K$ folds.
+\end{itemize}
+
+Then, we define the \textbf{cross-validation error} to be the average error across all $K$ validation folds.
+
+\begin{figurebox}[]{K-Fold Cross-Validation Demo}
+	\centering\includegraphics[scale=0.5]{kfoldvalidation}
+\end{figurebox}
+
+\subsection{Hyperparameters}
+\begin{defn}[Hyperparameter]
+	A hyperparameter are values in a model chosen before the model is fit to data.
+\end{defn}
+
+\begin{example}
+	Examples of hyperparameters include:
+	\begin{itemize}
+		\item Degree of polynomial model.
+		\item The value for $K$ in K-Fold Cross-Validation.
+		\item Gradient descent learning rate $\alpha$.
+		\item Regularization penalty $\lambda$.
+	\end{itemize}
+\end{example}
+
+\subsubsection{Hyperparameter Tuning}
+To select a hyperparameter value via cross-validation:
+\begin{itemize}
+	\item List out several different guesses for the best hyperparameter.
+	\item For each guess, run cross-validation to compute the CV error for the choice of hyperparameter value.
+	\item Select the hyperparameter value with the lowest CV error.
+\end{itemize}
+
+\subsection{Regularization}
+\subsubsection{Constraining Model Parameters}
+One of the questions we have to tackle is how we can control the complexity of our model.
+
+One idea is to use each feature a little in our model.
+\begin{equation*}
+	\mathbb Y = \theta_0 + \theta_1 \phi_1 + \theta_2\phi_2 \cdots + \theta_p\phi_p
+\end{equation*}
+
+If we restrict how large each parameter $\theta_i$ can be, we restrict how much each feature contributes to the model. When $\theta_i$ is close or equal to 0, the model decreases in complexity because $\phi_i$ barely impacts the prediction.
+
+In regularization, we restrict complexity by putting a limit on the magnitude of the $\theta_i$
+
+\begin{example}
+	Suppose we specify that the sum of all absolute parameters can be no larger than some number $Q$:
+	\begin{equation*}
+		\sum_{i=1}^{p} \lvert \theta_i \rvert \leq Q.
+	\end{equation*}
+
+	We've given the model a ``budget" on how much weight to assign to each feature. Some features $\theta_i$ would need to be smaller in order for the sum to be less than $Q$.
+	
+	Note here that the intercept $\theta_0$ is typically excluded from our calculations.
+\end{example}
+
+We note that smaller values of $Q$ will lead to less complex models, whereas larger values of $Q$ will lead to more complex models.
+
+\subsubsection{L1 Regularization (LASSO)}
+\begin{defn}[L1 Regularization]
+	In L1 Regularization, we find thetas which minimizes the objective function:
+	\begin{equation*}
+		\dfrac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y_i})^{2} = \dfrac{1}{n} \sum_{i=1}^{n} (y_i - \pr{\theta_0 + \theta_1\phi_{i,1} + \cdots + \theta_p\phi_{i,p}})^{2},
+	\end{equation*}
+	where $\sum_{i=1}^{p} \lvert \theta_i \rvert \leq Q$.
+	
+	Then, by the Lagrangian Duality, this is equivalent to finding thetas which minimizes the augmented objective function:
+	\begin{equation*}
+		\dfrac{1}{n} \sum_{i=1}^{n} (y_i - \pr{\theta_0 + \theta_1\phi_{i,1} + \cdots + \theta_p\phi_{i,p}})^{2} + \lambda\sum_{i=1}^{p} \lvert \theta_i \rvert
+	\end{equation*}
+\end{defn}
+\begin{defn}[Regularization Penalty Hyperparameter]
+	$\lambda$ is the regularization penalty hyperparameter. When $\lambda$ is large, our objective function is penalized more for choosing larger thetas. So, model will adjust by reducing thetas and decreasing complexity.
+\end{defn}
+
+We choose our $\lambda$ via cross-validation.
+
+\begin{rmk}
+	L1 Regularization is also called LASSO: "Least Absolute Shrinkage and Selection Operator".
+\end{rmk}
+
+\begin{code}{python}{L1 Regularization}
+import sklearn.linear_model as lm
+lasso_model = lm.Lasso(alpha = 1) # alpha represents the hyperparameter lambda
+lasso_model.fit(X_train, Y_train)
+lasso_model.coef_
+\end{code}
+
+Note that the optimal parameters for a LASSO model tend to include a lot of zeroes.
+
+In other words, LASSO effectively selects only a subset of the features.
+
+However, we there is an issue with this approach: features with larger values will naturally contribute more to the predicted $\hat y$ for each observation. This means then that our LASSO model will need to spend more of its budget to allow smaller values to have much of an impact on each observation.
+
+To remedy this, we can standardize the data; i.e. we replace everything with z-scores:
+\begin{equation*}
+	z_k = \dfrac{x_k - \mu_k}{\sigma_k}
+\end{equation*}
+
+\subsubsection{L2 Regularization (Ridge Regression)}
+Alternatively, for our $Q$, we could have done:
+\begin{equation*}
+	\sum_{i=1}^{p} \theta_i^{2} \leq Q.
+\end{equation*}
+
+\begin{defn}[L2 Regularization]
+	For L2 Regularization, we want to find thetas which minimize the following objective function:
+	\begin{equation*}
+		\dfrac{1}{n} \sum_{i=1}^{n} (y_i - \pr{\theta_0 + \theta_1\phi_{i,1} + \cdots + \theta_p\phi_{i,p}})^{2} + \lambda\sum_{i=1}^{p} \theta_i^{2}
+	\end{equation*}
+\end{defn}
+
+\begin{code}{python}{L2 Regularization.}
+import sklearn.linear_model as lm
+ridge_model = lm.Ridge(alpha = 1) # alpha represents the hyperparameter lambda
+ridge_model.fit(X_train, Y_train)
+ridge_model.coef_
+
+\end{code}
+
+One thing to note about Ridge Regression is that it has a closed-form solution:
+\begin{equation*}
+	\hat{\theta}_\mathrm{ridge} = \pr{\mathbb X^{\intercal} \mathbb X + n \lambda I}^{-1} \mathbb X^{\intercal} \mathbb Y. 
+\end{equation*}
+
+\begin{warn}
+	We note that there is a solution even if $\mathbb X$ is not full-rank -- this is an important reason for why we often prefer L2 Regularization.
+\end{warn}
+
+\section{Lecture 17 -- 03/14/24}
+\subsection{Probability Review}
+Recall the following:
+\begin{defn}[Sample Mean]
+	The \textbf{sample mean} is the mean of our random sample. We can calculate this using \inlinecode{\mintinline{python}{np.mean(data)}}.
+\end{defn}
+
+Furthermore, an important theorem is the following:
+\begin{thm}[Central Limit Theorem]
+	If you draw a large random sample with replacement, then, regardless of the population distribution, the probability distribution of the sample mean:
+	\begin{itemize}
+		\item Is roughly normal.
+		\item Is centered around the population mean.
+		\item Has a standard deviation of:
+		\begin{equation*}
+			s = \dfrac{\sigma}{\sqrt{n}}
+		\end{equation*}
+		where $\sigma$ is the population standard deviation, and $n$ is the sample size.
+	\end{itemize}
+\end{thm}
+
+\subsection{Random Variables}
+\begin{defn}[Random Variable]
+	A \textbf{random variable} is a function from the outcome of a random event to a number.
+\end{defn}
+\begin{example}
+	For example, a coin can land either heads $(H)$ or tails $(T)$. We can define a random variable $X$ as follows:
+	\begin{equation*}
+		X = \begin{cases}
+				1 & \text{if coin lands heads} \\
+				0 & \text{if coin lands tails}
+			\end{cases}
+	\end{equation*}
+
+	We note that $\dom X = \brc{H, T}$ and $\ran X = \brc{1,0}$.
+\end{example}
+
+\begin{rmk}
+	Note that Random Variables are typically denoted with uppercase letters, whereas Regular Variables are typically denoted with lowercase letters!
+\end{rmk}
+
+For any random variable, we need to be able to specify two things:
+\begin{itemize}
+	\item \textbf{Possible values}: the set of values the random variable can take 
+	\item \textbf{Probabilities}: the chance that the random variable will take each possible value.
+	\begin{itemize}
+		\item Each probability should be a real-number between 0 and 1 (inclusive).
+		\item The total probability of all possible values should be 1.
+	\end{itemize}
+\end{itemize}
+
+Assuming that $X$ is discrete, then it has a finite number of possible values. Then, we denote $P(X = x)$ to be the probability that $X$ takes on $x$, and we have:
+\begin{equation*}
+	\sum_x P(X = x) = 1.
+\end{equation*}
+
+We often do this using a \textbf{probability distribution table}. Going back to our coin toss example, we have:
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		$x$ & $P(X=x)$ \\
+		\hline
+		0 & 1/2 \\
+		\hline
+		1 & 1/2 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{defn}[Distribution]
+	A \textbf{distribution} fully defines a random variable.  If you know the distribution of a random variable you can:
+	\begin{itemize}
+		\item Can compute properties of the random variables and derived variables.
+		\item Can simulate the random variables.
+	\end{itemize}
+
+	We can use \inlinecode{\mintinline{python}{np.random.choice}} or \inlinecode{\mintinline{python}{df.sample}} or \inlinecode{\mintinline{python}{scipy.stats.<dist>.rvs(...) }}
+\end{defn}
+
+\begin{rmk}
+	We often don’t know the (true) distribution and instead compute an empirical distribution:
+\end{rmk}
+
+Note that the total area of the bars/density curve will be equal to 1.
+
+\subsubsection{Bernoulli Random Variable}
+\begin{defn}[Bernoulli Random Variable]
+	A Bernoulli Random Variable is one that takes on two values: 0 or 1.
+\end{defn}
+
+The Bernoulli distribution is parameterized by $p$, the probability that $P(X = 1)$.
+
+\begin{miscbox}{Common Distributions}
+	Below are some common distributions:
+	\begin{itemize}
+		\item Bernoulli ($p$)
+		\begin{itemize}
+			\item $P(X=1) = p$ and $P(X = 0) = 1 - p$.
+			\item Sometimes called the ``indicator" random variable.
+		\end{itemize}
+		\item Binomial ($n,p$)
+		\begin{itemize}
+			\item Number of 1's in $n$ independent Bernoulli trials.
+		\end{itemize}
+		\item Categorial $(p_1, \ldots, p_k)$ of values
+		\begin{itemize}
+			\item Probability of each value is 1 / (number of possible values).
+		\end{itemize}
+		\item Uniform on the open unit interval $(0,1)$
+		\begin{itemize}
+			\item Density is flat at 1 on $(0,1)$ and 0 elsewhere.
+		\end{itemize}
+		\item Normal ($\mu, \sigma^{2}$)
+		\begin{itemize}
+			\item Can be described with the following equation:
+			\begin{equation*}
+			f(x) = \dfrac{1}{\sqrt{2\pi\sigma^{2}}}e^{ \dfrac{-(x-\mu)^{2}}{2\sigma^{2}}}
+		\end{equation*}
+		\end{itemize}
+	\end{itemize}
+\end{miscbox}
+
+\subsection{Expectation and Variance}
+\begin{defn}[Expectation]
+	The \textbf{expectation} of a random variable X is the weighted average of the possible values of X, where the weights are the probabilities of the values.
+\end{defn}
+
+The following are two equivalent ways to apply the weights:
+\begin{itemize}
+	\item One sample at a time:
+	\begin{equation*}
+		E[X] = \sum_{\text{all samples $s$}} X(s)P(s)
+	\end{equation*}
+	\item One possible value at a time:
+	\begin{equation*}
+		E[X] = \sum_{\text{all possible x}} xP(X=x)
+	\end{equation*}
+\end{itemize}
+
+We note that the second way is more common, as we typically are given the distribution, not all possible samples!
+
+\begin{warn}
+	The expectation of a random variable is a number, \textit{not} a random variable! 
+	\begin{itemize}
+		\item It is a generalization of the average (same units as the random variable).
+		\item It is the center of gravity of the probability distribution histogram.
+		\item If we simulate the variable many times, it is the long run average of the simulated values.
+	\end{itemize}
+\end{warn}
+
+\begin{defn}[Variance]
+	\textbf{Variance} is the expected squared deviation from the expectation of X.
+\end{defn}
+
+We define $\Var(X)$ to be as follows:
+\begin{equation*}
+	\Var(X) = E\br{ \pr{X - E[X]}^{2}}
+\end{equation*}
+
+\begin{rmk}
+	The units of the variance are the square of the units of X. To get back to the original units, we use the standard deviation of $X$:
+	\begin{equation*}
+		\SD(X) = \sqrt{\Var(X)}
+	\end{equation*}
+\end{rmk}
+
+\begin{warn}
+	Variance and Standard Deviation return number, \textit{not} random variables!
+	\begin{itemize}
+		\item Describes the variability of a random variable.
+		\item Variance is the expected squared error  between the random variable and its expected value.
+		\item Could be viewed as the chance error between a sample X and the population mean.
+	\end{itemize}
+\end{warn}
+
+\begin{rmk}
+	By Chebyshev's Inequality, no matter what the shape of the distribution of X is, the vast majority of the probability lies in the interval “expectation plus or minus a few SDs.”
+\end{rmk}
+
+There's a more convenient form for variance however:
+\begin{equation*}
+	\Var(X) = E\br{X^{2}} - \pr{E\br{X}}^{2}
+\end{equation*}
+
+To calculate $E\br{X^{2}}$, we can simply do:
+\begin{equation*}
+	E\br{X^{2}} = \sum_x x^{2} P(X=x).
+\end{equation*}
+
+\begin{example}
+	Let $X$ be the outcome of a single dice roll, where $X$ is a random variable. Then, we have the following:
+	\begin{align*}
+		P(X=x) = \begin{cases}
+				\dfrac{1}{6} & x \in \brc{1,2,3,4,5,6} \\
+				0 & \text{otherwise}
+			\end{cases}
+	\end{align*}
+
+	Then, $E[X]$ will be equal to:
+	\begin{align*}
+		E[X] &= \dfrac{1}{6}(1+2+3+4+5+6) \\
+		&= \dfrac{7}{2}
+	\end{align*}
+
+	And $\Var(X)$ will be:
+	\begin{align*}
+		\Var(X) &= E\br{X^{2}} - \pr{E\br{X}}^{2} \\
+		&= \dfrac{91}{6} - \pr{\dfrac{7}{2}}^{2} \\
+		&= \dfrac{35}{12}
+	\end{align*}
+\end{example}
+
+\subsection{Sums of Random Variables}
+First, we note that a function of random variables will be a random variable as well!
+\begin{example}
+	If $X_1, \ldots, X_n$ are random variables, then the following are random variables as well:
+	\begin{itemize}
+		\item $\max\pr{X_1, \ldots, X_n}$.
+		\item $\frac{1}{n} \sum_{i=1}^{n} X_i$.
+		\item $X_n^{2}$
+	\end{itemize}
+\end{example}
+
+\subsubsection{Properties of Expectation}
+The following are important properties of expectations:
+\begin{itemize}
+	\item Expectation is linear: $E\br{aX + b} = aE[X] + b$.
+	\item Expectation is linear in sums of RVs: $E[X+Y] = E[X] + E[Y]$.
+	\item If $g$ is non-linear, then $E[g(X)] \neq g(E[X])$.
+\end{itemize}
+
+Below is the proof for the second property:
+\begin{proof}
+	...
+\end{proof}
+
+Using these properties, we can in fact derive the alternate definition of variance as follows:
+\begin{proof}
+	...
+\end{proof}
+
+\subsubsection{Properties of Variance}
+The following are important properties of variance:
+\begin{itemize}
+	\item Variance is non-linear: $\Var(aX + b) = a^{2}\Var(X)$.
+	\item Variance of the sums of RVs is affected by the independence of the RVs: $\Var(X + Y) = \Var(X) + \Var(Y) + 2\Cov(X,Y)$.
+\end{itemize}
+
+\begin{defn}[Covariance]
+	\textbf{Covariance} is the expected product of deviations from expectation:
+	\begin{equation*}
+		\Cov(X,Y) = E\br{(X- E[X]) (Y-E[Y])}.
+	\end{equation*}
+\end{defn}
+
+\begin{rmk}
+	We note that covariance is a generalization of variance. Furthermore, 
+	\begin{equation*}
+		\Cov(X,X) = E[(X - E[X])^{2}] = Var(X)
+	\end{equation*}
+\end{rmk}
+
+We can interpret by finding the correlation:
+\begin{equation*}
+	r(X,Y) = E \br{\dfrac{X - E[X]}{\SD(X)} \dfrac{Y-E[Y]}{\SD(Y)}} = \dfrac{\Cov(X,Y)}{\SD(X)\SD(Y)}. 
+\end{equation*}
+
+Correlation (and therefore covariance) measures a linear relationship between X and Y.
+\begin{itemize}
+	\item If X and Y are correlated, then knowing X tells you something about Y.
+	\item ``X and Y are uncorrelated" is the same as “Correlation and covariance equal to 0”.
+	\item Independent X, Y are uncorrelated, because knowing X tells you nothing about Y.
+	\item The converse is not necessarily true: X, Y could be uncorrelated but not independent.
+\end{itemize}
+
+\subsubsection{Equal, Independently Distributed, and i.i.d.}
+\begin{defn}[Equal]
+	$X$ and $Y$ are \textbf{equal} if:
+	\begin{itemize}
+		\item $X(s) = Y(s)$ for every sample $s$.
+		\item We write $X = Y$.
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[Identically Distributed]
+	$X$ and $Y$ are \textbf{identically distributed} if:
+	\begin{itemize}
+		\item The distribution of $X$ is the same as the distribution of $Y$.
+		\item We say “$X$ and $Y$ are equal in distribution.”
+		\item If $X$ = $Y$, then $X$ and $Y$ are identically distributed; but the converse is not true (e.g. $Y = 7-X$, where $X$ is a die).
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[i.i.d]
+	$X$ and $Y$ are independent and identically distributed (\textbf{i.i.d.}) if:
+	\begin{itemize}
+		\item $X$ and $Y$ are identically distributed, and
+		\item Knowing the outcome of $X$ does not influence your belief of the outcome of $Y$, and vice versa (“$X$ and $Y$ are independent.”)
+	\end{itemize}
+\end{defn}
+
+
 \end{document}

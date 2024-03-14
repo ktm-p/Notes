@@ -1,17 +1,5 @@
-def ratio_to_peak(series):
-  return series.iloc[-1] / max(series)
+import sklearn.linear_model as lm
+ridge_model = lm.Ridge(alpha = 1) # alpha represents the hyperparameter lambda
+ridge_model.fit(X_train, Y_train)
+ridge_model.coef_
 
-# This WILL error!
-f_babynames.groupby("Name").agg(ratio_to_peak) # Applies ratio_to_peak() onto all columns, even Str-type ones!!
-
-# Calculates the RTP. Returns a table with a Year and Count column
-rtp_table = f_babynames.groupby("Name")[["Year","Count"]].agg(ratio_to_peak)
-
-# Calculates the RTP. Returns a table with a Count column
-rtp_table = f_babynames.groupby("Name")[["Count"]].agg(ratio_to_peak)
-rtp_table = rtp_table.rename(columns = {"Count": "Count RTP"}) # Renames Count column to Count RTP
-
-# Finds the top ten lowest RTP names
-top10 = rtp_table.sort_values("Count RTP").head(10).index
-# Plots the data
-px.line(f_babynames[f_babynames["Name"].isin(top10)], x = "Year", y = "Count", color = "Name")

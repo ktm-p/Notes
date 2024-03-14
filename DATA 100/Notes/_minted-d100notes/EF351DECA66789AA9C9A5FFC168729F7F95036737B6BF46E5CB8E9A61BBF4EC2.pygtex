@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn.pipeline} \PYG{k+kn}{import} \PYG{n}{Pipeline}
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn.preprocessing} \PYG{k+kn}{import} \PYG{n}{PolynomialFeatures}
+
+\PYG{k}{def} \PYG{n+nf}{fit\PYGZus{}model\PYGZus{}dataset}\PYG{p}{(}\PYG{n}{degree}\PYG{p}{):}
+\PYG{n}{pipelined\PYGZus{}model} \PYG{o}{=} \PYG{n}{Pipeline}\PYG{p}{([}
+\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}polynomial\PYGZus{}transformation\PYGZsq{}}\PYG{p}{,} \PYG{n}{PolynomialFeatures}\PYG{p}{(}\PYG{n}{degree}\PYG{p}{)),}
+\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZus{}regression\PYGZsq{}}\PYG{p}{,} \PYG{n}{lm}\PYG{o}{.}\PYG{n}{LinearRegression}\PYG{p}{())}
+\PYG{p}{])}
+
+\PYG{n}{pipelined\PYGZus{}model}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{X\PYGZus{}train\PYGZus{}mini}\PYG{p}{[[}\PYG{l+s+s2}{\PYGZdq{}hp\PYGZdq{}}\PYG{p}{]],} \PYG{n}{Y\PYGZus{}train\PYGZus{}mini}\PYG{p}{)}
+\PYG{k}{return} \PYG{n}{mean\PYGZus{}squared\PYGZus{}error}\PYG{p}{(}\PYG{n}{Y\PYGZus{}val}\PYG{p}{,} \PYG{n}{pipelined\PYGZus{}model}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{X\PYGZus{}val}\PYG{p}{[[}\PYG{l+s+s2}{\PYGZdq{}hp\PYGZdq{}}\PYG{p}{]]))}
+
+\PYG{n}{errors} \PYG{o}{=} \PYG{p}{[}\PYG{n}{fit\PYGZus{}model\PYGZus{}dataset}\PYG{p}{(}\PYG{n}{degree}\PYG{p}{)} \PYG{k}{for} \PYG{n}{degree} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{18}\PYG{p}{)]}
+\PYG{n}{MSEs\PYGZus{}and\PYGZus{}k} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{DataFrame}\PYG{p}{(\PYGZob{}}\PYG{l+s+s2}{\PYGZdq{}k\PYGZdq{}}\PYG{p}{:} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{18}\PYG{p}{),} \PYG{l+s+s2}{\PYGZdq{}MSE\PYGZdq{}}\PYG{p}{:} \PYG{n}{errors}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{figure}\PYG{p}{(}\PYG{n}{dpi}\PYG{o}{=}\PYG{l+m+mi}{120}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{18}\PYG{p}{),} \PYG{n}{errors}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{xlabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Model Complexity (degree of polynomial)\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ylabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Validation MSE\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{xticks}\PYG{p}{(}\PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{18}\PYG{p}{));}
+\end{Verbatim}
