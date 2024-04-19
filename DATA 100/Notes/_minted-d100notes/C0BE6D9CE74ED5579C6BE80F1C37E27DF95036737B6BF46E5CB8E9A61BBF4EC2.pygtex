@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZpc{}}\PYG{n}{load\PYGZus{}ext} \PYG{n}{sql} \PYG{c+c1}{\PYGZsh{} Using ipython cell magic so we can use SQL}
+
+\PYG{o}{\PYGZpc{}\PYGZpc{}}\PYG{n}{sql} \PYG{n}{duckdb}\PYG{p}{:}\PYG{o}{///}\PYG{n}{data}\PYG{o}{/}\PYG{n}{basic\PYGZus{}examples}\PYG{o}{.}\PYG{n}{db}
+
+\PYG{o}{\PYGZpc{}\PYGZpc{}}\PYG{n}{sql}
+\PYG{n}{SELECT} \PYG{o}{*} \PYG{n}{FROM} \PYG{n}{Database}
+\end{Verbatim}

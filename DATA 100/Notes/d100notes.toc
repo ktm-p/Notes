@@ -1,57 +1,75 @@
 \contentsline {chapter}{Contents}{2}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}Introduction to Data Science}{4}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Lecture 1 -- 01/16/24}{4}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Course Overview}{4}{subsection.1.1.1}%
-\contentsline {subsubsection}{Why Data Science Matters}{4}{section*.2}%
-\contentsline {subsubsection}{What is Data Science?}{5}{section*.2}%
-\contentsline {subsection}{\numberline {1.1.2}Course Outline}{5}{subsection.1.1.2}%
-\contentsline {subsubsection}{Prerequisites}{5}{section*.3}%
-\contentsline {subsubsection}{Topics (Tentative)}{5}{section*.3}%
-\contentsline {subsubsection}{Course Components}{6}{section*.3}%
-\contentsline {subsubsection}{Grading}{6}{section*.3}%
-\contentsline {subsection}{\numberline {1.1.3}The Data Science Lifecycle}{7}{subsection.1.1.3}%
-\contentsline {section}{\numberline {1.2}Lecture 2 -- 01/18/24}{8}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Tabular Data}{8}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}DataFrames and Series}{8}{subsection.1.2.2}%
-\contentsline {subsubsection}{The Series Object}{8}{defn.1.3}%
-\contentsline {subsubsection}{DataFrames}{9}{Item.6}%
-\contentsline {subsection}{\numberline {1.2.3}Data Extraction}{11}{subsection.1.2.3}%
-\contentsline {subsubsection}{.head and .tail}{11}{section*.4}%
-\contentsline {subsubsection}{Label-based Extraction (.loc)}{11}{section*.4}%
-\contentsline {subsubsection}{Integer-based Extraction (.iloc)}{12}{figure.1.5}%
-\contentsline {subsubsection}{.loc versus .iloc}{13}{figure.1.5}%
-\contentsline {subsubsection}{Context-dependent Extraction ([])}{13}{example.1.4}%
-\contentsline {chapter}{\numberline {2}Pandas, and more Pandas!}{14}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Lecture 3 -- 01/23/24}{14}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Conditional Selection}{14}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Adding, Removing, and Modifying Columns}{15}{subsection.2.1.2}%
-\contentsline {subsubsection}{Adding and Modifying Columns}{15}{section*.5}%
-\contentsline {subsubsection}{Removing Columns}{16}{Item.8}%
-\contentsline {subsection}{\numberline {2.1.3}Useful Utility Functions}{16}{subsection.2.1.3}%
-\contentsline {subsubsection}{Custom Sorting}{17}{section*.6}%
-\contentsline {section}{\numberline {2.2}Lecture 4 -- 01/25/24}{17}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Grouping}{17}{subsection.2.2.1}%
-\contentsline {subsubsection}{Group Basics}{18}{section*.7}%
-\contentsline {subsubsection}{Aggregation Functions}{18}{figure.2.2}%
-\contentsline {subsubsection}{groupby.size() versus groupby.count()}{21}{figure.2.4}%
-\contentsline {subsubsection}{Filtering by Groups}{22}{figure.2.6}%
-\contentsline {chapter}{\numberline {3}idk yet}{23}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Lecture 16 -- 03/12/24}{23}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Cross-Validation}{23}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}K-Fold Cross-Validation}{25}{subsection.3.1.2}%
-\contentsline {subsubsection}{Validation Folds}{26}{section*.8}%
-\contentsline {subsection}{\numberline {3.1.3}Hyperparameters}{26}{subsection.3.1.3}%
-\contentsline {subsubsection}{Hyperparameter Tuning}{26}{example.3.4}%
-\contentsline {subsection}{\numberline {3.1.4}Regularization}{27}{subsection.3.1.4}%
-\contentsline {subsubsection}{Constraining Model Parameters}{27}{section*.9}%
-\contentsline {subsubsection}{L1 Regularization (LASSO)}{27}{example.3.5}%
-\contentsline {subsubsection}{L2 Regularization (Ridge Regression)}{28}{rmk.3.8}%
-\contentsline {section}{\numberline {3.2}Lecture 17 -- 03/14/24}{28}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Probability Review}{28}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Random Variables}{29}{subsection.3.2.2}%
-\contentsline {subsubsection}{Bernoulli Random Variable}{30}{rmk.3.16}%
-\contentsline {subsection}{\numberline {3.2.3}Expectation and Variance}{31}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Sums of Random Variables}{32}{subsection.3.2.4}%
-\contentsline {subsubsection}{Properties of Expectation}{32}{example.3.23}%
-\contentsline {subsubsection}{Properties of Variance}{33}{example.3.23}%
-\contentsline {subsubsection}{Equal, Independently Distributed, and i.i.d.}{33}{rmk.3.25}%
+\contentsline {chapter}{\numberline {1}Introduction to Data Science}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Lecture 1 -- 01/16/24}{5}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Course Overview}{5}{subsection.1.1.1}%
+\contentsline {subsubsection}{Why Data Science Matters}{5}{section*.2}%
+\contentsline {subsubsection}{What is Data Science?}{6}{section*.2}%
+\contentsline {subsection}{\numberline {1.1.2}Course Outline}{6}{subsection.1.1.2}%
+\contentsline {subsubsection}{Prerequisites}{6}{section*.3}%
+\contentsline {subsubsection}{Topics (Tentative)}{6}{section*.3}%
+\contentsline {subsubsection}{Course Components}{7}{section*.3}%
+\contentsline {subsubsection}{Grading}{7}{section*.3}%
+\contentsline {subsection}{\numberline {1.1.3}The Data Science Lifecycle}{8}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Lecture 2 -- 01/18/24}{9}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Tabular Data}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}DataFrames and Series}{9}{subsection.1.2.2}%
+\contentsline {subsubsection}{The Series Object}{9}{defn.1.3}%
+\contentsline {subsubsection}{DataFrames}{10}{Item.6}%
+\contentsline {subsection}{\numberline {1.2.3}Data Extraction}{12}{subsection.1.2.3}%
+\contentsline {subsubsection}{.head and .tail}{12}{section*.4}%
+\contentsline {subsubsection}{Label-based Extraction (.loc)}{12}{section*.4}%
+\contentsline {subsubsection}{Integer-based Extraction (.iloc)}{13}{figure.1.5}%
+\contentsline {subsubsection}{.loc versus .iloc}{14}{figure.1.5}%
+\contentsline {subsubsection}{Context-dependent Extraction ([])}{14}{example.1.4}%
+\contentsline {chapter}{\numberline {2}Pandas, and more Pandas!}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Lecture 3 -- 01/23/24}{15}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Conditional Selection}{15}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Adding, Removing, and Modifying Columns}{16}{subsection.2.1.2}%
+\contentsline {subsubsection}{Adding and Modifying Columns}{16}{section*.5}%
+\contentsline {subsubsection}{Removing Columns}{17}{Item.8}%
+\contentsline {subsection}{\numberline {2.1.3}Useful Utility Functions}{17}{subsection.2.1.3}%
+\contentsline {subsubsection}{Custom Sorting}{18}{section*.6}%
+\contentsline {section}{\numberline {2.2}Lecture 4 -- 01/25/24}{18}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Grouping}{18}{subsection.2.2.1}%
+\contentsline {subsubsection}{Group Basics}{19}{section*.7}%
+\contentsline {subsubsection}{Aggregation Functions}{19}{figure.2.2}%
+\contentsline {subsubsection}{groupby.size() versus groupby.count()}{22}{figure.2.4}%
+\contentsline {subsubsection}{Filtering by Groups}{23}{figure.2.6}%
+\contentsline {subsubsection}{More on Groups}{24}{figure.2.8}%
+\contentsline {subsection}{\numberline {2.2.2}Pivot Tables}{24}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Join Tables}{26}{subsection.2.2.3}%
+\contentsline {chapter}{\numberline {3}Data Wrangling and EDA}{28}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Lecture 5 -- 01/30/24}{28}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Structure}{28}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Granuality}{29}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}More on Structure}{29}{subsection.3.1.3}%
+\contentsline {subsubsection}{Primary and Foreign Keys}{29}{section*.8}%
+\contentsline {chapter}{\numberline {4}Models, Regularization, and Probability}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Lecture 16 -- 03/12/24}{30}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Cross-Validation}{30}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}K-Fold Cross-Validation}{32}{subsection.4.1.2}%
+\contentsline {subsubsection}{Validation Folds}{33}{section*.9}%
+\contentsline {subsection}{\numberline {4.1.3}Hyperparameters}{33}{subsection.4.1.3}%
+\contentsline {subsubsection}{Hyperparameter Tuning}{33}{example.4.4}%
+\contentsline {subsection}{\numberline {4.1.4}Regularization}{34}{subsection.4.1.4}%
+\contentsline {subsubsection}{Constraining Model Parameters}{34}{section*.10}%
+\contentsline {subsubsection}{L1 Regularization (LASSO)}{34}{example.4.5}%
+\contentsline {subsubsection}{L2 Regularization (Ridge Regression)}{35}{rmk.4.8}%
+\contentsline {section}{\numberline {4.2}Lecture 17 -- 03/14/24}{35}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Probability Review}{35}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Random Variables}{36}{subsection.4.2.2}%
+\contentsline {subsubsection}{Bernoulli Random Variable}{37}{rmk.4.16}%
+\contentsline {subsection}{\numberline {4.2.3}Expectation and Variance}{38}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Sums of Random Variables}{39}{subsection.4.2.4}%
+\contentsline {subsubsection}{Properties of Expectation}{39}{example.4.23}%
+\contentsline {subsubsection}{Properties of Variance}{40}{example.4.23}%
+\contentsline {subsubsection}{Equal, Independently Distributed, and i.i.d.}{40}{rmk.4.25}%
+\contentsline {chapter}{\numberline {5}SQL}{42}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Lecture 20 -- 04/02/2024}{42}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}DBMS versus Raw Files}{42}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}What is SQL?}{43}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Database Systems}{43}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Running SQL in Python}{43}{subsection.5.1.4}%
+\contentsline {subsubsection}{Data Types}{44}{defn.5.8}%
+\contentsline {subsubsection}{Constraints}{44}{defn.5.8}%
+\contentsline {subsubsection}{Basic Queries}{45}{defn.5.10}%

@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{babynames\PYGZus{}pivot} \PYG{o}{=} \PYG{n}{babynames}\PYG{o}{.}\PYG{n}{pivot\PYGZus{}table}\PYG{p}{(}
+\PYG{n}{index} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{,}     \PYG{c+c1}{\PYGZsh{} rows (turned into index)}
+\PYG{n}{columns} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}Sex\PYGZdq{}}\PYG{p}{,}    \PYG{c+c1}{\PYGZsh{} column values}
+\PYG{n}{values} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Count\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{],}
+\PYG{n}{aggfunc} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{max}\PYG{p}{,}   \PYG{c+c1}{\PYGZsh{} group operation}
+\PYG{p}{)}
+\end{Verbatim}

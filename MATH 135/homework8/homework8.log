@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  14 MAR 2024 17:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  20 MAR 2024 20:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./homework7.tex
-(homework7.tex
+**./homework8.tex
+(homework8.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -1025,35 +1025,35 @@ Package: thmdef-mdframed 2023/05/04 v0.76
 \c@dscounter=\count340
 ) (C:/Users/Michael/mytexmf\tex/latex/LaTeX-Setup\macros.sty)
 LaTeX Font Info:    Trying to load font information for OT1+cantarell-TLF on in
-put line 37.
+put line 34.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/cantarell\ot1cantarel
 l-tlf.fd
 File: OT1cantarell-TLF.fd 2019/06/24 Font definitions for OT1/cantarell-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 37.
- (homework7.aux)
-\openout1 = `homework7.aux'.
+(Font)              scaled to size 10.0pt on input line 34.
+ (homework8.aux)
+\openout1 = `homework8.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
 \c@mv@tabular=\count341
 \c@mv@boldtabular=\count342
 
@@ -1082,10 +1082,10 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 .cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 37.
- (homework7.out) (homework7.out)
+Package hyperref Info: Link coloring ON on input line 34.
+ (homework8.out) (homework8.out)
 \@outlinefile=\write4
-\openout4 = `homework7.out'.
+\openout4 = `homework8.out'.
 
 
 *geometry* driver: auto-detecting
@@ -1123,22 +1123,22 @@ Package hyperref Info: Link coloring ON on input line 37.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 38.
+(Font)              scaled to size 17.28pt on input line 35.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 38.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
+(Font)              scaled to size 12.0pt on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
 
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+stmry on input line 3
-8.
+5.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/stmaryrd\ustmry.fd)
 [1
@@ -1146,173 +1146,110 @@ LaTeX Font Info:    Trying to load font information for U+stmry on input line 3
 {C:/Users/Michael/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Mi
 chael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_imucfy.enc}]
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 38.
+(Font)              scaled to size 14.4pt on input line 35.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 38.
+(Font)              scaled to size 14.4pt on input line 35.
 
-(homework7.loe
+(homework8.loe
 Underfull \hbox (badness 10000) detected at line 1
-\OT1/cantarell-TLF/m/n/10 6.1
- []
-
-
-Underfull \hbox (badness 10000) detected at line 2
-\OT1/cantarell-TLF/m/n/10 6.2
- []
-
-
-Underfull \hbox (badness 10000) detected at line 3
-\OT1/cantarell-TLF/m/n/10 6.3
- []
-
-
-Underfull \hbox (badness 10000) detected at line 4
-\OT1/cantarell-TLF/m/n/10 6.4
- []
-
-
-Underfull \hbox (badness 10000) detected at line 5
-\OT1/cantarell-TLF/m/n/10 6.6
- []
-
-
-Underfull \hbox (badness 10000) detected at line 6
-\OT1/cantarell-TLF/m/n/10 6.7
- []
-
-
-Underfull \hbox (badness 10000) detected at line 7
 \OT1/cantarell-TLF/m/n/10 6.13
  []
 
 
-Underfull \hbox (badness 10000) detected at line 8
+Underfull \hbox (badness 10000) detected at line 2
 \OT1/cantarell-TLF/m/n/10 6.14
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 3
+\OT1/cantarell-TLF/m/n/10 6.15
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 4
+\OT1/cantarell-TLF/m/n/10 6.16
  []
 
 )
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/it' in size <10> not availa
 ble
 (Font)              Font shape `OT1/cantarell-TLF/m/sl' tried instead on input 
-line 38.
+line 35.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
-(Font)              scaled to size 10.0pt on input line 38.
+(Font)              scaled to size 10.0pt on input line 35.
  [2{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_
 dr4czt.enc}]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 43.
+(mdframed)              on input line 40.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 43.
+(Font)              scaled to size 10.0pt on input line 40.
 Package hyperref Info: bookmark level for unknown homework defaults to 0 on inp
-ut line 43.
- [3]
+ut line 40.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 122.
-
-pdfTeX warning (ext4): destination with the same identifier (name{homework.6.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.122 	S
-        how that in Fig. 32 we have:
-<C:/Users/Michael/Pictures/135_hw7_omegatimesomega.png, id=43, 274.02374pt x 23
-3.07076pt>
-File: C:/Users/Michael/Pictures/135_hw7_omegatimesomega.png Graphic file (type 
-png)
-<use C:/Users/Michael/Pictures/135_hw7_omegatimesomega.png>
-Package pdftex.def Info: C:/Users/Michael/Pictures/135_hw7_omegatimesomega.png 
- used on input line 200.
-(pdftex.def)             Requested size: 137.01154pt x 116.53508pt.
- [4 <C:/Users/Michael/Pictures/135_hw7_omegatimesomega.png>] [5]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 259.
-
-pdfTeX warning (ext4): destination with the same identifier (name{homework.6.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.259 	F
-        ind a one-to-one correspondence between the open unit interval $(0,1...
-[6]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 322.
-
-pdfTeX warning (ext4): destination with the same identifier (name{homework.6.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.322 	C
-        onstruct a one-to-one correspondence between the closed unit interval
+(mdframed)              on input line 63.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 334.
+(Font)              scaled to size 7.0pt on input line 66.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 5.0pt on input line 334.
-
-[7]
+(Font)              scaled to size 5.0pt on input line 66.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 365.
+(mdframed)              on input line 83.
+LaTeX Font Info:    Trying to load font information for U+rsfso on input line 9
+0.
 
-pdfTeX warning (ext4): destination with the same identifier (name{homework.6.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.365 	L
-        et $\kappa$ be a nonzero cardinal number. Show that there does not e...
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/rsfso\ursfso.fd
+File: ursfso.fd 2011/02/13 Fontinst v1.933 font definitions for U/rsfso.
+)
+LaTeX Font Info:    Font shape `U/rsfso/m/n' will be
+(Font)              scaled to size 10.0pt on input line 90.
+LaTeX Font Info:    Font shape `U/rsfso/m/n' will be
+(Font)              scaled to size 7.0pt on input line 90.
+LaTeX Font Info:    Font shape `U/rsfso/m/n' will be
+(Font)              scaled to size 5.0pt on input line 90.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 374.
+(mdframed)              on input line 94.
 
+[3
 pdfTeX warning (ext4): destination with the same identifier (name{homework.6.0}
 ) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.374 	A
-        ssume that $A$ is finite and $f : A \rightarrow A$. Show that $f$ is...
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 391.
-
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.95 \end{hw}
+             
 pdfTeX warning (ext4): destination with the same identifier (name{homework.6.0}
 ) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.391 	S
-        how that a finite union of finite sets is finite. [8]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 414.
-
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.95 \end{hw}
+             ] [4
 pdfTeX warning (ext4): destination with the same identifier (name{homework.6.0}
 ) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.414 	D
-        efine a permutation of $K$ to be any one-to-one function from $K$
-[9]
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.111 \end{document}
+                    ]
 \tf@loe=\write5
-\openout5 = `homework7.loe'.
+\openout5 = `homework8.loe'.
 
- (homework7.aux)
+ (homework8.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-Package rerunfilecheck Info: File `homework7.out' has not changed.
+Package rerunfilecheck Info: File `homework8.out' has not changed.
 (rerunfilecheck)             Checksum: 76F3CB97BFC8ACB139E008DA91402C0E;261.
  ) 
 Here is how much of TeX's memory you used:
- 25901 strings out of 474541
- 488829 string characters out of 5743481
- 1943978 words of memory out of 5000000
- 47609 multiletter control sequences out of 15000+600000
- 570199 words of font info for 83 fonts, out of 8000000 for 9000
+ 25879 strings out of 474541
+ 488097 string characters out of 5743481
+ 1941978 words of memory out of 5000000
+ 47591 multiletter control sequences out of 15000+600000
+ 570793 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 124i,12n,145p,548b,1066s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 124i,11n,145p,548b,1066s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/C
 antarell-Bold.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/g
 nome/cantarell/Cantarell-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/M
@@ -1320,21 +1257,17 @@ iKTeX/fonts/type1/gnome/cantarell/Cantarell-Regular.pfb><C:/Users/Michael/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Mi
 chael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
 C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
-mmi5.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmmi7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmr10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Michael/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Michael/AppData/Local/
-Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Michael/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/M
-ichael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
-C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symb
-ols/msam10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/amsfonts/symbols/msbm10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/hoekwater/stmary10.pfb>
-Output written on homework7.pdf (9 pages, 224090 bytes).
+mmi7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmr5.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Michael/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Michael/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Michael/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/U
+sers/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/rsfs/rsfs10.pfb>
+Output written on homework8.pdf (4 pages, 163706 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 22 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 109 PDF objects out of 1000 (max. 8388607)
+ 11 named destinations out of 1000 (max. 500000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

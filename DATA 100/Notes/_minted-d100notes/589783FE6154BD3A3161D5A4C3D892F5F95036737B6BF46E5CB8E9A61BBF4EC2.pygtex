@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Attempt \PYGZsh{}2}
+\PYG{n}{elections\PYGZus{}sorted\PYGZus{}by\PYGZus{}percent} \PYG{o}{=} \PYG{n}{elections}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZpc{}\PYGZdq{}}\PYG{p}{,} \PYG{n}{ascending}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{n}{elections\PYGZus{}sorted\PYGZus{}by\PYGZus{}percent}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Party\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{first}\PYG{p}{()}
+
+\PYG{c+c1}{\PYGZsh{} Using lambda functions}
+\PYG{n}{elections\PYGZus{}sorted\PYGZus{}by\PYGZus{}percent} \PYG{o}{=} \PYG{n}{elections}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZpc{}\PYGZdq{}}\PYG{p}{,} \PYG{n}{ascending}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{n}{elections\PYGZus{}sorted\PYGZus{}by\PYGZus{}percent}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Party\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{agg}\PYG{p}{(}\PYG{k}{lambda} \PYG{n}{x} \PYG{p}{:} \PYG{n}{x}\PYG{o}{.}\PYG{n}{iloc}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}
+
+\PYG{c+c1}{\PYGZsh{} Using idxmax}
+\PYG{n}{best\PYGZus{}per\PYGZus{}party} \PYG{o}{=} \PYG{n}{elections}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{n}{elections}\PYG{o}{.}\PYG{n}{groupby}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Party\PYGZdq{}}\PYG{p}{)[}\PYG{l+s+s2}{\PYGZdq{}\PYGZpc{}\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{idxmax}\PYG{p}{()]}
+
+\PYG{c+c1}{\PYGZsh{} Using drop\PYGZus{}duplicates function}
+\PYG{n}{best\PYGZus{}per\PYGZus{}party2} \PYG{o}{=} \PYG{n}{elections}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZpc{}\PYGZdq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{drop\PYGZus{}duplicates}\PYG{p}{([}\PYG{l+s+s2}{\PYGZdq{}Party\PYGZdq{}}\PYG{p}{],} \PYG{n}{keep}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}last\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}

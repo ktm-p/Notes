@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{homework}
+\usepackage{macros}
+
+%% LIST OF PROBLEMS SETUP %%
+\renewcommand\thmtformatoptarg[1]{:\enspace#1}
+\makeatletter
+\def\ll@homework{
+	\thmt@thmname~
+	\protect\numberline{\csname the\thmt@envname\endcsname}%
+	\ifx\@empty
+	\thmt@shortoptarg
+	\else
+	\protect\thmtformatoptarg{\thmt@shortoptarg}
+	\fi
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\numberline}[1]{\hb@xt@3em{#1}}
+\makeatother	
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\listoftheorems
+	\newpage
+}
+
+\begin{document}
+\mytitle{Math 135: Homework 8}{Spring 2024}
+
+\setcounter{section}{5}
+\section{Cardinal Numbers and the Axiom of Choice}
+\begin{hw}{13}[0][0]
+	Show that a finite union of finite sets is finite.
+\end{hw}
+\begin{solution}
+	We can proceed by induction.
+	
+	First, we observe that for a set $A$ with cardinality $0$, we have then that $A = \emptyset$. Then, $\bigcup A = \emptyset$, so, indeed, we have that $\bigcup A$ is finite as well.
+	
+	Next, suppose that our claim holds for set $A$ with cardinality $n$.
+	
+	Now, we look at $A$ whose cardinality is $n^{+}$. Observe then that because $A$ is finite, it follows that there exists a bijection between $A$ and $n^{+}$, and thus some bijective function $f : n^{+} \rightarrow A$.
+	
+	Then, we have:
+	\begin{align*}
+		\bigcup A &= \bigcup_{k \in n^{+}} f(k) \\
+		&= \bigcup_{k \in n} f(k) \cup f(n)
+	\end{align*}
+	
+	By our induction hypothesis, we have that $\bigcup_{k \in n} f(k)$ is finite. And since $f(n)$ is also finite, we thus have that $\bigcup_{k \in n} f(k) \cup f(n)$ is finite too.
+	
+	Therefore, by induction, we conclude that the claim holds as desired.
+\end{solution}
+
+\begin{hw}{14}[0][0]
+	Define a permutation of $K$ to be any one-to-one function from $K$
+	onto $K$. We can then define the factorial operation on cardinal numbers by the equation
+	\begin{equation*}
+		\kappa ! = \mathrm{card} \brc{f : f \text{ is a permutation of $K$}}
+	\end{equation*}
+	where $K$ is any set of cardinality $\kappa$. Show that $\kappa !$ is well defined.
+\end{hw}
+\begin{solution}
+	Suppose we have sets $K_0$ and $K_1$. Let $\card K_0 = \kappa = \card K_1$. 
+	
+	Then, because the cardinalities of $K_0$ and $K_1$ are the same, we can thus construct a bijection between them.
+	
+	To show that $\kappa!$ is well-defined, we will have to show then that there exists a bijection between the set of permutations of $K_0$ (which we will denote at $K_0'$) and permutations of $K_1$ (which we denote as $K_1$').
+	
+	Then to do this, we recall that there exists a bijection $g$ between $K_0$ and $K_1$. So, for each permutation $f$ of $K_1$, we can first send this permutation to $K_0$ with our bijection $g$, which we then permute. After, we can send the permutation of $K_0$ back to $K_1$ using $g^{-1}$.
+	
+	Thus, we observe then that there exists a bijection between the set of permutations $f$ of $K_0$ and of $K_1$; i.e., we have shown that $\kappa!$ is well-defined.
+\end{solution}
+
+\begin{hw}{15}[0][0]
+	Show that there is no set $A$ with the property that for every set there is some member of $A$ that dominates it.
+\end{hw}
+\begin{solution}
+	Suppose for the sake of contradiction that such a set $A$ did exist.
+	
+	Then, let us consider the power set of the union of $A$. We denote this by $S$.
+	
+	Then, we observe that $A \subset \mathscr{P}\bigcup A = S$. However, this means then that $A \prec S$ which is a contradiction, as then no element of $A$ dominates $S$.
+\end{solution}
+
+\begin{hw}{16}[0][0]
+	Show that for any set $S$ we have $S \preccurlyeq \prescript{S}{}{2}$, but $S \not\approx \prescript{S}{}{2}$.
+\end{hw}
+\begin{solution}
+	To begin with, denote $\card S = \lambda$. We note that $\card \prescript{S}{}{2} = 2^{\lambda}$. Meanwhile, $\card S = \lambda$. So, we have that $\card S \leq \card \prescript{S}{}{2}$; in other words, $S \preccurlyeq\prescript{S}{}{2}$.
+	
+	Now, we will show that $S \not\approx \prescript{S}{}{2}$. To do this, let us consider the following functions $F: S \rightarrow \prescript{S}{}{2}$ and $g(x) = 1 - F(x)(x)$. We note here that $g : S \rightarrow 2$.
+	
+	Now, we observe that for some function $F(x)$ such that $F(x) = g$ for all $x \in S$, then we have the following:
+	\begin{align*}
+		F(x) = g &\implies F(x)(x) = 1 - F(x)(x) \\
+		&\implies 2F(x)(x) = 1 \\
+		&\implies F(x)(x) = \dfrac{1}{2}
+	\end{align*}
+
+	However, we note that since $F(x)$ should be a function from $S$ to $2$, it must be then that $F(x)$ has output of either $0$ and $1$; therefore, because $g$ isn't in the image of $F$, $S \not\approx\prescript{S}{}{2}$.
+\end{solution}
+
+\end{document}

@@ -938,7 +938,7 @@ babynames.groupby("Year")[["Count"]].sum()
 babynames.groupby("Year").sum(numeric_only=True) 
 \end{code}
 
-\begin{casestudy*}{Name Popularity}{}
+\begin{casestudy*}[parbox=false]{Name Popularity}{}
 Suppose that we wanted to find the female baby name which has fallen in popularity the most in California.
 
 For example, the code below gives us the number of Jennifer's that are born in California per year.
@@ -1062,7 +1062,189 @@ Another common use for groups is to filter data.
 	\centering\includegraphics[scale=0.75]{groupby_filter}
 \end{figurebox}
 
-\chapter{idk yet}
+\begin{casestudy*}[parbox=false]{Best Election}{}
+	Suppose that we want to know the best election by each party, where the ``best" election refers to the election with the highest percentage of votes.
+	\begin{itemize}
+		\item For example, Democrat’s best election was in 1964, with candidate Lyndon Johnson
+		winning 61.3\% of votes.
+	\end{itemize}
+
+	So... how do we do this?
+	
+	A naive first attempt might be to do \inlinecode{\mintinline{python}{elections.groupby("Party").max().head(10)}}. However, we observe the following:
+	
+	\begin{figurebox}[]{Error with naive attempt.}
+		\centering\includegraphics[scale=0.25]{woodrow_wilson_error}
+	\end{figurebox}
+
+	We see that we have that Woodrow Wilson won the presidency in 2020...!
+	
+	Recall that each column is calculated independently! More concretely, the year's max is 2020, the name's max is Woodrow Wilson (due to alphabetical ordering), etc.
+	
+	So, what do we do? Instead, we can do the following:
+	\begin{itemize}
+		\item First sort the \texttt{DataFrame} so that rows are in descending order of \%.
+		\item Then group by Party and take the first item of each sub-\texttt{DataFrame}.		
+	\end{itemize}
+
+	The code is presented below, along with some alternate methods to solve the problem:
+\begin{code}{python}{Finding best election by each party.}
+# Attempt #2
+elections_sorted_by_percent = elections.sort_values("%", ascending=False)
+elections_sorted_by_percent.groupby("Party").first()
+
+# Using lambda functions
+elections_sorted_by_percent = elections.sort_values("%", ascending=False)
+elections_sorted_by_percent.groupby("Party").agg(lambda x : x.iloc[0])
+
+# Using idxmax
+best_per_party = elections.loc[elections.groupby("Party")["%"].idxmax()]
+
+# Using drop_duplicates function
+best_per_party2 = elections.sort_values("%").drop_duplicates(["Party"], keep="last")
+\end{code}
+
+An important takeaway from this case study is that oftentimes, there are numerous approaches for a problem, with each one having its own benefit and drawbacks.
+\end{casestudy*}
+
+\subsubsection{More on Groups}
+Finally, we note that we can look into \texttt{DataFrameGroupBy} objects with the following commands:
+\begin{itemize}
+	\item \inlinecode{\mintinline{python}{grouped_by_party.groups
+	}}
+	\item \inlinecode{\mintinline{python}{grouped_by_party.get_group("Socialist")
+	}}
+\end{itemize}
+
+\subsection{Pivot Tables}
+Suppose we want to build a table showing the total number of babies born of each sex in each year. One way is to use \inlinecode{\mintinline{python}{.groupby()}} with both columns of interest as follows:
+\begin{center}
+	\inlinecode{\mintinline{python}{babynames.groupby(["Year", "Sex"])[["Count"]].agg(sum)
+	}}
+\end{center}
+\begin{figurebox}[]{Using \texttt{.groupby()} on multiple columns.}
+	\centering\includegraphics[scale=0.75]{multi_groupby}
+\end{figurebox}
+\begin{warn}
+	Note that the resulting \texttt{DataFrame} is multi-indexed in this case! That is, its index has multiple dimensions. This will be explored in a later lecture.
+\end{warn}
+
+However, perhaps a more natural way of displaying this information is through the use of pivot tables. 
+\begin{code}{python}{Basic pivot table.}
+babynames_pivot = babynames.pivot_table(
+index = "Year",     # rows (turned into index)
+columns = "Sex",    # column values
+values = ["Count"], # field(s) to process in each group
+aggfunc = np.sum,   # group operation
+)
+\end{code}
+\begin{figurebox}[]{Basic pivot table.}
+	\centering\includegraphics[scale=0.75]{pivot_table}
+\end{figurebox}
+
+\begin{figurebox}[]{Pivot table mechanics.}
+	\centering\includegraphics[scale=0.5]{pivot_table_mechanic}
+\end{figurebox}
+
+Note that we can also use pivot tables on multiple columns, as demonstrated below:
+\begin{code}{python}{Pivot table with multiple columns.}
+babynames_pivot = babynames.pivot_table(
+index = "Year",     # rows (turned into index)
+columns = "Sex",    # column values
+values = ["Count", "Name"],
+aggfunc = np.max,   # group operation
+)
+\end{code}
+\begin{figurebox}[]{Pivot table with multiple columns.}
+	\centering\includegraphics[scale=0.5]{pivot_table_multi}
+\end{figurebox}
+
+\subsection{Join Tables}
+For the last topic of this lecture, we discuss joining two different tables together.
+
+\begin{example}
+	Suppose that we wanted to know the popularity of a presidential candidate's name in 2022. Using \inlinecode{\mintinline{python}{.merge()}}, we can merge the \texttt{babynames} and \texttt{elections} tables together.
+\end{example}
+
+Below, we provide the code for this:
+\begin{code}{python}{Joining \texttt{babynames} and \texttt{elections} tables.}
+# Getting babyname information in 2022.
+babynames_2022 = babynames[babynames["Year"] == 2022]
+
+# Creating First Name column for elections table.
+elections["First Name"] = elections["Candidate"].str.split().str[0]
+
+# Method 1
+merged1 = pd.merge(left = elections, right = babynames_2022, 
+left_on = "First Name", right_on = "Name")
+
+# Method 2
+merged = elections.merge(right = babynames_2022, 
+left_on = "First Name", right_on = "Name")
+\end{code}
+\begin{figurebox}[]{Merging \texttt{DataFrame} together.}
+	\centering\includegraphics[scale=0.65]{join_table}
+\end{figurebox}
+
+\chapter{Data Wrangling and EDA}
+%\epigraph{\textit{The plural of ``regex" is ``regrets."}}{--- cjs} % https://english.stackexchange.com/questions/508834/what-is-the-plural-form-of-regex#comment1466066_508834
+\epigraph{\textit{Exploratory data analysis is an attitude,\\a state of flexibility,\\a willingness to look for those things that we believe are not there,\\as well as those that we believe to be there.}}{--- J. Tukey}
+\section{Lecture 5 -- 01/30/24}
+In this week's lecture, we will be looking at Exploratory Data Analysis (EDA).
+\begin{miscbox}{Key Properties in EDA}
+	Below are the key properties which we consider in EDA:
+	\begin{itemize}
+		\item \textbf{Structure} -- the “shape” of a data file.
+		\item \textbf{Granularity} -- how fine/coarse is each datum.
+		\item \textbf{Scope} -- how (in)complete is the data.
+		\item \textbf{Temporality} -- how is the data situated in time.
+		\item \textbf{Faithfulness} -- how well does the data capture “reality.”
+	\end{itemize}
+\end{miscbox}
+
+\subsection{Structure}
+Oftentimes, we prefer working with rectangular data. The reasons for this is that
+\begin{enumerate}
+	\item Regular structures are easy manipulate and analyze
+	\item A big part of data cleaning is about 
+	transforming data to be more rectangula
+\end{enumerate}
+
+Two types of rectangular data are Tables and Matrices.
+\begin{paracol}{2}
+	\textbf{Tables:}
+	\begin{itemize}
+		\item Named columns with different types.
+		\item Manipulated using data transformation languages (map, filter, group by, join, …).
+	\end{itemize}
+	\switchcolumn
+	\textbf{Matrices:}
+	\begin{itemize}
+		\item Numeric data of the same type (float, int, etc.).
+		\item Manipulated using linear algebra.
+	\end{itemize}
+\end{paracol}
+\begin{rmk}
+	We note that Tables are referred to as \texttt{DataFrames} in R/Python, and as relations in SQL.
+\end{rmk}
+
+\subsection{Granuality}
+\begin{defn}[Granuality]
+	The granuality refers to how coarse/fine each datum is; i.e. what each record represents.
+	
+	When the granuality is fine, we see information on specific individuals/objects/etc., whereas coarse granuality is where we see information of some group.
+\end{defn}
+
+We note that not all records may capture granuality at the same level; for example, sometimes data may include summaries (``rollups") as records.
+
+Furthermore, if the data is coarse, we should consider how it was aggregated (sampling, averaging, maybe some combination of the two...?).
+
+\subsection{More on Structure}
+\subsubsection{Primary and Foreign Keys}
+idk
+
+\chapter{Models, Regularization, and Probability}
+\epigraph{\textit{Woohoooooooooooo!!!}}{--- S. Rao}
 \section{Lecture 16 -- 03/12/24}
 Recall from the end of Lecture 14 that we had two lingering thoughts:
 \begin{itemize}
@@ -1619,5 +1801,171 @@ Correlation (and therefore covariance) measures a linear relationship between X 
 	\end{itemize}
 \end{defn}
 
+\chapter{SQL}
+\section{Lecture 20 -- 04/02/2024}
+Thus far in the class, we've worked with data which is stored in CSV files.
 
+This is a reasonable workflow for data which is \textbf{moderately sized} and is \textbf{unchanging} (static).
+\begin{itemize}
+	\item Size is $<\tilde{10}$GB (or a third of the RAM on your workstation).
+	\item Weekly snapshot.
+\end{itemize}
+
+However, in the real world, we note that data is typically stored in a Database Management System.
+%\begin{figurebox}[]{Illustration of Database Management System}
+%	\centering\includegraphics[]{}
+%\end{figurebox}
+
+So... what exactly \textit{is} a database even?
+\begin{defn}[Database]
+	A \textbf{database} is an organized collection of data.
+\end{defn}
+
+\begin{defn}[Database Management System]
+	A \textbf{Database Management System} (DBMS) is a software system that stores, manages, and facilitates access to one or more databases.
+\end{defn}
+\begin{example}
+	Common large-scale DBMS's used in Data Science are:
+	\begin{itemize}
+		\item Google BigQuery
+		\item Amazon Redshift
+		\item ...
+	\end{itemize}
+\end{example}
+
+\subsection{DBMS versus Raw Files}
+Some of the advantages of a DBMS over raw files (such as CSV) are as follow:
+\begin{itemize}
+	\item Data Storage:
+	\begin{itemize}
+		\item Reliable storage to survive system crashes and disk failures.
+		\item Optimize to compute on data that does not fit in memory.
+		\item Special data structures to improve performance (you can learn more about this in CS186).
+	\end{itemize}
+	\item Data Management:
+	\begin{itemize}
+		\item Configure how data is logically organized and who has access.
+		\item Can enforce guarantees on the data (e.g. non-negative person weight or age):
+		\begin{itemize}
+			\item Can be used to prevent data anomalies.
+			\item Ensures safe concurrent operations on data (i.e. multiple users reading/writing simultaneously.)
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsection{What is SQL?}
+SQL is its own programming language, distinct from Python. However, it is often called from within other programming languages.
+
+SQL is a special purpose programming language which is used specifically for communicating with database systems.
+\begin{itemize}
+	\item It is \textbf{the} dominant language/technology for working with data!
+	\item It's is a \textbf{language of tables}; all inputs \textit{and} outputs are tables.
+\end{itemize}
+
+\begin{rmk}
+	One of the reasons why SQL is so widely-used is due to how old and ubiquitous it is; it's hard for companies to just switch to something else.
+\end{rmk}
+
+\subsection{Database Systems}
+In this class, we'll be looking at two database systems: SQLite and DuckDB.
+
+\begin{defn}[SQLite]
+	SQLite is an easy-to-use library that allows us to directly manipulate a database file or an in-memory database using a simplified version of SQL.
+	
+	It's commonly used to store data for small apps on mobile devices, and it's optimized for simplicity and speed of simple data tasks.
+\end{defn}
+
+\begin{defn}[DuckDB]
+	DuckDB is an easy-to-use library that lets you directly manipulate a database file, collection of table-formatted files (such as CSV), or in-memory pandas dataframes using a more complete version of SQL.
+	
+	It's increasingly popular for data analysis on large datasets, and is optimized for simplicity and speed of advanced data analysis tasks.
+\end{defn}
+
+\subsection{Running SQL in Python}
+In order to connect to a database, we proceed as follows:
+\begin{code}{python}{Running SQL}
+%load_ext sql # Using ipython cell magic so we can use SQL
+
+%%sql duckdb:///data/basic_examples.db 
+
+%%sql
+SELECT * FROM Database
+\end{code}
+
+\begin{defn}[Relation]
+	SQL tables are often called \textbf{relations}.
+	
+	It has columns (which are also referred to as attributes, or fields), and rows (or records/tuple).
+\end{defn}
+
+Every column in a relation has three properties:
+\begin{itemize}
+	\item ColName,
+	\item Type, and
+	\item Constraint(s) on values.
+\end{itemize}
+
+\begin{defn}[Schema]
+	A \textbf{schema} describes the logical structure of a table. Whenever a new table is created, the creator must declare its schema.
+\end{defn}
+\begin{code}{mysql}{Example of creating a table}
+CREATE TABLE Dragon (
+	name TEXT PRIMARY KEY,
+	year INTEGER CHECK (year >= 2000),
+	cute INTEGER
+)
+\end{code}
+
+\subsubsection{Data Types}
+Some types in SQL include:
+\begin{itemize}
+	\item INT: integers.
+	\item FLOAT: floating point numbers.
+	\item VARCHAR: strings of text (also called TEXT).
+	\item BLOB: arbitrary data (e.g. songs, video files, etc.).
+	\item DATETIME: date and time.
+\end{itemize}
+
+\subsubsection{Constraints}
+Some examples of constraints are:
+\begin{itemize}
+	\item CHECK: data must obey the given check constant.
+	\item PRIMARY KEY: specifies that this key is used to uniquely identify rows in the table.
+	\item NOT NULL: null data can't be inserted for this column.
+	\item DEFAULT: provides a default value to use if the user doesn't specify on insertion.
+\end{itemize}
+
+\begin{defn}[Primary Key]
+	A \textbf{primary key} is the set of column(s) used to uniquely identify each record in the tablet. They're used to ensure data integrity, and to optimize data access.
+\end{defn}
+
+\begin{defn}[Foreign Key]
+	A \textbf{foreign key} is a reference to a primary key in another table.
+\end{defn}
+
+\subsubsection{Basic Queries}
+First, we can select columns using the \inlinecode{\mintinline{mysql}{SELECT}} query that we want to look at. If we want to rename a selected column, we can use the \inlinecode{\mintinline{mysql}{AS}} keyword.
+
+To return only unique values, we can combine two different keywords as follows: \inlinecode{\mintinline{mysql}{SELECT DISTINCT}}.
+
+\begin{warn}
+	Note that in SQL, there is a difference between single and double quotes! For string operations, we use \textbf{single quotes}, whereas for column names we use \textbf{double quotes}.
+\end{warn}
+
+To select specific entries that fit some condition, we can use \inlinecode{\mintinline{mysql}{WHERE}}. Some conditions keywords we have are:
+\begin{itemize}
+	\item \inlinecode{\mintinline{mysql}{IN}}
+\end{itemize}
+
+Putting this all together, we get the following:
+\begin{code}{mysql}{Using keywords in SQL.}
+%%sql
+SELECT name, cute, year FROM Dragon WHERE name IN ('puff', 'hiccup')
+\end{code}
+
+
+
+\begin{warn}
+	Note that the order in which rows are returned is completely arbitrary! It varies depending on the database completely. Thus, we \textbf{have} to use the \inlinecode{\mintinline{mysql}{ORDER BY}} keyword.
+\end{warn}
 \end{document}

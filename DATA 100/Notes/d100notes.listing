@@ -1,5 +1,5 @@
-import sklearn.linear_model as lm
-ridge_model = lm.Ridge(alpha = 1) # alpha represents the hyperparameter lambda
-ridge_model.fit(X_train, Y_train)
-ridge_model.coef_
-
+CREATE TABLE Dragon (
+	name TEXT PRIMARY KEY,
+	year INTEGER CHECK (year >= 2000),
+	cute INTEGER
+)

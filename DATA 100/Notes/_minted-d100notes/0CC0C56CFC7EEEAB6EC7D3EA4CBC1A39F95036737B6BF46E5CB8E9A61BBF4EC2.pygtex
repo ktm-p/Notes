@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Getting babyname information in 2022.}
+\PYG{n}{babynames\PYGZus{}2022} \PYG{o}{=} \PYG{n}{babynames}\PYG{p}{[}\PYG{n}{babynames}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Year\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mi}{2022}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Creating First Name column for elections table.}
+\PYG{n}{elections}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}First Name\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{elections}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Candidate\PYGZdq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{str}\PYG{o}{.}\PYG{n}{split}\PYG{p}{()}\PYG{o}{.}\PYG{n}{str}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZsh{} Method 1}
+\PYG{n}{merged1} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{left} \PYG{o}{=} \PYG{n}{elections}\PYG{p}{,} \PYG{n}{right} \PYG{o}{=} \PYG{n}{babynames\PYGZus{}2022}\PYG{p}{,}
+\PYG{n}{left\PYGZus{}on} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}First Name\PYGZdq{}}\PYG{p}{,} \PYG{n}{right\PYGZus{}on} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Method 2}
+\PYG{n}{merged} \PYG{o}{=} \PYG{n}{elections}\PYG{o}{.}\PYG{n}{merge}\PYG{p}{(}\PYG{n}{right} \PYG{o}{=} \PYG{n}{babynames\PYGZus{}2022}\PYG{p}{,}
+\PYG{n}{left\PYGZus{}on} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}First Name\PYGZdq{}}\PYG{p}{,} \PYG{n}{right\PYGZus{}on} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}Name\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}

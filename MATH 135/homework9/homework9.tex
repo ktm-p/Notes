@@ -1,0 +1,267 @@
+\documentclass{article}
+\usepackage{homework}
+\usepackage{macros}
+
+%% LIST OF PROBLEMS SETUP %%
+\renewcommand\thmtformatoptarg[1]{:\enspace#1}
+\makeatletter
+\def\ll@homework{
+	\thmt@thmname~
+	\protect\numberline{\csname the\thmt@envname\endcsname}%
+	\ifx\@empty
+	\thmt@shortoptarg
+	\else
+	\protect\thmtformatoptarg{\thmt@shortoptarg}
+	\fi
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\numberline}[1]{\hb@xt@3em{#1}}
+\makeatother	
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\listoftheorems
+	\newpage
+}
+
+\begin{document}
+\mytitle{Math 135: Homework 9}{Spring 2024}
+
+\setcounter{section}{5}
+\section{Cardinal Numbers and the Axiom of Choice}
+\begin{hw}{18}[0][0]
+	Prove that the following statement is equivalent to the axiom of choice: For any set $\mathscr A$ whose members are nonempty sets, there is a function $f$ with domain $\mathscr A$ such that $f(X) \in X$ for all $X \in \mathscr A$.
+\end{hw}
+\begin{solution}
+%	The statement essentially is saying that there exists a choice function for any collection of non-empty sets $\mathscr A$.
+%	
+	First, we will show that the axiom of choice implies the given statement.
+	\begin{innerproof}
+		Let us suppose that the axiom of choice holds.
+		
+		Then, let us consider some set $\mathscr A$ whose members are nonempty sets. We want to show that there exists a function $f$ with the desired property given in the statement for this set.
+		
+		To do this, let us first consider the set $\bigcup \mathscr A$ which we know exists by the union axiom. Then, by the axiom of choice, we know that there exists a function $f : \mathscr P \pr{\bigcup \mathscr A} \setminus \brc{\emptyset} \rightarrow \bigcup \mathscr A$ such that $f(X) \in X$ for every nonempty $X \subseteq \bigcup \mathscr A$.
+		
+		Then, if we restrict $f$ to $\mathscr A$, we see then that indeed we have a function with the desired property for $\mathscr A$.
+	\end{innerproof}
+
+	Now, we will show the other direction.
+	\begin{innerproof}
+		Let us consider some non-empty set $X$. Then, we observe that the set $\mathscr P\pr{X} \setminus \brc{\emptyset}$ is in fact a collection of non-empty sets. So, by our assumption, we know that there exists a function $f$ whose domain is $\mathscr P\pr{X} \setminus \brc{\emptyset}$ such that $f(x) \in x$ for all $x \in \mathscr P \pr{X} \setminus \brc{\emptyset}$. But since $x \in \mathscr P \pr{X} \setminus \brc{\emptyset}$, this means that $x \subseteq X$.
+		
+		In other words, $f(x) \in x$ for every nonempty $x \subseteq X$. Furthermore, $\ran f \subseteq X$. But this is precisely the axiom of choice.
+	\end{innerproof}
+
+	Thus, we conclude that the two are indeed equivalent.
+\end{solution}
+
+\begin{hw}{21}[0][0]
+	Assume that $\mathscr A$ is a non-empty set such that for every set $B$,
+	\begin{equation*}
+		B \in \mathscr A \iff \text{ every finite subset of $B$ is a member of $\mathscr A$}.
+	\end{equation*}
+
+	Show that $\mathscr A$ has a maximal element; i.e., an element that is not a subset of any other element of $\mathscr A$.
+\end{hw}
+\begin{solution}
+	We will prove this by using Zorn's Lemma.
+	
+	First, let us consider some $\mathscr C \subseteq \mathscr A$, where $\mathscr C$ is a chain. We want to show then that $\bigcup \mathscr C \in \mathscr A$.
+	
+	For $\bigcup\mathscr C \in \mathscr A$, it must be then that every finite subset $C$ of $\bigcup\mathscr C$ must be a member of $\mathscr A$. So, let us denote $F$ to be a finite subset of $\bigcup \mathscr C$. Now, by definition of union, for each $x \in F$, there exists some $C_x \in \mathscr C$ such that $x \in C_x \in \mathscr C$.
+	
+	Then, using the fact that $F$ is finite and $\mathscr C$ being a chain, we note then that the set $C' \coloneq \brc{C_x : x \in F}$ must have a maximal element $C_{\mathrm{max}}$.
+	
+	Then, because $\mathscr C$ is a chain, it follows then that for all $C_x \in C'$, we have that $C_x \subseteq C_\mathrm{max}$. This means then that for all $x \in F$, we have $x \in C_x \subseteq C_\mathrm{max}$, meaning that $F \subseteq C_\mathrm{max}$.
+	
+	And we note that since $\mathscr C \subseteq \mathscr A$, and we have $F \subseteq C_\mathrm{max} \in \mathscr C \subseteq \mathscr A$, we have then that $F \in \mathscr A$. Thus, we observe that every finite subset $F$ of $\bigcup \mathscr C$ is in $\mathscr A$; thus, we that $\bigcup \mathscr C \in \mathscr A$ as desired.
+	
+	From here, we can simply apply Zorn's Lemma to thus conclude that, indeed, $\mathscr A$ has a maximal element.
+\end{solution}
+
+\begin{hw}{25}[0][0]
+	Assume that $S$ is a function with domain $\omega$ such that $S(n) \subseteq S(n^{+})$ for each $n \in \omega$. Assume that $B$ is a subset of the union $\bigcup_{n \in \omega} S(n)$ such that for every infinite subset $B'$ of $B$, there is some $n$ such that $B' \cap S(n)$ is finite.
+	
+	Show that $B$ is a subset of some $S(n)$.
+\end{hw}
+\begin{solution}
+	Let us suppose for the sake of contradiction that $B$ isn't a subset of every $S(n)$. Then, this means that for every $n \in \omega$, we have that $B \setminus S(n) \neq \emptyset$. Then, for every $n \in \omega$, there exists some $b_n \in B \setminus S(n)$.
+	
+	From here, by the axiom of choice, we know that there exists some set $B' \coloneq \brc{b_n : n \in \omega}$. Furthermore, we note that $B' \subseteq B$.
+	
+	Now, we claim that $B'$ is infinite.
+	\begin{innerproof}
+		First, recall that $B \subseteq \bigcup_{n \in \omega} S(n)$.
+		
+		Then, we note that if $B'$ wasn't infinite, then there exists some $m$ such that $B' \subseteq \bigcup_{n \leq m} S(n) = S(m)$. Then, we note that $B' \subseteq S(m)$. However, this means then that for any $b_n \in B'$, we have that $b_n \in S(m)$ as well.
+		
+		However, this is a contradiction with the fact that $b_n \in B' \subseteq B$, and $B \not\subseteq S(n)$ for any $n \in \omega$. In other words, $b_n$ shouldn't be in any $S(n)$ for all $n \in \omega$.
+		
+		Thus, we conclude that $B'$ must be infinite.
+	\end{innerproof}
+	
+	Now, since $B'$ is an infinite subset of $B$, we note then that there exists some $m$ such that $B' \cap S(m)$ is infinite. Then, the set $\brc{k : b_k \in S(m)}$ must be infinite as well. Then, this means that there exists some $k \in \omega$ where $k > m$ such that $b_k \in S(m)$. However, we note that we said that $b_k \not\in S(k) \supseteq S(m)$. Thus, we have arrived at a contradiction.
+	
+	Therefore, we can conclude that it must be that $B$ is a subset of some $S(n)$.
+\end{solution}
+
+\begin{hw}{27}[1][0]
+	Let $A$ be a collection of circular disks in the plane such that no two of which intersect. Show that $A$ is countable.
+\end{hw}
+\begin{solution}
+	To begin with, we note that every disk $d \in A$ will contain some rational point $p = (x,y) \in \QQ \times \QQ$. So, for each disk, we can pick said point $p$. Now, we note that because the disks can't overlap with one another, it follows then that from each disk we can pick out a unique $p$.
+	
+	With this in mind, we can construct an injection $f: A \inj \QQ \times \QQ$ where each disk $d \in A$ gets mapped to a unique point $p = (x,y) \in \QQ \times \QQ$; and we see that no two disks can map to the same point due to them not overlapping, and thus $f$ is indeed an injection.
+	
+	Therefore, we observe that $\card \pr{D} \leq \card \pr{\QQ \times \QQ} = \card \pr{\QQ}$. In other words, we see that $D$ is countable as desired.
+\end{solution}
+
+\begin{hw}{27}[2][0]
+	Let $B$ be a collection of circles in the plane such that no two of which intersect. Need $B$ be countable?
+\end{hw}
+\begin{solution}
+	We observe that the set $B$ is not countable.
+	
+	To prove our claim, let us first define a circle as follows: for any (positive) $r \in \RR$, we define:
+	\begin{equation*}
+		b_r : \brc{\pr{x,y} \in \RR^{2} : x^{2} + y^{2} = r^{2}}.
+	\end{equation*}
+
+	Then, we observe that $b_r$ is a circle and that for $r \neq s$, we note then that $b_r$ and $b_s$ don't intersect with one another.
+	
+	Then, we can define $B$ to be the collection of such circles:
+	\begin{equation*}
+		B \coloneq \brc{b_r : r \in \RR^{+}}.
+	\end{equation*}
+
+	Thus, we observe that we can construct a bijection between $B$ and $\RR$ by mapping each $b_r \in B$ to $r \in \RR$. In other words, we see that $B$ is indeed uncountable.
+\end{solution}
+
+\begin{hw}{27}[3][0]
+	Let $C$ be a collection of figure eights in the plane such that no two of which intersect. Need $C$ be countable?
+\end{hw}
+\begin{solution}
+	We shall prove that $C$ is in fact countable.
+	
+	Each figure eight $c \in C$ contains two loops which we shall denote by $c_1$ and $c_2$. Note that for each loop in $c$, it contains two different rational points $p \in \QQ^{2}$ and $q \in \QQ^{2}$ inside.
+	
+	Now, we observe that for any two figure eights $c_a$ and $c_b$, one of five scenarios must occur:
+	\begin{enumerate}
+		\item $c_a$ is inside $c_{b,1}$ (the first loop of $c_b$).
+		\item $c_a$ is inside $c_{b,2}$.
+		\item $c_b$ is inside $c_{a,1}$.
+		\item $c_b$ is inside $c_{a,2}$.
+		\item $c_a$ and $c_b$ are outside of one another.
+	\end{enumerate}
+
+	Then, without loss of generalisation, let us suppose that Scenario 1 occurs; that is, $c_a$ is inside $c_{b,1}$. Now, let us pick rational points $p_a \in c_{a,1}$ and $q_a \in c_{a,2}$, and let us pick $p_b \in c_{b,1}$ and $q_b \in c_{b,2}$. Note that these points are in $\QQ^{2}$.
+	
+	We observe that while $p_{b}$ might be contained in one of the two loops of $c_a$ as well, we note that since $c_a$ is inside of $c_{b,1}$, it follows then that any point $q_b$ we pick from $c_{b,2}$ is not contained in $c_a$.
+	
+	A similar argument will show that we can always pick a point from the ``outer" figure eight that isn't contained in the ``inner" figure eight for Scenarios 2 to 4.
+	
+	In the case of Scenario 5, it follows trivially from them being outside one another that any points $p, q$ we pick from the loops of $c_a$ and $c_b$ aren't contained in the other figure eight.
+	
+	With this in mind, we see that for any figure eight $c \in C$, we can map it to some pair of coordinates $(p, q) \in \QQ^{2} \times \QQ^{2}$. Furthermore, we have shown that no two figure eights $c$ can map to the same pair of coordinates $(p, q)$; in other words, there exists an injection from $C$ to $\QQ^{2} \times \QQ^{2}$.
+	
+	Then, we observe that $\card \pr{C} \leq \card \pr{\QQ^{2} \times \QQ^{2}}$. Then, we note that $\QQ^{2}$ is countable, and the cartesian product of countable sets is also countable. Thus, we conclude that, indeed, $C$ is countable as well.
+\end{solution}
+
+\begin{hw}{28}[0][0]
+	Find a set $\mathscr A$ of open intervals in $\RR$ such that every rational number belongs to one of those intervals, but $\bigcup \mathscr A \neq \RR$.
+\end{hw}
+\begin{solution}
+	We can define $\mathscr A$ as follows:
+	\begin{equation*}
+		\mathscr A \coloneq \brc{\pr{\sqrt 2 + n - 1, \sqrt 2 + n} : n \in \ZZ}.
+	\end{equation*}
+
+	We see then that every rational must belong to one of these intervals. However, since we're excluding irrationals of the form $\sqrt 2 + n$, we note that the union can't be equal to $\RR$. Thus, $\mathscr A$ satisfies the desired requirements.
+\end{solution}
+
+\begin{hw}{32}[0][0]
+	Let $\mathscr F A$ be the collection of all finite subsets of $A$. Show that if $A$ is infinite, then $A \approx \mathscr F A$.
+\end{hw}
+\begin{solution}
+	Let us denote $A$ to be an infinite set, and $\mathscr F A$ to be a collection of all finite subsets of $A$.
+	
+	Now, we note then that $\card \pr{A} \leq \card\pr{\mathscr F A}$ due to the fact that for each element $a \in A$, we have that $\brc{a} \in \mathscr F A$ by definition.
+	
+	Now, we want to show then that $\card \pr{\mathscr F A} \leq \card\pr{A}$ for them to be equal.
+	
+	To do this, we shall denote $F_n$ to be the subset of $\mathscr F A$ which contains all subsets of $A$ whose cardinality is $n$. We note then that $\mathscr F A = \brc{\emptyset} \sqcup \bigsqcup_{n=0}^{\infty} F_n$.
+	
+	This means then that we have:
+	\begin{align*}
+		\card \pr{\mathscr F A} &= \card\pr{\bigsqcup_{n=0}^{\infty} F_n} \\
+		&= \sum_{n=0}^{\infty} \card\pr{F_n}
+	\end{align*}
+
+	From here, we note then that the cardinality of each $F_n$ is in fact at most equal to the cardinality of $A^{n}$. We note that we can construct a surjection between $A^{n}$ and $F_n$; to do this, we consider a subset $A'^{n}$ of $A^{n}$ whose members are all of length $n$ and have distinct elements within them. Then, we note that for each member in $A'^{n}$, we can map it to an element $\brc{a_1, \ldots, a_n} \in F_n$. Thus, every element of $F_n$ is mapped to by something in $A'^{n}$.
+	
+	Now, noting that $A$ is infinite, we see that $\card \pr{F_n} \leq \card \pr{A^{n}} = \card \pr{A}^{n} = \card \pr{A}$. 
+	
+	With this in mind, we observe the following:
+	\begin{align*}
+		\sum_{n=0}^{\infty} \card\pr{F_n} &\leq \sum_{n=0}^{\infty} \card\pr{A} \\
+		&= \aleph_0 \cdot \card\pr{A} \\
+		&= \card\pr{A}
+	\end{align*}
+
+	Thus, putting this all together, we see that we have $\card\pr{A} \leq \card \pr{\mathscr F A} \leq \card\pr{A}$; thus, we conclude that $\card \pr{\mathscr F A} = \card \pr{A}$. In other words, $\mathscr F A \approx A$ as desired.
+\end{solution}
+
+\begin{hw}{35}[0][0]
+	Find a collection $\mathscr A$ of $2^{\aleph_0}$ sets of natural numbers such that any two distinct members of $\mathscr A$ have finite intersections.
+\end{hw}
+\begin{solution}
+	To begin with, we note that the set of prime numbers $P$ is countably infinite; in other words, $\card \pr{P} = \aleph_0$.
+	
+	From here, we note that the set of all subsets of $P$ --- that is, the set $\mathscr P \pr{P}$ --- has cardinality of $2^{\aleph_0}$ (in other words, it's uncountable). Then, since the set of finite subsets of a countable set is countable, the set of infinite subsets of $P$ must thus be uncountable.
+	
+	With this in mind, let us pick out some infinite subset $P_1$ of $P$ with elements $\brc{p_0, p_1, \ldots}$. We can then construct the set $A_1$ as follows:
+	\begin{equation*}
+		A_1 \coloneq \brc{p_0, p_0p_1, \ldots},
+	\end{equation*}
+	where we order its elements in increasing order.
+	
+	Then, we note that we can construct a bijection between $P_1$ and $A_1$. Furthermore, we note that every integer has a unique factorization (up to the order of the factors). With this fact in mind, for a different infinite subset $P_2$ of $P$, we note then that $A_1$ and $A_2$ will share only a finite number of elements with each other.
+	
+	Thus, we observe that the collection $\mathscr A$ of these sets $A$ will have $2^{\aleph_0}$ sets of natural numbers and each distinct members of $\mathscr A$ will have finite intersections.
+\end{solution}
+
+\begin{hw}{36}[0][0]
+	Show that for an infinite cardinal $\kappa$, we have $\kappa ! = 2^{\kappa}$, where $\kappa!$ is defined as in Exercise 14. 
+\end{hw}
+\begin{solution}
+	We first define $K$ to be a set with cardinality $\card \pr{K} = \kappa$.
+	
+	Then, we can define the set $\mathbb K \coloneq \brc{\pi : K \rightarrow K : \text{$\pi$ is a permutation of $K$}}$. We note then that $\kappa ! = \card \pr{\mathbb K}$.
+	
+	Now, we can show that $\kappa ! = 2^{\kappa}$ by showing that $2^{\kappa} \leq \kappa ! \leq 2^{\kappa}$.
+	
+	To first show that $\kappa ! \leq 2^{\kappa}$, we note that $\mathbb K \subseteq \mathscr P (K \times K)$. So, we have:
+	\begin{align*}
+		\kappa! &= \card \pr{\mathbb K} \\
+		&\leq \card \pr{\mathscr P \pr{K \times K}} \\
+		&= 2^{\kappa \cdot \kappa} \\
+		&= 2^{\kappa}
+	\end{align*}
+
+	For the other inequality, we first consider the disjoint union of $K$ with itself. Let us denote this by $K'$. Note then that $\card \pr{K'} = \kappa' = \kappa + \kappa = \kappa$.
+	
+	Now, we consider the set of permutations of $K'$, $\mathbb K'$, which has cardinality $\kappa' !$. Then, for any permutation $f \in \mathbb K'$, we define a function $g \in {}^{2}K'$ such that $g(k) = 0$ if $f(k)$ is in the first copy of $K'$, and $g(k) = 1$ if $f(k)$ is in the second copy of $K'$.
+	
+	We observe then that this is a surjection from $\mathbb K'$ onto ${}^{2}K$. Then, since surjections have an injective right-inverse, we note then that we can construct some injection from ${}^{2}K$ to $\mathbb K'$. Furthermore, since $\card \pr{\mathbb K'} = \card \pr{\mathbb K}$, we can construct a bijection between them. Thus, there exists an injection from ${}^{2}K$ to $\mathbb K$. In other words, we have $2^{\kappa} \leq \kappa !$.
+	
+	Then, putting this all together, we see then that we have $2^{\kappa} \leq \kappa ! \leq 2^{\kappa}$. Therefore, we conclude that $2^{\kappa} = \kappa !$ as desired.
+\end{solution}
+\end{document}
