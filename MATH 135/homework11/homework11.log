@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  24 APR 2024 13:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  24 APR 2024 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./homework10.tex
-(homework10.tex
+**./homework11.tex
+(homework11.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -1033,8 +1033,8 @@ File: OT1cantarell-TLF.fd 2019/06/24 Font definitions for OT1/cantarell-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 34.
- (homework10.aux)
-\openout1 = `homework10.aux'.
+ (homework11.aux)
+\openout1 = `homework11.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
@@ -1083,9 +1083,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring ON on input line 34.
- (homework10.out) (homework10.out)
+ (homework11.out) (homework11.out)
 \@outlinefile=\write4
-\openout4 = `homework10.out'.
+\openout4 = `homework11.out'.
 
 
 *geometry* driver: auto-detecting
@@ -1150,44 +1150,49 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
 (Font)              scaled to size 14.4pt on input line 35.
 
-(homework10.loe
+(homework11.loe
 Underfull \hbox (badness 10000) detected at line 1
-\OT1/cantarell-TLF/m/n/10 7.1a
+\OT1/cantarell-TLF/m/n/10 7.14
  []
 
 
 Underfull \hbox (badness 10000) detected at line 2
-\OT1/cantarell-TLF/m/n/10 7.1b
+\OT1/cantarell-TLF/m/n/10 7.15a
  []
 
 
 Underfull \hbox (badness 10000) detected at line 3
-\OT1/cantarell-TLF/m/n/10 7.5
+\OT1/cantarell-TLF/m/n/10 7.15b
  []
 
 
 Underfull \hbox (badness 10000) detected at line 4
-\OT1/cantarell-TLF/m/n/10 7.6
+\OT1/cantarell-TLF/m/n/10 7.16
  []
 
 
 Underfull \hbox (badness 10000) detected at line 5
-\OT1/cantarell-TLF/m/n/10 7.7a
+\OT1/cantarell-TLF/m/n/10 7.19
  []
 
 
 Underfull \hbox (badness 10000) detected at line 6
-\OT1/cantarell-TLF/m/n/10 7.7b
+\OT1/cantarell-TLF/m/n/10 7.23i
  []
 
 
 Underfull \hbox (badness 10000) detected at line 7
-\OT1/cantarell-TLF/m/n/10 7.7c
+\OT1/cantarell-TLF/m/n/10 7.23ii
  []
 
 
 Underfull \hbox (badness 10000) detected at line 8
-\OT1/cantarell-TLF/m/n/10 7.8
+\OT1/cantarell-TLF/m/n/10 7.23iii
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 9
+\OT1/cantarell-TLF/m/n/10 7.24
  []
 
 )
@@ -1201,108 +1206,99 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
 dr4czt.enc}]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 40.
+(mdframed)              on input line 41.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 40.
+(Font)              scaled to size 10.0pt on input line 41.
 Package hyperref Info: bookmark level for unknown homework defaults to 0 on inp
-ut line 40.
+ut line 41.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 64.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 75.
+ [3
+pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
+) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.89 	H
+       owever, since we can construct an isomorphism between $\ang{A, <_A}$ ...
+
+pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
+) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.89 	H
+       owever, since we can construct an isomorphism between $\ang{A, <_A}$ ...
+]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 105.
+
+pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.105 	A
+        ssume that $\alpha$ and $\beta$ are ordinal numbers with $\alpha \in...
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 123.
+
+pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.123 	A
+        ssume that $A$ is a finite set and that $<$ and $\prec$ are linear o...
 LaTeX Font Info:    Trying to load font information for TS1+cantarell-TLF on in
-put line 55.
+put line 132.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/cantarell\ts1cantarel
 l-tlf.fd
 File: TS1cantarell-TLF.fd 2019/06/24 Font definitions for TS1/cantarell-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/cantarell-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 55.
+(Font)              scaled to size 10.0pt on input line 132.
+ [4{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_
+tv3tjz.enc}]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 66.
+(mdframed)              on input line 148.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 94.
- [3{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_
-tv3tjz.enc}
-pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
-) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.99 \end{hw}
-             ]
+(mdframed)              on input line 159.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 114.
+(mdframed)              on input line 168.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 179.
 
 pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
 ) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.114 	A
-        ssume that $S$ is a subset of the real numbers that is well-ordered....
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 136.
-
-pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.136 	L
-        et $C$ be some fixed set. Apply transfinite recursion to $\omega$, u...
-[4
-pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
-) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.151 	
-       ]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 164.
-
-pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.164 	S
-        how that if $a \in F(n)$, then $a \subseteq F(n^{+})$.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 171.
-
-pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.171 	L
-        et $\overline{C} = \bigcup \ran F$. Show that $\overline C$ is a tra...
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 190.
-
-pdfTeX warning (ext4): destination with the same identifier (name{homework.7.0}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.190 	S
-        how that the subset axioms are provable from the other axioms. [5]
-[6]
+l.179 	S
+        how that for any ordinal number $\alpha$, there exists a cardinal nu...
+[5]
 \tf@loe=\write5
-\openout5 = `homework10.loe'.
+\openout5 = `homework11.loe'.
 
- (homework10.aux)
+ (homework11.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-Package rerunfilecheck Info: File `homework10.out' has not changed.
+Package rerunfilecheck Info: File `homework11.out' has not changed.
 (rerunfilecheck)             Checksum: 629247469C4511113BF874883942C5AF;159.
  ) 
 Here is how much of TeX's memory you used:
- 25931 strings out of 474541
- 489492 string characters out of 5743481
- 1946978 words of memory out of 5000000
- 47635 multiletter control sequences out of 15000+600000
+ 25930 strings out of 474541
+ 489412 string characters out of 5743481
+ 1944978 words of memory out of 5000000
+ 47631 multiletter control sequences out of 15000+600000
  570285 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,12n,145p,549b,1066s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1318,12 +1314,10 @@ fonts/cm/cmr10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmr7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Michael/AppData/Local/Programs
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Michael/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/Mich
-ael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pf
-b>
-Output written on homework10.pdf (6 pages, 167926 bytes).
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on homework11.pdf (5 pages, 163659 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
- 20 named destinations out of 1000 (max. 500000)
+ 125 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

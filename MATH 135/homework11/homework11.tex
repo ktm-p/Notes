@@ -1,0 +1,188 @@
+\documentclass{article}
+\usepackage{homework}
+\usepackage{macros}
+
+%% LIST OF PROBLEMS SETUP %%
+\renewcommand\thmtformatoptarg[1]{:\enspace#1}
+\makeatletter
+\def\ll@homework{
+	\thmt@thmname~
+	\protect\numberline{\csname the\thmt@envname\endcsname}%
+	\ifx\@empty
+	\thmt@shortoptarg
+	\else
+	\protect\thmtformatoptarg{\thmt@shortoptarg}
+	\fi
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\numberline}[1]{\hb@xt@3em{#1}}
+\makeatother	
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\listoftheorems
+	\newpage
+}
+
+\begin{document}
+\mytitle{Math 135: Homework 11}{Spring 2024}
+
+\setcounter{section}{6}
+\section{Orderings and Ordinals}
+
+\begin{hw}{14}[0][0]
+	Assume that $\ang{A, <}$ is a partially ordered structure. Define the function $F$ on $A$ by the equation
+	\begin{equation*}
+		F(a) = \brc{x \in A : x \leq a}.
+	\end{equation*}
+	and let $S = \ran F$. Show that $F$ is an isomorphism from $\ang{A, <}$ onto $\ang{S, \subset_S}$.
+\end{hw}
+\begin{solution}
+	First, we will show that $F$ is indeed a bijection. To do this, we first note that since $S = \ran F$, then by definition, $F$ maps $A$ onto $S$.
+	
+	To show that it is injective, let us suppose for the sake of contradiction that for $a_1, a_2 \in A$ such that $F(a_1) = F(a_2)$, we have that $a_1 \neq a_2$. But if $a_1 \neq a_2$, then we note that $a_1 \in F(a_1)$ and $a_2 \in F(a_2)$, but $a_1 \neq a_2 \implies F(a_1) \neq F(a_2)$ as these two sets contain different elements. But this is a contradiction. Thus, $F$ must be injective.
+	
+	Since $F$ is both one-to-one and onto, we note then that it is indeed a bijection.
+	
+	To show that if $a_1 < a_2$ then $F(a_1) \subset_S F(a_2)$, we first note that by definition, $a_2 \in F(a_2)$. However, because $a_1 < a_2 \implies a_2 \not\leq a_1$, we have that $a_2 \not\in F(a_1)$.
+	
+	Next, we note that for all $a \in F(a_1)$, by definition we have that $a \leq a_1$. However, since $a \leq a_1 < a_2$, it follows that $a < a_2$; in other words, for all $a \in F(a_1)$, we have that $a \in F(a_2)$. And since $a_2 \in F(a_2)$ but $a_2 \not\in F(a_1)$, we observe then that, indeed, $F(a_1) \subset_S F(a_2)$ as desired.
+	
+	For the other direction, note that if $F(a_1) \subset F(a_2)$, it follows then that there exists some $a \in F(a_2)$ which isn't in $F(a_1)$. More specifically, by definition of $F$, we note that $F(a_1)$ contains all elements $a \leq a_1$, and $F(a_2)$ contains elements $a \leq a_2$. Since $F(a_1) \subset F(a_2)$, we see that all $a \in F(a_1)$ is also in $F(a_2)$. But $F(a_1) \subset F(a_2)$, meaning that $a_1 < a_2$ for there to be elements in $F(a_2)$ that isn't in $F(a_1)$.
+	
+	Thus, we see that indeed, $F$ is an isomorphism from $\ang{A, <}$ onto $\ang{S, \subset_S}$.
+\end{solution}
+
+\begin{hw}{15}[1][0]
+	Assume that $<$ is a well-ordering on $A$ and that $t \in A$. Show that $\ang{A, <}$ is never isomorphic to $\ang{\seg t, <^{\circ}}$.
+\end{hw}
+\begin{solution}
+	Suppose for the sake of contradiction that $\ang{A, <}$ is isomorphic to $\ang{\seg t, <^{\circ}}$. That is, for some $t \in A$, there exists some isomorphism $F : A \rightarrow \seg t$.
+	
+	Now, we note that since $F$ is isomorphic, it follows that for all $a_1 < a_2$ in $A$, we have that $F(a_1) < F(a_2)$. Furthermore, by a previous exercise, we note then that this means that $a \leq f(a)$ for all $a \in A$.
+	
+	With this in mind, we observe then that $f(t) \in \seg t$, and thus by definition we have that $f(t) < t$. However, we note that this contradicts with the fact that $t \leq f(t)$. Thus, we conclude that no such isomorphism can exist.
+\end{solution}
+
+\begin{hw}{15}[2][0]
+	Show that in Theorem 7K, at most one of the three alternatives holds.
+\end{hw}
+\begin{solution}
+	Suppose for the sake of contradiction that more than one of the three alternatives can hold.
+	
+	Then, we consider the case where we're comparing $A$ and $B$. Now, by the theorem, we have three cases:
+	\begin{enumerate}
+		\item $\ang{A, <_A} \simeq \ang{B, <^{\circ}}$
+		\item $\ang{A, <_A} \simeq \ang{\seg b, <^{\circ}}$, for some $b \in B$
+		\item $\ang{\seg a, <_A} \simeq \ang{B, <^{\circ}}$, for some $a \in A$
+	\end{enumerate}
+
+	Suppose Case 1 holds and Case 2 holds as well. We have then that $\ang{A, <_A} \simeq \ang{B, <^{\circ}}$ and $\ang{A, <_A} \simeq \ang{\seg b, <^{\circ}}$.
+	
+	However, since we can construct an isomorphism between $\ang{A, <_A}$ and $\ang{B, <^{\circ}}$, and between $\ang{A, <_A}$ and $\ang{\seg b, <^{\circ}}$, we note then that we can thus construct an isomorphism between $\ang{\seg b, <^{\circ}}$ and $\ang{B, <^{\circ}}$.
+	
+	This contradicts with the previous subpart.
+	
+	We can proceed similarly for if Case 1 and Case 3 holds at the same time.
+	
+	For Case 2 and Case 3 both holding, we note that we have $\ang{A, <_A} \simeq \ang{\seg b, <^{\circ}}$ and $\ang{\seg a, <_A} \simeq \ang{B, <^{\circ}}$. But if this is the case, we can then construct an isomorphism between each set and their own initial segment.
+	
+	First, we create an injection between $\seg a$ and $A$. Then, from $A$ we know there's an isomorphism with $\seg b$, from which we can construct another injection to $B$. And $B$ is isomorphic to $\seg a$.
+	
+	However, this means then that they're all isomorphic with one another; i.e., $\ang{A, <}$ and $\ang{B, <^{\circ}}$ are isomorphic to their own initial segment. Thus, we have another contradiction.
+	
+	So, we conclude that at most one of the scenarios can occur.
+\end{solution}
+
+\begin{hw}{16}[0][0]
+	Assume that $\alpha$ and $\beta$ are ordinal numbers with $\alpha \in \beta$. Show that $\alpha^{+} \in \beta^{+}$. Conclude then that whenever $\alpha \neq \beta$, $\alpha^{+} \neq \beta^{+}$.
+\end{hw}
+\begin{solution}
+	We observe that $\alpha \in \beta$. Since $\alpha^{+}$ is the least ordinal larger than $\alpha$, then by definition we have $\alpha \in \alpha^{+}$, and $\alpha^{+} \subseteq \beta$.
+	
+	Similarly, by definition of $\beta^{+}$, we have that $\beta \in \beta^{+} \iff \beta \subset \beta^{+}$.
+	
+	Then, we have:
+	\begin{equation*}
+		\alpha \subset \alpha^{+} \subseteq \beta \subset \beta^{+}.
+	\end{equation*}
+
+	Thus, we have $\alpha^{+} \subset \beta^{+} \iff \alpha^{+} \in \beta^{+}$.
+	
+	Then, we note that if $\alpha \neq \beta$, then either $\alpha \in \beta$ or $\beta \in \alpha$. And thus we have then that either $\alpha^{+} \in \beta^{+}$ or $\beta^{+} \in \alpha^{+}$; in other words, we have $\alpha^{+} \neq \beta^{+}$ as desired.
+\end{solution}
+
+\begin{hw}{19}[0][0]
+	Assume that $A$ is a finite set and that $<$ and $\prec$ are linear orderings on $A$. Show that $\ang{A, <}$ and $\ang{A, \prec}$ are isomorphic.
+\end{hw}
+\begin{solution}
+	First, we note that since $A$ is finite, then it follows that $<$ and $\prec$ are not only linear orderings on $A$, but are in fact well-orderings.
+	
+	From here, we observe that every non-empty subset of $A$ must thus have a minimal element with respect to $<$ and $\prec$. Furthermore, since $A$ is a finite set, it follows then that there exists some $m \in \omega$ such that $A \approx m$.
+	
+	With this in mind, we can construct an isomorphism $F: \ang{A, <} \rightarrow \ang{A, \prec}$ as follows:
+	\begin{itemize}
+		\item First, for $n = 0$, we denote $a_0$ to be the least element in $A$ with respect to $<$. Also, we denote $a'_0$ to be the least element in $A$ with respect to $\prec$. Then, we let $a_0 \mapsto a'_0$.
+		\item Then, for $n = k$, we map the minimal element $a_k \in \ang{A, <} \setminus \brc{a_0, \ldots, a_{k-1}}$ to the minimal element $a'_k \in \ang{A, \prec} \setminus \brc{a'_0, \ldots, a'_{k-1}}$.
+	\end{itemize}
+
+	By construction, we see that if $a < b$, then we have that $F(a) \prec F(b)$.
+
+	For injectivity, let us suppse for contradiction that for $a, b \in A$, $F(a) =_\prec F(b)$ but $a \neq_< b$. Then, since $<$ is a linear ordering, we note that either $a < b$ or $b < a$.
+	
+	Without loss of generality, let us suppose the first case holds. Then, we see that if $a < b$, it follows then that $F(a) \prec F(b)$; however, this means then that $F(a) \neq_\prec F(b)$ which is a contradiction. So, indeed, $F$ is injective.
+	
+	For surjectivity, we want to show that for all $a' \in A$, there exists some $a \in A$ such that $F(a) = a'$. Then, we note that for all $n \in \omega$, we have that $a'_n = F(a_n)$. Thus, we see that indeed $F$ is a surjection.
+	
+	So, we conclude that $F$ is an isomorphism as desired.
+\end{solution}
+
+\begin{hw}{23}[0][1]
+	Assume that $A$ is a set and define $\alpha$ to be the set of ordinals dominated by $A$. Show that $\alpha$ is a cardinal number.
+\end{hw}
+\begin{solution}
+	Suppose for the sake of contradiction that $\alpha$ is not a cardinal number. Then, there exists some ordinal $\beta < \alpha$ such that $\beta$ is a cardinal number of $\alpha$.
+	
+	Now, we note that since $\beta < \alpha$, it follows then that $\beta \in \alpha$. This means then that $\beta$ is dominated by $A$. However, by definition of $\alpha$, we note that $\alpha$ isn't dominated by $A$ else $\alpha \in \alpha$ which is a contradiction. Thus, $\beta$ can't be equinumerous to $\alpha$.
+	
+	Therefore, we conclude that $\card \alpha = \alpha$; i.e., $\alpha$ is a cardinal number as desired.
+\end{solution}
+
+\begin{hw}{23}[0][2]
+	Show that $\card A < \alpha$.
+\end{hw}
+\begin{solution}
+	Suppose for the sake of contradiction that $\card A \geq \alpha$. Then, we note that $\card \alpha \leq \card A$. But if this was the case, we note then that $\alpha$ is thus dominated by $A$; this is a contradiction.
+	
+	Therefore, we conclude that $\card A < \alpha$.
+\end{solution}
+
+\begin{hw}{23}[0][3]
+	Show that $\alpha$ is the least cardinal greater than $\card A$.
+\end{hw}
+\begin{solution}
+	Suppose for contradiction that there exists some $\beta$ such that $\card A < \beta < \alpha$. Then, we have $\card A < \beta$; in other words, we see that $\beta$ is not dominated by $A$.
+	
+	Then, since $\alpha$ is the set of ordinals which is dominated by $A$, we have then that $\alpha \leq \beta$ by definition. But this is thus a contradiction.
+	
+	Therefore, we conclude that $\alpha$ is indeed the least cardinal greater than $\card A$.
+\end{solution}
+
+\begin{hw}{24}[0][0]
+	Show that for any ordinal number $\alpha$, there exists a cardinal number $\kappa$ that is (as an ordinal) larger than $\alpha$.
+\end{hw}
+\begin{solution}
+	We note that this follows from the previous question. Recall that any set $A$ is equinumerous to some ordinal $\alpha$.
+	
+	Then, with this in mind, we observe that we can define $\kappa$ to be a set of ordinals dominated by $A$ as per the previous question. Then, we note that $\kappa$ is itself a cardinal number and that $\card \alpha = \card A < \kappa$. It follows then that $\alpha < \kappa$.
+	
+	Thus, we have proven the claim as desired.
+\end{solution}
+\end{document}
