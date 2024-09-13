@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{n+nb}{pi}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYGZca{}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{10}\PYG{p}{)];}
+\PYG{n}{a}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{b}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{p}{;}
+\PYG{n}{h}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mf}{0.05}\PYG{p}{;}
+\PYG{p}{[}\PYG{n}{t}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{w}\PYG{p}{]}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{pa3\PYGZus{}rk4}\PYG{p}{(}\PYG{n}{a}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{h}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{)}
+\PYG{n}{t}\PYG{+w}{         }\PYG{l+s}{theta\PYGZus{}1}\PYG{+w}{       }\PYG{l+s}{theta\PYGZus{}2}\PYG{+w}{        }\PYG{l+s}{w\PYGZus{}1}\PYG{+w}{         }\PYG{l+s}{w\PYGZus{}2}
+\PYG{o}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{l+m+mf}{0.00}\PYG{+w}{    }\PYG{l+m+mf}{3.14159265}\PYG{+w}{    }\PYG{l+m+mf}{0.00000000}\PYG{+w}{    }\PYG{l+m+mf}{0.00000000}\PYG{+w}{    }\PYG{l+m+mf}{0.00000000}
+\PYG{l+m+mf}{10.00}\PYG{+w}{    }\PYG{l+m+mf}{3.14159048}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00000127}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00000258}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.00000151}
+\PYG{l+m+mf}{20.00}\PYG{+w}{    }\PYG{l+m+mf}{2.82652174}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.18225021}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.36938068}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.20819032}
+\PYG{l+m+mf}{30.00}\PYG{+w}{    }\PYG{l+m+mf}{1.56468852}\PYG{+w}{    }\PYG{l+m+mf}{2.50502124}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.42746975}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.08491447}
+\PYG{l+m+mf}{40.00}\PYG{+w}{    }\PYG{l+m+mf}{0.93837915}\PYG{+w}{    }\PYG{l+m+mf}{2.25829202}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.25216627}\PYG{+w}{    }\PYG{l+m+mf}{0.54513375}
+\PYG{l+m+mf}{50.00}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.20785253}\PYG{+w}{  }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{13.15226318}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.01760665}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.09580021}
+\PYG{l+m+mf}{60.00}\PYG{+w}{    }\PYG{l+m+mf}{1.84424925}\PYG{+w}{  }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{19.27685961}\PYG{+w}{    }\PYG{l+m+mf}{0.76525912}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.85169218}
+\PYG{l+m+mf}{70.00}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.34868718}\PYG{+w}{  }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{40.16116165}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.54235743}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.52281970}
+\PYG{l+m+mf}{80.00}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.70455472}\PYG{+w}{  }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{43.11211278}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.31937476}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.88765946}
+\PYG{l+m+mf}{90.00}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.23855070}\PYG{+w}{  }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{49.51645070}\PYG{+w}{    }\PYG{l+m+mf}{1.05321419}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.22478220}
+\PYG{l+m+mf}{100.00}\PYG{+w}{    }\PYG{l+m+mf}{1.12966733}\PYG{+w}{  }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{56.43191547}\PYG{+w}{    }\PYG{l+m+mf}{1.09775705}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.48213182}
+
+\PYG{n}{t}\PYG{+w}{ }\PYG{p}{=}
+
+\PYG{l+m+mf}{100.0000}
+
+
+\PYG{n}{w}\PYG{+w}{ }\PYG{p}{=}
+
+\PYG{l+m+mf}{1.1297}\PYG{+w}{  }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{56.4319}\PYG{+w}{    }\PYG{l+m+mf}{1.0978}\PYG{+w}{   }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.4821}
+\end{Verbatim}

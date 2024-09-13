@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{gcc}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{DABC}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{c}\PYG{+w}{ }\PYG{n}{app}\PYG{p}{.}\PYG{n}{c}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{o}\PYG{+w}{ }\PYG{n}{app}\PYG{p}{.}\PYG{n}{o}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{gcc}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{c}\PYG{+w}{ }\PYG{n}{lib}\PYG{p}{.}\PYG{n}{c}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{o}\PYG{+w}{ }\PYG{n}{lib}\PYG{p}{.}\PYG{n}{o}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{gcc}\PYG{+w}{ }\PYG{n}{app}\PYG{p}{.}\PYG{n}{o}\PYG{+w}{ }\PYG{n}{lib}\PYG{p}{.}\PYG{n}{o}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{o}\PYG{+w}{ }\PYG{n}{app}
+\end{Verbatim}

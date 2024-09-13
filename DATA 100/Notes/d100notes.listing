@@ -1,5 +1,2 @@
-CREATE TABLE Dragon (
-	name TEXT PRIMARY KEY,
-	year INTEGER CHECK (year >= 2000),
-	cute INTEGER
-)
+%%sql
+SELECT name, cute, year FROM Dragon WHERE name IN ('puff', 'hiccup')

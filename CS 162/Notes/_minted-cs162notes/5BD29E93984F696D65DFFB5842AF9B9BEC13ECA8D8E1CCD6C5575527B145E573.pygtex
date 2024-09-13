@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{pthread\PYGZus{}create}\PYG{p}{(}\PYG{n}{pthread\PYGZus{}t}\PYG{+w}{ }\PYG{o}{*}\PYG{k+kr}{thread}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{pthread\PYGZus{}attr\PYGZus{}t}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{attr}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{o}{*}\PYG{p}{(}\PYG{o}{*}\PYG{n}{start\PYGZus{}routine}\PYG{p}{)(}\PYG{k+kt}{void}\PYG{o}{*}\PYG{p}{),}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{arg}\PYG{p}{);}
+
+\PYG{c+c1}{// Thread is created, executing start\PYGZus{}routine with arg as its sole argument.}
+\PYG{c+c1}{// Return is implicit call to pthread\PYGZus{}exit}
+\PYG{c+c1}{// (attr contains info like stack size, scheduling policy, etc.)}
+
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{pthread\PYGZus{}exit}\PYG{p}{(}\PYG{k+kt}{void}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{value\PYGZus{}ptr}\PYG{p}{);}
+\PYG{c+c1}{// Terminates the thread and makes value\PYGZus{}ptr available to any successful join}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{pthread\PYGZus{}join}\PYG{p}{(}\PYG{n}{pthread\PYGZus{}t}\PYG{+w}{ }\PYG{k+kr}{thread}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{o}{**}\PYG{n}{value\PYGZus{}ptr}\PYG{p}{);}
+\PYG{c+c1}{// Suspends execution of the calling thread until the target thread terminates}
+\end{Verbatim}

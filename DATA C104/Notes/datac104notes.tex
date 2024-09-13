@@ -1,0 +1,1152 @@
+\documentclass[openany]{book}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+\usepackage{macros}
+\usepackage{notes}
+
+%% PICTURES DIRECTORY %%
+\graphicspath{{C:/Users/Michael/Pictures/}}
+\graphicspath{{C:/Users/Michael/Pictures/D104}}
+
+%% REDEFINING CHAPTER FORMATTING %%
+\newif\iftoc\titleformat{\chapter}[display]{\cabin}{}{2in}{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Week}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}[\vspace{-20pt}\rule{\textwidth}{0.1pt}\vspace{0.0in}]
+\titlespacing{\chapter}{0pt}{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}{0pt}
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+
+\begin{document}
+\mytitle{Data C104: Human Contexts and Ethics of Data}{Fall 2024}
+
+\chapter{An Introduction}
+\section{Required Reading -- \textit{Do Artifacts have Politics?}}
+\subsection{A Brief Overview}
+In \textit{``Do Artifacts have Politics"} by Langdon Winner, they discuss the idea that man-made (technical) objects can contain ``political properties."
+
+Winner breaks down his argument into two parts:
+\begin{itemize}
+	\item Firstly, how inventions become a way of settling an issue within a community.
+	\item And secondly, ``inherently political technologies" which appear to require particular kinds of political relationships.
+\end{itemize}
+
+\subsection{Technical Arrangements as a Form of Order}
+\subsubsection{\textit{The Long Island Bridges}}
+\begin{example}[Bridges and Racism]
+	First, Winner presents an example: many of the bridges in Long Island, New York have strangely short overhead passes. As it turns out, the short height of these passes are due to the fact that their build, Robert Moses, built them as such to discourage buses on his parkways.
+
+	This is a reflection of Moses' biases and racial prejudices, as it allowed the ``upper" and ``comfortable middle" classes of white people to use his parkways, whereas the ``low class" black people who had to use public transit couldn't due to the low height of the overpasses.
+	
+	A consequence of this decision was the limiting of racial minorities and low-income groups into Moses' public park, Jones Beach.
+	
+	Furthermore, Moses even vetoed a plan to extend a railroad to Jones Beach, solidifying his intentions to limit the racial minorities and low-income people from his park.
+	
+	With this example, we can see how architecture and city planning can often contain both implicit and explicit political undertones.
+\end{example}
+
+\subsubsection{\textit{Further Examples}}
+\begin{example}[Parisian Roads and Street Protests]
+	Another example can be seen in Baron Haussmann's broad Parisian roads: these were designed in such a way to prevent recurrence of street fighting seen within the 1848 revolution. The broad streets meant that it was harder for protesters to put up barricades, easier for guards to fight back, and so on.
+\end{example}
+
+\begin{example}[Brutalism and Student Protests]
+	Or, we can point to large concrete buildings on American university campuses built to defuse student demonstrations. The complex floor plans, oddly placed entrances, and so on all serve to make student demonstrations harder to be held\footnotemark.
+\end{example}
+\footnotetext{Although Winner alludes to this, it is somewhat of a baseless claim that isn't easily verifiable: \url{https://slate.com/human-interest/2013/10/campus-brutalism-were-the-buildings-designed-to-thwart-student-riots.html}}
+
+From here, Winner discuses how oftentimes, studies of industrial machines can lead to uncovering ``interesting" political stories: technological changes express an amalgamation of motives, which often includes the desire to have control over others.
+
+\subsubsection{\textit{Industrial Mechanisation}}
+\begin{example}[Mechanisation and Labour Unions]
+	A ``poignant" example of this idea is seen in the industrial mechanisation of the nineteenth century.
+	
+	At Cyrus McCormick's reaper manufacturing plant, new and untested pneumatic molding machines were added at the cost of \$500,000. An initial interpretation of this decision, based solely on cost, would be that McCormick wanted to modernise the plant and increase efficiency and productivity.
+	
+	However, a closer look into the context behind this decision reveals a different story: McCormick was fighting with the National Union of Iron Molders, and the addition of these machines was a means of getting rid of the skilled workers who had organised such a union local in Chicago.
+	
+	Instead of skilled workers creating the castings, McCormick instead hired unskilled labour to work the machines. In fact, they even created castings inferior to what the skilled workers had produced, and eventually the machines were shut down.
+	
+	Nevertheless, although from an economical standpoint it might've been a lost, McCormick achieved his goal of disbanding the union. This example illustrates clearly how intertwined technological and political history can be.
+\end{example}
+
+In both the cases of Moses and McCormick, we see the importance of technical arrangements that precede the use of the things in question. It is trivial to see that technologies can be used in a political manner -- such as televisions being used to promote some candidate. However, this tends to lead to viewing technologies as being neutral tools who are only given political power by their users.
+
+Instead, these examples show how a given design might have been designed and built in such a way that it produces a set of consequences logically and temporally \textit{prior} to any of its uses.
+
+\subsubsection{\textit{Public Transportation}}
+While these examples thus far have illustrated when there is malicious intent, we can also see examples of when technologies lead to isolation, albeit unintentionally.
+
+\begin{example}[Public Transport and Handicapped People]
+	For example, we see that many means of public transportation such as buses were not designed with handicapped users in mind, restricting their ability to move around freely or even use the buses.
+	
+	This extends further to things such as sidewalks and the likes. And although there weren't any active intentions with discriminating against this minority group, the effects are still present, and thus there are now reforms being made to accommodate the affected.
+\end{example}
+
+We note that many important technological advancements have political consequences which transcend the idea of ``intended" and ``unintended": there are moments where some inventions may benefit one group greatly but set the other group back greatly as well.
+
+In these cases, it isn't correct -- nor insightful -- to say that ``somebody intended to do somebody else harm." Instead, we ought to say that some groups were simply bound to receive a better hand than others.
+
+\subsubsection{\textit{The Mechanical Tomato Harvesters}}
+\begin{example}[Tomato Harvesters, the Rich, and the Poor]
+	An illustrative example of how an invention can be both beneficial and harmful is seen in the mechanical tomato harvester, developed by researchers at the University of California during the 1940's.
+	
+	These machines greatly boosted productivity and efficiency, though due to the nature of their operation, researchers had to breed new tomatoes that were harder, sturdier, but also less tasty.
+	
+	Furthermore, due to their size and high cost, only a specific group of tomato growers could actually utilise the machine. The result? A decline in the number of tomato growers from several thousand to only several hundred. And yet, despite the decrease in growers, there was an increase in tomato output.
+	
+	And by the 1970's, tens of thousands of jobs in the tomato industry were eliminated due to the introduction of these harvesters. Thus, only very large growers had benefited from the introduction of such technology.
+\end{example}
+
+The University of California was in fact eventually sued by attorneys from the California Rural Legal Assistance, a group who represented farmworkers and other parties of interest.
+
+They claimed that the officials spent taxpayer money on projects which benefited only a handful of private interests while putting farmworkers and other people in harm's way. However, the University denied these charges and argued that to accept them ``would require elimination of all research with any potential practical application."
+
+And over many decades, agricultural research and advancements tended to favour larger agribusiness concerns, leading to those opposing the innovation of technologies such as the tomato harvester to be deemed ``anti-technology" and ``anti-progress."
+
+\subsubsection{\textit{Important Choices}}
+Winner discusses how, within a given category of technological changes, there are two kinds of choices that can affect its relative distribution of power, authority and privilege.
+
+Often, the crucial decision is a ``yes" or ``no": whether the project is will be adopted or not.
+
+However, once it has been greenlit, a second range of choices has to be made -- choices which are often equally as important. These choices has to do with special features in te design or arrangement of a technical system after it has been given the ``go ahead."
+
+\begin{example}[A Utility Company]
+	Let us look at a utility company. The company has been given permission to build large electric power lines. However, this isn't the end of the story: now they must decide where the power lines are to be placed, the design of the towers, and more. These are equally important choices that must be decided upon.
+\end{example}
+
+Some of the most interesting research on technology and politics focuses on demonstrating how seemingly innocuous design features in mass transit systems, water projects, and the likes actually mask social choices of profound significance.
+
+A key takeaway here is that looking at technology solely from a cost-cutting, efficiency, modernising perspective oftentimes results in us missing the point on the larger context at play here.
+
+From these examples, Winner thus conclude that technologies are ``ways of building order in our world."
+
+\subsection{Inherently Political Technologies}
+Thus far, none of the examples have tackled the idea that some technologies are, by their very nature, political in a specific way.
+
+According to this view, the adoption of a given technical system will bring with it ``conditions for human relationships" that have a political cast -- centralised or decentralised, repressive or liberating, and so on.
+
+This is essentially what is at the core of assertions like those made by Lewis Mumford -- that two traditions of technology exist side-by-side in Western history, one authoritarian and one democratic.
+
+Though examples given thus far have been flexible in their design and arrangements, and this flexibility can result in varying outcomes politically, this section explores certain kinds of technology which doesn't have this flexibility. For these technologies, choosing them means choosing a particular form of political life.
+
+\subsubsection{\textit{Technology and Authority}}
+\begin{example}[Engels' \textit{``On Authority"}]
+	In Friedrich Engels' \textit{``On Authority"}, he argues against anarchists on why strong authority is a necessary condition in modern industry.
+	
+	In his essay, he draws upon three sociotechnical systems of his day: cotton-spinning mills, railways, and ships at sea.
+	
+	He notes how the process of cotton becoming a finished thread, the cotton moves through a number of different operations, at a number of different locations in the factory. Because these tasks must be coordinated, Engels argues that the workers must accept a rigid discipline, that strong authority is needed else work becomes dysfunctional.
+	
+	Similarly lessons are drawn from the other two systems.
+\end{example}
+
+\begin{example}[Plato's \textit{``Republic"}]
+	In fact, we see that attempts to justify strong authority through appealing to technical practices can be seen in Plato's \textit{``Republic"} as well.
+	
+	Similar to Engels, Plato similarly drew comparisons to the ship at sea: since large ships need to be steered by those with strong arms, sailors naturally yield to the captain's command. And from here, Plato draws comparisons between governing a state and being the captain of a ship.
+\end{example}
+
+However, we see that in Engels' arguments, the justification isn't made through analogies such as in Plato's work, but instead by directly referencing the technology.
+
+However, following Engels' argument, we would expect that as we adopt increasingly complicated technical systems, the prospects for authoritarian ways of life would be greatly enhanced.
+
+This runs contrary to Karl Marx's position, in which he believes that the conditions that will eventually dissolve the capitalist division of labour and facilitate proletarian revolution are, in fact, conditions latent in industrial technology itself.
+
+These differences in viewpoints leads to a question (for socialism): what does modern technology make possible or necessary in political life?
+
+\subsubsection{\textit{The Two Claims}}
+Arguments to the effects that technologies are, in some sense, inherently political are given two basic forms by Winner:
+\begin{itemize}
+	\item Firstly, the adoption of a given technical system actually \textit{requires} the creation and maintenance of a particular set of social conditions as the operating environment of that system.
+	\begin{itemize}
+		\item We note that Engels' position is of this kind. In this conception, some kinds of technologies cannot exist as an effective operating entity unless certain social and material conditions were met.
+	\end{itemize}
+	\item A second, weaker claim is that a given kind of technology is strongly compatible with, but doesn't necessarily require, social and political relationships of a particular kind.
+	\begin{itemize}
+		\item Many advocates of solar energy espouses that the technologies is a lot more compatible with a democratic, egalitarian society than coal/oil/nuclear-based energy systems. However, they don't claim that solar energy \textit{require} democracy necessarily.
+	\end{itemize}
+\end{itemize}
+
+And furthermore, within each versions of the argument exists further distinction between conditions \textit{internal} and \textit{external} to the workings of a given technical system.
+
+More concretely, Engels' argument deals with internal social relations said to be required within cotton factories and railways. On the other hand, solar advocates' beliefs that the technology is compatible with democracy relates to how the technologies complement aspects of society removed from the organisation of the technologies as such.
+
+\subsubsection{\textit{Some Examples}}
+\begin{example}[The Atomic Bomb]
+	An example of inherently political artifacts given by Winner is the atomic bomb. In it, he states how, as long as they exist, the ``lethal properties demand that it be controlled by a centralized, rigidly hierarchical chain of command." And furthermore, Winner believes that the internals social system of the bomb ``must be authoritarian" in order to prevent misuse of it.
+	
+	To Winner, the state of affairs ``stands as a practical necessity" which is ``independent of any larger political system." Through this, we see how certain inventions are deeply political by their nature, and which doesn't become political based on how they are implemented or used (such as the bridges seen in Long Island).
+\end{example}
+
+\begin{example}[The Visible Hand]
+	In Alfred D. Chandler's \textit{``The Visible Hand"}, he argues for why certain technologies are inherently political, require certain societal structures to be in place for them to function. To illustrate this point, he appeals to technologies such as railroads which requires tight scheduling, which requires someone in charge to ensure smooth operations, etc.
+\end{example}
+
+\section{Lecture -- 8/28/2024}
+\subsection{Course Information}
+\begin{miscbox}{Course Expectations}
+\begin{itemize}
+	\item Lecture attendance isn't mandatory, but helps with understanding of the content.
+	\begin{itemize}
+		\item Lecture recordings will only be available for one week.
+	\end{itemize}
+	\item Major assignments include two analysis papers, midterm, and final.
+	\item There are mandatory, weekly discussions.
+	\begin{itemize}
+		\item There are weekly writing ``warm up" exercises.
+	\end{itemize}
+\end{itemize}
+\end{miscbox}
+
+Every instruction hosts weekly office hours. There will also be tutoring sessions Thursday from 4-5pm in Dwinelle 3205, starting 9/5.
+
+\subsection{Winner's Essay}
+First, we look at an example covered in the required reading: the bridge. Some considerations people may have when constructing a bridge involves stability, whether it can hold a lot of weight, whether it's convenient, and so on.
+
+As discussed in Winner's \textit{``Do Artifacts Have Politics?"}, the bridges built by Robert Moses in Long Island have a very low overpass; as a result, buses cannot go under the bridges. As a result, people who use public transportation have difficulties going to Moses' new park; these people are typically lower income part of the populace.
+
+Whether this was intentional or not is somewhat unclear, but regardless, the effects are still felt by the people.
+
+\subsubsection{Analyzing Quotes}
+A key quote from Winner is as follows:
+
+\begin{fancyquotes}
+	Robert Moses' monumental structures of concrete and steel \textbf{\textit{embody a systematic social inequality}}, a way of \textbf{\textit{engineering relationships among people}} that, after a time, becomes \textbf{\textit{just another part of the landscape}}
+	
+	\begin{flushright}
+		\emph{idk}
+	\end{flushright}
+\end{fancyquotes}
+
+The bridges built by Moses represents, carries, and reinforces these specific social inequalities affecting a specific group of people; we see that even something as simple as bridges can be vectors to carry out some form of inequality.
+
+The third part of the quote illustrates how, eventually, these inventions become so ubiquitous, so common, that it becomes almost invisible and we simply don't think about it anymore... unless we're being affected (negatively).
+
+All in all, technology isn't just a tool; rather, they shape the world which we live within -- they are a form of politics.
+
+In fact, this is further seen in the following quote:
+
+\begin{fancyquotes}
+	The things we call 'technologies' are ways of building order in the world. [...] The issues that divide or unite people in society are settled not only in the institutions and practices of politics proper, but also, and less obviously, in tangible arrangements of steel and concrete, wires and transistors, nuts and bolts.
+	\begin{flushright}
+		\emph{Douglas Adams}
+	\end{flushright}
+\end{fancyquotes}
+
+Winner discusses how technology can be politics by other means; going back to Moses, instead of creating laws to further one's political agendas, he instead built things (bridges) which carries out a similar effect.
+
+Further, Winner suggests that we should think about politics differently -- it isn't just the politicians and people we vote, but the materials that affects our world as well.
+
+\begin{miscbox}{Technology and Social Order}
+	Key characteristics of how technology structures social order are as follows:
+	\begin{itemize}
+		\item Integrates into everyday life.
+		\item Becomes part of the landscape.
+		\item Embodies social values, positions, and narratives.
+		\item
+	\end{itemize}
+\end{miscbox}
+
+\subsubsection{The Human Contexts and Ethics Toolkit}
+%\begin{center}
+%	\begin{tabularx}{|X X|}
+%		HCE Toolkit & \\
+%		\hline
+%		Power & Narratives \\
+%		Sociotechnical Systems & Identity/Positionality \\
+%		\hline
+%		Agency & Labor \\
+%		Classification & Performativity \\
+%		
+%	\end{tabularx}
+%\end{center}
+
+\begin{defn}[Power]
+	Power is the asymmetric capacity of a person or technology to structure or alter the behaviour of others.
+	
+	Scientific and technological power is intertwined with political power.
+\end{defn}
+
+Oftentimes, power is a lot more subtle, rather than something explicit and violent. It can be seen through charismatic personalities, trust, and so on.
+
+\begin{defn}[Identity/Positionality]
+	Identity is not only about how you see yourself, and how you see the world; it is also how society sees and treats you (positionality).
+\end{defn}
+
+We note that identity is co-produced with technology as well.
+
+\begin{defn}[Sociotechnical Systems]
+	Sociotechnical Systems is a system in which the actions of people and technologies are intertwined such that it isn't possible to just isolate the ``technical part" and deal with on its own.
+\end{defn}
+
+In the case of, say, a telephone, it's clear that it can only work with the help of a lot of other parts and people. The concept is meant to blur the line between the social and the technical.
+
+\begin{defn}[Narratives]
+	Narratives are essentially a fancy word for stories: they express and explain things that matter to people -- who they are, how the world is, how things work, what needs to be done, what futures are possible, desirable, or inevitable.
+	
+	Technology shapes and is shaped by narratives that are at-large in society. And while they can come to feel natural, they always need to be questioned.
+\end{defn}
+
+\section{Required Reading -- \textit{Introductory Essay: The Social Shaping of Technology}}
+\subsection{Technological Determinism as a Theory of Society}
+\begin{fancyquotes}
+	Technological determinism contains a partial truth. Technology matters. It matters not just to the material condition of our lives and to our biological and physical environment that much is obvious but to the way we live together socially
+	
+	\begin{flushright}
+		\emph{-- MacKenzie and Wajcman, 4}
+	\end{flushright}
+\end{fancyquotes}
+
+From this quote, we see how the authors believe that technology not only impacts the ``material condition" of our lives, but they also contribute to shaping society, shaping how we ``live together socially."
+
+However, the fact that they say that technological determinism only contains a ``partial" truth indicates their opinions on the idea: it isn't entirely correct.
+
+First, the authors elaborate upon the effects of technology further in the following example:
+\begin{example}[Technology and Feudal Society]
+	According to the historian Lynn White, the coming about of feudal society can be attributed to the invention and popularization of the stirrup (a saddle, basically).
+	
+	Prior to the introduction of the stirrup, fighting on horseback was limited due to soldiers having the risk of falling off of their horses. However, with their introduction, it made the effectiveness of fighting horseback increase greatly.
+	
+	But, the costs of training, of armour, and of horses were incredibly high -- in order to support such a form of fighting, society had to be reshaped in order to support an elite force of horseback soldiers.
+\end{example}
+
+However, the authors refer to White's views as a ``parable" rather than actual history; they pointed out how, while the stirrup may have explained the introduction of feudalism among the Franks, it doesn't account for its introduction to other groups (such as the Anglo-Saxons).
+
+Instead, the authors tell us to reference the ``set of social conditions wider than military technology" in order to understand the spread of feudalism to other areas. This leads us to the following quote:
+
+\begin{fancyquotes}
+	As a simple cause and effect theory of historical change, technological determinism is at best an oversimplification. Changing technology will always be only one factor among many others: political, economic, cultural, and so on. If technology's physical and biological effects are complex and contested matters ... it would clearly be foolish to expect its social effects to be any simpler. A 'hard', simple cause and effect technological determinism is not a good candidate as a theory of social change.
+	
+	\begin{flushright}
+		\emph{-- MacKenzie and Wacjman, 4}
+	\end{flushright}
+\end{fancyquotes}
+
+Thus, from this quote, the authors establish their stance on technological determinism: it leaves out a lot of details on how society is shaped by simply boiling it down to ``technology."
+
+According to them, technology is only one of many factors that contributes to the shaping of society. We have to consider other factors as well, whether they be political, economic, cultural, or other things. In fact, their stance is so strong that they deem it ``foolish" to expect technology to be the sole driving force for change in society.
+
+\begin{warn}
+	However, the authors make it clear that while simplifying every change seen in society to technology is ``foolish", this doesn't mean that technology has \textit{no} effects.
+	
+	While we can rule out ``hard" determinism, there still exists what they refer to as ``soft" determinism.
+\end{warn}
+
+\subsubsection{A Callback to Winner's Essay}
+The authors point back to Winner's essay, discussing Winner's claim of how basing energy supply around nuclear technology which requires plutonium may lead to stronger state surveillance to prevent its theft, misuse, etc. and thus erode traditional civil liberties.
+
+However, the authors point how, while uranium seemed to be scarce at the time of Winner's essay, it hasn't led to any such effects thus far. However, the general outline of Winner's essay still rings true: ``in adopting a technology, we may be opting for far more -- economically, politically, even culturally, as well as technically than appears at first sight" (MacKenzie and Wacjman, 5).
+
+But, to determine what exactly this 'more' might be is difficult, as (hard) technological determinism is an oversimplification theory of technological change. Thus, to them, the predictions are ``often off-beam."
+
+\subsection{Technological Determinism as a Theory of Technology}
+So far, the authors have discussed how technological determinism provides an oversimplified answer to societal changes. 
+
+Now, they tackle the idea of technological determinism as a ``theory of technology" -- in this scenario, technological changes is seen as an independent factor, ``impacting on society from the outside."
+
+However, they claim that this line of thinking is incorrect.
+
+\subsubsection{The Dangers of this Mistake}
+To begin with, the authors provide a reasoning for why this line of thinking is dangerous:
+
+\begin{fancyquotes}
+	The view that technology just changes, either following science or of its own accord, promotes a passive attitude to technological change. It focuses our minds on how to adapt to technological change, not on how to shape it. It removes a vital aspect of how we live from the sphere of public discussion, choice,and politics. Precisely because technological determinism is partly right as a theory of society ... its deficiency as a theory of technology impoverishes the political life of our societies.
+	
+	\begin{flushright}
+		\emph{-- MacKenzie and Wacjman, 5}
+	\end{flushright}
+\end{fancyquotes}
+
+From this quote, we observe how the authors believe that such a line of thinking results in us thinking of how to \textit{adapt}, rather than how to \textit{shape}, technological change. This can be seen in the present as well with respect to certain sentiments towards things such as Machine Learning/AI.
+
+\begin{example}[Reflexive Modernization]
+	The authors point to a phrase from Ulrich Beck -- ``reflexive modernization". The crucial idea is that, rather than modernization being a process that just happens to society, it is instead something that we must actively, and democratically, shape.
+\end{example}
+
+\begin{fancyquotes}
+	As a vitally important part of 'progress', technological change is a key aspect of what our societies need actively to shape, rather than passively to respond to.
+	
+	\begin{flushright}
+		\emph{-- MacKenzie and Wacjman, 6}
+	\end{flushright}
+\end{fancyquotes}
+
+\subsection{Does Science Shape Technology?}
+Technology is often said to be ``applied science." That is, scientists discover facts about reality, and technologists apply them to produce useful things. This is a key underpinning of popular forms of technological determinism.
+
+First, according to the authors, the idea that scientists ``uncover what is already there" is naive.
+
+Furthermore, science and technology haven't always been closely connected activities. The authors refer to examples such as the watermill, the plough, the spinning mill, etc. to illustrate this point. As the authors point out: ``contribution of activities we would now think of as science to what we would call technology was often marginal."
+
+\begin{fancyquotes}
+	Where science and technology are connected, as they increasingly have been since the second half of the nineteenth century, it is mistaken to see the connection between them as one in which technology is one sidedly dependent on science. Technology has arguably contributed as much to science as vice versa.
+	
+	\begin{flushright}
+		\emph{-- MacKenzie and Wacjman, 7}
+	\end{flushright}
+\end{fancyquotes}
+
+\begin{example}[The Computer and Science]
+	An example provided by the authors to illustrate this point is the computer: we observe how with its invention, it has allowed science to progress dramatically, letting people communicate with each other easier, simulate ideas easier, etc.
+\end{example}
+
+\section{Lecture -- 8/30/2024}
+\begin{miscbox}{Course Schedule}
+	The units for this course is as follows:
+	\begin{enumerate}
+		\item Making the Datafied World
+		\begin{itemize}
+			\item Week 1: Foundations
+			\item Week 2: Making Data
+			\item Week 3: Making Knowledge
+			\item Week 4: Narratives about Human-Technology Futures
+		\end{itemize}
+		\item Histories of the Datafied World
+		\item Governance
+		\item Industry, Capitalism, and Labour
+		\item Sites of Data Ethics Today
+	\end{enumerate}
+\end{miscbox}
+
+\subsection{The Datafied World}
+We can think of our datafied world in terms of layers. First, we have the ``Ubiquitous Data" layer.
+\begin{defn}[Ubiquitous Data]
+	The ``Ubiquitous Data" layer consists of instruments, making data, and instrumentation. The drive of this first layer is to turn the world into data.
+	
+	Of course, this is built upon the assumption that the world can actually be turned into data.
+\end{defn}
+
+Next, we have the ``Reliable Analytics" layer.
+
+\begin{defn}[Reliable Analytics]
+	The ``Reliable Analytics" layer is where we work with the data and then draw inferences from it. The drive here is to know the world through data.
+\end{defn}
+
+Then, we have the ``Culture of Algorithms" layer.
+\begin{defn}[Culture of Algorithms]
+	These algorithms can actually be implemented in machines and ran automatically, and scaled as well. The underlying imperative here is to make things objective, regular, and automated.
+\end{defn}
+
+And finally, we have the ``Autonomous Agents" layer.
+\begin{defn}[Autonomous Agents]
+	In here, the autonomous agents are learning and adapting. This involves things such as ML and AI, for example. The drive here is to optimize, adapt, and govern.
+\end{defn}
+
+So, when referring to the datafied world, we are referring to turning the world into data first, which then gets used by other layers.
+
+\subsection{Technological Determinism}
+\begin{defn}[Technological Determinism]
+	Technological Determinism says the following: technology is in the driver's seat. That is, it acts on its own and is self-moving. Furthermore, it is inevitable and has to happen. It then has impacts on society from the outside, which society must try to adapt to or not.
+\end{defn}
+
+While technological determinism gets at important things, it misses key things as well; we can refer to MacKenzie and Wajcman for this.
+
+\subsection{Alternative Narratives}
+Aside from the technological narrative which was given previously, there are other views as well. For example, the societal narratives as follows:
+\begin{itemize}
+	\item Historical forces that brought us data, analytics, and computing.
+	\item Social structures that got embedded in the datafied world
+	\item Economic logics that have driven forward investment
+	\item Actors steering it (individuals and collectives)
+\end{itemize}
+
+However, we can mix these two narratives together, creating this interwoven sociotechnical narrative.
+
+\subsection{An Example}
+\begin{example}[The Rental Market]
+	We can look at the rental market. One way in which it is datafied is reflected in how there are algorithms constructed to predict the optimal pricing strategy of rental properties based on its characteristics.
+	
+	Applying HCE tools to the datafied rental market, we see how 
+\end{example}
+
+\chapter{Week Two Woes}
+\section{Required Reading -- \textit{Sorting Things Out: Classification and Its Consequences}}
+\subsection{Introduction}
+The first required reading of this week is a piece by Bowker and Star: \textit{``Sorting Things Out: Classification and Its Consequences"}.
+
+To begin with, the author makes a point out of how normal -- and ingrained within our nature -- it is to categorize things. They list out examples such as files on our desktops, social roles (such as one's family, friend, boss, etc.).
+
+Normally, these classifications are invisible but become more visible when they ``break down or become objects of contention," as the authors put it. However, despite being invisible, their impact is still tangible. This is elaborated upon in the following example:
+
+\begin{example}[Daily Life Impacts]
+	For example, we look at ignoring the classification of our gender. What if we just went to whatever bathroom without care? We'd certainly be shouted at or found weird by other people if we use the ``wrong" bathroom.
+	
+	Similarly, if you stand in the immigration queue in the airport without proper documentation, you'd certainly be looked at weirdly as well.
+\end{example}
+
+\begin{example}[Wider Scale Impacts]
+	Other examples include how an entire area is classified. For example, ones classified as residential versus ecological can affect how the government will decide to build upon the area, how much money will be invested, what sort of projects, etc.
+\end{example}
+
+\subsection{Categories as Subjects of Contention}
+The paper mentions how classes and categories can become objects of contention. 
+
+More specifically, they point to the de-medicalization of homosexuality in the DSM. We see how this came to be after direct lobbying by gay and lesbian advocates.
+
+Furthermore, within the same era, feminists were debating whether the categories of premenstrual syndrome and postpartum depression would be good to include in the DSM or not.
+
+And more recently, the option to select multiple racial categories was only included around 1997, spurred on by people coming from multiracial background advocating for the inclusion. But at the same time, it was highly contested as many African-American and Hispanic civil rights groups.
+
+\subsection{The Main Idea}
+Here, the author describes the main points of this article:
+\begin{enumerate}
+	\item They seek to understand the role of invisibility in the work that classification does in ordering human interaction.
+	\item They want to understand how exactly these categories and made and being kept invisible.
+	\item They explore how systems of classification are part of the built information environment.
+\end{enumerate}
+
+\subsection{The Dangers of Classification}
+To begin with, we point to this quote from the book which illustrates the authors' belief that classification can be dangerous:
+
+\begin{fancyquotes}
+	Each stand and each category valorizes some point of view and silences another. This is not inherently a bad thing [...] but dangerous."
+	
+	\begin{flushright}
+		\emph{\textit{-- Bowker and Star, 5}}
+	\end{flushright}
+\end{fancyquotes}
+
+\begin{defn}[Valorize]
+	To give or ascribe value or validity to (something).
+\end{defn}
+To illustrate this point of how categories exist which we may not immediately view as problematic, they provide the following:
+
+\begin{example}[Immigration, Academic Achievement, and Classification]
+	For example, the U.S. Immigration service deems certain groups -- categories -- of people as being more desirable for U.S. residents. The result? A quote system that valued those from Europe over those from Africa or South America.
+	
+	Another example provided is how students are classified as being ``good" or ``bad" based on standardized testing and aptitude. This results in certain knowledge being seen as more important, whereas others are treated as invisible.
+\end{example}
+
+Other examples which may not have an obvious impact includes VHS over Betamax, and the standardization of types of seeds for farming. Initially, we may think that these actions are morally neutral.
+
+However, the authors argue that ``collective forms of choice are also morally weighted."
+
+\subsection{Working Infrastructure}
+The authors ...
+
+\subsection{Classification}
+\begin{defn}[Classification]
+	A classification is a spatial, temporal, or spatio-temporal segmentation of the world.
+\end{defn}
+
+A classification system then can be thought of as a set of boxes which things can be placed within and then do some kind of work.
+
+In an abstract, ideal sense, the authors claim that classification systems exhibit the following two properties:
+\begin{enumerate}
+	\item \textit{There are consistent, unique classificatory principles in operation.}
+	\begin{itemize}
+		\item Genetic Principle of Ordering: This is where we're classifying things by their origin and descent. For example, we can think of a family tree. Another example is a hierarchy of tasks deriving from one another over time.
+		\item Temporal Ordering: For example, we sort correspondence by date received.
+		\item Functional Ordering: For example, we sort recipes by how often they're used.
+	\end{itemize}
+
+	\item \textit{The categories are mutually exclusive.}
+	
+	\item \textit{The system is complete.}
+	\begin{itemize}
+		\item That is, the classification system should be able to place a label on everything in the world it's trying to describe.
+	\end{itemize}
+\end{enumerate}
+
+We note that in practice, the second point isn't often achieved: when certain categories become a point of contention, we see that there may be conflicts on whether an object belongs to one category or another. An obvious example would be gender, in which people may not fit exactly in one gender (e.g. genderfluid).
+
+With respect to the third point, there are instances where people decide to ignore new data that would make a system more comprehensive. A possible reason may be monetary: you could hide the discovery of a new species on an economically important development site due to monetary considerations, for example. Or, an anomaly being discovered may cause an overhaul to a record keeping system, and thus it is ignored.
+
+\subsubsection{Classification versus Nomenclature}
+\begin{defn}[Nomenclature]
+	An agreed-upon naming scheme.
+\end{defn}
+\begin{example}
+	For example, street names include those named after intellectual figures, political figures, etc.
+\end{example}
+
+More precisely, the ICD (International Classification of Disease) is labeled a ``classification" even though many consider it to be a ``nomenclature." But ultimately, the WHO has been trying to create a separate IND (International Nomenclature of Disease). Thus, anything consistently called a classification system and is treated as such will be considered as such by the authors.
+
+\section{Lecture -- 9/4/2024}
+Today, we will be discussing the process of getting a complex thing such as the world and then abstracting it, simplifying it.
+
+All in all, we think of how data can be made.
+
+So, what is this lecture for?
+\begin{itemize}
+	\item Work through a case of making data.
+	\item Open up representation -- how data represents the world.
+	\begin{itemize}
+		\item Knowledge -- Selection, abstraction, mediation, perspective
+		\item Politics - People, authority, power
+	\end{itemize}
+	\item Dive deeper into classification.
+	\begin{itemize}
+		\item Stay alert to assumptions and choices
+	\end{itemize}
+\end{itemize}
+
+For this lecture, we are looking at a case study of the air district.
+
+First, we have something known as the AQI, which is a useful and obligatory abstraction for standardization, communication and action implemented by the U.S. EPA.
+
+Note that other countries can have their own versions of the AQI.
+
+The AQI provides a basic tool to communicate the air pollution levels.
+
+In this regard, we see how the AQI can be thought of as a form of technology.
+
+% insert chart of substances found in the air
+We see from this graph what concentration of certain substances are found in the air in each of the city.
+
+We note that the website contains information on Hydrogen Sulfate; however, it isn't one of the five main air pollutants. So typically, we wouldn't expect to be looking at data involving it. Yet, the website has it.
+
+To explore why the website contains information on it, we can explore deeper on the air district and its job.
+
+We note that the Air District isn't just some entity that only collects data; it does it with a purpose -- namely, to try and enforce air pollution regulations.
+
+For example, there are a number of oil refineries in specific areas of the Bay Area, and we see how the Air District reports on specific flares and the likes.
+
+However, while these reports tell us about how something bad might be occurring, it leaves out a lot of the context of the continuous horrible effects to the community around it for example.
+
+\subsection{Making Data}
+We look at ``the phenomenon" in the world, and the abstractions that represent it.
+
+We look for the work that makes the data represent the phenomenon.
+\begin{itemize}
+	\item Networks of air sensors running all the time.
+	\item Local communities generating complaints.
+	\item Air District paying people and posting data.
+\end{itemize}
+
+And then, we ask about the why's.
+\begin{itemize}
+	\item Why it's getting made, to what end?
+	\item Why these particular questions?
+	\item Who gets to define it and make it?
+	\item Who participates, how, and who cares?
+	\begin{itemize}
+		\item Do measurements of flare gases really capture the phenomenon for communities?
+		\item Local knowledge and participation also make data -- ``from below," not just ``from above."
+	\end{itemize}
+\end{itemize}
+
+\subsection{Data and Power}
+There is a strong tie between data and power: it enables somethings to happen, and others to not. For example, if certain data is not collected, it is viewed as ``not existing" at all.
+
+We say that ``data takes work and it does work." It is made -- by people -- to do work in the world in contexts which shape what they do.
+
+Furthermore, data is not just given; there are choices built into all data about how to represent the world. In the case of the Air District, there could have been different choices: they could have looked at different substances, different areas they deemed important, etc.
+
+Finally, data travels: it moves beyond its original contexts (how/where/why it was made). But it travels with those world-making effects built in.
+
+\subsection{Representation}
+As a representation of the world, data is of course going to be selected. It is partial. In other words, people make choices about:
+\begin{itemize}
+	\item What phenomena to know.
+	\item What data to try to capture it with.
+	\item What aspects to feature.
+	\item By what means, with what instruments.
+	\item How to present it to make it actionable.
+\end{itemize}
+
+\begin{warn}
+	Note that selection is often better thought of as \textit{perspective}, rather than \textit{bias}. And it can't just be eliminated.
+\end{warn}
+
+We note that you can never eliminate bias; it always exist.
+
+Furthermore, selection is a feature, not a bug. Selection, abstraction, mediation, and perspective are all in the very nature of representation of representation.
+
+\subsubsection{Why does it Matter?}
+One of the reason is that data speaks with authority: the world is seen as ``speaking through" data, and data is seen as ``speaking for" the world.
+
+The data becomes a necessary passage point, and so do authorities rely on.
+
+Grassroots can make data of their own from below as well, in order to be represented in it. This is a lot like political representation.
+
+\subsection{What Counts?}
+For the Air District:
+\begin{itemize}
+	\item What counts as pollutants to measure?
+\end{itemize}
+
+Classifications embed choices.
+
+\begin{fancyquotes}
+	Each standard and each category valorizes some point of view and silences another.
+	
+	\begin{flushright}
+		\emph{Bowker and Star, 5}
+	\end{flushright}
+\end{fancyquotes}
+
+When people classify, human assumptions and judgments enter into data, with (or without) being noticed.
+\begin{itemize}
+	\item These assumptions and judgments get naturalized, reproduced, embedded in systems, and given new life and power.
+	\item We need to denaturalize what's built in as natural.
+\end{itemize}
+
+\section{Required Reading -- \textit{Informational Persons and Our Information Politics}}
+
+\subsection{Informational Persons}
+In this paper by C. Koopman, they claim that we are all subject to vast amounts of personal data that attaches itself to us, and we in turn regularly reattach to ourselves.
+
+The importance of this data is elaborate upon in the following (hyperbolic) example:
+\begin{example}[A World Without Data]
+	The author asks us to imagine a world where we lose all of our data -- if you can no longer be represented by any data system.
+	
+	In this case, we have no driver's license, passport, bank account number, transcripts, etc.
+	
+	We have nothing and can do nothing.
+\end{example}
+
+This example illustrates how the loss of our ``informational selfhood" would ``debilitate our sense of self" in the present day. Thus, we see how information is deeply woven into who we are as a person.
+
+However, we note that this is only an issue now; centuries ago, if a farmer had encountered such a scenario, nothing would really... change.
+
+\subsubsection{19th Century Detour} 
+During the nineteenth century, people began using confessional technologies -- such as diaries and autobiographies -- to take notes of ``not only merchants and their shenanigans but to the most banal chores and most secret ideas of an individual," as Cornelia Vismann puts it.
+
+And complementing this was a variety of less literary and more mundane materials for self-formation: numbers. As Ian Hacking puts it, a ``new kind of man" was brought into being, a ``man whose essence was plotted by a thousand numbers."
+
+\subsubsection{20th Century}
+These ideas espoused by Vismann and Hacking gave rise to the subjects of information we see now. In the early decades of the 20th century, we see how information preceded the person.
+
+\begin{fancyquotes}
+	It became possible for information to draw up persons as if out of nowhere [...] We began being born onto forms: the ubiquitous birth certificate certifying the inauguration of a lifelong paper trail that would outlive even the eventualities of our death certificates.
+	
+	\begin{flushright}
+		\emph{\textit{-- Koopman, 6}}
+	\end{flushright}
+\end{fancyquotes}
+
+\subsubsection{The Present Day}
+The author points to social media profiles as being an emblem of the informational person which our modern technologies have ``coaxed us to become."
+
+However, the author argues that the ``terms of our informational selfhood" doesn't belong to social media, digital media, etc.
+
+Instead, it presents some formatting of our informations -- before social media, people still had names, addresses, jobs, etc., but social media provides a formatting of this informational self.
+
+\subsubsection{Data}
+The author makes the claim that we can't just simply detach ourselves from our data; instead, data is what makes us... us. Who we are is deeply interactive with data.
+
+\section{Required Reading -- \textit{Coded Exposure}}
+\subsection{Technology and Racism}
+To begin with, the author talks about how sensors are often unable to detect people of darker skin tones. This coded racism however, is often overlooked as being a simple ``inconvenience in service to a greater good." Instead of improving the sensors, companies may try installing manual water fountains, thus conjuring up a sort of racial segregation.
+
+\subsection{Multiply Exposed}
+While some technologies fail to see Blackness, others serve to expose them to systems of racial surveillance.
+
+Here, expose can take on many different meaning.
+
+\subsubsection{Photography}
+First, we look at the exposing film.
+
+Photography was developed to capture visually and classify human differences. However, it also helped to solidify certain ideas such as race and empires; photographs served as visual evidence of the stratified difference.
+
+We typically assume that photographs are objective depictions of our reality. However, they are taken according to the demands and desire of those who exercised some sort of power or control over others.
+
+Even color photography and a positive bias towards lighter skin tone reinforces a White-dominated ideal. Thus, in this visual economy, race is heightened and accorded greater value.
+
+\subsubsection{Racism}
+In a recounting by Frantz Fanon, he describes the experience at being looked at -- exposed -- by a White child, who eventually starts fearing him.
+
+It reveals to us a key feature of Black life in Paris: they fear being exposed, as it leads to a form of suffocating social constriction. However, ironically enough, the White child is the one who fancied themselves the one at risk.
+
+\subsection{Exposing Whiteness}
+\subsubsection{Kodak}
+A concrete technique through which Whiteness has fashioned itself in photography is seen in Kodak's Shirley Cards. Since the model's (white) skin tone was set as the norm, it meant that people with darker skin tones were often underexposed.
+
+Some attempts to ameliorate this is seen in adding more light to darker individuals to make them more visible; but this runs into the issue when the image consists of multiple individuals of darker complexion.
+
+Eventually, the photographic industry decided to fully tackle this issue, spurred on by demands from Black parents after the desegregation of education; their children were blurry in school photographs.
+
+Kodak was also spurred on to change their technology in order to compete with other companies outside of Europe as well.
+
+Thus, the author makes note of how the ``market and profitability imperative of tailoring technologies to different populations is an ongoing driver of innovation."
+
+\subsubsection{Polaroid}
+Another example of racism in photography is illustrated in Polaroid, who used their cameras with the added flash ``boost button," to better capture Black citizens for the infamous passbooks of South Africa. As such, the company was contributing to the apartheid of South Africa at the time.
+
+At first, the company simply tried to improve the conditions of its South-African workers; but this wasn't adequate for the masses, and after several years of protests, Polaroid finally pulled out of South Africa completely.
+
+Through this example, the author illustrates how the design of technology can be connected to social policies.
+
+\subsubsection{HP Cameras}
+HP cameras are noted to pan to follow a White face, but stop when a darker skinned person comes into the frame.
+
+Thus, we see how, even now, the new tools are ``coded in old biases." Although this may seem surprising if we equate technological innovation to social progress, when viewing through the lens of ``enduring invisibility," this instance is less surprising.
+
+\subsubsection{Tecno Mobile}
+The Chinese Tecno Mobile company made it a point to emphasize the quality of photos for Black customers in their ads.
+
+\subsection{Exposing Difference}
+In 2015, Google Photo marked two Black people as ``gorillas" -- a racist depiction grounded in history.
+
+Similarly, when attempting to make an African-inspired avatar, D. Fox Harrell found that it was made ``automatically less intelligent."
+
+\begin{fancyquotes}
+	Prejudice, bias, stereotyping, and stigma are built not only into many games, but other forms of identity representations in social networks, virtual worlds, and more. These have real world effects on how we see ourselves and each other. Even in systems that have very open identity creation options, like Second Life, there are still different valuations for skins, social groups and categories being formed
+	
+	\begin{flushright}
+		\emph{\textit{-- Benjamin, 75}}
+	\end{flushright}
+\end{fancyquotes}
+
+While these examples so far may not seem very deadly, it becomes a lot more grave once we see these ``racist robots" be employed by institutions such as the police.
+
+\section{Lecture -- 9/6/2024}
+\subsection{What's this lecture for?}
+For this lecture, we'll start with a standard definition of personal data. Furthermore, we'll be looking at a case study about a social services algorithm to analyze the structure of personal data.
+
+\subsection{Personal Data}
+\begin{defn}[Personal Data According to the GDPR]
+	According to the General Data Protection Regulation (GDPR), personal data is defined as the following:
+	\begin{itemize}
+		\item Any information relating to an identified or identifiable natural personal.
+	\end{itemize}
+\end{defn}
+
+This is a fairly intuitive definition. We'll also provide a preliminary definition: personal data is tied to and deriving from individuals, having its origins in those individuals' bodies and behaviors.
+
+\subsection{Case Study: Coordinated Entry System (CES) for the Unhoused, LA}
+The LA county created an assessment tool which collects information on unhoused individuals and represents/ranks each individual as vulnerable (risky).
+
+Each individual gets represented with some sort of risk score to determine who to distribute resources to.
+
+We note that a lot of intimate data is collected. For example, survey questions include:
+\begin{itemize}
+	\item Use of emergency medical services, mental health crisis services, suicide prevention services, etc.
+	\item Drug use, sex work history, etc.
+	\item Photograph
+\end{itemize}
+
+Protection personal information include:
+\begin{itemize}
+	\item Social Security, name, DOB, etc.
+\end{itemize}
+
+As viewed from above by the institution, the system is a ``beautifully rational system." It has good intentions all around, solving social problems with a data-centered technical system.
+
+However, there are those represented in the data -- the data subjects -- who say otherwise.
+
+\subsubsection{Representation}
+We observe that in order for people to get housing, they must go through the survey -- even if they don't want to share a lot of personal, vulnerable information about themselves.
+
+Even more, they may have divulged all of these things for but a chance to get housing.
+
+\subsubsection{Classification}
+When classifying people, we talk about putting people into discrete categories. We count people \textit{as} something.
+
+When discussing classifying people, we should also involve what work it takes to fit people into classifications -- classifications aren't necessarily natural. They are artificial.
+
+Sorting also sometimes involves some sort of ranking; i.e. some classification may be deemed better than others.
+
+With regards to the CES, being classified as ``high vulnerability" means that we may be seen as a risk by other people.
+
+It causes people to think about what a ``good" group is for deserving housing. Other classes are thus considered worse, inferior, and this perception shapes people and how they're perceived by society.
+
+\subsubsection{Abstraction}
+Data can be made from people, but exactly the work of making the data abstracts from them.
+
+However, abstraction is an important and powerful thing: it can help shield us from personal suffering, turning people into fungible units or commodities, etc.
+
+The question then is how we ethically acknowledge -- and counteract -- the abstraction that's a natural part of data?
+
+\begin{example}[The Punch Card]
+	The Punch Card became a symbol of bureaucracy, as described in the following quote:
+
+\begin{fancyquotes}
+	Punch cards stood for abstraction, oversimplification and dehumanization. The cards were, it seemed, a two-dimensional portrait of people, people abstracted into numbers that machines could use. The cards came to represent a society where it seemed that machines had become more important than people, where people had to change their ways to suit the machines.
+	
+	\begin{flushright}
+		\emph{-- Steven Lubar, 44}
+	\end{flushright}
+\end{fancyquotes}
+\end{example}
+
+Tying this back to the CES, the vulnerability score abstracts away from a personal narrative -- someone's entire life story.
+
+Many felt that the focus of the CES is on generating and analyzing data rather than on building housing.
+
+People who have to go through the CES have to find some spot between not oversharing all of their vulnerable information but also not leaving out so much that they aren't known well enough.
+
+It dehumanizes the people, reducing them down to just a data point, an abstract object to be manipulated.
+
+\subsubsection{Circulation}
+Data is made in a context -- but by being made into data, it can easily circulate beyond that context and travel far from its origin.
+
+It does this under two conditions:
+\begin{itemize}
+	\item If someone else finds that traveling is useful to them.
+	\item It always get re-contextualized (and often carries more context with it than you think).
+\end{itemize}
+
+In the context of our case study, the scores circulate into other domains of life, where they get re-contextualized. For example, the data may get shared with other agencies, such as the police. This results in the systems providing social services ultimately becoming a part of managing and policing the underprivileged.
+
+\subsection{23 and Me}
+We note that when we take our DNA test, it can still divulge information about other people as well (such as family members). Even the most personal data can tell information about other people as well.
+
+Data is never just about one personal. It's about a collective.
+
+\subsection{Stake of Representation}
+Even with the best of intentions, representations can be -- and often are -- experienced as harmful.
+
+\subsubsection{Allocative and Representational Harm}
+Frequently, we focus on ``allocative harm" of data systems: that is, the ways in which data collection, databases, data analytics, etc. can negaitvely affect the distribution of resources to a person or group.
+
+But, we should also consider the representational harm -- this is the ways in which these data technologies can make statements or say something about us to ourselves and others.
+
+Ultimately, we say that personal data has stakes in the way that it can expose us to disrespect, surveillance, loss, and so on.
+
+\begin{warn}
+	Note that vulnerability is central to personhood and the human condition. It is part of every social relationship, and it's at the heart of ethics.
+	
+	Technology shapes \textit{who} becomes vulnerable, and \textit{how}.
+\end{warn}
+
+\chapter{The Yapper Strikes Back}
+\section{Lecture -- 9/9/2024}
+In this week, we will be looking at ``making knowledge." The purpose of this lecture is outlined as follows:
+\begin{itemize}
+	\item Consider how and why we tell the history of science.
+	\item What about philosophy of science?
+	\item Bringing it together with Thomas Kuhn.
+\end{itemize}
+
+\subsection{The Trinity Test}
+On July 16, 1945, the world's first nuclear explosion testing occurred with the Trinity Test.
+
+After 1945, science no longer became the work of an isolated individual.
+
+Around the globe, there became more government involvement (and intervention) in scientific research. A lot of money went into training the next generation, building infrastructure, providing funding, etc.
+
+Before 1945, STEM being seen as something for ``smart" people was not necessarily commonplace before 1945. But this was subverted after WW2.
+
+We also saw the advent and explosion of collaborative research.
+
+\subsection{Big Science}
+In the 1950s to 60s, we saw how researchers grew from 50,000 to 1,000,000. Scientific journals grew from about a hundred to tens of thousands as well. These are quantitative changes.
+
+Furthermore, there are qualitative changes as well with respect to the feeling in the scientific community. The form of science itself became different. For example, having to work in teams; this is an example of a quantitative change impacting a qualitative change.
+
+\subsection{Professional History of Science}
+At this point in time, studying science's patterns in order to organize and optimize scientific research for its practical outcomes. This is a physics-centered history of science.
+
+And we observe how universities began to invest more into the history of science. For example, Berkeley hired its first historian of science (who focused on the history of physics) in 1959.
+
+\subsection{Great Men Narratives}
+Earlier, traditional history of science focuses on the individual genius and his ideas. These narratives are still with us! Instead, we have to think of a more distributed model of agency and influence that is actually deployed.
+
+Along with this idea, there's this idea of a single line of progress; all societies follow the same evolutionary techno-scientific path. That is, all societies go through ``stages" (no alternative modernities), which connects to lots of racial theories as it allowed them to point to who is ``behind" in this techno-scientific line.
+
+Thus, this narrative helps support the idea of the superiority of Europe over the rest of the world. In this view, the history of science is in fact the history of Europe's ascent and global leadership. It undergirds colonial and imperial networks and power.
+
+This further leads to the narrative of inevitability, one that is of an unstoppable and inevitable progress of science.
+
+\begin{figurebox}[]{John Gast, \textit{American Progress} (1872)}
+	\centering\includegraphics[width=\textwidth]{d104-us-progress}
+\end{figurebox}
+
+In this image depicting the age of Manifest Destiny, we see how in the darkness, there are caricatures of native Americans being pushed away, depicting them as uncivilized versus the technologically advanced white men.
+
+\subsection{Science in the Present Day}
+One of the interesting questions to ask is how science changes. Two options presented in the lecture are:
+\begin{itemize}
+	\item Mostly through data collection.
+	\item Mostly through new concepts or theories.
+\end{itemize}
+
+Arguments for the first point is how data collection can lead to use identifying new problems to tackle. But we need new concepts/theories to really advance forward (for example, ChatGPT being created thanks to the publication of several seminal papers).
+
+\subsection{Philosophies of Science}
+\subsubsection{Logical Positivism (1920s - 1960s)}
+\begin{defn}
+	Everything starts from empirical data (or sense impressions underneath the data). That is, scientific theory is from empirical data and logical structure to organize it.
+\end{defn}
+
+Thus, there are clear-cut separation between observations and theories, facts and values.
+
+Implications lead to scientists confronting empirical data directly, and theory comes later. Furthermore, theory then gets verified by experiment and depends on generalizations from past data.
+
+But this lead to the problem of ``black swans." That is, some unexpected data that we can't predict based off of our generalizations and the like.
+
+\begin{example}
+	Suppose we're in 17th to 18th century Europe and classifying swans. They write that all swans are white, finding data to support this. But once you encounter a black swan, this theory is thus wrong and has to either be corrected, or this ``black swan" isn't actually a swan.
+\end{example}
+
+From this example, we can never be sure that our theories are truths; there is always the risk of a counterexample appearing.
+
+\subsubsection{Falsificationism (1930s - 1970s)}
+\begin{defn}
+	Falsification is the idea that scientific theories can't be verified; instead, they can be falsified. That is, everyone can reach the same result in falsifying a theory with data.
+\end{defn}
+
+Falsification is thus a deductive procedure (a ``logic").
+
+Thus, a good theory is falsifiable, robust, and bold (explains a lot, and takes risks).
+
+This leads to the following implications:
+\begin{itemize}
+	\item Good scientists are skeptics. Everything must be doubted.
+	\item They go out into he world trying to falsify their theories.
+	\item We make gradual progress towards truth, through correcting error.
+\end{itemize}
+
+\begin{rmk}
+	We note here that there is a connection between this philosophy and the idea of hypothesis testing. And it gives way to the rise of statistics.
+\end{rmk}
+
+\subsubsection{Limits}
+However, there are limits of these ``logical" approaches ot science. Scientists don't actually behave in this way; there's much more tinkering than that. The following quote illustrates this idea:
+
+\begin{fancyquotes}
+	Scientists don't change their mind easily. Rather, they die.
+	
+	\begin{flushright}
+		\emph{\textit{-- Max Planck}}
+	\end{flushright}
+\end{fancyquotes}
+
+One big limitation is the \textbf{under-determination of scientific theories by data}:
+\begin{itemize}
+	\item Multiple theories could explain the same data, leading to competing theories.
+	\item Thus, we have to choose between two different theories.
+\end{itemize}
+
+Furthermore, there's the idea of the Duhem-Quine thesis. That is, \textbf{a hypothesis can't be tested in isolation}.
+
+\subsection{The Copernican Revolution}
+...
+
+\subsection{Thomas Kuhn}
+
+\section{Lecture -- 9/11/2024}
+Within this lecture, we explore why data is so powerful today, both in science and public life.
+
+Looking at history can help us understand how quantitative data has come to be regarded as being objective.
+
+However, the term ``objective" is a relatively modern concept that wasn't known about centuries back. Data wasn't always seen as being objective.
+
+\begin{rmk}
+	Data can be used as a powerful and persuasive rhetorical device which facilitates communication and trust in complex and democratizing.
+\end{rmk}
+
+%\begin{figurebox}[]{Recidivism and Economic Graphs}
+%	\centering\includegraphics[width=\textwidth]{d104-data-graphs}
+%\end{figurebox}
+
+Looking at the recidivism graph, it allows us to make judgment on who we should be worried about or not, and the like. The other graph tells us a story of perhaps when to buy stocks, how the economy will progress, etc.
+
+A politician can look at the graph on the right and make predictions on what may happen, using this data to make decisions following these predictions.
+
+\begin{example}[University Rankings]
+	Another example of data having a powerful impact is reflected in university rankings. We look at these rankings and trust that they tell us that a university is better than another.
+\end{example}
+
+But, the question becomes: why is it that our first reaction is to trust these rankings?
+
+Another way to frame this question is: why is data so pervasive and persuasive?
+
+One answer is that data is ``objective" -- but this has its own issues, such as what ``objective" truly mean, seeing how its definition has changed over the course of history.
+
+\subsection{Two Parallel Narratives}
+There is a common assumption that quantification and objectivity have always been intertwined. However, this lecture will explore how they stemmed from very different origins.
+
+To begin with, it was only in the 19th century where objectivity became a word to describe the quantification.
+
+\subsubsection{Rise of Quantification in Science}
+According to Galileo, only the quantifiable properties of things are real. He makes arguments based on the quantification of the life-world, sacrificing rich concepts closer to human experience for precision of numerical measurement of quantities.
+
+More specifically, the things we experience through sensory perception can vary from person to person, and thus are secondary. Instead, we have to look at their primary properties -- only what could be quantified was real. Only through measurements can we arrive at reliable, objective conclusions.
+
+Thus, numbers describe the underlying architecture of reality, they allow intervention, and they can be agreed upon.
+
+Mathematical techniques are technologies of distance, minimizing the need for personal trust and help to produce knowledge independent of the particular people who make it.
+
+Thus, all of this makes a social claim: that through quantification, standardization, and calibration, science can be built as a global network -- the ``universality" of science.
+
+However, the rise of quantification should be remarked to be incredibly artificial; and its adoption can come at the cost of other societies.
+
+\begin{example}
+	Galileo traced the path of the cannonball, using math to describe its parabolic nature. Thus, it helped to improve military power of the European states.
+\end{example}
+
+\begin{example}
+	Financial transactions on a global scale was done through numbers. Before, we would have to move gold around greatly, which was prone to looting and other issues, along with how hard it is to actually move the gold. However, with numbers on banknotes, this process became a lot easier.
+	
+	But it comes with some trust with the banking institutions and that this concept actually... works.
+\end{example}
+
+\subsubsection{Objectivity}
+The idea of objectivity being in conflict with subjectivity came to be to combat the issue of trust.
+
+For example, institutions in democratic society had to create some sort of way for people to trust them. Thus, numbers became the face of objectivity: it served as an adaptation to the suspicions of powerful outsiders.
+
+The following are ways we see objectivity nowadays:
+\begin{itemize}
+	\item We often look at objectivity as a ``view from nowhere" -- we can go beyond the appearances to see the deeper truth of things. It is also viewed as opposing subjectivity.
+	
+	\item Some also believe that objectivity is achieved through knowledge generated by quantitative measurements, following impersonal rules and procedures
+	
+	\item Objectivity is also regarded as knowledge being generated by a, or a group of, trained expert(s). But we see how human experts can come into part for defining objectivity, despite its supposed juxtaposition to subjectivity.
+\end{itemize}
+
+\subsubsection{Varieties of Objectivity}
+\begin{itemize}
+	\item Mechanical Objectivity -- this is producing a result according to correct procedures/rules/etc. which anyone could follow and understand.
+	\begin{itemize}
+		\item This is in contrast to the idea of ``Truth to Nature", which aimed to capture the ideal form of something, with the idea that anybody could take it and study it.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Objectivity and the Law}
+In many societies, they want to create a judicial system which is ``blind", having no place for personal biases of the judges. They want an ``objective" law.
+
+This is so that the citizens can place trust in the justice system, knowing that anyone and everyone is treated the same under the eye of the law.
+
+\subsubsection{The Connection}
+Now, why did quantification become the paradigm of objectivity?
+
+The reason is that quantification is a powerful rhetorical device which works well in larger, complex societies and facilities communication between strangers.
+
+Math is also very structured and rule-bound, allowing people to communicate in this global network only if they follow the rules.
+
+Thus, it all appears to be disinterested, impersonal, and independent of producer. It's neutral and apolitical, free of external interference.
+
+\subsubsection{Quantification and Politics in the French Revolution}
+Before the old regime, they just did everything they wanted without people knowing what was going on.
+
+With the revolution, quantification served as a tool to banish prejudice, superstition, etc. of the Old Regime. Numbers were transparent and open, and anyone can learn to calculate.
+
+\subsubsection{Democracy and Quantification}
+Not everyone agreed with the approach that the public numbers presented as objective facts of society should be handled by everyone. Instead, they pushed for a technocracy.
+
+Thus, there isn't a clear answer to whether number is democratic or not; on one hand, they can be used to reveal and share information which is empowering. On the other hand, numbers can be used to hide and exclude.
+
+Therefore, it's important on how a certain society approaches and uses numbers.
+
+\subsection{Conclusion}
+Quantitative data is more than just numbers; it's a powerful rhetorical device, a tool for persuasion. It served a lot of purposes, such as 
+
+\section{Discussion -- 9/12/2024}
+\subsection{This Week's Readings}
+
+
+\end{document}

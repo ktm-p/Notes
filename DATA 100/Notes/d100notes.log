@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  2 APR 2024 12:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  17 MAY 2024 08:00
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2874,6 +2874,51 @@ F1D5.pygtex)
 
 
 (_minted-d100notes/12884E5CA2C9E27244F60438C02B5698DE6CF45835DDEA3168CDE3472913
+F1D5.pygtex)
+\openout5 = `d100notes.pyg'.
+
+runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
+stripnl="False" -o _minted-d100notes/EF62592E87A2BD34E4D65AEB7B09F18FDE6CF45835
+DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
+
+
+(_minted-d100notes/EF62592E87A2BD34E4D65AEB7B09F18FDE6CF45835DDEA3168CDE3472913
+F1D5.pygtex)
+\openout5 = `d100notes.pyg'.
+
+runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
+stripnl="False" -o _minted-d100notes/1333F3BD775453D01BF12780858F70F9DE6CF45835
+DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
+
+
+(_minted-d100notes/1333F3BD775453D01BF12780858F70F9DE6CF45835DDEA3168CDE3472913
+F1D5.pygtex)
+\openout5 = `d100notes.pyg'.
+
+runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
+stripnl="False" -o _minted-d100notes/A759F684E27357CA4BAC1C1FECF39802DE6CF45835
+DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
+
+
+(_minted-d100notes/A759F684E27357CA4BAC1C1FECF39802DE6CF45835DDEA3168CDE3472913
+F1D5.pygtex)
+\openout8 = `d100notes.listing'.
+
+runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
+stripnl="False" -o _minted-d100notes/5D532A435D1D5E14D6735D1A628CAA57EB179E35E6
+90FB31A676F2B2CE8A838B.pygtex d100notes.listing)...executed.
+
+
+(_minted-d100notes/5D532A435D1D5E14D6735D1A628CAA57EB179E35E690FB31A676F2B2CE8A
+838B.pygtex)
+\openout5 = `d100notes.pyg'.
+
+runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
+stripnl="False" -o _minted-d100notes/FEC3656842638FAF4D3668A0FB4D442BDE6CF45835
+DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
+
+
+(_minted-d100notes/FEC3656842638FAF4D3668A0FB4D442BDE6CF45835DDEA3168CDE3472913
 F1D5.pygtex) [45] (d100notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -2889,10 +2934,10 @@ runsystem(del d100notes.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 42699 strings out of 474541
- 929616 string characters out of 5743481
+ 42745 strings out of 474541
+ 933066 string characters out of 5743481
  1970978 words of memory out of 5000000
- 63609 multiletter control sequences out of 15000+600000
+ 63640 multiletter control sequences out of 15000+600000
  600762 words of font info for 120 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,17n,145p,575b,1799s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2922,7 +2967,7 @@ Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam1
 0.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/symbols/msam7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb>
-Output written on d100notes.pdf (45 pages, 1593497 bytes).
+Output written on d100notes.pdf (45 pages, 1596944 bytes).
 PDF statistics:
  1061 PDF objects out of 1200 (max. 8388607)
  220 named destinations out of 1000 (max. 500000)

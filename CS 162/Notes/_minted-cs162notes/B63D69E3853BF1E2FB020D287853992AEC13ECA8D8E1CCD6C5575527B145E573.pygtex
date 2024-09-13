@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{pthread\PYGZus{}mutex\PYGZus{}init}\PYG{p}{(}\PYG{n}{pthread\PYGZus{}mutex\PYGZus{}t}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{mutex}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{pthread\PYGZus{}mutexattr\PYGZus{}t}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{attr}\PYG{p}{);}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{pthread\PYGZus{}mutex\PYGZus{}lock}\PYG{p}{(}\PYG{n}{pthread\PYGZus{}mutex\PYGZus{}t}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{mutex}\PYG{p}{);}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{pthread\PYGZus{}mutex\PYGZus{}unlock}\PYG{p}{(}\PYG{n}{pthread\PYGZus{}mutex\PYGZus{}t}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{mutex}\PYG{p}{);}
+\end{Verbatim}

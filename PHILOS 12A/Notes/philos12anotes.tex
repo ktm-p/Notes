@@ -1,0 +1,284 @@
+\documentclass[openany]{book}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+\usepackage{macros}
+\usepackage{notes}
+
+%% PICTURES DIRECTORY %%
+\graphicspath{{C:/Users/Michael/Pictures/}}
+
+% CHAPTER FORMATTING %
+\newif\iftoc\titleformat{\chapter}[display]{\cabin}{}{2in}{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Week}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}[\vspace{-20pt}\rule{\textwidth}{0.1pt}\vspace{0.0in}]
+\titlespacing{\chapter}{0pt}{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}{0pt}
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+
+\begin{document}
+\mytitle{PHILOS 12A: Introduction to Logic}{Summer 2024}
+
+\chapter{Introduction to Propositional Logic}
+\section{What is Propositional Logic?}
+\subsection{Introduction}
+Propositional Logic is sometimes referred to as ``Sentential Logic."
+
+In this course, we use the following definition for a proposition:
+\begin{defn}[Proposition]
+	A proposition refers to a \textbf{declarative sentence}.
+\end{defn}
+\begin{example}
+	The following is a proposition: \textit{``Paris is the capital of France."}
+	
+	On the other hand, the question \textit{``Is Paris the capital of France?"} is not considered a proposition.
+\end{example}
+
+\subsection{Propositional Connectives}
+\begin{defn}[Propositional Connectives]
+	A propositional connective is a word or phrase that we can combine with some other given propositions to build up more complex propositions.
+\end{defn}
+
+Within the course, we will use $p$ and $q$ to refer to different propositions. With this in mind, we look at the following example:
+\begin{example}
+	Let $p$ denote the proposition \textit{``there is a heatwave today"}, and $q$ to be \textit{``the weather is hot"}. Then, using propositional connectives, we can create the following propositions:
+	\begin{itemize}
+		\item $p$ and $q$.
+		\item $p$ or $q$.
+		\item If $p$, then $q$.
+		\item It is not the case that $p$.
+		\item It is more likely that $p$ than $q$.
+		\item The people know that $p$.
+	\end{itemize}
+\end{example}
+
+Then, we can study reasoning involving these connectives.
+\begin{example}[Reasoning with Or]
+	For example, let $p$ denote \textit{``the infection is viral"} and $q$ be \textit{``the infection is bacterial"}. Then, we have:
+	\begin{enumerate}
+		\item $p$ or $q$.
+		\item It is not the case that $p$.
+		\item Therefore, $q$.
+	\end{enumerate}
+
+	This is an example of reasoning.
+\end{example}
+\begin{warn}
+	We note that this reasoning is \textbf{good} regardless of the propositions substituted in for $p$ or $q$; we'll be studying patterns of reasoning that is good in virtue of their ``form."
+\end{warn}
+
+\begin{example}[Reasoning with Implication]
+	Another example can be done using implications as follows:
+	\begin{enumerate}
+		\item If $p$, then $q$.
+		\item It is not the case that $q$.
+		\item Therefore, it is not the case that $p$.
+	\end{enumerate}
+
+	Again, we note that this example works for any proposition used for $p$ and $q$.
+\end{example}
+
+\begin{example}[Reasoning with Likeliness]
+	Finally, let us consider the following:
+	\begin{enumerate}
+		\item It is more likely that $p$ than it is $q$.
+		\item Therefore, it is more likely that $p$ than it is ($q$ and $r$).
+	\end{enumerate}
+\end{example}
+
+Thus far, we've given examples of \textbf{good} reasonings. Instead, we will now look at an example of a \textbf{bad} reasoning:
+\begin{example}[Bad Reasoning with Implications]
+	Suppose we had the following reasoning:
+	\begin{enumerate}
+		\item If $p$, then $q$.
+		\item It is not the case that $p$.
+		\item Therefore, it is not the case that $q$.
+	\end{enumerate}
+
+	However, this is \textbf{bad}! Even though it isn't the case that $p$, we don't know whether it is or is not the case that $q$.
+	
+	We can use a concrete example to verify this: suppose that $p$ is \textit{``the patient is taking their medicine"} and $q$ is \textit{``the patient is getting better"}.
+	
+	Then, we suppose that if $p$, then $q$. However, it isn't the case that $p$; i.e., the patient isn't taking their medicine. However, although this is the case, they can still get better, but they could also be getting worse -- we can't conclude that it is not the case that $q$!
+\end{example}
+
+Another example that's a bit trickier is given below:
+\begin{example}[Bad Reasoning with Likeliness]
+	Suppose we had:
+	\begin{enumerate}
+		\item It is more likely that $p$ than it is $q$.
+		\item It is more likely that $p$ than it is $r$.
+		\item Therefore, it is more likely that $p$ than it is ($q$ or $r$).
+	\end{enumerate}
+
+	However, this is bad. Again, let us use a concrete example:
+	\begin{itemize}
+		\item $p$ denotes \textit{``the next card will be a number card"}.
+		\item $q$ denotes \textit{``the next card will be black"}.
+		\item $r$ denotes \textit{``the next card will be red"}.
+	\end{itemize}
+
+	Then, we see that while each individual premise is true, the next card we pick is guaranteed to be either black or red; thus the conclusion is false.
+\end{example}
+
+\section{Truth-Functional Connectives}
+In this section, we will examine a special class of propositional connectives: \textbf{truth-functional connectives}.
+
+A truth-functional connective contains two parts to them: the ``truth" part, and the ``functional" part.
+
+\subsection{Truth}
+First, we look at the ``truth" part.
+
+In this course, we will make the following assumptions for all propositions:
+\begin{enumerate}
+	\item All propositions we deal with are either \textbf{true} or \textbf{false}.
+	\item Propositions can't be both true \textit{and} false.
+\end{enumerate}
+
+We can come up with propositions that don't satisfy these rules.
+\begin{example}
+	The following are propositions that don't satisfy the rules we've established:
+	\begin{enumerate}
+		\item Hawaiian Pizza is delicious \textit{(propositions of taste)}.
+		\begin{itemize}
+			\item This statement doesn't have an objective truth to it.
+		\end{itemize}
+		\item Bob is bald \textit{(vague propositions)}.
+		\begin{itemize}
+			\item If we struggle to classify Bob as being bald (due to, say, him having almost no hair), we say that the proposition is neither true or false.
+		\end{itemize} 
+		\item This proposition is false \textit{(self-referential propositions)}.
+		\begin{itemize}
+			\item Something something set theory, something something Russell's Paradox, something something.
+		\end{itemize}
+	\end{enumerate}
+\end{example}
+
+We say that the truth value of a true proposition is \texttt{TRUE} ($T$), and the truth value of a false proposition is \texttt{FALSE} ($F$).
+
+\subsection{Unary versus Binary Connectives}
+Now, we can tackle the ``functional" part.
+
+We can categorize connectives we've seen thus far into two groups: \textbf{unary} and \textbf{binary}.
+\begin{itemize}
+	\item Unary:
+	\begin{itemize}
+		\item ``It is not the case that \_\_\_".
+		\item ``The police knows that \_\_\_".
+	\end{itemize}
+	\item Binary: 
+	\begin{itemize}
+		\item ``\_\_\_ or \_\_\_".
+		\item ``\_\_\_ and \_\_\_".
+		\item ``If \_\_\_, then \_\_\_".
+		\item ``It is more likely that \_\_\_ than it is \_\_\_".
+	\end{itemize}
+\end{itemize}
+
+\begin{defn}[Arity]
+	The number of propositions a connective takes in is referred to as its \textbf{arity}.
+\end{defn}
+\begin{warn}
+	Note that we can consider connectives of arity three or higher, but we'll postpone on that... for now?
+\end{warn}
+
+\subsection{Truth-Functionality}
+For a unary connective $\#$ to be truth-functional, for any proposition $p$, its truth value $\#p$ must be a function of the truth value of $p$. In other words, given two propositions $p$ and $q$ with the same truth value, it must be then that $\#p$ and $\#q$ have the same truth value.
+
+\begin{example}[Unary Truth-Functional]
+	We observe that \textit{``It is not the case that"} is truth-functional:
+	\begin{center}
+		\begin{tabularx}{150pt}{c|X}
+			$p$ & \textit{``It is not the case that $p$"} \\
+			\hline
+			$T$ & $F$ \\
+			\hline
+			$F$ & $T$
+		\end{tabularx}
+	\end{center}
+
+	On the other hand, \textit{``The police knows that"} isn't:
+	\begin{center}
+		\begin{tabularx}{150pt}{c|X}
+			$p$ & \textit{``The police knows that $p$"} \\
+			\hline
+			$T$ & $?$ \\
+			\hline
+			$F$ & $F$
+		\end{tabularx}
+	\end{center}
+
+	We note that if $p$ is true, the police doesn't necessarily know that that is the case! For example, say that $p$ is \textit{``Ted Bundy is a killer"} and $q$ is \textit{``My neighbour is secretly a killer"}. $\#p$ is true, whereas $\#q$ is false. 
+	
+	Thus, we say that it isn't truth-functional.
+\end{example}
+
+For a binary connective $\#$, for it to be truth-functional, we say that for any propositions $p$ and $q$, the truth value $p\#q$ must be a function of those $p$ and $q$.
+
+\begin{example}[Binary Truth-Functional]
+	We see that \textit{``and"} is a truth-functional:
+	\begin{center}
+		\begin{tabularx}{150pt}{X|X|X}
+			$p$ & $q$ & \textit{$p$ and $q$} \\
+			\hline
+			$T$ & $T$ & $T$ \\
+			\hline
+			$T$ & $F$ & $F$ \\
+			\hline
+			$F$ & $T$ & $F$ \\
+			\hline
+			$F$ & $F$ & $F$
+		\end{tabularx}
+	\end{center}
+
+	Similarly, \textit{``or"} is a truth-functional as well:
+	\begin{center}
+		\begin{tabularx}{150pt}{X|X|X}
+			$p$ & $q$ & \textit{$p$ or $q$} \\
+			\hline
+			$T$ & $T$ & $T$ \\
+			\hline
+			$T$ & $F$ & $T$ \\
+			\hline
+			$F$ & $T$ & $T$ \\
+			\hline
+			$F$ & $F$ & $F$
+		\end{tabularx}
+	\end{center}
+
+	On the other hand, let us consider the \textit{counterfactual} condition: \textit{``If it had been the case that $p$, then it would have been the case that $q$"}. Note that $p$ is referred to as the \textbf{antecedent}, and $q$ is the \textbf{consequent}.
+	
+	To see why this isn't a truth-functional, we look at the following:
+	\begin{itemize}
+		\item Let $p$ be \textit{``I overslept"} ($F$), and $q$ be \textit{``The speaker gave her lecture"} ($T$).
+		\begin{itemize}
+			\item Substituting this in, we have: \textit{``If it had been that I overslept, it would've been that the speaker gave her lecture"}; this is true, as regardless of whether I overslept or not, the speaker would've still given her lecture.
+		\end{itemize}
+		\item Let $p$ be \textit{``I overslept"} ($F$), and $r$ be \textit{``I arrived on time"} ($T$).
+		\begin{itemize}
+			\item Substituting this in, we have: \textit{``If it had been that I overslept, it would've been that I arrived on time"}; this is false. However, we see that despite $q$ and $r$ having the same truth value, $p\#q$ and $p\#r$ have different truth values! Thus, we conclude that it isn't truth-functional.
+		\end{itemize}
+	\end{itemize}
+\end{example}
+
+\section{}
+\end{document}

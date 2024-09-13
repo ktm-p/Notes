@@ -1,0 +1,6 @@
+df2 = @(x) -((2.*x.*sin(x.^2))./((x.^2+10).^2)) + ( (2.*x.*cos(x.^2))/(x.^2 + 10)) + (exp(-x./10)./500);
+p = findmanyzeros(f2, 0, 10, 50, 10^(-10));
+ext = findmanyzeros(df2, 0, 10, 50, 10^(-10));
+x = 0:0.01:10;
+plot(x, f2(x), x, 0*x, p, 0*p, "ko", ext, f2(ext), "m^");
+legend("f2(x)", "y=0", "Zeros", "Extrema", "Location", "SouthEast");

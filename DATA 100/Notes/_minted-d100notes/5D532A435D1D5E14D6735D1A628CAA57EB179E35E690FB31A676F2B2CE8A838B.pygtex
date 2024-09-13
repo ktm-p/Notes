@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZpc{}\PYGZpc{}}\PYG{k}{sql}
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{k}{name}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{cute}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{year}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{Dragon}\PYG{+w}{ }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{k}{name}\PYG{+w}{ }\PYG{k}{IN}\PYG{+w}{ }\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}puff\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}hiccup\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}

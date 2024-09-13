@@ -1,0 +1,5 @@
+>> yl16 = log(abs(l16 - l10000));
+yl32 = log(abs(l32 - l10000));
+yl64 = log(abs(l64 - l10000));
+yl128 = log(abs(l128 - l10000));
+plot([log((t2-t1)/16), log((t2-t1)/32), log((t2-t1)/64), log((t2-t1)/128)], [yl16, yl32, yl64, yl128], 'o')

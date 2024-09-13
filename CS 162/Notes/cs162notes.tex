@@ -1,0 +1,887 @@
+\documentclass[openany]{book}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+\usepackage{macros}
+\usepackage{notes}
+
+%% PICTURES DIRECTORY %%
+\graphicspath{{C:/Users/Michael/Pictures/}}
+\graphicspath{{C:/Users/Michael/Pictures/CS162/}}
+
+% REDEFINING CHAPTER FORMATTING %
+\newif\iftoc\titleformat{\chapter}[display]{\cabin}{}{2in}{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Week}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}[\vspace{-20pt}\rule{\textwidth}{0.1pt}\vspace{0.0in}]
+\titlespacing{\chapter}{0pt}{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}{0pt}
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+
+\begin{document}
+\mytitle{CS162: Operating Systems and Systems Programming}{Fall 2024}
+
+\chapter{An Introduction}
+\section{Lecture -- 8/29/2024}
+\subsection{Course Information}
+\begin{warn}
+	Note that the course is an \textbf{Early Drop Deadline} course; the deadline is on September 6th.
+\end{warn}
+
+\subsection{Basics}
+What is an operating system? Well, first, we have hardware; on the other hand, we also have the application which must run on the hardware.
+
+How do these applications run on the hardware? This is where OS comes in, enabling applications to run on and share the hardware.
+
+\begin{defn}[Operating System]
+	It's a special layer of software that provides application software access to hardware resource.
+	\begin{itemize}
+		\item It's a convenient abstraction of hardware devices, which may be complex.
+		\item Since multiple applications can be running at once, we must have protected access to shared resources so that they don't ``step on each others' toes".
+		\item Security and authentication.
+		\item Communication amongst logical entities.
+	\end{itemize}
+\end{defn}
+
+An OS does the following:
+\begin{itemize}
+	\item Provides abstractions to applications.
+	\begin{itemize}
+		\item File systems
+		\item Processes, threads
+		\item VM, containers
+		\item Naming systems
+	\end{itemize}
+	\item Manage resources
+	\begin{itemize}
+		\item Memory, CPU, storage, etc.
+	\end{itemize}
+	\item Achieves the above by implementing specific algorithms and techniques
+	\begin{itemize}
+		\item Scheduling
+		\item Concurrency
+		\item Transactions
+		\item Security
+	\end{itemize}
+\end{itemize}
+
+To elaborate, we note that an OS:
+\begin{itemize}
+	\item Provides clean, easy-to-use abstractions of physical resources
+	\begin{itemize}
+		\item Infinite memory, dedicated machine
+		\item Masking limitations
+	\end{itemize}
+	\item Manage protection, isolation, and sharing of resources
+	\begin{itemize}
+		\item Resource allocation and Communication
+	\end{itemize}
+	\item Glue
+	\begin{itemize}
+		\item Storage, Window system, Networking
+		\item Sharing, Authorization
+		\item Look and feel
+	\end{itemize}
+\end{itemize}
+\subsubsection{Von Neumann Architecture}
+In this architecture, we have the CPU -- comprised of the Control and Logic units -- which takes in some input and puts out an output. At the same time, the program is saving states within the memory.
+
+\subsubsection{Processes}
+\begin{defn}[Process]
+	A process is an execution environment with restrict rights provided by the OS.
+\end{defn}
+
+A process consists of the following things:
+\begin{itemize}
+	\item Address Space
+	\item One or more threads of control executing within that address space
+\end{itemize}
+
+The Operating System provides each running program with its own process.
+
+Now, note that a processor can only execute one process at a time; to combat this issue, we can do something called ``context switching."
+
+Also, we note that each program should not be able to access the memory of other programs (or even the OS' memory itself); this is where the OS comes into play. It isolates processes from each other, and itself from processes as well.
+
+\chapter{I have no idea}
+\section{Lecture -- 9/3/2024}
+\subsection{Review}
+Recall that virtualization provides the illusion where each process uses its own machine; it further provides the illusion of infinite memory and processor.
+
+Furthermore, recall that the hypervisor creates virtual machines, which virtualizes hardware to OS. And in fact, virtual machines can be implemented on top of an existing OS too.
+
+\subsection{The Four Abstractions}
+We will be looking at the following four abstractions:
+\begin{itemize}
+	\item Thread: Execution Context
+	\begin{itemize}
+		\item Fully describes the program state
+		\item Program Counter, Registers, etc.
+	\end{itemize}
+	\item Address Space
+	\begin{itemize}
+		\item Set of memory addresses which is accessible to the program
+	\end{itemize}
+	\item Process: an instance of a running program
+	\begin{itemize}
+		\item Protected address space, and one or more threads.
+	\end{itemize}
+	\item Dual Mode Operation/Protection
+\end{itemize}
+
+\subsubsection{61C Review}
+Recall that for a program, we first write then compile them, then load the instruction and data segments of executable files into memory.
+
+Then, we create stack (which goes from high to low; this includes things like function arguments, return addresses, etc.) and heap (which goes from low to high; this is when we use \texttt{malloc}).
+
+We then transfer the control to program, and provide services to the program.
+
+Recall that we fetch instruction from memory, decode it, then execute it.
+
+\subsection{Thread}
+\begin{defn}[Thread]
+	A thread is a single unique execution.
+	\begin{itemize}
+		\item Program Counter, Registers, Execution Flags, Stack, Memory State
+	\end{itemize}
+\end{defn}
+
+We note that a thread is executing on a processor (core) when it is \textit{resident} in the processor registers.
+
+% finish writing from slides later
+\begin{defn}[Resident]
+	Resident means: Registers hold the root state (context) of the thread.
+	\begin{itemize}
+		\item This includes the PC and currently executing instruction.
+	\end{itemize}
+\end{defn}
+
+\subsubsection{The Illusion of Multiple Processors}
+What we can do is multiplex in time; think of splitting the CPU in time-slices.
+
+Threads are virtual codes. Contents include program counter, stack pointer, and registers.
+
+The thread is on the real (physical) core, or is saved in chunk of memory (``TCB").
+
+In order to trigger this switch, including: timer, I/O, voluntary yield, etc.
+
+The Thread Control Block holds the contents of registers when thread isn't running, and is stored (for now) in the kernel.
+
+\begin{warn}
+	The kernel is part of the OS, representing the core functionalities. There are other services of the OS which doesn't run all the time; these are not part of the kernel.
+\end{warn}
+
+\subsection{Address Space}
+\begin{defn}
+	The address space is the set of accessible addresses and state associated with them.
+\end{defn}
+
+\begin{example}
+	For example, on a 32-bit processor, we have $2^{32}$ addresses; on 64-bit processors, we have $2^{64}$.
+\end{example}
+
+Recall that our operating system must protect itself from user programs, and must protect user programs from one another.
+\begin{itemize}
+	\item Reliability
+	\item Security
+	\item Privacy
+	\item Fairness
+\end{itemize}
+
+\subsubsection{Simple Protection: Base and Bound}
+One way to implement this protection is to define some base address and some bound on it; we allow the application to read and write only within this area.
+
+\subsubsection{Relocation}
+One issue to consider is where we determine these bounds? In this case, we have to do it at runtime; the same program should be able to run on different machines, which may have different memory space...
+
+So, what do we do?
+
+One way is to ignore it; when we compile the program, we start at zero. And then we can translate it.
+
+We can let the CPU do the translations on the fly at runtime nowadays.
+
+\subsubsection{Paged Virtual Address Space}
+We note that allocating the chunks isn't very flexible; what if the application is only using a fraction of the chunk?
+
+Instead, what we can do is allocate smaller pieces of memory -- pages -- if the application needs it.
+
+Hardware translates address using a page table.
+\begin{itemize}
+	\item Each page has a separate base. % finish listing down bullet points
+\end{itemize}
+
+If a page isn't used in the memory, we can evict it.
+
+\subsection{Process}
+\begin{defn}
+	A process is an execution environment with restricted rights.
+	\begin{itemize}
+		\item (Protected) Address Space with One or More Threads
+		\item Owns memory (address space)
+		\item Owns file descriptors, file system context, etc.
+		\item Encapsulates one or more threads sharing process resources.
+	\end{itemize}
+\end{defn}
+
+We note that processes are protected from each other by the OS.
+
+We note that the overhead for threads to communicate between each other in the same process is a lot lower.
+
+\subsubsection{Single versus Multi-threaded}
+We note that in a multi-threaded environment, each thread has its own register and stack, but can share code/data/files within the same process.
+
+Reasons to have multiple threads per address space includes:
+\begin{itemize}
+	\item Parallelism: Takes advantage of actual hardware parallelism (such as multicore).
+	\item Concurrency: ease of handling I/O and other simultaneous events.
+\end{itemize}
+
+\subsection{Dual Mode Operation}
+Hardware provides at least two modes:
+\begin{itemize}
+	\item Kernel Mode (``supervisor" mode)
+	\item User Mode
+\end{itemize}
+
+Certain operations are prohibited when using User Mode:
+\begin{itemize}
+	\item Changing the page table pointer
+	\item Disabling interrupts
+	\item Interacting directly with hardware
+	\item Writing to kernel memory
+\end{itemize}
+
+We can have a mode bit to decide which mode to be in.
+
+%Kernel mode decides which process to execute; then once the process is done, we switch back to kernel.
+
+%Additional layers of protection through virtual machines/containers.
+\subsubsection{Types of Transfers}
+First, we can do Syscall:
+\begin{itemize}
+	\item Process requests a system service (e.g. exit)
+	\item Like a function call, but outside the process
+	\item Doesn't have the address of the system function to call
+	\item Marshall the syscall id and args in registers and exec syscall
+\end{itemize}
+
+Next is an interrupt:
+\begin{itemize}
+	\item An external asynchronous event triggers context switch (time, I/O device, etc.)
+	\item It's independent of user process
+\end{itemize}
+
+Finally is trap or exception:
+\begin{itemize}
+	\item Internal synchronous event triggers context switch (segmentation fault, divide by zero, etc.)
+\end{itemize}
+
+\subsubsection{Process Control Block}
+The kernel represents each process as a PCB:
+\begin{itemize}
+	\item Status (running/read/blocked/...)
+	\item Register state (when it isn't ready)
+	\item Process ID, User, Executable, etc.
+	\item Execution Time
+	\item Memory space, transition
+\end{itemize}
+
+Kernel Scheduler maintains a data structure which contains the PCB. Then, some scheduling algorithm selects the next one to run.
+
+If no process is ready to run, we go into an idle state.
+
+\section{Discussion - 9/4/2024}
+\subsection{C Review}
+\subsubsection{Types}
+C is statically typed (types are known at compile time), and is weakly typed as well (can cast between any types). On the other hand, if we think of Python, it is both dynamically and strongly typed.
+
+Primitive types are \texttt{char}, \texttt{short}, \texttt{int}, \texttt{long}, and \texttt{float}.
+
+We work a lot with pointers; these are references that hold the address of an address of an object in memory.
+\begin{itemize}
+	\item They're essentially unsigned integers.
+	\item Use \* to get the value, and \& to get the address.
+\end{itemize}
+
+\subsubsection{Memory}
+Recall that our memory layout is roughly as follows:
+\begin{itemize}
+	\item Text
+	\item (Un)initialized Data
+	\item Heap
+	\item Stack
+	\item Initialized strings/global constants which may be stored in read-only segments
+\end{itemize}
+
+\subsubsection{C Concept Check}
+\begin{enumerate}
+	\item \texttt{sizeof(\*dbl\_char)} is 4, since it's a pointer. In this case, this is because we're on a 32-bit system.
+	\item It shouldn't error; it'll also return 4.
+	\item In the case of \texttt{char\* a = "162"}, the string literal is stored in the read-only section of memory (and thus is immutable). On the other hand, \texttt{char b[] = "162"}, the string is placed onto the stack of the current function's stack frame and is mutable.
+	\item For this, one of the differences is that \texttt{struct point\* p} is a pointer to the struct \texttt{p} (and is uninitialized). In that case, we'll probably get a segfault on when we do \texttt{printf("\%d", p->x = 1);}, as there's most likely garbage on where we're trying to access to when we do \texttt{p->x}.
+\end{enumerate}
+
+\begin{warn}
+	Note that for 2., this is because of \texttt{sizeof()}; if we did something like \texttt{int x = \*dbl\_char}, where \texttt{dbl\_char == NULL}, then it would error.
+\end{warn}
+
+\subsubsection{Headers}
+\begin{enumerate}
+	\item The size should be something greater than or equal to 9 (for this problem specifically, it is 16).
+	\item The size should be something greater than or equal to 17 (for this problem specifically, it is 24).
+\end{enumerate}
+\begin{warn}
+	Although we have \texttt{char* string} and \texttt{char target}, which in total is 9 bytes on our 64-bit system, we note that GCC pads structs arbitrarily.
+\end{warn}
+
+When we do something like:
+\begin{code}{C}{gcc Compiling}
+> gcc -DABC -c app.c -o app.o
+> gcc -c lib.c -o lib.o
+> gcc app.o lib.o -o app
+\end{code}
+
+In this case, \texttt{app.c} is compiled with ABC defined, but not \texttt{lib.c}; this leads to some undefined behaviour.
+
+\subsection{x86}
+\subsubsection{Registers}
+Registers are small storage spaces directly on the processor, allowing for fast memory access.
+
+General Purpose Registers store both data and addresses; we have 8 in x86. Started as 16-bits, but we can extend to 32-bit using e prefix.
+
+\subsubsection{AT\&T Syntax}
+Prefix registers with \%, constants with \$.
+
+The general structure is \texttt{inst src, dest}. Address memory with \texttt{offset(base, index, scale)}.
+\begin{itemize}
+	\item \texttt{base, index} are registers. \texttt{offset} is any integer. \texttt{scale} is 1/2/4/8.
+\end{itemize}
+
+\subsubsection{Calling Convention}
+Recall the Calling Convention from CS161.
+
+\section{Lecture -- 9/5/2024}
+Today, we will take a deeper dive into threads and how we program with them.
+
+\subsection{Recap}
+\begin{figurebox}[]{Switching Between User and Kernel Mode}
+	\centering\includegraphics[]{162-user-kernel}
+\end{figurebox}
+
+\subsubsection{Running Multiple Programs}
+We have the basic mechanism to:
+\begin{itemize}
+	\item Switch between user processes and the kernel,
+	\item The kernel can switch among user processes,
+	\item Protect OS from user processes and processes from each other.
+\end{itemize}
+
+But now, there are some questions to consider:
+\begin{itemize}
+	\item How we represent user processes int he OS?
+	\item How we decide which user process to run?
+	\item How we pack up the process and set it aside?
+	\item How we get a stack and heap for the kernel?
+\end{itemize}
+
+\subsubsection{Multiplexing Processes: The PCB}
+Recall that the kernel represents each process with a PCB
+\begin{itemize}
+	\item Status
+\end{itemize}
+
+The Kernel Scheduler maintains a data structure containing the PCBs, and it gives out CPU to different processes -- this is a policy decision.
+
+It also give out non-CPU resources, such as memory/IO. This is another policy decision.
+
+\subsubsection{Scheduler}
+\begin{defn}[Scheduling]
+	Scheduling is the mechanism for deciding which processes/threads receive hardware CPU time, when, and for how long.
+\end{defn}
+
+Lots of different scheduling policies provide fairness, real-time guarantees, latency optimization, etc.
+
+\subsubsection{Hyperthreading}
+Simultaneous Multi-threading (or Hyperthreading) is a hardware scheduling technique:
+\begin{itemize}
+	\item Avoids software overhead of multiplexing
+	\item Superscalar processors can execute multiple instructions that are independent
+	\item Duplicates register state to make a second ``thread" whcih allows more instructions to run
+\end{itemize}
+
+It can schedule each thread as if it were a separate CPU -- however, it has sub-linear speedup.
+
+\begin{figurebox}[]{Comparisons of Different Architecture}
+	\centering\includegraphics[]{162-archi-comp}
+\end{figurebox}
+
+We can think of hyperthreading as being similar to pipelining, but with threads instead.
+
+\subsection{Threads}
+Recall the definition of threads: this is a single unique execution context. It provides the abstraction of a signle execution sequence that represents a separately schedulable task.
+
+Threads are a mechanism for concurrency (overlapping execution); however, they can also run in parallel (simultaneous execution).
+
+And recall that the protection is handled by the process.
+
+\subsubsection{Some Definitions}
+\begin{defn}
+	\textbf{Multiprocessing} is where we have multiple CPUs (Core). \textbf{Multiprogramming} is where we have multiple jobs/processes. \textbf{Multithreading} is where we have multiple threads/processes.
+\end{defn}
+
+Going back to concurrency, this is where the scheduler is free to run threads in any order and interleaving. Threads may run to completion or time-slice in big or small chunks.
+
+\begin{warn}
+	Concurrency is \textbf{not} parallelism! Concurrency is about handling multiple things at once; parallelism is about doing multiple things \textit{simultaneously}.
+\end{warn}
+
+To elaborate, each thread handles or manages a separate task, but they are not being executed simultaneously!
+
+\subsection{Threads Mask I/O Latency}
+Recall that a thread is in one of the following three states:
+\begin{itemize}
+	\item RUNNING -- running
+	\item READY -- eligible to run, but not currently running
+	\item BLOCKED -- ineligible to run
+\end{itemize}
+
+If no thread performs I/O, the scheduler tries to be fair and give half of the time to one thread, and the other half to another.
+
+However, if, say, T1 has an I/O operation, we can dedicate more time to T2.
+
+\subsection{Multi-threaded Programs}
+When we compile a C program and run the executable, this creates a process that is executing the program. Initially, the new process only has one thread in its own address space.
+
+But, how do we make it multi-threaded? The solution is that the process issues system calls to create new threads -- these new threads are part of the process and share its address space.
+
+\subsection{OS Library API for Threads: pthreads}
+\begin{code}{C}{pthreads}
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void*), void *arg);
+
+// Thread is created, executing start_routine with arg as its sole argument.
+// Return is implicit call to pthread_exit
+// (attr contains info like stack size, scheduling policy, etc.)
+
+
+void pthread_exit(void *value_ptr);
+// Terminates the thread and makes value_ptr available to any successful join
+
+int pthread_join(pthread_t thread, void **value_ptr);
+// Suspends execution of the calling thread until the target thread terminates
+\end{code}
+
+Now we introduce a new idea: Fork-Join Pattern.
+\begin{figurebox}[]{Fork-Join Pattern}
+	\centering\includegraphics[]{162-fork-join-pat}
+\end{figurebox}
+
+The main thread creates forks, which is a collection of sub-threads, passing them args to work on. And at the end, it joins with them, collecting the result.
+
+\subsection{Thread State}
+State shared by all threads in process:
+\begin{itemize}
+	\item Content of memory
+	\item I/O state
+\end{itemize}
+
+State private to each thread:
+\begin{itemize}
+	\item Kept in the TCB
+	\item CPU registers
+	\item Execution stack
+\end{itemize}
+
+Execution Stack:
+\begin{itemize}
+	\item Parameters, temporary variables
+	\item Return PCs are kept while called procedures are executing
+\end{itemize}
+
+\subsection{Memory Layout with Two Threads}
+We note that we have two sets of memory registers and stacks. If threads violate this, we can get a stack overflow.
+
+\subsection{Interleaving and Non-Determinism}
+When we write a program, we see it sequentially. However, due to the nature of the scheduler, we have to take note of how it can interleave and make things non-deterministic.
+
+Thus, we have to note the following:
+\begin{itemize}
+	\item Non-Determinism
+	\begin{itemize}
+		\item Scheduler can run threads in any order, and can switch threads at any time.
+		\item This results in testing being very difficult.
+	\end{itemize}
+	\item Independent Threads
+	\begin{itemize}
+		\item No state shared with other threads; this is deterministic, and reproducible conditions.
+	\end{itemize}
+	\item Cooperating Threads
+	\begin{itemize}
+		\item Shared state between multiple threads.
+	\end{itemize}
+\end{itemize}
+
+\begin{figurebox}[]{Non-Determinism Example}
+	\centering\includegraphics[]{162-nondet-ex}
+\end{figurebox}
+
+We see that in this example, \texttt{x} can be either 1, 3, or 5 depending on which order the scheduler decides to execute our threads, and when it switches.
+
+\subsection{Solution}
+Now, we introduce the following terms:
+\begin{defn}[Synchronization]
+	Synchronization is the coordination among threads, usually regarding shared data.
+\end{defn}
+
+\begin{defn}[Mutual Exclusion]
+	Mutual Exclusion is ensuring only one thread does a particular thing at a time (one thread excludes the others). This is at ype of synchronization.
+\end{defn}
+
+\begin{defn}[Critical Section]
+	Critical Section is code which exactly one thread can execute at once. This is a result of mutual exclusion.
+\end{defn}
+
+\begin{defn}[Lock]
+	Lock is an object only one thread can hold at a time. This is a mechanism for mutual exclusion.
+\end{defn}
+
+\subsubsection{Lock}
+Locks provide two atomic operations:
+\begin{itemize}
+	\item \texttt{Lock.acquire()} -- wait until lock is free; then mark it as busy.
+	\begin{itemize}
+		\item After this returns, we say that the calling thread ``holds" the lock.
+	\end{itemize}
+	\item \texttt{Lock.release()} -- this marks the lock as free.
+	\begin{itemize}
+		\item This should only be called by a thread that currently holds the lock.
+		\item Once this returns, the calling thread no longer holds the lock.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Issues with Lock}
+Note that if we run into an infinite loop when a thread acquires a lock, then we can't release it at all.
+
+Furthermore, we note that if everything requires a lock, then it is no better than just not having multiple threads.
+
+\subsubsection{pthreads Lock}
+\begin{code}{C}{pthreads Lock Functions}
+int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
+
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+\end{code}
+
+\subsection{Conclusion}
+\begin{itemize}
+	\item Threads are the OS unit of concurrency and execution.
+	\begin{itemize}
+		\item We can use \texttt{pthread\_create} to manage threads within a process.
+		\item They share data; we need synchronization to avoid data races.
+	\end{itemize}
+\end{itemize}
+
+\chapter{Third Week}
+\section{Lecture -- 9/10/2024}
+\subsection{Handling Things Safely}
+Instead of calling a function, we have an identifier for each system function call.
+
+
+\begin{itemize}
+	\item Vector Through well-defined syscall entry points
+	\begin{itemize}
+		\item Table which maps system call number to handler.
+		\item Set to kernel mode at the same time as jumpt o system call code in kernel.
+		\item Separate kernel stack in kernel memory during syscall execution
+	\end{itemize}
+
+	\item On entry, we copy arguments from the user memory/registers/stack into the kenerl memory. Furthermore, we validate the arguments.
+	
+	\item On exit, we copy results back.
+\end{itemize}
+
+\subsubsection{Interrupts}
+\begin{itemize}
+	\item Interrupt processing not visible to the user process
+	\item Interrupt vector
+	\item Kernel interrupt stack
+	\item Interrupt masking
+	\item Atomic transfer of control
+\end{itemize}
+
+\subsubsection{Interrupt Controller}
+The interrupt controller chooses which interrupt request to honor. Interrupt identity is specific with ID line. Mask enables/disables interrupts. It picks the one with highest priority.
+
+\subsection{Separate Stacks}
+We note that the kernel needs space to work, but we can't put anything on the user stack. Thus, a solution is to consider a two-stack model.
+
+The OS thread has an interrupt stack (located in the kernel memory) plus user stack (located in user memory).
+
+Syscall handler copies user args to kernel space before invoking specific function.
+
+\subsection{Managing Processes}
+First, we recall that everything outside of the kernel is running in a process.
+\begin{itemize}
+	\item Even the shell!
+\end{itemize}
+
+A key point to take note of is that processes are started by other processes.
+
+\subsubsection{Bootstrapping}
+If processes are started by other processes, the question arises on how the first process start.
+
+Note then that the first process is started by the kernel.
+
+\subsubsection{Process Management API}
+We have the following:
+\begin{itemize}
+	\item \texttt{exit}: terminate a process
+	\item \texttt{fork}: copy the current process
+	\item \texttt{exec}: change the program being run by the current process
+	\item \texttt{wait}
+	\item \texttt{kill}
+	\item \texttt{sigaction}
+\end{itemize}
+
+\subsubsection{Creating Processes}
+Each process has a unique identifier.
+
+When we do \texttt{pid\_t fork()}, we copy the current process. The new process has a different pid and contains a single thread.
+
+The return value is a pid.
+
+When we create a copy of the current process, they no longer have access to each other. Remember that processes are protected from each other!
+
+We note that based on the return value of \texttt{fork()}, we have:
+\begin{itemize}
+	\item When the return value is greater than zero, we are running in the original parent process.
+	\item When the return value is zero, we are running in the child process.
+	\item When the return value is less than zero, there's an issue...
+\end{itemize}
+
+\begin{figurebox}[]{Illustration of \texttt{fork()}}
+	\centering\includegraphics[]{cs162-proc-fork-demo}
+\end{figurebox}
+
+\subsubsection{Variants of \texttt{exec}}
+The shell forks a process, and that process calls \texttt{exec}.
+
+\subsubsection{Waiting}
+We see that \texttt{wait} can be thought of as being similar to \texttt{join} with threads. 
+
+\subsubsection{Signals}
+
+\subsection{Files}
+A Unix/POSIX idea is that ``Everything is a File." We have identical interface for:
+\begin{itemize}
+	\item Files on disk
+	\item Devices (terminals, printers, etc.)
+	\item Regular files on disk
+	\item Networking (sockets)
+	\item Local interprocess communication (pipes, sockets)
+\end{itemize}
+
+It's based ont he system calls \texttt{open()}, \texttt{read()}, \texttt{write()}, and \texttt{close()}.
+
+It also includes \texttt{ioctl()} for custom configuration that doesn't quite fit in.
+
+\subsubsection{The Abstraction}
+Files are a named collection of data in a file system. The data is a sequence of bytes (could be text, binary, etc.). Each file also has metadata such as its size, modification time, owner, etc.
+
+We have a directory, which is a folder containing files (and other directories).
+
+From here, we have a hierarchical naming system (the path).
+
+\subsubsection{The Connection between Processes, File Systems, and Users}
+Every process has a \textbf{\textit{current working directory}} (CWD).
+\begin{itemize}
+	\item We note that this can be set with system call.
+\end{itemize}
+
+We have absolute and relative paths (the former ignores CWD, the latter being relative to it).
+
+\subsubsection{Streams}
+
+\section{Discussion -- 9/11/2024}
+\subsection{Fundamentals}
+\subsubsection{Operating System}
+The OS's job is to provide hardware abstractions to software applications and manage hardware resources.
+
+\begin{warn}
+	OS is not really a well-defined term! We can sorta think of it like a referee, illusionist, and glue.
+\end{warn}
+
+\subsubsection{Address Space}
+If we don't have the illusion of infinite resources, each process has to fight over the resources on our device.
+
+Base and bound splits up our memory up so that each specific area is for some process; if the process accesses things outside of their allowed segment, it causes some sort of error.
+
+There are other ways such as segmentation, and page-tables.
+
+An address space is like a concept, and not like the physical hardware.
+
+\subsubsection{Dual Mode Operation}
+We assign privileges to processes. We have kernel mode, which has access to everything; OS will mostly be acting in this mode.
+
+User mode has less privileges.
+
+\begin{example}
+	To switch between the modes, we think of Spotify wanting to play audio.
+	
+	The transfer between user mode to kernel mode is call the \texttt{syscall}. Alternatively, there's interrupts which transfers from user to kernel  mode; think of a keyboard.
+	
+	We also have exceptions; we want the kernel to handle it in a ``privileged" way.
+\end{example}
+
+We also have the IVT (Interrupt Virtual Table).
+
+\subsection{Concept Check}
+\begin{hw}
+	What is the importance of address translation?
+\end{hw}
+\begin{solution}
+	It allows us to map virtual memory to physical memory in order to give us the illusion of having the entire address space.
+	
+	Furthermore, it provides isolation/protection between different processes' address space.
+\end{solution}
+
+\begin{hw}
+	Similar to what’s done in the prologue at calling convention, what needs to happen before a mode transfer occurs?
+\end{hw}
+\begin{solution}
+	We need to copy all of our registers/data first before we do a mode transfer occurs.
+	
+	Namely, we need to save the processor state in the TCB (since the kernel may overwrite it).
+\end{solution}
+
+\begin{hw}
+	How does the syscall handler protect the kernel from corrupt or malicious user code?
+\end{hw}
+\begin{solution}
+	User program specifies an index instead of direct address of the handler. Arguments are validated and copied over to the kernel stack to prevent TOCTTOU attacks.
+	
+	After the syscall finishes, the results are copied back into the user memory. The user process isn't allowed to access the results stored in kernel memory.
+	
+	We note then that the user process never accesses the kernel memory directly.
+\end{solution}
+
+\begin{hw}
+	Trivia: In Linux, the \texttt{/dev/kmem} file contains the entirety of kernel virutal memory and it can be read. Why do we let a user program read kernel memory?
+\end{hw}
+\begin{solution}
+	Since it's restricted to only root users, this means that we are assuming that the user has the privileges of a supervisor to begin with in order to read the \texttt{/dev/kmem} file.
+\end{solution}
+
+\subsection{Processes}
+\subsubsection{PCB}
+The OS needs to run many programs, which requires being able to switch between user processes and kernel; switching among user processes through the kernel; protecting the OS from processes, and processes from each other.
+
+Thus, the kernel represents each process with a Process Control Block (PCB), which can be thought of as a metadata storage block.
+
+\begin{rmk}
+	For the first project, we can just think of a one-to-one mapping between threads and processes, since we aren't having multi-threaded processes.
+\end{rmk}
+
+\subsubsection{Syscall}
+\texttt{exec} changes the program being run by the current process. Unlike \texttt{fork}, it doesn't create a new process.
+
+\begin{rmk}
+	Each thread has its own stack, but since they share a process, they can access the other threads' stack.
+	
+	They also share a heap.
+	
+	Whereas if we have two processes, if we share address on one stack with another, the other process can't access it.
+\end{rmk}
+
+\subsubsection{Signal Handling}
+\begin{hw}
+	Why is SIGSTOP and SIGKILL overriding disabled?
+\end{hw}
+\begin{solution}
+	We can think that if we accidentally ran a malicious code, if they could override it, then we can't terminate the program.
+\end{solution}
+
+\subsection{Pintos Lists}
+...
+
+\section{Lecture -- 9/12/2024}
+\subsection{Low-Level vs High-Level File API}
+First, low-level:
+\begin{itemize}
+	\item Low-level direct use of syscall interface: \texttt{open()}, \texttt{read()}, etc.
+	\item Opening of file returns descriptor: \texttt{int myfile = open(...);}
+	\item File descriptor only meaning to kernel.
+	\begin{itemize}
+		\item We index into the PCB which holds pointers to kernel-level structure describing file.
+	\end{itemize}
+	\item Every \texttt{read()} or \texttt{write()} causes syscall no matter how small.
+\end{itemize}
+
+On the other hand, high-level:
+\begin{itemize}
+	\item High-level buffered access: \texttt{fopen()}, \texttt{fread()}, etc.
+	\item Opening of file returns ptr to FILE: \texttt{FILE *myfile = fopen(...);}
+	\item File structure is user space contained
+\end{itemize}
+
+Consider a low-level operation: we require to do some syscalls, then save all of our arguments onto registers, and so on.
+
+But high-level is more sophisticated, not needing to necessarily go through syscalls.
+
+The high-level API has the issue of not doing what we imagine it would do. For example, looking at the \texttt{sleep(10)} example: we see that using high-level API, everything before and after the sleep gets printed at once.
+
+Another example, if we are doing a write then read, the information may not be up to date; we would need to flush.
+
+%\subsection{syscall Review}
+%Recall that low-level lib parameters are set up in registers and syscall instruction is issued.
+
+\subsection{Files}
+\begin{defn}
+	A file descriptor number is an int, which we can think of a index/pointer which directs us to where the file is located at.
+\end{defn}
+
+\begin{defn}
+	A file description is ...
+\end{defn}
+The file description is created in the kernel. The two most important things to take note of are:
+\begin{itemize}
+	\item Where to find the file data on disk, \texttt{inode}.
+	\item The current position within the file.
+\end{itemize}
+
+\begin{rmk}
+	We note that \texttt{unlikely()} hints to the branch prediction that the chances of this condition occurring is unlikely.
+\end{rmk}
+
+\subsection{Device Driver}
+\begin{defn}[Device Driver]
+	This is device-specific code in the kernel that interacts directly with device hardware.
+\end{defn}
+
+Device driver is usually divided into two pieces:
+\begin{itemize}
+	\item Top half: accessed in call path from system calls.
+	\item Bottom half: run as interrupt routine.
+\end{itemize}
+
+Handler functions for each of the file operations.
+
+\end{document}

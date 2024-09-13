@@ -1,0 +1,10 @@
+\contentsline {chapter}{Contents}{2}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Introduction to Propositional Logic}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}What is Propositional Logic?}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Introduction}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Propositional Connectives}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Truth-Functional Connectives}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Truth}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Unary versus Binary Connectives}{6}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Truth-Functionality}{6}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}}{7}{section.1.3}%
