@@ -1,6 +1,0 @@
-\contentsline {section}{\numberline {1}Double-Check Your Intuition Again}{3}{section.1}%
-\contentsline {section}{\numberline {2}Unreliable Servers}{6}{section.2}%
-\contentsline {section}{\numberline {3}Geometric and Poisson}{7}{section.3}%
-\contentsline {section}{\numberline {4}Coupon Collector Variance}{8}{section.4}%
-\contentsline {section}{\numberline {5}Probabilistically Buying Probability Books}{10}{section.5}%
-\contentsline {section}{\numberline {6}Dice Games}{13}{section.6}%

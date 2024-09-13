@@ -1,8 +1,0 @@
-\contentsline {section}{\numberline {0}Sundry}{3}{section.0}%
-\contentsline {section}{\numberline {1}Planarity and Graph Complements}{4}{section.1}%
-\contentsline {section}{\numberline {2}Touring Hypercube}{5}{section.2}%
-\contentsline {section}{\numberline {3}Binary Trees}{7}{section.3}%
-\contentsline {section}{\numberline {4}Edge Colourings}{9}{section.4}%
-\contentsline {section}{\numberline {5}Modular Practice}{11}{section.5}%
-\contentsline {section}{\numberline {6}Nontrivial Modular Solutions}{12}{section.6}%
-\contentsline {section}{\numberline {7}Wilson's Theorem}{14}{section.7}%
