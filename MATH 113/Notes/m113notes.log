@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  13 SEP 2024 11:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  16 SEP 2024 12:00
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1932,14 +1932,14 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 9.0pt on input line 450.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
 (Font)              scaled to size 9.0pt on input line 450.
-<C:/Users/Michael/Pictures/MATH113/m113-rects.png, id=396, 396.2805pt x 414.348
+<C:/Users/Michael/Pictures/MATH113/m113-rects.png, id=416, 396.2805pt x 414.348
 pt>
 File: C:/Users/Michael/Pictures/MATH113/m113-rects.png Graphic file (type png)
 <use C:/Users/Michael/Pictures/MATH113/m113-rects.png>
 Package pdftex.def Info: C:/Users/Michael/Pictures/MATH113/m113-rects.png  used
  on input line 451.
 (pdftex.def)             Requested size: 396.27953pt x 414.34698pt.
-<C:/Users/Michael/Pictures/MATH113/m113-tris.png, id=397, 292.09125pt x 418.563
+<C:/Users/Michael/Pictures/MATH113/m113-tris.png, id=417, 292.09125pt x 418.563
 75pt>
 File: C:/Users/Michael/Pictures/MATH113/m113-tris.png Graphic file (type png)
 <use C:/Users/Michael/Pictures/MATH113/m113-tris.png>
@@ -2151,19 +2151,76 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 982.
 
-[24] [25] (m113notes.aux)
+[24] [25]
+Chapter 4.
+Package mdframed Info: mdframed works in twoside mode on input line 1063.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1063.
+Package mdframed Info: mdframed works in twoside mode on input line 1074.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1074.
+Package mdframed Info: mdframed works in twoside mode on input line 1082.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1082.
+Package mdframed Info: mdframed works in twoside mode on input line 1085.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1085.
+[26
+
+]
+Package mdframed Info: mdframed works in twoside mode on input line 1097.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1097.
+Package mdframed Info: mdframed works in twoside mode on input line 1103.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1103.
+
+Overfull \hbox (2.58975pt too wide) in paragraph at lines 1103--1105
+[][][]\OT1/cantarell-TLF/b/n/10 Example 4.4. [][]\OT1/cantarell-TLF/m/n/10 (A N
+on-Example) Let us con-sider $\OT1/cmr/m/n/10 (\U/msb/m/n/10 Z\OML/cmm/m/it/10 
+; \OT1/cmr/m/n/10 +)$\OT1/cantarell-TLF/m/n/10 . Let us con-sider $\OT1/cmr/m/n
+/10 (\U/msb/m/n/10 Z\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 3\U/msb/m/n/10 Z\OML/cmm/
+m/it/10 ; \OT1/cmr/m/n/10 +)$\OT1/cantarell-TLF/m/n/10 . We note that $\OT1/cmr
+/m/n/10 (\U/msb/m/n/10 Z\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 3\U/msb/m/n/10 Z\OML/
+cmm/m/it/10 ; \OT1/cmr/m/n/10 +)$
+ []
+
+Package mdframed Info: mdframed works in twoside mode on input line 1109.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1109.
+Package mdframed Info: mdframed works in twoside mode on input line 1119.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1119.
+Package mdframed Info: mdframed works in twoside mode on input line 1124.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1124.
+[27]
+Package mdframed Info: mdframed works in twoside mode on input line 1162.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1162.
+ [28] (m113notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `m113notes.out' has not changed.
-(rerunfilecheck)             Checksum: C56C7FC6386E816346CCEF21ACA1D823;6601.
+(rerunfilecheck)             Checksum: 7F2568E1710106B98F45443DE30A2121;7104.
  ) 
 Here is how much of TeX's memory you used:
- 41195 strings out of 474541
- 852847 string characters out of 5743481
+ 41259 strings out of 474541
+ 854002 string characters out of 5743481
  1951978 words of memory out of 5000000
- 62474 multiletter control sequences out of 15000+600000
+ 62511 multiletter control sequences out of 15000+600000
  590545 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,12n,145p,548b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2187,9 +2244,9 @@ nts/cm/cmsy10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmsy7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/Michael/AppData/Local/Pro
 grams/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on m113notes.pdf (25 pages, 475413 bytes).
+Output written on m113notes.pdf (28 pages, 492203 bytes).
 PDF statistics:
- 660 PDF objects out of 1000 (max. 8388607)
- 205 named destinations out of 1000 (max. 500000)
- 557 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 719 PDF objects out of 1000 (max. 8388607)
+ 232 named destinations out of 1000 (max. 500000)
+ 589 words of extra memory for PDF output out of 10000 (max. 10000000)
 

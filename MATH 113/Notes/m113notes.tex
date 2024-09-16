@@ -1055,4 +1055,126 @@ We can in fact think of this as a graph as follows:
 \end{center}
 
 An advantage of this is that it becomes easy to visualize things such as composition of maps. Furthermore, inverses are easy to see as well.
+
+\chapter{Week For Suffering}
+\section{Lecture -- 9/16/2024}
+\subsection{Warm-Up}
+\begin{hw}
+	Prove that $3\ZZ = \brc{k \in \ZZ : 3 \mid k}$ is a group with the $+$ operation.
+\end{hw}
+\begin{solution}
+	First, we prove that there exists an identity. We observe that $3(0) = 0$, so we see that $0 \in 3\ZZ$. Furthermore, note that $0 + k = k$ for all $k \in \ZZ$. Thus, since $3\ZZ \subseteq \ZZ$, we note that $0$ is also the identity in $3\ZZ$.
+	
+	Next, we observe that for any $k \in 3\ZZ$, we observe that there exists $a \in \ZZ$ such that $3a = k$. Then, we observe that if we let $b = -a$, then we have $3b = -k$. Thus, we see that $-k \in 3\ZZ$ as well. Then, we see that $k + (-k) = 0$. Thus, it passes the inverse check.
+	
+	Finally, we note that $+$ is associative on $\ZZ$, and thus it follows that it is associative on $3\ZZ$ as well.
+\end{solution}
+
+\begin{hw}
+	How to find new examples of groups?
+\end{hw}
+\begin{solution}
+	We can look at existing groups, and then form subgroups from them.
+\end{solution}
+
+\subsection{Subgroups}
+\begin{defn}
+	A subgroup $H$ of a group $G$ is a group $H$ with a group operation $*$ restricted from $G$.
+\end{defn}
+
+\begin{example}[Restriction]
+	Let us suppose some set $X$ with a function $f$ mapping $X$ to $\RR$. So, we have $f : X \rightarrow \RR$. Then, there are times where we are only interested in some subset $Y \subset X$. Then, we look at $f : Y \rightarrow \RR$.
+	
+	Then, we have two notations:
+	\begin{itemize}
+		\item $f : Y \rightarrow \RR$.
+		\item $f \restriction Y$
+	\end{itemize}
+\end{example}
+
+So, for example, let consider $G = (G, *)$. Then, we have $* : G \times G \rightarrow G$. Now, we restrict it to $* : H \times H \rightarrow H$. We note that we have to enforce mapping to $H$, since $H$ is in fact a group.
+
+\begin{example}($n\ZZ$)
+	Let us consider $(\ZZ, +)$. Then, let us look at $(3\ZZ, +)$. This is in fact a subgroup of $(\ZZ, +)$. From the warm-up, we see that $(3\ZZ, +)$ is in fact a group.
+	
+	More generally, let us consider $n \in \ZZ$. Then, $n\ZZ = \brc{k \in \ZZ : n \mid k}$. Then, it is a subgroup a subgroup of $(\ZZ, +)$.
+\end{example}
+
+\begin{example}(A Non-Example)
+	Let us consider $(\ZZ, +)$. Let us consider $(\ZZ/3\ZZ, +)$. We note that $(\ZZ/3\ZZ, +)$ is a group. We also note that we have closure, and so we see that $(\ZZ/3\ZZ, +)$ is... a subgroup?
+	
+	However, we note that $+$ isn't the same operation as we have on $(\ZZ, +)$. Furthermore, we see that $\ZZ/3\ZZ \not\subseteq \ZZ$.
+\end{example}
+
+\begin{defn}[Subgroup Lattice]
+	We define a subgroup lattice of a group $G$ to be:
+	
+	\begin{equation*}
+		(\brc{e}, *) \subset \cdots (H, *) \subset (K, *) \cdots \subset (G, *)
+	\end{equation*}
+
+	On the left-hand side is the trivial subgroup, the smallest possible subgroup. Then, the largest subgroup is the group itself. And everything in-between is what we call proper subgroups.
+\end{defn}
+
+\begin{defn}[Proper Subgroup]
+	Proper subgroups are subgroups which are not the group itself and not the trivial subgroup.
+\end{defn}
+
+\begin{prop}
+	We say that $H \subseteq G$ is a subgroup if and only if:
+	\begin{itemize}
+		\item $e_G \in H$.
+		\item If $h_1, h_2 \in H$, then $h_1h_2 \in H$.
+		\item If $h \in H$, then $h^{-1} \in H$
+	\end{itemize}
+\end{prop}
+\begin{proof}
+	First, let us suppose that $H \subseteq G$ is a subgroup. Then, we'll prove that the three properties hold.
+	\begin{innerproof}
+		First, let us show that $e_G \in H$. We observe that since $H$ is a subgroup, we have that $e_H \in H$ and that for all $h \in H$, we have $e_H h = h e_H = h$.
+		
+		Furthermore, we note that $e_H \in G$, so we see that $e_G e_H = e_H e_G = e_H$.
+		
+		Now, we observe the following:
+		\begin{align*}
+			e_G e_H = e_H e_G = e_H
+		\end{align*}
+	
+		Furthermore, we have:
+		\begin{align*}
+			e_H e_H = e_H
+		\end{align*}
+	
+		So, we have:
+		\begin{align*}
+			e_G e_H &= e_H e_H \\
+			e_G (e_H e_H^{-1}) &= e_H(e_H e_H^{-1}) \\
+			e_G &= e_H
+		\end{align*}
+	
+		Next, let us consider inverses. Since $H$ is a subgroup, we know then that if $h \in H$, we have an inverse $h'$ such that $hh' = h'h = e$. And we note by the uniqueness of inverses in $G$, we have that $h' = h^{-1}$.
+		
+		Finally, for closure, we note that it follows from the fact that $H$ is in fact a group.
+	\end{innerproof}
+\end{proof}
+
+\begin{prop}
+	$H \subseteq G$ is a subgroup if and only if $H \neq \emptyset$ and $\forall a, b \in H$, we have $ab^{-1} \in H$.
+\end{prop}
+\begin{solution}
+	First, let us show that if $H \neq \emptyset$ and $\forall a,b \in H$, we have $ab^{-1} \in H$, then we have $H$ is a subgroup.
+	\begin{innerproof}
+		First, since $H \neq \emptyset$, let us then consider $h \in H$. Then, $hh = hh^{-1} = e \in H$.
+		
+		Next, let us consider $h \in H$. Then, we observe that since we know $e \in H$, we have that $eh^{-1} = h^{-1} \in H$.
+		
+		Finally, let us consider $h_1, h_2 \in H$. We want to show that $h_1 h_2 \in H$ (i.e. we have closure). Since $H$ respects inverses, we see that if $h_2 \in H$, we have $h_2^{-1} \in H$ as well.
+		
+		Then, we see that $h_1, h_2^{-1} \in H$. Then, we have $h_1(h_2^{-1})^{-1} = h_1h_2\in H$.
+		
+		Therefore, we note that $H$ is in fact a subgroup.
+	\end{innerproof}
+	
+\end{solution}
+
 \end{document}
