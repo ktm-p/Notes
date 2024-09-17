@@ -32,3 +32,10 @@
 \contentsline {subsection}{\numberline {3.2.2}Rank and Null Space}{19}{subsection.3.2.2}%
 \contentsline {chapter}{\numberline {4}Week For Suffering}{21}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Discussion -- 9/16/2024}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Lecture -- 9/17/2024}{23}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Least Squares, and Linear Regression}{23}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Non-Linear Regression}{24}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Why the L2 Norm?}{24}{subsection.4.2.3}%
+\contentsline {subsubsection}{A Second Approach}{25}{thm.4.5}%
+\contentsline {subsection}{\numberline {4.2.4}Set of Solutions}{26}{subsection.4.2.4}%
+\contentsline {subsubsection}{Eigenvalues, Singular Values, and Determinants}{26}{section*.4}%

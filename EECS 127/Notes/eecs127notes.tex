@@ -1007,4 +1007,312 @@ And we note that $v = \begin{bmatrix}
 	\end{equation*}
 \end{solution}
 
+\section{Lecture -- 9/17/2024}
+When we have noise in our measurements, it will make our system inconsistent.
+
+\subsection{Least Squares, and Linear Regression}
+\begin{example}[Noisy Measurements]
+	Consider $m = 3$, $n = 2$. And we have the following:
+	\begin{equation*}
+		\begin{cases}
+			x_1 + x_2 = 2 \\
+			2x_1 + 3x_2 = 5 \\
+			4x_1 - x_2 = 3
+		\end{cases}
+	\end{equation*}
+
+	Now, we note that if let $x_1 = x_2 = 1$, the system of equations would be satisfied.
+	
+	However, if instead we had:
+	\begin{equation*}
+		x_1 + x_2 = 2 + \varepsilon
+	\end{equation*}
+
+	Where $\varepsilon$ is some noise. In that case, to solve this system of equations, we would instead solve the least square $\min \norm{Ax - y}_2$.
+	
+	If the optimal objective is equal to zero, that is we have $\norm{Ax^{*} - y}_2 = 0$, meaning that $Ax^{*} = y$. Otherwise, $Ax^{*} \neq y$.
+\end{example}
+
+From the example above, we see that $\norm{Ax - y}$ is telling us how much we are violating $Ax = y$.
+
+\begin{example}[Linear Regression]
+	Let's say we have a set of points
+	
+	% Insert graph here
+	
+	Then, we would like to find some line that is close to all of the points on our graph. The equation for this line then would be:
+	\begin{equation*}
+		z_2 = az_1 + b.
+	\end{equation*}
+
+	We let $a = x_1$ and $b = x_2$. Let us assume that we have $m$ different points.
+	
+	So, we have $z_2^{(i)} - x_1z_1^{(i)} - x_2$, for $i = 1, \ldots, m$. Note that this may not be equal to zero.
+	
+	Then, we want to find:
+	\begin{align*}
+		\min_{x \in \RR^{2}} \sum_{i=1}^{m} (x_1z_1^{(i)} + x_2 - z_2^{(i)})^{2} &= \sum_{i = 1}^{m} \pr{\begin{bmatrix}
+				z_1^{(i)} & 1
+		\end{bmatrix}x - z_2^{(i)}}^{2} \\
+		&= \min \norm{Ax-y}_2^{2}
+	\end{align*}
+
+	Where we have:
+	\begin{equation*}
+		A = \begin{bmatrix}
+			z_1^{(1)} & 1 \\
+			\vdots & \vdots \\
+			z_1^{(m)} & 1
+		\end{bmatrix}, \quad
+		y = \begin{bmatrix}
+			z_2^{(1)} \\ \vdots \\ z_2^{(m)}
+		\end{bmatrix}
+	\end{equation*}
+\end{example}
+
+\begin{example}[General Linear Regression]
+	Let us consider having a general linear regression system, with input $a \in\RR^{n}$ and output is $a^{\intercal}x \in \RR$, where $x$ is the vector of coefficients.
+	
+	We apply inputs $a^{(1)}, \ldots, a^{(m)} \in \RR^{n}$. Then, we measure noisy outputs $y_1, \ldots, y_m \in \RR$.
+	
+	In Least Squares, we minimize the sum of the residuals:
+	\begin{equation*}
+		\min_{x \in \RR^{n}} \sum_{i=1}^{m} \pr{(a^{(i)})^{\intercal}x - y_i}^{2} = \min\norm{Ax - y}_2^{2}
+	\end{equation*}
+
+	Where we define $A$, $y$ to be:
+	\begin{equation*}
+		A = \begin{bmatrix}
+			(a^{(1)})^{\intercal} \\ \vdots \\ (a^{(m)})^{\intercal}
+		\end{bmatrix}, \quad y = \begin{bmatrix}
+		 y_1 \\ \vdots \\ y_m
+	\end{bmatrix}
+	\end{equation*}
+\end{example}
+
+\subsection{Non-Linear Regression}
+\begin{example}[Non-Linear Regression]
+	Suppose we want to find a quadratic function to fit points.
+	
+	% Insert graph with points like parabola
+	
+	Now, we have points $(z_1^{(i)}), z_2^{(i)}$, with $i = 1, \ldots, m$.
+	
+	And we have the model $z_2 = az_1^{2} + bz_1 + c$. We call $a = x_1$, $b = x_2$, and $c = x_3$.
+	
+	Then, we want to minimize the following:
+	\begin{align*}
+		\min \sum_{i=1}^{m} \pr{ (x_1z_1^{(i)})^{2} + x_2z_1^{(i)} + x_3 - z_2^{(i)}}^{2} &= \min\norm{Ax-y}^{2}
+	\end{align*}
+
+	Where we let:
+	\begin{equation*}
+		A = \begin{bmatrix}
+			(z_1^{(1)})^{2} & z_1^{(1)} & 1 \\
+			\vdots & \vdots & \vdots \\
+			(z_1^{(m)})^{2} & z_1^{(m)} & 1
+		\end{bmatrix}, \quad y = \begin{bmatrix}
+		z_2^{(1)} \\ \vdots \\ z_2^{(m)}
+	\end{bmatrix}
+	\end{equation*}
+\end{example}
+
+\subsection{Why the L2 Norm?}
+Now, the question arises on why we re minimizing the L2 Norm, and not any other function.
+
+To answer this, let us suppose we are looking at the measured value $y = \text{correct } \tilde{y} + \text{sensor noise } \bar y$. 
+
+If $\bar y$ is Gaussian, then $\bar{y}_1, \ldots, \overline{y}_m$ is i.i.d.
+
+Then, we see that Least Squares becomes best estimation, which is maximum likelihood in statistics.
+
+Then, we examine $\min_{x \in \RR^{n}} \norm{Ax-y}_2$, where $A \in \RR^{m \times n}$.
+
+Then, we look at the range $R(A) = \brc{Ax : x \in \RR^{n}}$, which is in fact a subspace.
+
+Then, the projected point $y^{*}$ exists and is unique as well. From previous lectures, we know that $y - y^{*} \perp R(A)$. Furthermore, we've seen before that $N(A^{\intercal}) \perp R(A)$, and that $N(A^{\intercal}) \oplus R(A) = \RR^{m}$.
+
+So, we see that $y-y^{*} \in N(A)$. That means then that $A^{\intercal}(y-y^{*}) = 0$. And since $y^{*} \in R(A)$, it follows then that there exists a point $x^{*}$ such that $Ax^{*} = y^{*}$.
+
+So, we have:
+\begin{align*}
+	0 = A^{\intercal}(y - y^{*}) = A^{\intercal}(y - Ax^{*}) = 0 \\
+	A^{\intercal}y = A^{\intercal}Ax^{*}
+\end{align*}
+
+Now, we introduce the following theorem:
+\begin{thm}
+	Least Squares always has a solution, and is characterized as the set of solutions:\begin{equation*}
+		S = \brc{x^{*} : A^{\intercal}Ax^{*} = A^{\intercal}y}
+	\end{equation*}
+\end{thm}
+
+If $A$ turns out to be full column rank, we note then that $A^{\intercal}A$ will be invertible, and thus we can define $x^{*} = (A^{\intercal}A)^{-1}A^{\intercal}y = A^{\intercal}y$.
+
+\subsubsection{A Second Approach}
+Another way to find the formula is that $\min f(x) \rightarrow \nabla f(x) = 0$. But, note that $\norm{Ax-y}_2$ is not differentiable at the origin. So, we replace it with $\norm{Ax-y}_2^{2}$.
+
+Recall that
+\begin{align*}
+	\norm{Ax-y}_2^{2} &= \ang{Ax-y, Ax-y} \\
+	&= (Ax-y)^{\intercal}(Ax-y) \\
+	&= (x^{\intercal}A^{\intercal} - y^{\intercal})(Ax - y) \\
+	&= x^{\intercal}px + q^{\intercal}x + r
+\end{align*}
+
+	Where we have $p = A^{\intercal}A \in \RR^{n \times m}$, $q = -2A^{\intercal}y \in \RR^{n}$, and $r = y^{\intercal}y \in \RR$.
+	
+	So, we have $x^{\intercal}px + q^{\intercal}x + r$, a quadratic function. Suppose $n = 1$, so an example function we'd have is:
+	\begin{equation*}
+		f(x) = 2x^{2} + 5x - 1
+	\end{equation*}
+
+	If $n=2$, we would have a function like:
+	\begin{equation*}
+		f(x) = x_1^{2} + 5x_2^{2} - 6x_1x_2 + 7x_1 + 2x_2 - 5
+	\end{equation*}
+
+	To put it in standard form, we would do:
+	\begin{equation*}
+		f(x) = \begin{bmatrix}
+			x_1 & x_2
+		\end{bmatrix}\begin{bmatrix}
+		1 & -3 \\ -3 & 5
+	\end{bmatrix}\begin{bmatrix}
+	x_1 \\ x_2
+\end{bmatrix} + \begin{bmatrix}
+7 & 2
+\end{bmatrix}x - 5
+	\end{equation*}
+
+	We always choose $p$ to be symmetric. That is, $p = p^{\intercal}$.
+	
+	Now, let us look at the $(i, j)$ entry of $p$, $p_{i, j}$.
+	
+	Then, we observe the following:
+	\begin{align*}
+		f(x) &= x^{\intercal}px + q^{\intercal}x + r \\
+		&= \sum_{i=1}^{n} \sum_{j=1}^{n} p_{i,j}x_ix_j + \sum{i=1}^{n}q_ix_i + r \\
+		&= \sum_{i=1}^{n}p_{i, i}x_i^{2} + \sum_{i < j} (p_{i,j} + p_{j,i})x_ix_j + \sum_{i = 1}^{n}q_ix_i + r
+	\end{align*}
+
+	Then, we take the derivative to get:
+	\begin{align*}
+		\frac{\partial f(x)}{\partial x_i} &= 2p_{i,i}x_i + \sum_{i \neq j} (p_{i,j} + p_{j,i})x_j + q_i \\
+		&= 2p_{i,i}x_i + \sum_{i \neq j} 2p_{i,j}x_j + q_i \\
+		&= 2 \begin{bmatrix}
+			p_{i,1} & \cdots & p_{i,n}
+		\end{bmatrix} + q_i
+	\end{align*}
+
+	Thus, we see that $\nabla f(x) = 2px + q$. Thus, we see that if $x^{*}$ is a local minimum, we have $\nabla f(x^{*}) = 0$.
+	
+	So, $\nabla f(x^{*}) = 0 \implies 2A^{\intercal}Ax^{*} + (-2A^{\intercal}y) = 0$.
+	
+	Then, we have:
+	\begin{align*}
+		2A^{\intercal}Ax^{*} &= 2A^{\intercal}y \\
+		A^{\intercal}Ax^{*} &= A^{\intercal}y \\
+		x^{*} &= (A^{\intercal}A)^{-1}A^{\intercal}y
+	\end{align*}
+
+\subsection{Set of Solutions}
+Let us consider the set of solution
+\begin{equation*}
+	S = \brc{x^{*} : A^{\intercal}Ax^{*} = A^{\intercal}y}
+\end{equation*}
+
+For this, we aren't making any assumptions on $A \in \RR^{m \times n}$. In the case where $m \geq n$, then we can find the inverse of $A^{\intercal}A$, and thus have a unique solution. On the other hand, if $n > m$, then we have the case of an underdetermined system, and thus $x^{*}$ may not be unique.
+
+\subsubsection{Eigenvalues, Singular Values, and Determinants}
+In the case of such an underdetermined system, we have to find the best solution. To solve such a problem, we need a few new concepts.
+
+First, let us consider a matrix $A \in \RR^{n \times n}$. Then, we denote its determinant to be $\det (A)$.
+
+\begin{defn}[Characteristic Polynomial]
+	Let $\lambda \in \RR$. Then, we note that $P(\lambda) = \det(\lambda I_n - A)$, where $I_n$ is the identity matrix in $R^{n \times n}$.
+	
+	This polynomial is the characteristic polynomial of $A$.
+\end{defn}
+
+We note that this polynomial has degree $n$, and thus has $n$ zeroes. We can thus write it as:
+\begin{equation*}
+	P(\lambda) = (\lambda-\lambda_1)(\lambda - \lambda_2)\cdots(\lambda-\lambda_n).
+\end{equation*}
+
+These $\lambda_1, \ldots, \lambda_n$ are complex numbers which are roots of $P(\lambda)$.
+
+\begin{defn}[Eigenvalue]
+	We say that $\lambda_1, \ldots, \lambda_n$ are eigenvalues of $A$.
+	
+	Then, this means that $\lambda \in \CC$ if there exists some non-zero $U \in \CC^{n}$ such that:
+	\begin{equation*}
+		(\lambda I_n - A)u = 0
+	\end{equation*}
+
+	In other words, we have
+	\begin{equation*}
+		AU = \lambda u
+	\end{equation*}
+
+	And we call $u$ to be the eigenvector.
+\end{defn}
+\begin{example}
+	Let us consider
+	\begin{equation*}
+		A = \begin{bmatrix}
+			1 & 0 \\ 0 & 1
+		\end{bmatrix}
+	\end{equation*}
+	
+	Then, $\det(\lambda I - A) = (\lambda - 1)(\lambda - 1) = 0$. From the characteristic polynomial, we see that $\lambda_1 = \lambda_2 = 1$. These are the repeated eigenvalues of $A$.
+	
+	Then, to find the eigenvector, we want to find:
+	\begin{equation*}
+		\begin{bmatrix}
+			 1 & 0 \\ 0 & 1 
+		\end{bmatrix}\begin{bmatrix}
+		 u_1 \\ u_2
+	\end{bmatrix} = \lambda\begin{bmatrix}
+	u_1 \\ u_2
+\end{bmatrix}
+	\end{equation*}
+
+	Working through this yields us:
+	\begin{equation*}
+		\begin{bmatrix}
+			u_1\\u_2
+		\end{bmatrix} = \begin{bmatrix}
+		1 \\ 0
+	\end{bmatrix}
+ 	\text{ or }
+ 		\begin{bmatrix}
+ 			0 \\ 1
+ 		\end{bmatrix}
+	\end{equation*}
+\end{example}
+
+\begin{example}
+	Another example is to look at:
+	\begin{equation*}
+		A = \begin{bmatrix}
+			 1 & 1 \\ 0 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	Then, we have: $\det (\lambda I - A) = (\lambda - 1)(\lambda - 1)$. Then, we have $\lambda_1 = \lambda_2 = 1$. Then, we see that:
+	\begin{align*}
+		Au = \lambda u \implies \begin{cases}
+			u_1 + u_2 = u_1 \\
+			u_2 = u_2
+		\end{cases}
+	\end{align*}
+
+	Then, we see that $u_2 = 0$, and $u_1$ is arbitrary. Thus, our eigenvector would be:
+	\begin{equation*}
+		u = \begin{bmatrix}
+			u_1 \\ 0
+		\end{bmatrix}
+	\end{equation*}
+\end{example}
 \end{document}
