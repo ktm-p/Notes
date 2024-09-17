@@ -1,99 +1,107 @@
 \contentsline {chapter}{Contents}{2}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}An Introduction}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Required Reading -- \textit {Do Artifacts have Politics?}}{5}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}A Brief Overview}{5}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Technical Arrangements as a Form of Order}{5}{subsection.1.1.2}%
-\contentsline {subsubsection}{\textit {The Long Island Bridges}}{5}{section*.2}%
-\contentsline {subsubsection}{\textit {Further Examples}}{5}{example.1.1}%
-\contentsline {subsubsection}{\textit {Industrial Mechanisation}}{6}{example.1.3}%
-\contentsline {subsubsection}{\textit {Public Transportation}}{6}{example.1.4}%
-\contentsline {subsubsection}{\textit {The Mechanical Tomato Harvesters}}{7}{example.1.5}%
-\contentsline {subsubsection}{\textit {Important Choices}}{7}{example.1.6}%
-\contentsline {subsection}{\numberline {1.1.3}Inherently Political Technologies}{8}{subsection.1.1.3}%
-\contentsline {subsubsection}{\textit {Technology and Authority}}{8}{section*.3}%
-\contentsline {subsubsection}{\textit {The Two Claims}}{9}{example.1.9}%
-\contentsline {subsubsection}{\textit {Some Examples}}{9}{example.1.9}%
-\contentsline {section}{\numberline {1.2}Lecture -- 8/28/2024}{10}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Course Information}{10}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Winner's Essay}{10}{subsection.1.2.2}%
-\contentsline {subsubsection}{Analyzing Quotes}{10}{section*.4}%
-\contentsline {subsubsection}{The Human Contexts and Ethics Toolkit}{11}{section*.4}%
-\contentsline {section}{\numberline {1.3}Required Reading -- \textit {Introductory Essay: The Social Shaping of Technology}}{12}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Technological Determinism as a Theory of Society}{12}{subsection.1.3.1}%
-\contentsline {subsubsection}{A Callback to Winner's Essay}{13}{example.1.16}%
-\contentsline {subsection}{\numberline {1.3.2}Technological Determinism as a Theory of Technology}{13}{subsection.1.3.2}%
-\contentsline {subsubsection}{The Dangers of this Mistake}{13}{section*.5}%
-\contentsline {subsection}{\numberline {1.3.3}Does Science Shape Technology?}{14}{subsection.1.3.3}%
-\contentsline {section}{\numberline {1.4}Lecture -- 8/30/2024}{14}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}The Datafied World}{15}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Technological Determinism}{15}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Alternative Narratives}{15}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}An Example}{16}{subsection.1.4.4}%
-\contentsline {chapter}{\numberline {2}Week Two Woes}{17}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Required Reading -- \textit {Sorting Things Out: Classification and Its Consequences}}{17}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Introduction}{17}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Categories as Subjects of Contention}{17}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}The Main Idea}{18}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}The Dangers of Classification}{18}{subsection.2.1.4}%
-\contentsline {subsection}{\numberline {2.1.5}Working Infrastructure}{18}{subsection.2.1.5}%
-\contentsline {subsection}{\numberline {2.1.6}Classification}{18}{subsection.2.1.6}%
-\contentsline {subsubsection}{Classification versus Nomenclature}{19}{Item.11}%
-\contentsline {section}{\numberline {2.2}Lecture -- 9/4/2024}{19}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Making Data}{20}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Data and Power}{21}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Representation}{21}{subsection.2.2.3}%
-\contentsline {subsubsection}{Why does it Matter?}{21}{section*.6}%
-\contentsline {subsection}{\numberline {2.2.4}What Counts?}{21}{subsection.2.2.4}%
-\contentsline {section}{\numberline {2.3}Required Reading -- \textit {Informational Persons and Our Information Politics}}{22}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Informational Persons}{22}{subsection.2.3.1}%
-\contentsline {subsubsection}{19th Century Detour}{22}{example.2.8}%
-\contentsline {subsubsection}{20th Century}{22}{example.2.8}%
-\contentsline {subsubsection}{The Present Day}{23}{example.2.8}%
-\contentsline {subsubsection}{Data}{23}{example.2.8}%
-\contentsline {section}{\numberline {2.4}Required Reading -- \textit {Coded Exposure}}{23}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Technology and Racism}{23}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Multiply Exposed}{23}{subsection.2.4.2}%
-\contentsline {subsubsection}{Photography}{23}{section*.7}%
-\contentsline {subsubsection}{Racism}{24}{section*.7}%
-\contentsline {subsection}{\numberline {2.4.3}Exposing Whiteness}{24}{subsection.2.4.3}%
-\contentsline {subsubsection}{Kodak}{24}{section*.8}%
-\contentsline {subsubsection}{Polaroid}{24}{section*.8}%
-\contentsline {subsubsection}{HP Cameras}{24}{section*.8}%
-\contentsline {subsubsection}{Tecno Mobile}{24}{section*.8}%
-\contentsline {subsection}{\numberline {2.4.4}Exposing Difference}{25}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5}Lecture -- 9/6/2024}{25}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}What's this lecture for?}{25}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Personal Data}{25}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Case Study: Coordinated Entry System (CES) for the Unhoused, LA}{25}{subsection.2.5.3}%
-\contentsline {subsubsection}{Representation}{26}{section*.9}%
-\contentsline {subsubsection}{Classification}{26}{section*.9}%
-\contentsline {subsubsection}{Abstraction}{26}{section*.9}%
-\contentsline {subsubsection}{Circulation}{27}{example.2.10}%
-\contentsline {subsection}{\numberline {2.5.4}23 and Me}{27}{subsection.2.5.4}%
-\contentsline {subsection}{\numberline {2.5.5}Stake of Representation}{27}{subsection.2.5.5}%
-\contentsline {subsubsection}{Allocative and Representational Harm}{27}{section*.10}%
-\contentsline {chapter}{\numberline {3}The Yapper Strikes Back}{28}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Lecture -- 9/9/2024}{28}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}The Trinity Test}{28}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Big Science}{28}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Professional History of Science}{28}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}Great Men Narratives}{29}{subsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.1.5}Science in the Present Day}{29}{subsection.3.1.5}%
-\contentsline {subsection}{\numberline {3.1.6}Philosophies of Science}{30}{subsection.3.1.6}%
-\contentsline {subsubsection}{Logical Positivism (1920s - 1960s)}{30}{section*.11}%
-\contentsline {subsubsection}{Falsificationism (1930s - 1970s)}{30}{example.3.2}%
-\contentsline {subsubsection}{Limits}{31}{rmk.3.4}%
-\contentsline {subsection}{\numberline {3.1.7}The Copernican Revolution}{31}{subsection.3.1.7}%
-\contentsline {subsection}{\numberline {3.1.8}Thomas Kuhn}{31}{subsection.3.1.8}%
-\contentsline {section}{\numberline {3.2}Lecture -- 9/11/2024}{31}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Two Parallel Narratives}{32}{subsection.3.2.1}%
-\contentsline {subsubsection}{Rise of Quantification in Science}{32}{section*.12}%
-\contentsline {subsubsection}{Objectivity}{32}{example.3.8}%
-\contentsline {subsubsection}{Varieties of Objectivity}{33}{example.3.8}%
-\contentsline {subsubsection}{Objectivity and the Law}{33}{example.3.8}%
-\contentsline {subsubsection}{The Connection}{33}{example.3.8}%
-\contentsline {subsubsection}{Quantification and Politics in the French Revolution}{33}{example.3.8}%
-\contentsline {subsubsection}{Democracy and Quantification}{33}{example.3.8}%
-\contentsline {subsection}{\numberline {3.2.2}Conclusion}{33}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Discussion -- 9/12/2024}{34}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}This Week's Readings}{34}{subsection.3.3.1}%
+\contentsline {chapter}{\numberline {1}An Introduction}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Required Reading -- \textit {Do Artifacts have Politics?}}{6}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}A Brief Overview}{6}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Technical Arrangements as a Form of Order}{6}{subsection.1.1.2}%
+\contentsline {subsubsection}{\textit {The Long Island Bridges}}{6}{section*.2}%
+\contentsline {subsubsection}{\textit {Further Examples}}{6}{example.1.1}%
+\contentsline {subsubsection}{\textit {Industrial Mechanisation}}{7}{example.1.3}%
+\contentsline {subsubsection}{\textit {Public Transportation}}{7}{example.1.4}%
+\contentsline {subsubsection}{\textit {The Mechanical Tomato Harvesters}}{8}{example.1.5}%
+\contentsline {subsubsection}{\textit {Important Choices}}{8}{example.1.6}%
+\contentsline {subsection}{\numberline {1.1.3}Inherently Political Technologies}{9}{subsection.1.1.3}%
+\contentsline {subsubsection}{\textit {Technology and Authority}}{9}{section*.3}%
+\contentsline {subsubsection}{\textit {The Two Claims}}{10}{example.1.9}%
+\contentsline {subsubsection}{\textit {Some Examples}}{10}{example.1.9}%
+\contentsline {section}{\numberline {1.2}Lecture -- 8/28/2024}{11}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Course Information}{11}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Winner's Essay}{11}{subsection.1.2.2}%
+\contentsline {subsubsection}{Analyzing Quotes}{11}{section*.4}%
+\contentsline {subsubsection}{The Human Contexts and Ethics Toolkit}{12}{section*.4}%
+\contentsline {section}{\numberline {1.3}Required Reading -- \textit {Introductory Essay: The Social Shaping of Technology}}{13}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Technological Determinism as a Theory of Society}{13}{subsection.1.3.1}%
+\contentsline {subsubsection}{A Callback to Winner's Essay}{14}{example.1.16}%
+\contentsline {subsection}{\numberline {1.3.2}Technological Determinism as a Theory of Technology}{14}{subsection.1.3.2}%
+\contentsline {subsubsection}{The Dangers of this Mistake}{14}{section*.5}%
+\contentsline {subsection}{\numberline {1.3.3}Does Science Shape Technology?}{15}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Lecture -- 8/30/2024}{15}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}The Datafied World}{16}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Technological Determinism}{16}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Alternative Narratives}{16}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}An Example}{17}{subsection.1.4.4}%
+\contentsline {chapter}{\numberline {2}Week Two Woes}{18}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Required Reading -- \textit {Sorting Things Out: Classification and Its Consequences}}{18}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Introduction}{18}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Categories as Subjects of Contention}{18}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}The Main Idea}{19}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}The Dangers of Classification}{19}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Working Infrastructure}{19}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Classification}{19}{subsection.2.1.6}%
+\contentsline {subsubsection}{Classification versus Nomenclature}{20}{Item.11}%
+\contentsline {section}{\numberline {2.2}Lecture -- 9/4/2024}{20}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Making Data}{21}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Data and Power}{22}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Representation}{22}{subsection.2.2.3}%
+\contentsline {subsubsection}{Why does it Matter?}{22}{section*.6}%
+\contentsline {subsection}{\numberline {2.2.4}What Counts?}{22}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Required Reading -- \textit {Informational Persons and Our Information Politics}}{23}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Informational Persons}{23}{subsection.2.3.1}%
+\contentsline {subsubsection}{19th Century Detour}{23}{example.2.8}%
+\contentsline {subsubsection}{20th Century}{23}{example.2.8}%
+\contentsline {subsubsection}{The Present Day}{24}{example.2.8}%
+\contentsline {subsubsection}{Data}{24}{example.2.8}%
+\contentsline {section}{\numberline {2.4}Required Reading -- \textit {Coded Exposure}}{24}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Technology and Racism}{24}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Multiply Exposed}{24}{subsection.2.4.2}%
+\contentsline {subsubsection}{Photography}{24}{section*.7}%
+\contentsline {subsubsection}{Racism}{25}{section*.7}%
+\contentsline {subsection}{\numberline {2.4.3}Exposing Whiteness}{25}{subsection.2.4.3}%
+\contentsline {subsubsection}{Kodak}{25}{section*.8}%
+\contentsline {subsubsection}{Polaroid}{25}{section*.8}%
+\contentsline {subsubsection}{HP Cameras}{25}{section*.8}%
+\contentsline {subsubsection}{Tecno Mobile}{25}{section*.8}%
+\contentsline {subsection}{\numberline {2.4.4}Exposing Difference}{26}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}Lecture -- 9/6/2024}{26}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}What's this lecture for?}{26}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Personal Data}{26}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Case Study: Coordinated Entry System (CES) for the Unhoused, LA}{26}{subsection.2.5.3}%
+\contentsline {subsubsection}{Representation}{27}{section*.9}%
+\contentsline {subsubsection}{Classification}{27}{section*.9}%
+\contentsline {subsubsection}{Abstraction}{27}{section*.9}%
+\contentsline {subsubsection}{Circulation}{28}{example.2.10}%
+\contentsline {subsection}{\numberline {2.5.4}23 and Me}{28}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.5}Stake of Representation}{28}{subsection.2.5.5}%
+\contentsline {subsubsection}{Allocative and Representational Harm}{28}{section*.10}%
+\contentsline {chapter}{\numberline {3}The Yapper Strikes Back}{29}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Lecture -- 9/9/2024}{29}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}The Trinity Test}{29}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Big Science}{29}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Professional History of Science}{29}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Great Men Narratives}{30}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Science in the Present Day}{30}{subsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.1.6}Philosophies of Science}{31}{subsection.3.1.6}%
+\contentsline {subsubsection}{Logical Positivism (1920s - 1960s)}{31}{section*.11}%
+\contentsline {subsubsection}{Falsificationism (1930s - 1970s)}{31}{example.3.2}%
+\contentsline {subsubsection}{Limits}{32}{rmk.3.4}%
+\contentsline {subsection}{\numberline {3.1.7}The Copernican Revolution}{32}{subsection.3.1.7}%
+\contentsline {subsection}{\numberline {3.1.8}Thomas Kuhn}{32}{subsection.3.1.8}%
+\contentsline {section}{\numberline {3.2}Lecture -- 9/11/2024}{32}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Two Parallel Narratives}{33}{subsection.3.2.1}%
+\contentsline {subsubsection}{Rise of Quantification in Science}{33}{section*.12}%
+\contentsline {subsubsection}{Objectivity}{33}{example.3.8}%
+\contentsline {subsubsection}{Varieties of Objectivity}{34}{example.3.8}%
+\contentsline {subsubsection}{Objectivity and the Law}{34}{example.3.8}%
+\contentsline {subsubsection}{The Connection}{34}{example.3.8}%
+\contentsline {subsubsection}{Quantification and Politics in the French Revolution}{34}{example.3.8}%
+\contentsline {subsubsection}{Democracy and Quantification}{34}{example.3.8}%
+\contentsline {subsection}{\numberline {3.2.2}Conclusion}{34}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Lecture -- ...}{34}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Week For Suffering}{35}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Lecture -- 9/16/2024}{35}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}What is a Narrative?}{35}{subsection.4.1.1}%
+\contentsline {subsubsection}{Work that Narratives Accomplish}{35}{section*.13}%
+\contentsline {subsubsection}{Narratives on a Societal Level}{35}{section*.13}%
+\contentsline {subsection}{\numberline {4.1.2}Futuring}{36}{subsection.4.1.2}%
+\contentsline {subsubsection}{Data Technologies and the Future}{36}{section*.14}%
+\contentsline {subsubsection}{Narrative Templates}{36}{section*.14}%
+\contentsline {subsubsection}{Artificial Intelligence}{36}{section*.14}%

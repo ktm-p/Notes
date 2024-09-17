@@ -30,3 +30,5 @@
 \contentsline {section}{\numberline {3.2}Lecture -- 9/12/2024}{19}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Examples}{19}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Rank and Null Space}{19}{subsection.3.2.2}%
+\contentsline {chapter}{\numberline {4}Week For Suffering}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Discussion -- 9/16/2024}{21}{section.4.1}%

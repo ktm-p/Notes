@@ -885,4 +885,126 @@ In this case, we want $\min_{x \in \RR^{n}} \norm{x}$, such that $Ax = y$.
 Then, $u^{*}$ is defined to be the projection of $0$ onto $S$. Then, we project $0$ onto $S = \bar x + N(A)$ (recall that $S$ is an affine set!). Then, since $x^{*} \in S$, we have $x^{*} - \bar x \in N(A)$.
 
 Thus, we have $\ang{x^{*}, x^{*} - \bar x} = 0$, for all $x \in S$. Thus, we conclude that $x^{*}$ is orthogonal to the null space $N(A)$. And therefore, we note that $x^{*} \in R(A^{\intercal})$.
+
+\chapter{Week For Suffering}
+\section{Discussion -- 9/16/2024}
+\begin{hw}
+	Let $A \in \RR^{3 \times 2}$ be as follows:
+	\begin{equation*}
+		A = \begin{bmatrix}
+			 1 & 2 \\ 3 & 4 \\ 5 & 6
+		\end{bmatrix}
+	\end{equation*}
+
+	Find the range of the matrix $A$, then express it in terms of a span of vectors.
+\end{hw}
+\begin{solution}
+	To begin with, we let $\vrange A$ to be:
+	\begin{equation*}
+		\vrange A = \brc{\begin{bmatrix}
+				1 \\ 3 \\ 5
+		\end{bmatrix}x_1 + \begin{bmatrix}
+		2 \\ 4 \\ 6
+	\end{bmatrix}x_2 : x_1, x_2 \in \RR}
+	\end{equation*}
+
+	Then, we can rewrite this as:
+	\begin{align*}
+		\vrange A = \vspan\pr{\begin{bmatrix}
+				1 \\ 3 \\ 5
+		\end{bmatrix}, \begin{bmatrix}
+		2 \\ 4 \\ 6
+	\end{bmatrix}}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Let $B \in \RR^{3 \times 3}$ defined to be:
+	\begin{equation*}
+		B = \begin{bmatrix}
+			1 & 0 & -1 \\ 0 & 1 & -1 \\ 1 & 1 & -2
+		\end{bmatrix}
+	\end{equation*}
+
+	Find the null space of $B$, then find a basis for the null space and determine its dimension.
+\end{hw}
+\begin{solution}
+	We want to find a vector $x$ such that $Bx = 0$. Then, we observe:
+	\begin{align*}
+		\begin{bmatrix}
+			1 & 0 & -1 \\ 0 & 1 & -1 \\ 1 & 1 & -2
+		\end{bmatrix} \begin{bmatrix}
+		x_1 \\ x_2 \\ x_3
+	\end{bmatrix} &= 0 \\
+	\begin{bmatrix}
+		x_1 - x_3 \\ x_2 - x_3 \\ x_1 + x_2 -2x_3
+	\end{bmatrix} &= 0 \\
+%	\begin{bmatrix}
+%		1 \\ 0 \\ 1
+%	\end{bmatrix} x_1 + \begin{bmatrix}
+%	0 \\ 1 \\ 1
+%\end{bmatrix} x_2 + \begin{bmatrix}
+%-1 \\ -1 \\ -2
+%\end{bmatrix} x_3 &= 0
+	\end{align*}
+
+	Then, we see that $x_1 = x_2 = x_3$. So, we have that:
+	\begin{align*}
+		B \begin{bmatrix}
+			x_3 \\ x_3 \\ x_3
+		\end{bmatrix} = 0
+	\end{align*}
+
+	Then, we have that the null space $N(A)$ is equal to:
+	\begin{align*}
+		N(A) &= \brc{\alpha\begin{bmatrix}
+				1 \\ 1 \\ 1
+		\end{bmatrix} : \alpha \in \RR}.
+	\end{align*}
+	
+And we note that $v = \begin{bmatrix}
+	1 \\ 1 \\1
+\end{bmatrix}$ is a basis for $N(A)$, and thus has dimension 1.
+\end{solution}
+
+\begin{hw}
+	Let $C \in \RR^{4 \times 3}$ be defined as:
+	\begin{equation*}
+		C = \begin{bmatrix}
+			 1 & 2 & 3 \\ 2 & 4 & 6 \\ 3 & 6 & 9 \\ 4 & 8 & 12
+		\end{bmatrix}
+	\end{equation*}
+
+	Find the rank of $C$, and verify it using different methods.
+\end{hw}
+\begin{solution}
+	First, we observe that since all of the columns are scalar multiples of each other, we have that $\dim \vrange C = 1$.
+	
+	We can also perform row-reduction to show that $\rank C = 1$.
+\end{solution}
+
+\begin{hw}
+	Let $D \in \RR^{4 \times 4}$ be:
+	\begin{equation*}
+		D = \begin{bmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0
+		\end{bmatrix}
+	\end{equation*}
+
+	Find the rank and nullity of $D$.
+\end{hw}
+\begin{solution}
+	First, we see that $\rank D = 3$ since we have three linearly independent vectors. Then, we observe that $\mathrm{nullity} D = 4 - 3 = 1$.
+	
+	Furthermore, we see that the null space $N(D)$ is:
+	\begin{equation*}
+		\vspan\pr{\begin{bmatrix}
+				0 \\ 0 \\ 0 \\ 1
+		\end{bmatrix}}
+	\end{equation*}
+\end{solution}
+
 \end{document}

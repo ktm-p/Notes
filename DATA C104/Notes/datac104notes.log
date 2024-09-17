@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  12 SEP 2024 12:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  16 SEP 2024 15:54
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1721,11 +1721,11 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
 
 {C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cabin/cbn_vqopx
 p.enc}{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell
-/a_dr4czt.enc}] [3])
+/a_dr4czt.enc}] [3] [4])
 \tf@toc=\write7
 \openout7 = `datac104notes.toc'.
 
- [4]
+ [5]
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/n' aliased to
 (Font)              `OT1/Cabin-TLF/regular/n' on input line 42.
@@ -1777,7 +1777,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 68.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 68.
-[5
+[6
 
 {C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_tv3
 tjz.enc}]
@@ -1807,7 +1807,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 99.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 99.
-[6]
+[7]
 Package mdframed Info: mdframed works in twoside mode on input line 110.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -1816,7 +1816,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 133.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 133.
- [7]
+ [8]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 152.
@@ -1829,7 +1829,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 163.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 163.
-[8]
+[9]
 Package mdframed Info: mdframed works in twoside mode on input line 195.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -1841,12 +1841,12 @@ Package mdframed Info: mdframed detected package amsthm
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9]
+ [10]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 230.
 
-[10]
+[11]
 Package mdframed Info: mdframed works in twoside mode on input line 284.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -1873,12 +1873,12 @@ Package mdframed Warning: You got a bad break
 (mdframed)                by changing the text, the space
 (mdframed)                or something else on input line 308.
 
-[11]
+[12]
 Package mdframed Info: mdframed works in twoside mode on input line 325.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 325.
- [12]
+ [13]
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 20.74pt on input line 353.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
@@ -1892,12 +1892,12 @@ Package mdframed Info: mdframed works in twoside mode on input line 382.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 382.
-[13]
+[14]
 Package mdframed Info: mdframed works in twoside mode on input line 409.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 409.
- [14]
+ [15]
 Package mdframed Info: mdframed works in twoside mode on input line 433.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -1918,12 +1918,12 @@ Package mdframed Info: mdframed works in twoside mode on input line 458.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 458.
- [15]
+ [16]
 Package mdframed Info: mdframed works in twoside mode on input line 476.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 476.
- [16]
+ [17]
 Chapter 2.
 Package mdframed Info: mdframed works in twoside mode on input line 491.
 Package mdframed Info: mdframed detected package amsthm 
@@ -1933,7 +1933,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 497.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 497.
-[17
+[18
 
 ]
 Package mdframed Info: mdframed works in twoside mode on input line 529.
@@ -1949,7 +1949,7 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 548.
 Package mdframed Info: Not enough space on this page on input line 550.
- [18]
+ [19]
 Package mdframed Info: Not enough space on this page on input line 550.
 Package mdframed Info: mdframed works in twoside mode on input line 576.
 Package mdframed Info: mdframed detected package amsthm 
@@ -1959,32 +1959,32 @@ Package mdframed Info: mdframed works in twoside mode on input line 580.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 580.
- [19] [20]
+ [20] [21]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 676.
 
-[21]
+[22]
 Package mdframed Info: mdframed works in twoside mode on input line 711.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 711.
- [22]
+ [23]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 758.
 
-[23]
+[24]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 773.
 
-[24]
+[25]
 Package mdframed Info: mdframed works in twoside mode on input line 819.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 819.
- [25]
+ [26]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 849.
@@ -1993,7 +1993,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 872.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 872.
-[26]
+[27]
 Overfull \hbox (13.25368pt too wide) in paragraph at lines 901--902
 []\OT1/cantarell-TLF/m/n/10 In the con-text of our case study, the scores cir-c
 u-late into other do-mains of life, where they get re-contextualized.
@@ -2009,9 +2009,9 @@ Overfull \hbox (10.90672pt too wide) in paragraph at lines 912--913
  sys-tems: that is, the ways in which data col-lec-tion, databases,
  []
 
-[27]
+[28]
 Chapter 3.
-[28
+[29
 
 ]
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
@@ -2024,7 +2024,7 @@ le
 line 963.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
 (Font)              scaled to size 9.0pt on input line 963.
-<C:/Users/Michael/Pictures/D104/d104-us-progress.jpg, id=721, 1159.9335pt x 863
+<C:/Users/Michael/Pictures/D104/d104-us-progress.jpg, id=762, 1159.9335pt x 863
 .3856pt>
 File: C:/Users/Michael/Pictures/D104/d104-us-progress.jpg Graphic file (type jp
 g)
@@ -2032,7 +2032,7 @@ g)
 Package pdftex.def Info: C:/Users/Michael/Pictures/D104/d104-us-progress.jpg  u
 sed on input line 964.
 (pdftex.def)             Requested size: 438.45708pt x 326.36412pt.
- [29 <C:/Users/Michael/Pictures/D104/d104-us-progress.jpg>]
+ [30 <C:/Users/Michael/Pictures/D104/d104-us-progress.jpg>]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 979.
@@ -2055,7 +2055,7 @@ Package mdframed Info: mdframed detected package amsthm
 (mdframed)              on input line 1013.
 Package hyperref Info: bookmark level for unknown rmk defaults to 0 on input li
 ne 1013.
-[30]
+[31]
 Package mdframed Info: mdframed works in twoside mode on input line 1048.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2064,7 +2064,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 1059.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1059.
- [31]
+ [32]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 1074.
@@ -2077,19 +2077,43 @@ Package mdframed Info: mdframed works in twoside mode on input line 1092.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1092.
-[32] [33] [34] (datac104notes.aux)
+[33] [34]
+Chapter 4.
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1162.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1174.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1174.
+
+Overfull \hbox (7.98859pt too wide) in paragraph at lines 1175--1176
+[][][]\OT1/cantarell-TLF/b/n/10 Example 4.1 \OT1/cantarell-TLF/m/n/10 (Sewing M
+a-chine)\OT1/cantarell-TLF/b/n/10 . [][]\OT1/cantarell-TLF/m/n/10 The Sewing Ma
+-chine mech-a-nized and sped up the work of sewing clothes.
+ []
+
+[35
+
+]
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1195.
+
+[36] (datac104notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `datac104notes.out' has not changed.
-(rerunfilecheck)             Checksum: F3928CACFD2D0B08AAE563BB60D302FA;17757.
+(rerunfilecheck)             Checksum: 0762442F00A4A2700F217C8314E0E837;19148.
  ) 
 Here is how much of TeX's memory you used:
- 41098 strings out of 474541
- 851899 string characters out of 5743481
+ 41116 strings out of 474541
+ 852164 string characters out of 5743481
  1946978 words of memory out of 5000000
- 62372 multiletter control sequences out of 15000+600000
+ 62381 multiletter control sequences out of 15000+600000
  593077 words of font info for 113 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,12n,145p,573b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2102,9 +2126,9 @@ AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Regular.pfb
 ><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Ca
 ntarell-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmtt8.pfb>
-Output written on datac104notes.pdf (34 pages, 6423396 bytes).
+Output written on datac104notes.pdf (36 pages, 6433645 bytes).
 PDF statistics:
- 840 PDF objects out of 1000 (max. 8388607)
- 202 named destinations out of 1000 (max. 500000)
- 960 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 889 PDF objects out of 1000 (max. 8388607)
+ 211 named destinations out of 1000 (max. 500000)
+ 1024 words of extra memory for PDF output out of 10000 (max. 10000000)
 
