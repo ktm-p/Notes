@@ -39,3 +39,7 @@
 \contentsline {subsubsection}{A Second Approach}{25}{thm.4.5}%
 \contentsline {subsection}{\numberline {4.2.4}Set of Solutions}{26}{subsection.4.2.4}%
 \contentsline {subsubsection}{Eigenvalues, Singular Values, and Determinants}{26}{section*.4}%
+\contentsline {chapter}{\numberline {5}Week Five}{28}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Discussion -- 9/23/2024}{28}{section.5.1}%
+\contentsline {subsubsection}{PSD Matrices}{28}{section*.5}%
+\contentsline {subsubsection}{Gradient and Hessian}{29}{hw.5.3}%

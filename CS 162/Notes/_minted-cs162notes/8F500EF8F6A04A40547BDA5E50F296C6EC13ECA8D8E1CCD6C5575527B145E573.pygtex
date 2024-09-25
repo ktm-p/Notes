@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{200}\PYG{p}{];}
+\PYG{+w}{	}\PYG{n}{memset}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}a\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{200}\PYG{p}{);}
+\PYG{+w}{	}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{fd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{open}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}test.txt\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{O\PYGZus{}CREAT}\PYG{o}{|}\PYG{n}{O\PYGZus{}RDWR}\PYG{p}{);}
+\PYG{+w}{	}\PYG{n}{write}\PYG{p}{(}\PYG{n}{fd}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{buffer}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{200}\PYG{p}{);}
+\PYG{+w}{	}\PYG{n}{lseek}\PYG{p}{(}\PYG{n}{fd}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SEEK\PYGZus{}SET}\PYG{p}{);}
+\PYG{+w}{	}\PYG{n}{read}\PYG{p}{(}\PYG{n}{fd}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{buffer}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{p}{);}
+\PYG{+w}{	}\PYG{n}{lseek}\PYG{p}{(}\PYG{n}{fd}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{500}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SEEK\PYGZus{}CUR}\PYG{p}{);}
+\PYG{+w}{	}\PYG{n}{write}\PYG{p}{(}\PYG{n}{fd}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{buffer}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

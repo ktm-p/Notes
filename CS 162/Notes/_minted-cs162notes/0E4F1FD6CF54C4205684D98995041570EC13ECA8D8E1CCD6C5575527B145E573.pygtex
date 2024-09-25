@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{lock\PYGZus{}acquire}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{lock}\PYG{p}{);}
+
+\PYG{c+cm}{/* CRITICAL SECTION */}
+
+\PYG{n}{lock\PYGZus{}release}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{lock}\PYG{p}{);}
+\end{Verbatim}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  17 SEP 2024 10:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  23 SEP 2024 14:52
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2192,7 +2192,36 @@ Package mdframed Info: mdframed works in twoside mode on input line 1296.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1296.
- [27] (eecs127notes.aux)
+ [27]
+Chapter 5.
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 1321.
+
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1321.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1323.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1323.
+Package mdframed Info: mdframed works in twoside mode on input line 1339.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1339.
+Package mdframed Info: mdframed works in twoside mode on input line 1352.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1352.
+[28
+
+]
+Package mdframed Info: mdframed works in twoside mode on input line 1370.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1370.
+ [29] (eecs127notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -2202,13 +2231,13 @@ L3 programming layer <2024-01-22>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `eecs127notes.out' has not changed.
-(rerunfilecheck)             Checksum: 34AC60E5BA38C11699101C64D553C5CC;6135.
+(rerunfilecheck)             Checksum: 14B6BF2650573118559A18C1429139A3;6678.
  ) 
 Here is how much of TeX's memory you used:
- 41198 strings out of 474541
- 853271 string characters out of 5743481
+ 41227 strings out of 474541
+ 853723 string characters out of 5743481
  1952978 words of memory out of 5000000
- 62449 multiletter control sequences out of 15000+600000
+ 62465 multiletter control sequences out of 15000+600000
  589595 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,17n,145p,551b,1024s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2236,9 +2265,9 @@ ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Us
 ers/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/m
 sbm7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/rsf
 s/rsfs10.pfb>
-Output written on eecs127notes.pdf (27 pages, 411397 bytes).
+Output written on eecs127notes.pdf (29 pages, 422474 bytes).
 PDF statistics:
- 679 PDF objects out of 1000 (max. 8388607)
- 227 named destinations out of 1000 (max. 500000)
- 491 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 716 PDF objects out of 1000 (max. 8388607)
+ 240 named destinations out of 1000 (max. 500000)
+ 523 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1315,4 +1315,84 @@ These $\lambda_1, \ldots, \lambda_n$ are complex numbers which are roots of $P(\
 		\end{bmatrix}
 	\end{equation*}
 \end{example}
+
+\chapter{Week Five}
+\section{Discussion -- 9/23/2024}
+\subsubsection{PSD Matrices}
+\begin{hw}
+	Show that if $A \in \mathbb{S}_+^{n}$, then there existd some $P \in \mathbb{S}_+^{n}$ such that $A = P^{2}$.
+\end{hw}
+\begin{solution}
+	We observe that if $A$ is positive semidefinite, we note that it follows that $A$ is symmetric. Then, we can diagonalize $A$ as $A = U \Lambda U^{\intercal}$.
+	
+	Then, with this in mind, we note that we can rewrite this as $A = (U \Lambda U^{\intercal}) = U \Lambda_1\Lambda_1 U^{\intercal} = U \Lambda_1^{2} U^{\intercal}$.
+	
+	This is because, since all entries of $\Lambda > 0$ and is a matrix with only non-zero entries along its diagonal, it follows then that we can simply let $\Lambda_1$ have diagonal entries which are square root of $\Lambda$. Then, we observe that:
+	\begin{align*}
+		U \Lambda_1^{2} U^{\intercal} &= (U\Lambda_1 U^{\intercal})(U\Lambda_1 U^{\intercal}) \\
+		&= PP \\
+		&= P^{2}
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Show that for any matrix $Q \in \RR^{m \times n}$, if $A = Q^{\intercal}Q$, then $A \in \mathbb{S}_+^{n}$.
+\end{hw}
+\begin{solution}
+	Suppose that $Q \in \RR^{m \times n}$, and $A = Q^{\intercal}Q$.
+	
+	Then, we observe that:
+	\begin{align*}
+		x^{\intercal}Q^{\intercal}Qx &= v^{\intercal}v \\
+		&= \lvert v \rvert_2^{2} \geq 0.
+	\end{align*}
+\end{solution}
+
+\begin{hw}
+	Let $B \in \RR^{m \times n}$ be an arbitrary matrix. Prove that non-zero eigenvalues of $BB^{\intercal}$ are the same as the non-zero eigenvalues of $B^{\intercal}B$.
+\end{hw}
+\begin{solution}
+	Let us suppose some eigenvalue of $B$. Then, we have that $BB^{\intercal}x = \lambda x$, for some eigenvector $x$ of $B$. Similarly, suppose we have $B^{\intercal}Bx = \mu x$.
+	
+	Now, recall that since $B^{\intercal}B$ is PSD:
+	\begin{align*}
+		B^{\intercal}Bx &= \mu x \\
+		BB^{\intercal}Bx &= B\mu x\\
+		&= \mu B x \\
+		BB^{\intercal}y &= \mu y
+	\end{align*}
+	
+	Thus, we see that, indeed, the two share the same eigenvalue.
+\end{solution}
+
+\subsubsection{Gradient and Hessian}
+\begin{hw}
+	Consider the function
+	\begin{equation*}
+		f(x) = e^{x_1} + e^{x_2} + \cdots + e^{x_n}.
+	\end{equation*}
+
+	Calculate its gradient, Hessian, and determine if the Hessian is a PSD.
+\end{hw}
+\begin{solution}
+	First, we observe that the gradient is:
+	\begin{equation*}
+		\nabla f(x) = 
+		\begin{bmatrix}
+			e^{x_1} \\ e^{x_2} \\ \vdots \\ e^{x_n}
+		\end{bmatrix}
+	\end{equation*}
+
+	Next, to check for its Hessian:
+	\begin{equation*}
+		H_f = \begin{bmatrix}
+			e^{x_1} & 0 & \cdots & 0 \\
+			0 & e^{x_2} & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & e^{x_n}
+		\end{bmatrix}
+	\end{equation*}
+
+	To check that $H_f$ is indeed PSD, we check that for any arbitrary vector $x$, and
+\end{solution}
 \end{document}

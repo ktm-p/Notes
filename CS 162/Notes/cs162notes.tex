@@ -121,7 +121,7 @@ Now, note that a processor can only execute one process at a time; to combat thi
 
 Also, we note that each program should not be able to access the memory of other programs (or even the OS' memory itself); this is where the OS comes into play. It isolates processes from each other, and itself from processes as well.
 
-\chapter{I have no idea}
+\chapter{Second Week Woes}
 \section{Lecture -- 9/3/2024}
 \subsection{Review}
 Recall that virtualization provides the illusion where each process uses its own machine; it further provides the illusion of infinite memory and processor.
@@ -883,5 +883,385 @@ Device driver is usually divided into two pieces:
 \end{itemize}
 
 Handler functions for each of the file operations.
+
+\chapter{Week For Suffering}
+\section{Discussion -- 9/17/2024}
+\begin{miscbox}{Administrivia}
+	Homework 1 is due this Sunday, and Project 1 Design Doc is due next Thursday.
+\end{miscbox}
+
+\subsection{Project Timeline}
+We want to roughly follow this timeline for projects:
+\begin{enumerate}
+	\item Work on design document.
+	\item Submit design document.
+	\begin{itemize}
+		\item Note that the design document has a hard ceiling of 15 pages.
+	\end{itemize}
+	\item TA reads through design document.
+	\item Meet with TA for a 30-minute design review.
+	\item Code.
+	\item Submit code, report, and peer evaluations.
+\end{enumerate}
+
+\subsection{Threads}
+Recall that threads as single unique execution contextes with their own set of registers and stack. They are sometimes referred to as ``lightweight processes."
+
+Components that are shared between threads in the same process don't need to be persisted by each individual thread.
+
+A thread still needs to persist registers, and its stack in the TCB.
+
+\subsection{Syscall}
+Recall that POSIX has a \texttt{pthread} library for syscalls, similar to the process syscalls.
+
+\begin{hw}
+	What are the possible outputs of the following program? How would we ensure that ``HELPER" is printed before ``MAIN"...?
+\end{hw}
+
+\begin{code}{C}{pthread\_order.c}
+void *helper(void *arg) {
+	printf("HELPER");
+	return NULL;
+}
+int main() {
+	pthread_t thread;
+	pthread_create(&thread, NULL, &helper, NULL);
+	sched_yield();
+	printf("MAIN");
+	return 0;
+}
+\end{code}
+
+\begin{solution}
+	We observe that the program will have the following possible outputs:
+	\begin{itemize}
+		\item MAINHELPER
+		\item HELPERMAIN
+		\item MAIN
+		\begin{itemize}
+			\item This happens either when \texttt{pthread\_create} fails, or when the main thread exits out first.
+		\end{itemize}
+	\end{itemize}
+
+	To ensure that HELPER gets printed before MAIN, we would need to use \texttt{pthread\_join(thread, NULL)}.
+\end{solution}
+
+\begin{hw}
+	What does the following program print?
+\end{hw}
+\begin{code}{C}{\texttt{pthread\_stack.c}}
+void *helper(void *arg) {
+	int *num = (int*) arg;
+	*num = 2;
+	return NULL;
+}
+
+int main() {
+	int i = 0;
+	pthread_t thread;
+	pthread_create(&thread, NULL, &helper, &i);
+	pthread_join(thread, NULL);
+	printf("i is %d", i);
+	return 0;
+}
+\end{code}
+\begin{solution}
+	We see that helper takes in a pointer which is stored on the main thread's stack, and then setting the region the pointer is pointing to.
+	
+	The program will print $2$. This is because both threads share the same address space, since they are both from the same process.
+	
+	Note that even though each thread have their own stack, they can access each other's stack as well.
+\end{solution}
+
+\begin{hw}
+	What does the following program print?
+\end{hw}
+\begin{code}{C}{\texttt{pthread\_stack.c}}
+void* helper(void *arg) {
+	int* num = (int*) arg;
+	printf("%d", *num);
+	return NULL;
+}
+
+void spawn_thread(void) {
+	int i = 162;
+	pthread_t thread;
+	pthread_create(&thread, NULL, &helper, &i);
+	return;
+}
+
+int main() {
+	spawn_thread();
+	return 0;
+}
+\end{code}
+\begin{solution}
+	We observe that since we aren't using \texttt{pthread\_join()}, it is possible that the main thread will exit before the helper thread; thus, we could be printing out nothing.
+	
+	Alternatively, the main thread could return from \texttt{spawn\_thread()} early, dereferencing everything, and leading to garbage being printed out.
+	
+	Or we could also have it work correctly, and we print out 162 as expected.
+\end{solution}
+
+\subsection{I/O}
+Recall the following design philosophy for UNIX:
+\begin{itemize}
+	\item Uniformity
+	\item Open before Use
+	\item Byte Oriented
+	\item Kernel Buffered Reads/Writes
+\end{itemize}
+
+\subsubsection{Low-Level API}
+When forking a process, both process A and B will have mirrored FDT's.
+
+Say Child B writes to some file it has opened up; if A tries to read that data, it can read/write more data into that same file.
+
+\subsubsection{High-Level API}
+These operate on streams of data. Note that low-level read isn't a guarantee on whether it can actually get the bytes or not, so it can be painful to work with.
+
+\begin{hw}
+	What is the difference between \texttt{fopen} and \texttt{open}?
+\end{hw}
+\begin{solution}
+	\texttt{fopen} is high-level API, while \texttt{open} is low-level API.
+\end{solution}
+
+\begin{hw}
+	What will the \texttt{test.txt} file look like after this program is run?
+\end{hw}
+\begin{code}{C}{\texttt{test.txt}}
+int main() {
+	char buffer[200];
+	memset(buffer, 'a', 200);
+	int fd = open("test.txt", O_CREAT|O_RDWR);
+	write(fd, buffer, 200);
+	lseek(fd, 0, SEEK_SET);
+	read(fd, buffer, 100);
+	lseek(fd, 500, SEEK_CUR);
+	write(fd, buffer, 100);
+}
+\end{code}
+
+\begin{solution}
+	The file will look like:
+	\begin{itemize}
+		\item The first 200 bytes will be ``a."
+		\item Then, the next 400 bytes will be null bytes.
+		\item Then the next 100 bytes will be the character ``a."
+	\end{itemize}
+\end{solution}
+
+\subsection{dup and dup2}
+...
+
+\section{Lecture -- 9/19/2024}
+Recall the dispatch loop: we run a thread, then choose the next thread. Then, we save the state of our current TCB, and load the state of the next TCB.
+
+This is an infinite loop, and one could argue that this is all that the OS does. One question then is how the thread gives control back to the OS? Furthermore, when should we -- if ever -- exit the loop?
+
+For the first question, remember I/O operations: we need to give OS control to do something, since they access the files on the storage device, not the application itself.
+
+For the second, the loop exits if we shut down the OS, and also in the case of interrupts.
+
+\subsection{Running a Thread}
+Recall that to run a thread, we load its state into the CPU, load its environment, then jump to the PC.
+
+\begin{rmk}
+	We give control of processor/core to the user code; the OS isn't running because the user is running. Furthermore, we can give control back to the OS with both internal and external events.
+\end{rmk}
+
+\subsection{Internal Events}
+\begin{itemize}
+	\item Block on I/O: the act of requesting I/O implicitly yields the CPU.
+	\item Waiting on a signle from other threads: thread asks to wait, and thus yields the CPU.
+	\item \texttt{yield()}: the thread volunteers to give up on CPU.
+\end{itemize}
+
+\begin{rmk}
+	Cooperative Multitasking
+\end{rmk}
+
+\subsection{Stack for Yielding Thread}
+% Insert image for stack for yielding thread
+
+Yield will perform a syscall, moving us to the kernel. Now, we are on the OS stack. We then call \texttt{run\_new\_thread}. Once we run the new thread, we can switch.
+
+\begin{itemize}
+	\item How does the dispatcher switch to a new thread?
+	\begin{itemize}
+		\item They save anything next thread may trash: PC, registers, stack pointer.
+		\item Maintains isolation for each thread.
+	\end{itemize}
+\end{itemize}
+
+% Insert image for stack for yielding with multiply threads
+
+\subsection{Context Switching}
+\begin{rmk}
+	It is very hard to test switch code; there are too many combinations and interleaving. 
+\end{rmk}
+
+\begin{warn}
+	Topaz kernel saved one instruction for optimization. What ended up happening was that, since it works as long as the kernel is under a megabyte, people were fine for a while. But eventually, they forgot, and weird issues began popping up.
+\end{warn}
+
+\subsubsection{Cost of Context Switching}
+We note that it's around 30 to 40 times cheaper to switch between threads within the same process.
+
+\begin{rmk}
+	There are thread libraries in the user-level. These threads are not visible to the operating system, and must use yield. The operating system would only give control to that thread without yield.
+	
+	Switching between threads using yield is even cheaper in user-space.
+\end{rmk}
+
+\subsection{External Events}
+If a thread never does any I/O, never waits, and never yield control, we must find a way that the dispatcher can regain control.
+
+The solution to this is to use external events, such as interrupts and timer.
+
+\subsubsection{Interrupt Controller}
+Recall that interrupts are invoked with interrupt lines from devices. The interrupt controller chooses which interrupt request to honor. CPU can disable all interrupts with internal flag.
+
+% Insert picture of network interrupt
+
+Note that an interrupt is a hardware-invoked context switch.
+
+\subsection{Threads}
+\subsubsection{Initialization}
+We initialize the registers of TCB, and then for the stack, we setup the return to go back to ThreadRoot. We can think of the stack as just before the body of ThreadRoot really gets started.
+
+\subsection{Concurrency and Parallelism}
+We have multiple threads in the same process which share the same data (so they can access the same data). As a result, unexpected behaviors can occur.
+
+\begin{warn}
+	If a scheduler can make the worst possible interleaving, assume that it will!
+\end{warn}
+
+\subsubsection{Bank Example}
+Note that we can try using multiple threads to make things faster. However, this can lead to data corruption.
+
+\subsubsection{Atomic Operations}
+Atomic operations always run to completion, or not at all. It is indivisible; it can't be stopped in the middle, and the state cannot be modified by someone else in the middle. This is a fundamental building block -- if there are no atomic operations, then we have no way for threads to work together.
+
+However, many instructions aren't atomic; double-precision floating point store is often not atomic.
+
+\subsection{Locks}
+Recall the following definitions:
+
+\begin{defn}[Synchronization]
+	Synchronization is using atomic operations to ensure cooperation between threads.
+\end{defn}
+
+\begin{defn}[Mutual Exclusion]
+	Ensures that only one thread does a particular thing at a time.
+\end{defn}
+
+\begin{defn}[Critical Section]
+	Piece of code that only one thread can execute at once. Only one thread at a time will get into this section of code.
+\end{defn}
+
+Now, for our lock, we have two main instructions: \texttt{acquire} and \texttt{release}. We assume that these operations are atomic. And when acquiring, we should wait; whoever has a lock may be in a critical section, and we can't enter this.
+
+Going back to our banking example, we can simply use locks to create a critical section.
+
+\begin{warn}
+	Threaded programs must work for all interleaving of thread instruction sequences! Cooperating threads are non-deterministic and non-reproducible, making it a nightmare to debug.
+\end{warn}
+
+\subsection{Conclusion}
+As a recap, we discussed threads, context switching, and the creation of threads. And in the context of context switching, we looked at how they can occur (via internal and external events).
+
+We also looked at concurrency.
+
+\chapter{Week Five}
+\section{Discussion -- 9/24/2024}
+\subsection{Mutual Exclusion}
+A challenge is trying to keep certain section of codes executed by only one thread at a time, or executing things in the order we want.
+
+Synchronization is possible through atomic operations, which always run to completion or not at all. Atomic operations are indivisible. Typically, loads/stores are atomic.
+
+Code that runs as part of mutual exclusion is a critical section.
+
+\subsubsection{Locks}
+Locks allows you to create critical sections pretty easily.
+
+\begin{code}{C}{Locks and Critical Sections}
+lock_acquire(&lock);
+
+/* CRITICAL SECTION */
+
+lock_release(&lock);
+\end{code}
+
+\subsubsection{Semaphore}
+Semaphores are synchronization variables with a non-negative integers. We have two (atomic) operations:
+\begin{itemize}
+	\item Down -- it waits for a semaphore's value to become strictly positive, then decrements it by 1.
+	\item Up -- it increments the value of the semaphoer by 1.
+\end{itemize}
+
+We have two workflows:
+\begin{itemize}
+	\item Mutual Exclusive: we use semaphore as a lock
+	\begin{enumerate}
+		\item Initialize semaphore to 1.
+		\item We down the semaphore when entering a critical section.
+		\item We up the semaphore when exiting the critical section.
+	\end{enumerate}
+	\item Scheduling: one thread waits for another thread to do something.
+	\begin{enumerate}
+		\item We initialize the semaphore to 0.
+		\item We down the semaphore in the waiting thread.
+		\item Once the active thread is done, it ups the semaphore and allows the waiting thread to work.
+	\end{enumerate}
+	
+\end{itemize}
+
+\begin{example}[Semaphores as Locks]
+	Suppose that we have threads A and B.
+	
+	Thread A enters a critical section and downs the semaphore. Thread B tries to enter the critical section, we see that the semaphore is zero, so it can't down it.
+	
+	Once A exits the critical section, it can up the semaphore so B can enter the critical section.
+\end{example}
+
+\begin{example}
+	We can use a semaphore to make Thread A to do something before Thread B. That is, we want Thread B to run after Thread A.
+	
+	So, Thread B is our waiting thread. We down the semaphore in Thread B. Once Thread A is done with its work, we can then up the semaphore, allowing for B to do its work.
+\end{example}
+
+\begin{hw}
+	Given the following code, describe how a malicious user might exploit some unintended behavior. What changes can be made to defend against the exploit?
+\end{hw}
+\begin{solution}
+	We observe that it's possible for us to do \texttt{transfer(a, b, 5)} and \texttt{transfer(b, a, 5)}, and there is an interleaving which results in one of them gaining an extra five dollars.
+	
+	To protect against this, we can simply add a lock around the transferring process.
+\end{solution}
+
+\begin{hw}
+	Suppose we have a server that can run at most 1000 people at a time. How would you enforce a strict limit of 1000 players?
+\end{hw}
+\begin{solution}
+	We can simply use a semaphore: first, initialize the semaphore to be 1000. Then, before \texttt{connect(s)}, we down it by one. And after a play session disconnects, we up the semaphore again. 
+\end{solution}
+
+\subsection{Atomic Operations}
+The operation \texttt{test_and_set} can be used to implement locks by creating a spin lock (?).
+
+For \texttt{tset}, if the value is zero, then we acquire the lock by setting the value to 1 and returning 0.
+
+On the other hand, if the value is 1, then we keep spinning in our loop until the value is set to zero.
+
+\subsection{Condition Variable}
+Condition Variables allow you to sleep inside a critical section; since multiple threads can be inside a thread, it is a lot different from locks/semaphores.
+
+We have there operations: wait, signal, and broadcast.
+
+Wait releases lock and suspends execution of calling thread. Signal wakes up the thread. And broadcast ...
+
+We note that semaphores are easier to use than condition variable.
 
 \end{document}

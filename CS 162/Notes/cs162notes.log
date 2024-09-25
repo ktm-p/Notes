@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  12 SEP 2024 19:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  24 SEP 2024 14:33
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1721,11 +1721,11 @@ line 65.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
 (Font)              scaled to size 10.0pt on input line 65.
  [3{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_
-dr4czt.enc}])
+dr4czt.enc}] [4])
 \tf@toc=\write7
 \openout7 = `cs162notes.toc'.
 
- [4]
+ [5]
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/n' aliased to
 (Font)              `OT1/Cabin-TLF/regular/n' on input line 42.
@@ -1760,7 +1760,7 @@ File: TS1cantarell-TLF.fd 2019/06/24 Font definitions for TS1/cantarell-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 57.
- [5
+ [6
 
 {C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_tv3
 tjz.enc}]
@@ -1768,13 +1768,13 @@ Package mdframed Info: mdframed works in twoside mode on input line 108.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 108.
- [6]
+ [7]
 Chapter 2.
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 150.
 
-[7
+[8
 
 ]
 Package mdframed Info: mdframed works in twoside mode on input line 160.
@@ -1795,12 +1795,12 @@ Package mdframed Info: mdframed detected package amsthm
 (mdframed)              on input line 198.
 Package hyperref Info: bookmark level for unknown example defaults to 0 on inpu
 t line 198.
- [8]
+ [9]
 Package mdframed Info: mdframed works in twoside mode on input line 235.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 235.
- [9]
+ [10]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 277.
@@ -1809,7 +1809,7 @@ Package hyperref Warning: The anchor of a bookmark and its parent's must not
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 313.
 
-[10]
+[11]
 \g__tcobox_out_iow=\write8
 \openout8 = `cs162notes.listing'.
 
@@ -1818,7 +1818,7 @@ Package hyperref Warning: The anchor of a bookmark and its parent's must not
 5E573.pygtex
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 8.0pt on input line 1.
-) [11]
+) [12]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 365.
@@ -1827,7 +1827,7 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 9.0pt on input line 385.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
 (Font)              scaled to size 9.0pt on input line 385.
-<C:/Users/Michael/Pictures/CS162/162-user-kernel.png, id=511, 426.99525pt x 365
+<C:/Users/Michael/Pictures/CS162/162-user-kernel.png, id=657, 426.99525pt x 365
 .56575pt>
 File: C:/Users/Michael/Pictures/CS162/162-user-kernel.png Graphic file (type pn
 g)
@@ -1838,13 +1838,13 @@ sed on input line 386.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12]
-[13 <C:/Users/Michael/Pictures/CS162/162-user-kernel.png>]
+ [13]
+[14 <C:/Users/Michael/Pictures/CS162/162-user-kernel.png>]
 Package mdframed Info: mdframed works in twoside mode on input line 416.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 416.
-<C:/Users/Michael/Pictures/CS162/162-archi-comp.png, id=523, 420.97275pt x 394.
+<C:/Users/Michael/Pictures/CS162/162-archi-comp.png, id=669, 420.97275pt x 394.
 47375pt>
 File: C:/Users/Michael/Pictures/CS162/162-archi-comp.png Graphic file (type png
 )
@@ -1855,7 +1855,7 @@ ed on input line 433.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [14]
+ [15]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 445.
@@ -1864,7 +1864,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 447.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 447.
-[15 <C:/Users/Michael/Pictures/CS162/162-archi-comp.png>]
+[16 <C:/Users/Michael/Pictures/CS162/162-archi-comp.png>]
 \openout8 = `cs162notes.listing'.
 
 
@@ -1875,7 +1875,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 5.0pt on input line 2.
 )
-<C:/Users/Michael/Pictures/CS162/162-fork-join-pat.png, id=536, 375.20175pt x 2
+<C:/Users/Michael/Pictures/CS162/162-fork-join-pat.png, id=682, 375.20175pt x 2
 98.11375pt>
 File: C:/Users/Michael/Pictures/CS162/162-fork-join-pat.png Graphic file (type 
 png)
@@ -1883,8 +1883,8 @@ png)
 Package pdftex.def Info: C:/Users/Michael/Pictures/CS162/162-fork-join-pat.png 
  used on input line 493.
 (pdftex.def)             Requested size: 375.20082pt x 298.11302pt.
- [16] [17 <C:/Users/Michael/Pictures/CS162/162-fork-join-pat.png>]
-<C:/Users/Michael/Pictures/CS162/162-nondet-ex.png, id=549, 338.4645pt x 128.88
+ [17] [18 <C:/Users/Michael/Pictures/CS162/162-fork-join-pat.png>]
+<C:/Users/Michael/Pictures/CS162/162-nondet-ex.png, id=695, 338.4645pt x 128.88
 15pt>
 File: C:/Users/Michael/Pictures/CS162/162-nondet-ex.png Graphic file (type png)
 
@@ -1905,7 +1905,7 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 557.
 Package mdframed Info: Not enough space on this page on input line 559.
-[18 <C:/Users/Michael/Pictures/CS162/162-nondet-ex.png>]
+[19 <C:/Users/Michael/Pictures/CS162/162-nondet-ex.png>]
 Package mdframed Info: Not enough space on this page on input line 559.
 Package mdframed Info: mdframed works in twoside mode on input line 561.
 Package mdframed Info: mdframed detected package amsthm 
@@ -1915,20 +1915,20 @@ Package mdframed Info: mdframed detected package amsthm
 
 
 (_minted-cs162notes/B63D69E3853BF1E2FB020D287853992AEC13ECA8D8E1CCD6C5575527B14
-5E573.pygtex) [19]
+5E573.pygtex) [20]
 Chapter 3.
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 621.
 
-[20
+[21
 
 ]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 648.
 
-<C:/Users/Michael/Pictures/CS162/cs162-proc-fork-demo.png, id=571, 386.6445pt x
+<C:/Users/Michael/Pictures/CS162/cs162-proc-fork-demo.png, id=717, 386.6445pt x
  476.982pt>
 File: C:/Users/Michael/Pictures/CS162/cs162-proc-fork-demo.png Graphic file (ty
 pe png)
@@ -1936,13 +1936,13 @@ pe png)
 Package pdftex.def Info: C:/Users/Michael/Pictures/CS162/cs162-proc-fork-demo.p
 ng  used on input line 681.
 (pdftex.def)             Requested size: 386.64355pt x 476.98082pt.
-[21]
+[22]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 684.
 
 Underfull \vbox (badness 3058) has occurred while \output is active []
 
- [22 <C:/Users/Michael/Pictures/CS162/cs162-proc-fork-demo.png>]
+ [23 <C:/Users/Michael/Pictures/CS162/cs162-proc-fork-demo.png>]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 706.
@@ -1957,7 +1957,7 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/sl' will be
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 725.
 
-[23]
+[24]
 Package mdframed Info: mdframed works in twoside mode on input line 747.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -1985,7 +1985,7 @@ Package mdframed Info: mdframed detected package amsthm
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 794.
 
-[24]
+[25]
 Package mdframed Info: mdframed works in twoside mode on input line 800.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2000,7 +2000,7 @@ Package mdframed Info: mdframed works in twoside mode on input line 816.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 816.
- [25]
+ [26]
 Package mdframed Info: mdframed works in twoside mode on input line 858.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2017,19 +2017,147 @@ Package mdframed Info: mdframed works in twoside mode on input line 875.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 875.
- [26] (cs162notes.aux)
+ [27]
+Chapter 4.
+Package mdframed Info: mdframed works in twoside mode on input line 918.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 918.
+[28
+
+]
+Package mdframed Info: Not enough space on this page on input line 919.
+\openout8 = `cs162notes.listing'.
+
+
+(_minted-cs162notes/634279FA3F950BC0AC973F09BDBB191CEC13ECA8D8E1CCD6C5575527B14
+5E573.pygtex)
+Package mdframed Info: mdframed works in twoside mode on input line 950.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 950.
+\openout8 = `cs162notes.listing'.
+
+
+(_minted-cs162notes/52852DE9D620968F30E477549461053EEC13ECA8D8E1CCD6C5575527B14
+5E573.pygtex)
+Package mdframed Info: mdframed works in twoside mode on input line 977.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 977.
+Package mdframed Info: Not enough space on this page on input line 978.
+ [29]
+Package mdframed Info: Not enough space on this page on input line 978.
+\openout8 = `cs162notes.listing'.
+
+
+(_minted-cs162notes/9ECF879F67ABF110A4826DE6EB7597E0EC13ECA8D8E1CCD6C5575527B14
+5E573.pygtex)
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1015.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1024.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1024.
+Package mdframed Info: mdframed works in twoside mode on input line 1031.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1031.
+[30]
+\openout8 = `cs162notes.listing'.
+
+
+(_minted-cs162notes/8F500EF8F6A04A40547BDA5E50F296C6EC13ECA8D8E1CCD6C5575527B14
+5E573.pygtex)
+Package mdframed Info: mdframed works in twoside mode on input line 1071.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1071.
+ [31]
+Package mdframed Info: mdframed works in twoside mode on input line 1082.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1082.
+
+Overfull \hbox (11.58768pt too wide) in paragraph at lines 1088--1089
+\OT1/cantarell-TLF/m/n/10 Yield will per-form a syscall, mov-ing us to the ker-
+nel. Now, we are on the OS stack. We then call \OT1/cmtt/m/n/10 run[]new[]threa
+d\OT1/cantarell-TLF/m/n/10 .
+ []
+
+Package mdframed Info: mdframed works in twoside mode on input line 1102.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1102.
+Package mdframed Info: mdframed works in twoside mode on input line 1113.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1113.
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1123.
+
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1131.
+
+[32]
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1141.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1152.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1152.
+Package mdframed Info: mdframed works in twoside mode on input line 1156.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1156.
+Package mdframed Info: mdframed works in twoside mode on input line 1160.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1160.
+[33] [34]
+Chapter 5.
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1186.
+
+\openout8 = `cs162notes.listing'.
+
+
+(_minted-cs162notes/0E4F1FD6CF54C4205684D98995041570EC13ECA8D8E1CCD6C5575527B14
+5E573.pygtex) [35
+
+]
+Package mdframed Info: mdframed works in twoside mode on input line 1221.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1221.
+Package mdframed Info: mdframed works in twoside mode on input line 1230.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1230.
+Package mdframed Info: mdframed works in twoside mode on input line 1236.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1236.
+ [36] (cs162notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `cs162notes.out' has not changed.
-(rerunfilecheck)             Checksum: BE38925CFB5CED676AD33FA01275EC50;11918.
+(rerunfilecheck)             Checksum: 2632C446D4A703254D67029AFDB9BA48;15863.
  ) 
 Here is how much of TeX's memory you used:
- 41086 strings out of 474541
- 852994 string characters out of 5743481
- 1942978 words of memory out of 5000000
- 62408 multiletter control sequences out of 15000+600000
+ 41298 strings out of 474541
+ 859264 string characters out of 5743481
+ 1946978 words of memory out of 5000000
+ 62528 multiletter control sequences out of 15000+600000
  591358 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,12n,145p,558b,1035s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2052,9 +2180,9 @@ AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users
 amsfonts/cm/cmtt8.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmtt9.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX
 /fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on cs162notes.pdf (26 pages, 553742 bytes).
+Output written on cs162notes.pdf (36 pages, 612389 bytes).
 PDF statistics:
- 725 PDF objects out of 1000 (max. 8388607)
- 140 named destinations out of 1000 (max. 500000)
- 854 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 969 PDF objects out of 1000 (max. 8388607)
+ 217 named destinations out of 1000 (max. 500000)
+ 1092 words of extra memory for PDF output out of 10000 (max. 10000000)
 
