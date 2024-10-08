@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  23 SEP 2024 11:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  2 OCT 2024 15:59
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1713,18 +1713,19 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
  [2
 
 {C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cabin/cbn_vqopx
-p.enc}])
-\tf@toc=\write7
-\openout7 = `m113notes.toc'.
-
+p.enc}]
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/it' in size <10> not availa
 ble
 (Font)              Font shape `OT1/cantarell-TLF/m/sl' tried instead on input 
-line 40.
+line 63.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
-(Font)              scaled to size 10.0pt on input line 40.
+(Font)              scaled to size 10.0pt on input line 63.
  [3{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_
-dr4czt.enc}] [4]
+dr4czt.enc}])
+\tf@toc=\write7
+\openout7 = `m113notes.toc'.
+
+ [4]
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/n' aliased to
 (Font)              `OT1/Cabin-TLF/regular/n' on input line 42.
@@ -1932,14 +1933,14 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 9.0pt on input line 450.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
 (Font)              scaled to size 9.0pt on input line 450.
-<C:/Users/Michael/Pictures/MATH113/m113-rects.png, id=470, 396.2805pt x 414.348
+<C:/Users/Michael/Pictures/MATH113/m113-rects.png, id=525, 396.2805pt x 414.348
 pt>
 File: C:/Users/Michael/Pictures/MATH113/m113-rects.png Graphic file (type png)
 <use C:/Users/Michael/Pictures/MATH113/m113-rects.png>
 Package pdftex.def Info: C:/Users/Michael/Pictures/MATH113/m113-rects.png  used
  on input line 451.
 (pdftex.def)             Requested size: 396.27953pt x 414.34698pt.
-<C:/Users/Michael/Pictures/MATH113/m113-tris.png, id=471, 292.09125pt x 418.563
+<C:/Users/Michael/Pictures/MATH113/m113-tris.png, id=526, 292.09125pt x 418.563
 75pt>
 File: C:/Users/Michael/Pictures/MATH113/m113-tris.png Graphic file (type png)
 <use C:/Users/Michael/Pictures/MATH113/m113-tris.png>
@@ -2342,19 +2343,117 @@ Package mdframed Info: mdframed works in twoside mode on input line 1464.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1464.
- [34] (m113notes.aux)
+Package mdframed Info: mdframed works in twoside mode on input line 1473.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1473.
+Package mdframed Info: Not enough space on this page on input line 1474.
+ [34]
+Package mdframed Info: Not enough space on this page on input line 1474.
+Package mdframed Info: mdframed works in twoside mode on input line 1482.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1482.
+Package mdframed Info: mdframed works in twoside mode on input line 1486.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1486.
+Package mdframed Info: mdframed works in twoside mode on input line 1497.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1497.
+Package mdframed Info: mdframed works in twoside mode on input line 1505.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1505.
+Package mdframed Info: mdframed works in twoside mode on input line 1518.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1518.
+Package mdframed Info: Box was splittet wrong
+ starting loop to iterate the splitting point
+(mdframed)              on input line 1528.
+ [35]
+Package mdframed Info: mdframed works in twoside mode on input line 1539.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1539.
+Package mdframed Info: mdframed works in twoside mode on input line 1544.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1544.
+Package mdframed Info: mdframed works in twoside mode on input line 1551.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1551.
+Package mdframed Info: mdframed works in twoside mode on input line 1558.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1558.
+Package mdframed Info: mdframed works in twoside mode on input line 1570.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1570.
+Package mdframed Info: mdframed works in twoside mode on input line 1578.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1578.
+Package mdframed Info: Not enough space on this page on input line 1581.
+ [36]
+Package mdframed Info: Not enough space on this page on input line 1581.
+Package mdframed Info: mdframed works in twoside mode on input line 1583.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1583.
+Package mdframed Info: mdframed works in twoside mode on input line 1592.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1592.
+ [37]
+Chapter 6.
+Package mdframed Info: mdframed works in twoside mode on input line 1604.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1604.
+Package mdframed Info: mdframed works in twoside mode on input line 1657.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1657.
+Package mdframed Info: mdframed works in twoside mode on input line 1665.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1665.
+[38
+
+]
+Package mdframed Info: mdframed works in twoside mode on input line 1682.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1682.
+Package mdframed Info: mdframed works in twoside mode on input line 1714.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1714.
+Package mdframed Info: Not enough space on this page on input line 1721.
+ [39]
+Package mdframed Info: Not enough space on this page on input line 1721.
+Package mdframed Info: mdframed works in twoside mode on input line 1729.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1729.
+ [40] (m113notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `m113notes.out' has not changed.
-(rerunfilecheck)             Checksum: 58709DD5D51A4575FEB864DB2F173C33;8328.
+(rerunfilecheck)             Checksum: 8D05EFC7A0B9E121E9E3FE2D5EFF3C21;9941.
  ) 
 Here is how much of TeX's memory you used:
- 41447 strings out of 474541
- 857314 string characters out of 5743481
+ 41597 strings out of 474541
+ 860008 string characters out of 5743481
  1951978 words of memory out of 5000000
- 62617 multiletter control sequences out of 15000+600000
+ 62705 multiletter control sequences out of 15000+600000
  590545 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,13n,145p,548b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2373,14 +2472,15 @@ Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Michael/AppD
 ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Mi
 chael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
 :/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-r7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmsy7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/Michael/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on m113notes.pdf (34 pages, 527839 bytes).
+r5.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmr7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmsy10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Michael/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/Michael/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on m113notes.pdf (40 pages, 571888 bytes).
 PDF statistics:
- 876 PDF objects out of 1000 (max. 8388607)
- 314 named destinations out of 1000 (max. 500000)
- 669 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1020 PDF objects out of 1200 (max. 8388607)
+ 376 named destinations out of 1000 (max. 500000)
+ 757 words of extra memory for PDF output out of 10000 (max. 10000000)
 

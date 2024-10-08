@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  23 SEP 2024 15:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  27 SEP 2024 15:11
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1721,11 +1721,26 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
 
 {C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cabin/cbn_vqopx
 p.enc}{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell
-/a_dr4czt.enc}] [3] [4] [5])
+/a_dr4czt.enc}] [3] [4] [5]
+LaTeX Font Info:    Trying to load font information for TS1+cantarell-TLF on in
+put line 152.
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/cantarell\ts1cantarel
+l-tlf.fd
+File: TS1cantarell-TLF.fd 2019/06/24 Font definitions for TS1/cantarell-TLF.
+)
+LaTeX Font Info:    Font shape `TS1/cantarell-TLF/m/it' in size <10> not availa
+ble
+(Font)              Font shape `TS1/cantarell-TLF/m/sl' tried instead on input 
+line 152.
+LaTeX Font Info:    Font shape `TS1/cantarell-TLF/m/sl' will be
+(Font)              scaled to size 10.0pt on input line 152.
+)
 \tf@toc=\write7
 \openout7 = `datac104notes.toc'.
 
- [6]
+ [6{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_
+tv3tjz.enc}]
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/Cabin-TLF/m/n' aliased to
 (Font)              `OT1/Cabin-TLF/regular/n' on input line 42.
@@ -1747,13 +1762,6 @@ LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/sl' will be
 (Font)              scaled to size 14.4pt on input line 43.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/n' will be
 (Font)              scaled to size 12.0pt on input line 44.
-LaTeX Font Info:    Trying to load font information for TS1+cantarell-TLF on in
-put line 49.
-
-(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/cantarell\ts1cantarel
-l-tlf.fd
-File: TS1cantarell-TLF.fd 2019/06/24 Font definitions for TS1/cantarell-TLF.
-)
 LaTeX Font Info:    Font shape `TS1/cantarell-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 49.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/it' in size <10> not availa
@@ -1762,7 +1770,6 @@ ble
 line 54.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/b/sl' will be
 (Font)              scaled to size 10.0pt on input line 54.
-
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 54.
@@ -1779,8 +1786,7 @@ Package mdframed Info: mdframed detected package amsthm
 (mdframed)              on input line 68.
 [7
 
-{C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cantarell/a_tv3
-tjz.enc}]
+]
 Package mdframed Info: Not enough space on this page on input line 70.
 Package mdframed Info: mdframed works in twoside mode on input line 72.
 Package mdframed Info: mdframed detected package amsthm 
@@ -2028,8 +2034,8 @@ le
 line 1009.
 LaTeX Font Info:    Font shape `OT1/cantarell-TLF/m/sl' will be
 (Font)              scaled to size 9.0pt on input line 1009.
-<C:/Users/Michael/Pictures/D104/d104-us-progress.jpg, id=990, 1159.9335pt x 863
-.3856pt>
+<C:/Users/Michael/Pictures/D104/d104-us-progress.jpg, id=1071, 1159.9335pt x 86
+3.3856pt>
 File: C:/Users/Michael/Pictures/D104/d104-us-progress.jpg Graphic file (type jp
 g)
 <use C:/Users/Michael/Pictures/D104/d104-us-progress.jpg>
@@ -2139,84 +2145,102 @@ a-chine)\OT1/cantarell-TLF/b/n/10 . [][]\OT1/cantarell-TLF/m/n/10 The Sewing Ma
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 1384.
 
-Package mdframed Info: mdframed works in twoside mode on input line 1411.
+[43] [44]
+Package mdframed Info: mdframed works in twoside mode on input line 1461.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1411.
-[43]
-Package mdframed Info: mdframed works in twoside mode on input line 1445.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1445.
-Package mdframed Info: mdframed works in twoside mode on input line 1458.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1458.
- [44]
-Package mdframed Info: Not enough space on this page on input line 1459.
+(mdframed)              on input line 1461.
 
-
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 1468.
-
-
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 1479.
-
-
-Underfull \vbox (badness 2111) has occurred while \output is active []
+Underfull \vbox (badness 1796) has occurred while \output is active []
 
  [45]
 Package mdframed Info: mdframed works in twoside mode on input line 1495.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1495.
-Package mdframed Info: mdframed works in twoside mode on input line 1502.
+Package mdframed Info: mdframed works in twoside mode on input line 1508.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1502.
+(mdframed)              on input line 1508.
 
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 1524.
+(hyperref)                be the same. Added a new anchor on input line 1518.
 
-[46]
-Package mdframed Info: mdframed works in twoside mode on input line 1526.
+
+Underfull \vbox (badness 1163) has occurred while \output is active []
+
+ [46]
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1529.
+
+[47]
+LaTeX Font Info:    Font shape `TS1/cantarell-TLF/b/it' in size <14.4> not avai
+lable
+(Font)              Font shape `TS1/cantarell-TLF/b/sl' tried instead on input 
+line 1588.
+LaTeX Font Info:    Font shape `TS1/cantarell-TLF/b/sl' will be
+(Font)              scaled to size 14.4pt on input line 1588.
+ [48]
+Package mdframed Info: mdframed works in twoside mode on input line 1600.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1526.
-Package mdframed Info: mdframed works in twoside mode on input line 1538.
+(mdframed)              on input line 1600.
+Package mdframed Info: mdframed works in twoside mode on input line 1607.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1538.
-Package mdframed Info: mdframed works in twoside mode on input line 1544.
+(mdframed)              on input line 1607.
+ [49]
+
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 1629.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1630.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1544.
- [47]
+(mdframed)              on input line 1630.
+Package mdframed Info: mdframed works in twoside mode on input line 1642.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1642.
+Package mdframed Info: mdframed works in twoside mode on input line 1648.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1648.
+[50] [51]
 Chapter 5.
-Package mdframed Info: mdframed works in twoside mode on input line 1558.
+Package mdframed Info: mdframed works in twoside mode on input line 1682.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1558.
-[48
+(mdframed)              on input line 1682.
+Package mdframed Info: mdframed works in twoside mode on input line 1686.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1686.
+[52
 
-] (datac104notes.aux)
+]
+Package mdframed Info: mdframed works in twoside mode on input line 1712.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1712.
+ [53] (datac104notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `datac104notes.out' has not changed.
-(rerunfilecheck)             Checksum: A7FBC5F94B646D4F9D32A36863279FC2;27445.
+(rerunfilecheck)             Checksum: 6AC8DFF076E6DDA202761C1980552050;30882.
  ) 
 Here is how much of TeX's memory you used:
- 41275 strings out of 474541
- 854729 string characters out of 5743481
+ 41341 strings out of 474541
+ 855786 string characters out of 5743481
  1946978 words of memory out of 5000000
- 62465 multiletter control sequences out of 15000+600000
- 593077 words of font info for 113 fonts, out of 8000000 for 9000
+ 62500 multiletter control sequences out of 15000+600000
+ 594519 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 124i,12n,145p,649b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 124i,12n,145p,770b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/impallari/cabin/C
 abin-Bold.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/impal
 lari/cabin/Cabin-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fo
@@ -2226,9 +2250,9 @@ AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Regular.pfb
 ><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Ca
 ntarell-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmtt8.pfb>
-Output written on datac104notes.pdf (48 pages, 6501854 bytes).
+Output written on datac104notes.pdf (53 pages, 6532028 bytes).
 PDF statistics:
- 1201 PDF objects out of 1440 (max. 8388607)
- 286 named destinations out of 1000 (max. 500000)
- 1384 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1322 PDF objects out of 1440 (max. 8388607)
+ 313 named destinations out of 1000 (max. 500000)
+ 1512 words of extra memory for PDF output out of 10000 (max. 10000000)
 

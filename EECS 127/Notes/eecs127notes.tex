@@ -1395,4 +1395,114 @@ These $\lambda_1, \ldots, \lambda_n$ are complex numbers which are roots of $P(\
 
 	To check that $H_f$ is indeed PSD, we check that for any arbitrary vector $x$, and
 \end{solution}
+
+\chapter{Week Six Suffering}
+\section{Discussion -- 9/30/2024}
+\begin{hw}
+	Recall that SVD of a matrix $A$ is $A = U \Sigma V^{T}$, where $U$ is $n \times n$, $\Sigma$ is $n \times m$, and $V^{T} = m \times m$.
+	
+	Note that $U^{T}U = I$, $V^{T}V = I$, and $\Sigma$ is diagonal.
+	
+	Then, find the SVD of the following matrix:
+	\begin{equation*}
+		A = \begin{bmatrix}
+			3  & 0 \\ 4 & 5
+		\end{bmatrix}
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	Let us look at $A^{T}A$:
+	\begin{align*}
+		A^{T}A &= \begin{bmatrix}
+			3 & 4 \\
+			0 & 5
+		\end{bmatrix}\begin{bmatrix}
+		3 & 0 \\ 4 & 5
+	\end{bmatrix} \\
+	&= \begin{bmatrix}
+		25 & 20 \\
+		20 & 25
+	\end{bmatrix}
+	\end{align*}
+
+	Then, let us now look at $A^{T}A - \lambda I$ and find its determinant:
+	\begin{align*}
+		A^{T}A - \lambda I &= \begin{bmatrix}
+			25 - \lambda & 20 \\
+			20 & 25 - \lambda
+		\end{bmatrix}
+	\end{align*}
+	
+	Then, we have that $(25-\lambda)^{2} - 20^{2} = 0$. Then, we have $25^{2} - 50\lambda + \lambda^{2} - 20^{2} = 0 \implies \lambda^{2} - 50\lambda + 25^{2} - 20^{2}$. So, we have $\lambda_1 = 5$ and $\lambda_2 = 45$.
+	
+	For $\lambda_1 = 5$, we want $A^{T}Av = \lambda v$. That is, we see:
+	\begin{align*}
+		A^{T}Av &= \begin{bmatrix}
+			25v_1 + 20v_2 \\ 20v_1 + 25v_2
+		\end{bmatrix} \\
+		&= \begin{bmatrix}
+			5v_1 \\ 5v_2
+		\end{bmatrix}
+	\end{align*}
+
+	So, we have $v_1 = v_1$ and $v_2 = -v_1$ gives us an eigenvector $v = \begin{bmatrix}
+		1 & -1
+	\end{bmatrix}^{T}$
+
+	Then, for $\lambda = 45$, we see that:
+	\begin{align*}
+		\begin{bmatrix}
+			25v_1 + 20v_2 \\
+			20v_1 + 25v_2
+		\end{bmatrix} &= \begin{bmatrix}
+		45v_1 \\ 45v_2
+	\end{bmatrix}
+	\end{align*}
+
+	Then, we see that $v_1 = v_1$ and $v_2 = v_1$. So, we have a second eigenvector $v = \begin{bmatrix}
+		1 & 1
+	\end{bmatrix}^{T}$.
+
+	Note then that these correspond to columns of $V$. First, we note that $\Sigma$ will be:
+	\begin{align*}\Sigma = 
+		\begin{bmatrix}
+			\sqrt{45} & 0 \\ 0 & \sqrt 5
+		\end{bmatrix}
+	\end{align*}
+
+	Then, we note that our $V$ would be:
+	\begin{equation*}
+		V = \frac 1 {\sqrt{2}} \begin{bmatrix}
+			 1 & 1 \\ 1 & -1
+		\end{bmatrix}
+	\end{equation*}
+
+	To find $U$, we first look at $Av_1$ to get:
+	\begin{align*}
+		Av_1 &= \begin{bmatrix}
+			u_1 & u_2
+		\end{bmatrix}\begin{bmatrix}
+		\sigma_1 & 0 \\ 0 & \sigma_2
+	\end{bmatrix}\begin{bmatrix}
+	v_1^{T} \\ v_2^{T}
+\end{bmatrix}v_1 \\
+	&= \begin{bmatrix}
+		u_1 & u_2
+	\end{bmatrix}\begin{bmatrix}
+		\sigma_1 & 0 \\ 0 & \sigma_2
+	\end{bmatrix}\begin{bmatrix}
+	1 \\ 0
+\end{bmatrix} \\
+&= \begin{bmatrix}
+	u_1 & u_2 
+\end{bmatrix}\begin{bmatrix}
+\sigma_1 \\ 0
+\end{bmatrix} \\
+&= u_1\sigma_1
+\end{align*}
+\end{solution}
+
+\begin{solution}
+	We look at $A = U\Sigma V^{T}$, and $A^{T} = V \Sigma U^{T}$. Then, we have that $A^{T}A = V \Sigma V^{T}$.
+\end{solution}
 \end{document}

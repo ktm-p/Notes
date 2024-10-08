@@ -127,26 +127,42 @@
 \contentsline {subsubsection}{Data Technologies and the Future}{43}{section*.16}%
 \contentsline {subsubsection}{Narrative Templates}{43}{section*.16}%
 \contentsline {subsubsection}{Artificial Intelligence}{43}{section*.16}%
-\contentsline {section}{\numberline {4.2}Lecture -- 9/18/2024}{43}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Lecture Outline}{43}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Counting}{44}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Informational Person}{44}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Personality}{44}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Performativity}{44}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Cyborgs}{45}{subsection.4.2.6}%
-\contentsline {subsubsection}{Donna Haraway}{45}{section*.17}%
-\contentsline {section}{\numberline {4.3}Discussion -- 9/19/2024}{45}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Porter's Reading}{45}{subsection.4.3.1}%
-\contentsline {subsubsection}{Key Points}{45}{section*.18}%
-\contentsline {subsubsection}{Bureaucracy and Quantification}{45}{section*.18}%
-\contentsline {section}{\numberline {4.4}Lecture -- 9/20/2024}{46}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Why is Data Valuable?}{46}{subsection.4.4.1}%
-\contentsline {subsubsection}{Data as Commodity}{46}{example.4.6}%
-\contentsline {subsubsection}{Data as the New Oil}{46}{example.4.6}%
-\contentsline {subsubsection}{AI Driving the Future}{46}{example.4.6}%
-\contentsline {subsubsection}{How Data became Valuable}{46}{example.4.6}%
-\contentsline {subsection}{\numberline {4.4.2}Data and Capitalism}{47}{subsection.4.4.2}%
-\contentsline {subsubsection}{Data as Capital}{47}{section*.19}%
-\contentsline {chapter}{\numberline {5}Week Five}{48}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Lecture -- 9/23/2024}{48}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}What is a Population?}{48}{subsection.5.1.1}%
+\contentsline {section}{\numberline {4.2}Required Reading -- \textit {A Manifesto for Cyborgs}}{43}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Why Cyborgs?}{43}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Work}{44}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Bodies}{44}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Feminism}{44}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Some Interesting Conflicts}{45}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Lecture -- 9/18/2024}{45}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Lecture Outline}{45}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Counting}{45}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Informational Person}{45}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Personality}{46}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Performativity}{46}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Cyborgs}{46}{subsection.4.3.6}%
+\contentsline {subsubsection}{Donna Haraway}{46}{section*.17}%
+\contentsline {section}{\numberline {4.4}Discussion -- 9/19/2024}{47}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Porter's Reading}{47}{subsection.4.4.1}%
+\contentsline {subsubsection}{Key Points}{47}{section*.18}%
+\contentsline {subsubsection}{Bureaucracy and Quantification}{47}{section*.18}%
+\contentsline {section}{\numberline {4.5}Required Reading -- \textit {Too Smart: How Digital Capitalism is Extracting Data, Controlling Our Lives, and Taking Over the World}}{47}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Amazon and Whole Foods}{47}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Data as Capital}{48}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Conclusion}{48}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Required Reading -- \textit {OpenAI Used Kenyan Workers on Less Than \$2 Per Hour to Make ChatGPT Less Toxic}}{49}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Lecture -- 9/20/2024}{49}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Why is Data Valuable?}{49}{subsection.4.7.1}%
+\contentsline {subsubsection}{Data as Commodity}{49}{example.4.6}%
+\contentsline {subsubsection}{Data as the New Oil}{49}{example.4.6}%
+\contentsline {subsubsection}{AI Driving the Future}{49}{example.4.6}%
+\contentsline {subsubsection}{How Data became Valuable}{50}{example.4.6}%
+\contentsline {subsection}{\numberline {4.7.2}Data and Capitalism}{50}{subsection.4.7.2}%
+\contentsline {subsubsection}{Data as Capital}{50}{section*.19}%
+\contentsline {subsubsection}{Drives and Dynamics}{50}{defn.4.9}%
+\contentsline {subsubsection}{Datafication Technologies and Capitalism}{50}{defn.4.9}%
+\contentsline {subsection}{\numberline {4.7.3}Conclusion}{51}{subsection.4.7.3}%
+\contentsline {chapter}{\numberline {5}Week Five}{52}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Lecture -- 9/23/2024}{52}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}What is a Population?}{52}{subsection.5.1.1}%
+\contentsline {subsubsection}{Collecting Data}{52}{defn.5.2}%
+\contentsline {subsubsection}{Statistics}{52}{defn.5.2}%

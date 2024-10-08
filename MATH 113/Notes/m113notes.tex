@@ -1466,4 +1466,301 @@ This means that there exists a set $\brc{g_i}$ of elements of $G$ such that $G =
 		\lvert H \rvert \mid \lvert G \rvert.
 	\end{equation*}
 \end{cor}
+
+\section{Lecture -- 9/25/2024}
+\subsection{Warm-Up}
+\begin{hw}
+	Are the sets $\ZZ/6\ZZ$ and $S_n$ isomorphic, for $n \geq 3$?
+\end{hw}
+\begin{solution}
+	No; recall that if $\ZZ/6\ZZ$ and $S_n$ are isomorphic, then if $\ZZ/6\ZZ$ is abelian (which it is), then $S_n$ must be too (which it isn't).
+\end{solution}
+
+\subsection{Isomorphisms}
+Recall that we defined an isomorphism to be a bijective homomorhism, and provided the following example:
+\begin{example}
+	We have an isomorphism between $(\RR, +)$ and $\RR_{>0}, \times$.
+\end{example}
+
+\begin{example}
+	We also have the following isomorphism from homework:
+	\begin{align*}
+		\mathrm{exp} : \ZZ/n\ZZ \rightarrow \ang{\cyc{1 2 \ldots n}} \\
+		[a] \mapsto \cyc{1 2 \ldots n}^{n}
+	\end{align*}
+
+	We note that it is injective since we can think of the operation as right shifts. Then, after $n$ shifts, we return to the same position. In other words, for two cycles to be equal to each other, their exponents must be equivalent to each other under $\mod n$.
+	
+	With that in mind, we note that if we have $x \neq y \mod n$, then it follows that $\cyc{1 2 \ldots n}^{x} \neq \cyc{1 2 \ldots n}^{y}$.
+\end{example}
+
+\begin{thm}[Cyclic Groups and $\ZZ$]
+	If $G$ is a cyclic group, then there are two possibilities:
+	\begin{enumerate}
+		\item If $G$ is of finite order $n$, then it is isomorphic to $\ZZ/n\ZZ$.
+		\item If $G$ is of infinite order, then it is isomorphic to $\ZZ$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Isomorphisms Preserve Structure]
+	If $G$ is isomorphic to $H$, then the following must be true:
+	\begin{itemize}
+		\item If $G$ is abelian, then $H$ is too.
+		\item If $G$ is cyclic, then $H$ is too.
+	\end{itemize}
+\end{thm}
+
+\subsection{External Direct Products}
+The idea is to decompose into small simple pieces. So, if we have a big structure, it's much easier to consider smaller constituents of it.
+
+In the case of external direct products, we want to create a larger group out of two smaller ones.
+
+\begin{defn}[External Direct Products]
+	Let $(G, \circ), (H, *)$ be groups. Then, we define its direct product $G \times H$ to be:
+	\begin{equation*}
+		G \times H = \brc{(g, h) : g \in G \land h \in H}
+	\end{equation*}
+
+	with the operation $\cdot$ to be as follows:
+	\begin{equation*}
+		(g_1, h_1) \cdot (g_2, h_2) = (g_1 \circ g_2, h_1 * h_2).
+	\end{equation*}
+\end{defn}
+\begin{proof}
+	For associativity, it follows from the operations of $G$ and $H$ being associative. We note that since the operation is independent for each coordinates.
+	
+	For identity, we note that the element $(e_G, e_H)$ serves as the identity element.
+	
+	For inverses, for every $(g, h) \in G \times H$, we take the inverse $(g^{-1}, h^{-1}) \in G \times H$. We know this exists by $G, H$ being groups.
+\end{proof}
+
+\section{Lecture -- 9/27/2024}
+\begin{defn}
+	Let $H \leq G$. We say that $H$ is normal (in $G$) iff $\forall g \in G : g H = H g$ iff $g \in G \forall h_1 \in H \exists h_2 \in H : gh_1 = h_2 g$.
+\end{defn}
+
+\subsection{Warm-Up}
+\begin{hw}
+	What subgroups of $(\ZZ/6\ZZ, +)$ are normal?
+\end{hw}
+\begin{solution}
+	We note that all subgroups are in fact normal. This follows from commutativity of the operation.
+\end{solution}
+
+\begin{hw}
+	What subgroups of $S_3$ are normal?
+\end{hw}
+\begin{solution}
+	The subgroup $S = \brc{\cyc{1}, \cyc{1 2 3}, \cyc{1 3 2}}$ is normal.
+\end{solution}
+
+\begin{prop}
+	If $G$ is abelian, then every subgroup is normal.
+\end{prop}
+\begin{proof}
+	We see that for all $g \in G$ and for all $h \in H \leq G$, we have that $gh = hg$. So trivially, we see that $gH = Hg$.
+\end{proof}
+
+\subsection{Normal Subgroups}
+So, why are we looking at normal subgroups? Namely, we are we looking at how $\forall g \in G$, $gHg^{-1} \subseteq H$.
+
+Well, note that $G / H = \brc{eH, g_1H, \ldots}$. Now, we want to turn $G/H$ into a group by introducing some operation $*$ such that $g_1 H * g_2 H = (g_1g_2)H$.
+
+\begin{example}
+	Note that we've looked at an example before.
+	
+	Let us look at $G = \ZZ$ and $H = n\ZZ$. That is, we look at $G/H = \ZZ/n\ZZ = \brc{[0], [1], \ldots, [n]}$. Then, we see how $[k] + [l] = (k + n\ZZ) + (l + n\ZZ) = (k+l)n\ZZ$.
+\end{example}
+
+However, it works iff $\forall g \in G, gHg^{-1} \subseteq H$.
+
+\begin{defn}
+	Let $f : G \rightarrow H$ be a homomorphism. Then, $\mathrm{Im}(f) = \brc{h \in H : \exists g \in G : f(g) = h}$.
+	
+	Also, we say that $\mathrm{Ker}(f) = \brc{g \in G : f(g) = e_H}$.
+\end{defn}
+
+\begin{thm}[First Isomorphism Theorem]
+	If $f : G \rightarrow H$ is a homomorphism, then $G / \mathrm{Ker}(f) \cong \mathrm{Im} f$.
+	
+	That is, there exists some isomorphism $\Psi : G / \mathrm{Ker}f \rightarrow \mathrm{Im} f$.
+\end{thm}
+\begin{proof}
+	To prove this, we will first introduce the following lemma:
+	
+	\begin{lem}
+		$\mathrm{Ker}f$ is a normal subgroup.
+	\end{lem}
+	\begin{innerproof}
+		We use the condition that for all $g \in G$, we have $g ( \mathrm{Ker}f)g^{-1} \subseteq \mathrm{Ker} f$.
+		
+		Let us take any $a \in \mathrm{Ker}f$. We see then that $f(gag^{-1}) = f(g)f(a)f(g^{-1}) = f(g)f(g^{-1}) = f(g)(f(g))^{-1} = e_H$. Thus, we see that, indeed, it lies in the kernel.
+	\end{innerproof}
+\end{proof}
+
+\chapter{Week Six Suffering}
+\section{Lecture -- 9/30/2024}
+\begin{hw}
+	Show that $D(2, \RR) \cong \RR^{\times} \times \RR^{\times}$. Note that $D(2, \RR)$ denotes all invertible diagonal $2 \times 2$ matrices with $\RR$-entries.
+\end{hw}
+\begin{solution}
+	We can consider the set of all matrices in the following form where $a, b \neq 0$:
+	\begin{equation*}
+		\begin{bmatrix}
+			a & 0 \\
+			0 & 1
+		\end{bmatrix}
+	\end{equation*}
+
+	and the form:
+	\begin{equation*}
+		\begin{bmatrix}
+			1 & 0\\
+			0 & b
+		\end{bmatrix}
+	\end{equation*}
+
+	We denote them as $H, K$ respectively. Note that $H, K$ are in fact subgroups.
+	
+	Then, we see that the intersection is only the identity matrix since for the two matrices to be equal, we must require $a = 1$ and $b = 1$. Finally, note that:
+	\begin{align*}
+		\begin{bmatrix}
+			a & 0 \\
+			0 & 1 
+		\end{bmatrix}
+		\begin{bmatrix}
+			1 & 0 \\
+			0 & b
+		\end{bmatrix} &= \begin{bmatrix}
+		a & 0 \\
+		0 & b
+	\end{bmatrix} \\
+	\begin{bmatrix}
+		1 & 0 \\
+		0 & b
+	\end{bmatrix}
+	\begin{bmatrix}
+		a & 0 \\
+		0 & 1
+	\end{bmatrix} &= \begin{bmatrix}
+		a & 0 \\
+		0 & b
+\end{bmatrix}
+	\end{align*}
+
+	Then, we see that there exists an isomorphism between $D(2, \RR)$ and $H \times K$.
+
+	Finally, we define a map $\varphi(h) \mapsto a$ and $\psi(k) \mapsto b$. These are both isomorphisms, and thus we can conclude that there exists an isomorphism between $H \times K$ and $\RR^{\times} \times \RR^{\times}$. Then, we have an isomorphism between $D(2, \RR)$ and $\RR^{\times} \times \RR^{\times}$.
+\end{solution}
+
+\begin{hw}
+	Show that $\ZZ/2\ZZ \times \ZZ/2\ZZ \not\cong \ZZ/4\ZZ$.
+\end{hw}
+\begin{solution}
+	We see that the former has elements of at most order 2, whereas the latter has elements of order 4. Thus, there can't be an isomorphism between the two.
+\end{solution}
+
+\subsection{Internal Direct Products}
+\begin{defn}
+	Let $G$ be a group, with $H, K \leq G$. $G$ is the internal direct product of $H$ and $K$ iff
+	\begin{enumerate}
+		\item $G = H \cdot K = \brc{h \cdot k : h \in H, k \in K}$.
+		\item $H \cap K = \brc{e_G}$.
+		\item $hk = kh$ for any $h \in H$ and $k \in K$.
+	\end{enumerate}
+\end{defn}
+
+\begin{warn}
+	Note that $H \cdot K \neq H \times K$! The left is an internal product, whereas the right is an external product.
+\end{warn}
+
+\begin{warn}
+	Note that the third condition isn't telling us that $G$ is abelian; we aren't considering elements such as $hh$ or $kk$, or elements not in the subgroup.
+\end{warn}
+
+\begin{thm}
+	If $G$ is the internal direct product of $H$ and $K$, then $G \cong H \times K$.
+\end{thm}
+\begin{proof}
+	First, note that since $G$ is an internal direct product of $H$ and $K$, then $g = hk$ for some $h \in H$ and $k \in K$.
+	
+	We will first define a map $\varphi(g) : G \rightarrow H \times K$ by $g \mapsto (h, k)$. Now, we will first show that $\varphi(g)$ is well-defined:
+	\begin{innerproof}
+		 To show well-definedness, we observe that for $hk=g=h'k'$, we see that:
+		\begin{align*}
+			hk &= h'k' \\
+			k(k')^{-1} &= h^{-1}h'
+		\end{align*}
+		
+		Now, we observe that $k(k')^{-1} \in K$ and $h^{-1}h' \in H$. Then, we note that $H \cap K = \brc{e_G}$, so $k(k')^{-1} = h^{-1}h' = e_G$.
+		
+		Then, we observe that $h' = h$ and $k' = k$. Therefore, $(h, k) = (h', k')$.
+	\end{innerproof}
+
+	Next, we will show that it is homomorphic:
+	\begin{innerproof}
+		Let us take $g_1, g_2$ and see that:
+		\begin{align*}
+			\varphi(g_1g_2) &= \varphi(h_1k_1h_2k_2) \\
+			&= \varphi(h_1h_2k_1k_2) \\
+			&= (h_1h_2, k_1k_2) \\
+			&= (h_1, k_1)(h_2, k_2) \\
+			&= \varphi(g_1)\varphi(g_2)
+		\end{align*}
+	\end{innerproof}
+\end{proof}
+
+\section{Lecture -- 10/2/2024}
+\begin{thm}[Fundamental Theorem of Finite Abelian Groups]
+	Every finite abelian group $G$ is isomorphic to:
+	\begin{equation*}
+		G \cong \ZZ p_1^{a_1} \times Z p_2^{a_2} \times \cdots \times \ZZ p_k^{a_k}
+	\end{equation*}
+
+	where $p_1, \ldots, p_k$ are primes (not necessarily distinct), and $a_1, \ldots, a_k$ are natural numbers.
+\end{thm}
+
+In the case where $G$ is finitely generated, we have that:
+\begin{equation*}
+	G \cong \ZZ^{b} \times \ZZ p_1^{a_1} \times \cdots \times \ZZ p_k^{a_k}
+\end{equation*}
+
+\begin{example}
+	For example, consider $\ZZ/2\ZZ \cong \ZZ/2\ZZ$. Then, $p_1 = 2$ and $a_1 = 2$.
+	
+	In the case where, say, $\ZZ/4\ZZ$, we see that $p_1 = 2$ and $a_1 = 2$. Now, suppose we had $\ZZ/6\ZZ$, then using the theorem, we see that $\ZZ/6\ZZ \cong \ZZ/2\ZZ \times \ZZ/3\ZZ$.
+	\begin{innerproof}
+		As a quick proof, we note that $\ZZ/6\ZZ = \brc{[0], [1], \ldots, [5]}$. Then, we consider following subgroups $H = \brc{[0], [3]}$ and $K = \brc{[0], [2], [4]}$.
+		
+		First, we see that every element in $\ZZ/6\ZZ$ is the result of some $h + k$ for $h \in H$ and $k \in K$.
+		
+		Next, we see that they only intersect on the identity element $[0]$.
+		
+		Finally, commutativity comes from both being abelian.
+	\end{innerproof}
+\end{example}
+
+\section{Lecture -- 10/4/2024}
+\subsection{Voting}
+\begin{example}[Outcomes of Voting]
+	Suppose we have $n$ people $\brc{1, \ldots, n}$. Then, everyone votes either $0$ or $1$. The question then is how many different outcomes are there?
+	
+	Well, since each person has two options, and there are $n$ people, there are $2^{n}$ outcomes.
+	
+	Another way to look at this is that there are $n+1$ outcomes; we can think of ordering the set into two groups, and there are $n+1$ ways to divide the set into two groups.
+	
+	Finally, there are three outcomes of the vote: either $0$ wins, $1$ wins, or there is a tie (if $n$ is even).
+\end{example}
+
+\begin{example}
+	Assume that some people know each other. We can denote each person as a node, and a line represents that they know each other.
+	
+	Now, suppose we have four people. And we know three people voted for one option, and one voted for the other.
+	
+	The first scenario to consider is when two people know each other. Then, we see that there are two options.
+	
+	For the second, there are three options. We can look at the edges between the vertices, or we can also just think of it as some type of symmetry (such as reflection or rotation) on the connected graph.
+\end{example}
+
+
 \end{document}
