@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  24 SEP 2024 14:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  29 OCT 2024 14:16
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -2145,44 +2145,259 @@ Package mdframed Info: mdframed works in twoside mode on input line 1236.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1236.
- [36] (cs162notes.aux)
+Package mdframed Info: mdframed works in twoside mode on input line 1245.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1245.
+
+
+LaTeX Warning: Reference `mdf@pagelabel-41' on page 36 undefined on input line 
+1246.
+
+
+Overfull \hbox (10.60141pt too wide) in paragraph at lines 1248--1249
+[]\OT1/cantarell-TLF/m/n/10 We can sim-ply use a semaphore: first, ini-tial-ize
+ the semaphore to be 1000. Then, be-fore \OT1/cmtt/m/n/10 connect(s)\OT1/cantar
+ell-TLF/m/n/10 ,
+ []
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1252 The operation \texttt{test_and_set}
+                                           can be used to implement locks by...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.1252 The operation \texttt{test_and_set}
+                                           can be used to implement locks by...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1253 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (34.24059pt too wide) in paragraph at lines 1254--1255
+[]\OT1/cmtt/m/n/10 For tset, if the value is zero, then we acquire the lock by 
+setting the value to 1 and returning
+ []
+
+
+Overfull \hbox (2.74086pt too wide) in paragraph at lines 1256--1257
+[]\OT1/cmtt/m/n/10 On the other hand, if the value is 1, then we keep spinning 
+in our loop until the value is
+ []
+
+
+Overfull \hbox (13.24077pt too wide) in paragraph at lines 1259--1260
+\OT1/cmtt/m/n/10 Condition Variables allow you to sleep inside a critical secti
+on; since multiple threads can
+ []
+
+
+Overfull \hbox (23.74068pt too wide) in paragraph at lines 1263--1264
+[]\OT1/cmtt/m/n/10 Wait releases lock and suspends execution of calling thread.
+ Signal wakes up the thread. And
+ []
+
+[36] [37]
+Chapter 6.
+Package mdframed Info: mdframed works in twoside mode on input line 1269.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1269.
+
+LaTeX Warning: Reference `mdf@pagelabel-42' on page 38 undefined on input line 
+1271.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1273.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1273.
+
+LaTeX Warning: Reference `mdf@pagelabel-43' on page 38 undefined on input line 
+1275.
+
+
+Overfull \hbox (55.2404pt too wide) in paragraph at lines 1276--1277
+\OT1/cmtt/m/n/10 One of the goals of scheduling is to minimize completion time.
+ We also want to maximize throughput.
+ []
+
+
+Overfull \hbox (39.49054pt too wide) in paragraph at lines 1276--1277
+\OT1/cmtt/m/n/10 When maximizing throguhput, we need to minimize overhead and u
+se resources efficiently. Finally,
+ []
+
+
+Overfull \hbox (2.74086pt too wide) in paragraph at lines 1276--1277
+\OT1/cmtt/m/n/10 we want to maintain fairness: every job is able to run on the 
+CPU at some point. There's
+ []
+
+Package mdframed Info: mdframed works in twoside mode on input line 1280.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1280.
+
+LaTeX Warning: Reference `mdf@pagelabel-44' on page 38 undefined on input line 
+1283.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1286.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1286.
+
+LaTeX Warning: Reference `mdf@pagelabel-45' on page 38 undefined on input line 
+1289.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1292.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1292.
+
+LaTeX Warning: Reference `mdf@pagelabel-46' on page 38 undefined on input line 
+1299.
+
+[38
+
+]
+
+LaTeX Warning: Reference `mdf@pagelabel-47' on page 39 undefined on input line 
+1299.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1302.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1302.
+
+LaTeX Warning: Reference `mdf@pagelabel-48' on page 39 undefined on input line 
+1307.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1311.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1311.
+
+LaTeX Warning: Reference `mdf@pagelabel-49' on page 39 undefined on input line 
+1312.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1318.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1318.
+
+LaTeX Warning: Reference `mdf@pagelabel-50' on page 39 undefined on input line 
+1319.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1325.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1325.
+
+LaTeX Warning: Reference `mdf@pagelabel-51' on page 39 undefined on input line 
+1326.
+
+Package mdframed Info: mdframed works in twoside mode on input line 1333.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1333.
+
+LaTeX Warning: Reference `mdf@pagelabel-52' on page 39 undefined on input line 
+1334.
+
+[39]
+Package mdframed Info: mdframed works in twoside mode on input line 1354.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1354.
+
+
+LaTeX Warning: Reference `mdf@pagelabel-53' on page 40 undefined on input line 
+1355.
+
+[40]
+Chapter 7.
+
+Overfull \hbox (28.99063pt too wide) in paragraph at lines 1368--1369
+\OT1/cmtt/m/n/10 To motivate EEVDF, we first look at Fluid Flow System. A flow 
+represents a thread's CPU usage,
+ []
+
+[41
+
+] (cs162notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-Package rerunfilecheck Info: File `cs162notes.out' has not changed.
-(rerunfilecheck)             Checksum: 2632C446D4A703254D67029AFDB9BA48;15863.
- ) 
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `cs162notes.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `cs162notes.out':
+(rerunfilecheck)             Before: 2632C446D4A703254D67029AFDB9BA48;15863
+(rerunfilecheck)             After:  09BC601FBE54A4E8982141F5C2ACF2F8;17140.
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 1252 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 41298 strings out of 474541
- 859264 string characters out of 5743481
+ 41384 strings out of 474541
+ 860699 string characters out of 5743481
  1946978 words of memory out of 5000000
- 62528 multiletter control sequences out of 15000+600000
+ 62576 multiletter control sequences out of 15000+600000
  591358 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 124i,12n,145p,558b,1035s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/impallari/cabin/C
-abin-Bold.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/impal
-lari/cabin/Cabin-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fo
-nts/type1/gnome/cantarell/Cantarell-Bold.pfb><C:/Users/Michael/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Bold.pfb><C:/Users/Michael/
-AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Regular.pfb
-><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Ca
-ntarell-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmitt10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Michael/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Michael/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Michael/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users
-/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb
-><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmtt10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmtt8.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmtt9.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on cs162notes.pdf (36 pages, 612389 bytes).
+ 124i,12n,145p,558b,1122s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/imp
+allari/cabin/Cabin-Bold.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fon
+ts/type1/impallari/cabin/Cabin-Regular.pfb><C:/Users/Michael/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Bold.pfb><C:/Users/Michael/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Cantarell-Bold.pfb><C:/
+Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/gnome/cantarell/Cantare
+ll-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/gnom
+e/cantarell/Cantarell-Regular.pfb><C:/Users/Michael/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Users/Michael/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Michael/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Mi
+chael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C
+:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+r10.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr5.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Michael/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Michael/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Michael/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/Users/M
+ichael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt9.pfb><
+C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symb
+ols/msam10.pfb>
+Output written on cs162notes.pdf (41 pages, 661111 bytes).
 PDF statistics:
- 969 PDF objects out of 1000 (max. 8388607)
- 217 named destinations out of 1000 (max. 500000)
+ 1047 PDF objects out of 1200 (max. 8388607)
+ 255 named destinations out of 1000 (max. 500000)
  1092 words of extra memory for PDF output out of 10000 (max. 10000000)
 

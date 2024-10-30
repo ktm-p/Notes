@@ -2,6 +2,7 @@
 % !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
 \usepackage{macros}
 \usepackage{notes}
+\usepackage{tabularx}
 
 %% PICTURES DIRECTORY %%
 \graphicspath{{C:/Users/Michael/Pictures/}}
@@ -1762,5 +1763,334 @@ In the case where $G$ is finitely generated, we have that:
 	For the second, there are three options. We can look at the edges between the vertices, or we can also just think of it as some type of symmetry (such as reflection or rotation) on the connected graph.
 \end{example}
 
+\chapter{Got Eight Up By the Exam}
+\section{Lecture -- 10/16/2024}
+Recall from the previous lecture that we have the following definitions:
+\begin{defn}
+	$\tilde{G}$ acts on $X$ if $\tilde{G} \leq \mathrm{Sym} X$.
+\end{defn}
 
+\begin{defn}[Group Action]
+	We say that $G$ acts on $X$ if $\Phi: G \times X \rightarrow X$ such that the following is true:
+	\begin{enumerate}
+		\item $e_G(x) = x$, and
+		\item $g_1*g_2(x) = g_1(g_2(x))$.
+	\end{enumerate}
+\end{defn}
+
+\subsection{Warm-Up}
+We say that $\ZZ/4\ZZ$ acts on a circle with vertices at $(\pm 1, \pm 1)$ by rotations.
+
+\begin{hw}
+	What is $X$? What is $G$ by the second definition? And what is $\tilde{G}$ from the first definition?
+\end{hw}
+\begin{solution}
+	First, we see that $X$ is simply the set $X = \brc{1,2,3,4}$ with an additional structure of ``circular order." Then, we see that $G$ is simply $\ZZ/4\ZZ$.
+	
+	Now, we observe that since $\ZZ/4\ZZ$ acts on the set $X$ by rotations, we can think of this as the set of all powers of the cycle $\cyc{1 2 3 4}$. Then, going back to $\tilde{G}$, we see then that this is simply the set of all powers of the cycle $\cyc{1 2 3 4}$.
+\end{solution}
+
+\begin{prop}
+	If $\Phi: G \times X \rightarrow X$ such that property $1$ and $2$ are satisfied, then $\varphi : G \rightarrow \mathrm{Sym}(X)$ such that $g \mapsto (x \mapsto \Phi(g,x) = g(x))$ is in fact a homomorphism.
+\end{prop}
+
+Going back to our warm-up problem, the map $\varphi$ would simply be $[i] \mapsto \cyc{1 2 3 4}^{i}$.
+
+\begin{rmk}
+	Note that just from how $[1]$ is mapped, we can figure out how the other elements are being mapped based on the fact that $[n] = [1]^{n}$.
+\end{rmk}
+
+Now, we observe that $\ZZ/4\ZZ / \mathrm{Ker} \varphi \cong \mathrm{Im}\varphi \leq S_4$. 
+
+Now, observe that $\mathrm{Ker}\varphi = \brc{[0]}$. Then, $\ZZ/4\ZZ / \mathrm{Ker}\varphi = \ZZ/4\ZZ$. Then, we observe that, in fact, we have that $\ZZ/4\ZZ \cong \tilde{G} = \ang{\cyc{1 2 3 4}}$.
+
+\begin{thm}[Cayley's Theorem]
+	Every group $G$ is isomorphic to a group of permutations.
+\end{thm}
+
+We will provide a rough sketch of the proof as follows:
+
+\begin{proof}
+	Suppose we have some $\Phi : G \times G \rightarrow G$ such that $(g, h) \mapsto gh$.
+	
+	Then, we want $\varphi : G \rightarrow \mathrm{Sym} G$. Applying the First Isomorphism Theorem, we will see that $G$ is in fact isomorphic to $\mathrm{Im}\varphi \leq \mathrm{Sym} G$.
+\end{proof}
+
+\section{Lecture -- 10/18/2024}
+\subsection{Warmup}
+\begin{hw}
+	Suppose we have a square with labeled vertices. Then, suppose we have two colours red and blue. How many different colourings of the square are there?
+\end{hw}
+\begin{solution}
+	One answer is that there are $2^{4} = 16$ colourings.
+	
+	On the other hand, we can also just say that there are 6 different colourings if we consider that colourings aren't unique when looking under rotations.
+\end{solution}
+
+\subsection{Burnside's Lemma}
+Going back to the warm-up, the basic idea here is for us to consider $n$ colours. Now, we introduce Burnside's Lemma:
+
+\begin{lem}
+	Let $G$ be a finite group, $X$ a finite set, and $G$ acts on $X$ -- that is, $G \curvearrowright X$.
+	
+	Then, we say that the number of $G$-orbits on $X$ to be equal to $\frac{1}{\lvert G \rvert} \sum_{g \in G} \lvert X_g \rvert$, where $X_g \subseteq X$ and is defined as $X_g = \brc{x \in X : g(x) = x}$.
+	
+	More precisely then, we say for $k$ denoting the number of orbits of $X$:
+	\begin{equation*}
+		k = \frac{1}{\lvert G \rvert}\sum_{g \in G} \lvert X_g \rvert
+	\end{equation*}
+\end{lem}
+\begin{rmk}
+	We note that another way to denote $X_g$ is to use $X_g = X_{\ang{g}}$.
+\end{rmk}
+
+\begin{example}
+	Going back to our warm-up problem, we first let $G = \mathrm{Dih}_4$ and $X$ to be all possible colorings of the square in $n$ colors.
+	
+	Then, we see that $\lvert G \rvert = 8$, and $\lvert X \rvert = n^{4}$.
+	
+	Now, we see that the question about ``how many different orderings there are" is simply asking for the number of $G$-orbits on $X$.
+	
+	Now, looking at each element of $G$, we can observe that we have the following:
+	\begin{itemize}
+		\item $\mathrm{id} = n^{4}$.
+		\item $r = n$.
+		\item $r^{2} = 2n^{2}$.
+		\item $r^{3} = n$.
+		\item $H = n^{2}$.
+		\item $V = n^{2}$.
+		\item $Y = n^{3}$.
+		\item $Z = n^{3}$.
+	\end{itemize}
+\end{example}
+
+\chapter{Ninth Week of Getting Nailed}
+\section{Lecture -- 10/21/2024}
+\subsection{Warm-Up}
+\begin{hw}
+	Given the following functions:
+	\begin{align*}
+		f(x) &= 31630025x^{7} + 21202411x^{6} + 77150x^{5} + 1023360x^{2} + 778609x + 64246 \\
+		g(x) &= 10543343x^{6} + 38575x^{5} + 341120x + 32123
+	\end{align*}
+	
+	Compute $\frac{f(n)}{g(n)}$, for any $n \geq 0$.
+\end{hw}
+\begin{solution}
+	First, let us denote $h(x)$ to be:
+	\begin{equation*}
+		h(x) = \frac{f(x)}{h(x)}.
+	\end{equation*}
+
+	Then, we can try to understand this as some polynomial $h(x)$. Then, after using polynomial division, it turns out that $h(x) = 3x+2$.
+\end{solution}
+
+\subsection{Rings and Fields}
+\begin{center}
+	\begin{tabular}{c|c|c|c}
+		Set & $\ZZ$ & $\ZZ/n\ZZ$ & $\RR$ \\
+		\hline
+		Addition & $2 + 2 = 4$ & $[0] + [1] = [0 + 1] = [1]$ & $\sqrt{2} + 2 = \sqrt{2} + 2$ \\
+		Subtraction & $3 - 5 = -2$ & $[5] - [3] = [5-3] = [2]$ & $2 + 4 = 6$ \\
+		\hline
+		Multiplication & $2 \cdot 3 = 6$ & $[2]\cdot[5] = [2 \cdot 5] = [10]$ & $2 \cdot \pi = 2\pi$ \\
+		Division & Almost never & Only if it's relatively prime to $n$ & $\frac{x}{y}$, as long as $y \neq 0$ \\
+		\hline
+		Division Algorithm & $(a,b) \quad a = qb + r$ & ? & Not needed \\
+		\hline
+		Divisors & $b \mid a \iff a = bc \quad 3 \mid 6$ & ? & Not needed \\
+		\hline
+		GCD & $(a,b) = \cdots \quad (6,10) = 2$ & ? & Not needed \\
+		\hline
+		Euclidean Algorithm & $(a,b) = xa + yb$ & ? & Not needed
+ 	\end{tabular}
+\end{center}
+
+Now, we go onto new examples:
+\begin{center}
+	\begin{tabular}{c|c|c}
+		Set & $\RR[x]$ & $M_{2 \times 2}(\RR)$ \\
+		\hline
+		Addition & Addition of Polynomials & Addition of Matrices\\
+		Subtraction & Subtraction of Polynomials & Subtraction of Matrices \\
+		\hline
+		Multiplication & Multiplication of Polynomials & Non-Commutative Ring \\
+		Division & Division of Polynomials & Non-Commutative Ring\\
+		\hline
+		Division Algorithm & Division for Polynomials & Non-Commutative Ring \\
+		\hline
+		Divisors & Primes versus Irreducibles & Non-Commutative Ring\\
+		\hline
+		GCD & GCD & Non-Commutative Ring \\
+		\hline
+		Euclidean Algorithm & Euclidean Algorithm for Polynomials & Non-Commutative Ring
+	\end{tabular}
+\end{center}
+
+\begin{rmk}
+	Note that $\RR[x]$ is all polynomials with coefficients in $\RR$. Meanwhile, $M_{2 \times 2}(\RR)$ is the set of all $2\times 2$ real matrices.
+\end{rmk}
+
+\section{Lecture -- 10/23/2024}
+\begin{defn}[Ring]
+	We define a ring $R$ to be a set with two operations $(R, +, \times)$ such that:
+	\begin{enumerate}
+		\item Addition is commutative: $a+b=b+a$.
+		\item Addition is associative: $a+(b+c) = (a+b)+c$
+		\item Addition Identity: $\exists 0\forall a(a + 0 = a)$.
+		\item Addition Inverse: $\forall a\exists a^{-1}(a + a^{-1} = 0)$. 
+		\item Multiplication is associative: $a(bc) = (ab)c$.
+		\item Distributivity: $a(b+c) = ab + bc$ and $(a+b)c = ac + bc$.
+	\end{enumerate}
+\end{defn}
+
+Alternatively, we can think of rings as the following:
+\begin{defn}[Ring Again]
+	Let a ring be a set $R$ with two operations $(R, +, \times)$. Then, $(R, +)$ is an abelian group, $(R, \times)$ is associative, and $(R, +, \times)$ is distributive.
+\end{defn}
+
+However, when talking about rings, we typically consider ones where $\exists 1 \forall a (a \times 1 = a)$. Unless stated otherwise, we typically assume that we have the multiplicative identity in our ring as well.
+
+Finally, we also assume that multiplication is commutative as well.
+
+Note then that when discussing rings in this course, we are in fact almost always talking about commutative rings with 1.
+
+\begin{rmk}
+	Note that while we denote the operations as $+$ and $\times$, these aren't necessarily specific addition/multiplication (for example, it isn't necessarily that $1+1 = 2$ sorta deal). However, we note that they are in fact very similar to the operations in $\ZZ$.
+\end{rmk}
+
+\begin{example}[Commutative Rings with 1]
+	Let us consider $(\ZZ/5\ZZ, +, \times)$ and $(\ZZ/6\ZZ, +, \times)$, we observe that they indeed are all abelian groups with respect to $+$. Furthermore, we note that multiplication is associative and commutative, there exists a multiplicative identity element $1$, and it's distributive.
+	
+	Thus, we note that they both are in fact commutative rings with an identity.
+\end{example}
+
+\begin{example}[Fields]
+	For $(\ZZ/5\ZZ, +, \times)$, we note that $[1][1] = [1], [2][3]=[6]=[1], [4][4] = [16] = [1]$.
+	
+	On the other hand, $(\ZZ/6\ZZ, +, \times)$, we have that $[1][1] = [1]$, $2,3,4$ don't have inverses, and $[5][5] = [25] = [1]$.
+\end{example}
+
+Previously, we defined $\ZZ/n\ZZ^{\times} = \brc{a \in \ZZ/n\ZZ : \exists b [a][b] = [1]}$. Now, going back to a more general situation, for any $(R, +, \times)$, we consider $R^{\times}$ to be a group of units, which is a set of all multiplicatively invertible elements.
+
+\begin{defn}[Fields]
+	We define a field $F$ to be a commutative ring (with $1$) such that every element has a multiplicative inverse (except for $0$).
+	
+	That is, $R^{\times} = R \setminus \brc{0}$ s.t. $\forall a \neq 0 \exists b \in R (ab = 1)$.
+\end{defn}
+
+\section{Lecture -- 10/25/2024}
+\subsection{Warm-Up}
+Suppose we have a ring $(R, +, \times)$. Then, we want to find the group of units $(R^{\times}, \times)$.
+
+Recall that we define a unit to be an element $a$ such that there exists some $b \in R$ such that $ab = 1$.
+
+With that in mind, we look at the following:
+\begin{hw}
+	We want to find the group of units for:
+	\begin{enumerate}
+		\item $\RR^{\times}$.
+		\item $\ZZ/6\ZZ^{\times}$.
+		\item $\ZZ^{\times}$.
+		\item $\ZZ[i]^{\times}$
+	\end{enumerate}
+\end{hw}
+\begin{solution}
+	We observe that:
+	\begin{enumerate}
+		\item $\RR^{\times}$ is simply all non-zero elements of $\RR$.
+		\item $\ZZ/6\ZZ^{\times}$ consists of all elements co-prime to $6$. That is, $\brc{[1], [5]}$.
+		\item $\ZZ^{\times}$ consists only of $\brc{1, -1}$.
+		\item $\ZZ[i]^{\times}$ consists of $\brc{1, -1, i, -i}$.
+	\end{enumerate}
+\end{solution}
+
+\subsection{Units and Zero Divisors}
+The goal is to try and describe ``types" of elements in rings.
+
+\begin{defn}[Zero Divisor]
+	We define a zero divisor in R to be an element $a$ such that there exist some $b \neq 0$ such that $ab = 0$.
+	
+	We denote $\mathrm{ZeroDiv}(R)$ to be the set of all zero divisors of $R$.
+\end{defn}
+
+\begin{prop}
+	Let $R$ be a commutative ring with identity. Then, $R^{\times} \cap \mathrm{ZerDiv}(R) = \emptyset$.
+\end{prop}
+\begin{rmk}
+	We note that the group of units $R^{\times}$ and the set of zero divisors $\mathrm{ZeroDiv}(R)$ are non-empty. Namely, $1$ is in the units and $0$ in the divisors.
+\end{rmk}
+\begin{proof}
+	Suppose for the sake of contradiction that they aren't disjoint. Then, we note that there exists some element $a \in R^{\times}$ such that there exists some $b \in R$ where $b \neq 0$ such that $ab = 1$ and there exists some $c$ such that $ac = 0$.
+	
+	Then, we observe that $abc = (ab)c = 0c = 0$. However, note that $R$ is commutative, so we have that $abc = acb = (ac)b = 1b = b$.
+	
+	But then, this means that $b = 0$. However, this contradicts with the fact that $b \neq 0$.
+	
+	Thus, we conclude that the intersection must be empty.
+\end{proof}
+
+With this in mind, we observe that $R = R^{\times} \sqcup \mathrm{ZeroDiv}(R) \sqcup \mathrm{idk}$.
+
+To see why this is so interesting, we go back to our examples in the warm-up:
+\begin{itemize}
+	\item Observe that for $\RR$, the units is $\RR \setminus \brc{0}$, and the zero divisor is only $0$. Then, we know that the remaining set must be empty.
+	\item Observe that for $\ZZ$, we have that $\ZZ^{\times} = \brc{1, -1}$. Meanwhile, we note that the zero divisors is only $0$. Thus, we can conclude that the remaining set is $\ZZ\setminus\brc{1,-1}$.	
+	\item Observe that for $\ZZ/6\ZZ$, the group of units is $\brc{[1], [5]}$. Meanwhile, we note that the zero divisors are precisely $\brc{[0], [2], [3], [4]}$. Then, the remaining set is simply empty.
+\end{itemize}
+
+\begin{rmk}
+	Note that $\RR$ is precisely a field: all non-zero elements are invertible.
+\end{rmk}
+
+\begin{rmk}
+	A remark about $\ZZ$ is that the remaining set for $\ZZ$ is precisely where the division and Euclidean algorithms live in.
+\end{rmk}
+
+\begin{thm}
+	If $R$ is finite, then $R = R^{\times} \sqcup \mathrm{ZeroDiv}(R)$.
+\end{thm}
+
+Before we prove this theorem, we will first introduce and prove the following propositions:
+
+\begin{prop}[Cancellation Law for non-Zero Divisors]
+	If $a \not\in \mathrm{ZeroDiv}(R)$, then $ab = ac \implies b = c$.
+\end{prop}
+\begin{example}
+	Let us look at an example for $R = \ZZ$. Then, we have something like $3m = 3n$; then, we can conclude that $m = n$.
+	
+	An important thing to note here then is that we aren't saying anything else! Namely, for our theorem, just because $a \not\in \mathrm{ZeroDiv}(R)$, it doesn't mean that $a \in R^{\times}$.
+\end{example}
+\begin{proof}
+	Let us suppose that $a \not\in \mathrm{ZeroDiv}(R)$. Then, we note that $a \neq 0$.
+	
+	With that in mind, we note that:
+	\begin{align*}
+		ab = ac &\implies ab-ac = 0 \\
+		&\implies a(b-c) = 0 \\
+		&\implies b-c = 0 \\
+		&\implies b = c
+	\end{align*}
+\end{proof}
+
+\begin{rmk}
+	Before proving for $R$, we look at the case of some group $G$. We note that if $G$ is finite but isn't of infinite order, we suppose for contradiction that it is finite.
+	
+	Then, we have $\brc{1, g, g^{2}, \ldots} \subseteq G$. However, we note that at some point, $g^{n} = g^{k}$ because $G$ is finite. Thus, $g^{n-k} = e_G$, meaning that it's of finite order.
+\end{rmk}
+
+\begin{thm}
+	If $R$ is finite, then $R = R^{\times} \sqcup \mathrm{ZeroDiv}(R)$.
+\end{thm}
+\begin{proof}
+	Since $R$ is finite, we note that $\brc{1, a, a^{2}, \ldots} \subseteq R$. Then, $a^{n} = a^{k}$ at some point. But then, this means that $a^{n} - a^{k} = a^{k}(a^{n-k} - 1) = 0$.
+	
+	Then, we have two cases:
+	\begin{itemize}
+		\item $a \in \mathrm{ZeroDiv}$. In this case, we're done.
+		\item Otherwise, suppose that $a \not\in \mathrm{ZeroDiv}(R)$. Then, we note that $a^{k} \neq 0$, it follows then that we must have $a^{n-k} - 1 = 0$, meaning that $a^{n-k} = a(a^{n-k-1}) = 1$. Thus, we see that $a \in R^{\times}$.
+	\end{itemize}
+\end{proof}
+
+With that in mind, we note that from now on, we won't be looking at finite rings much anymore, since it's not very interesting.
 \end{document}

@@ -1249,7 +1249,7 @@ We have two workflows:
 \end{solution}
 
 \subsection{Atomic Operations}
-The operation \texttt{test_and_set} can be used to implement locks by creating a spin lock (?).
+The operation \texttt{test\_and\_set} can be used to implement locks by creating a spin lock (?).
 
 For \texttt{tset}, if the value is zero, then we acquire the lock by setting the value to 1 and returning 0.
 
@@ -1263,5 +1263,110 @@ We have there operations: wait, signal, and broadcast.
 Wait releases lock and suspends execution of calling thread. Signal wakes up the thread. And broadcast ...
 
 We note that semaphores are easier to use than condition variable.
+
+\chapter{Seventh Week of Hell}
+\section{Discussion -- 10/8/2024}
+\begin{defn}[Response/Completion Time]
+	This is the total wait time and run time of a process. This is crucial for time sensitive tasks (such as I/O).
+\end{defn}
+
+\begin{defn}[Throughput]
+	Throughput is the rate at which tasks are completed.
+\end{defn}
+One of the goals of scheduling is to minimize completion time. We also want to maximize throughput. When maximizing throguhput, we need to minimize overhead and use resources efficiently. Finally, we want to maintain fairness: every job is able to run on the CPU at some point. There's typically a trade-off between minimizing completion time and maintaining fairness.
+
+\subsection{Algorithms}
+\begin{defn}
+	First Come First Serve (FCFS) schedule tasks in the order they arrive. It's simply to implemeent and is good for throughput as it minimizes overhead from context switching.
+	
+	However, the average completion time can vary greatly depending on arrival order. It suffers from the Convoy Effect, where short tasks get stuck behind long tasks.
+\end{defn}
+
+\begin{defn}
+	Shortest Job First (SJF) schedules the shortest task first. There's a pre-emptive version of SJF, called Shortest Remaining Time First (SRTF). It pre-empt resource if a task arrives and has a shorter completion time than the current running task.
+	
+	We can prove that it's optimal for minimizing average completion time for non-preemptive and preemptive policies. However, ...
+\end{defn}
+
+\begin{defn}
+	Round Robin (RR) schedules tasks suc hthat each take turn using the resource for a small amount of time (known as the time quantum $q$). After $q$ expires, the task is pre-empty and added to the end of the ready queue.
+	
+	Large $q$ resembles FCFS, whereas small $q$ has lots of interleavings. Thus, we need large $q$ with respect to context switching otherwise it suffers from low throughput.
+	
+	Round Robin ensures fairness in terms of sharing resources. Thus, if we have $n$ tasks, each task gets $\frac 1 n$ amoiunt of resource, and will not wait for more than $(n-1)q$ time unitis.
+	
+	Small scheduling quantum ...
+\end{defn}
+
+\begin{defn}
+	Multi-level Feedback Queue (MLFQ) uses multiple queues which each have a different priority. Each queue has its own scheduling policy; for example, one queue can have RR and another FCFS.
+	
+	Tasks start at the highest priority and then move down to the next queue if it uses up all of the resource; if it doesn't use up all resource, it goes up to a higher priority queue.
+	
+	This is to ensure that longer-running tasks (e.g. CPU bound) don't hog up all of the resources, and prioritises shorter-running tasks (e.g. I/O bound).
+\end{defn}
+
+\subsection{Round Robin T/F}
+\begin{hw}
+	The average wait time is less than that of FCFS for the same workload.
+\end{hw}
+\begin{solution}
+	False; we note that if the time quantum $q$ is small
+\end{solution}
+
+\begin{hw}
+	If a quantum is constantly updated to become the number of CPU ticks since boot, RR becomes FCFS.
+\end{hw}
+\begin{solution}
+	idk.
+\end{solution}
+
+\begin{hw}
+	Ideally, you want ...
+\end{hw}
+\begin{solution}
+	idk.
+\end{solution}
+
+\subsection{Life Ain't Fair}
+\begin{hw}
+	Round Robin with $q = 3$.
+\end{hw}
+\begin{solution}
+	With RR, we get:
+	\begin{itemize}
+		\item Taj x3
+		\item Kevin x3
+		\item Neil x3
+		\item Akshat x3
+		\item William x3
+		\item Alina x3
+		\item Taj x2
+		\item Kevin x2
+		\item Neil x2
+		\item Akshat x2
+		\item William x2
+		\item Alina x2
+	\end{itemize}
+\end{solution}
+
+\begin{hw}
+	Preemptive Priority
+\end{hw}
+\begin{solution}
+	The solution would be:
+	\begin{itemize}
+		\item Taj x5
+		\item Akshat x2
+		\item William x2
+		\item Alina x5 
+	\end{itemize}
+\end{solution}
+
+\chapter{Idk}
+\section{Discussion -- 10/29/2024}
+To motivate EEVDF, we first look at Fluid Flow System. A flow represents a thread's CPU usage, and the link represents the processor.
+
+Each link has a capacity
 
 \end{document}

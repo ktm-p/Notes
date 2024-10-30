@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  17 MAY 2024 08:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.2.22)  21 OCT 2024 11:30
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1375,6 +1375,80 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 runsystem(if not exist _minted-d100notes mkdir _minted-d100notes)...executed.
 
 ))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibrarybackgrounds.code.tex
+File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@layerbox@background=\box150
+\pgf@layerboxsaved@background=\box151
+)
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.code.tex
+File: tikzlibraryshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
+s\pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
+s\pgflibraryshapes.misc.code.tex
+File: pgflibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
+s\pgflibraryshapes.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
+s\pgflibraryshapes.arrows.code.tex
+File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.callouts.code.tex
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
+s\pgflibraryshapes.callouts.code.tex))
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
+ikz/libraries\tikzlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
+s\pgflibraryshapes.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodepartlowerbox=\box152
+\pgfnodeparttwobox=\box153
+\pgfnodepartthreebox=\box154
+\pgfnodepartfourbox=\box155
+\pgfnodeparttwentybox=\box156
+\pgfnodepartnineteenbox=\box157
+\pgfnodeparteighteenbox=\box158
+\pgfnodepartseventeenbox=\box159
+\pgfnodepartsixteenbox=\box160
+\pgfnodepartfifteenbox=\box161
+\pgfnodepartfourteenbox=\box162
+\pgfnodepartthirteenbox=\box163
+\pgfnodeparttwelvebox=\box164
+\pgfnodepartelevenbox=\box165
+\pgfnodeparttenbox=\box166
+\pgfnodepartninebox=\box167
+\pgfnodeparteightbox=\box168
+\pgfnodepartsevenbox=\box169
+\pgfnodepartsixbox=\box170
+\pgfnodepartfivebox=\box171
+)))
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/paracol\paracol.sty
 Package: paracol 2018/12/31 v1.35 
 \pcol@currcol=\count406
@@ -1394,12 +1468,12 @@ Package: paracol 2018/12/31 v1.35
 \pagerim=\dimen342
 \pcol@topskip=\skip155
 \belowfootnoteskip=\skip156
-\pcol@topfnotes=\box150
-\pcol@prespan=\box151
-\pcol@rightpage=\box152
-\pcol@colorstack@saved=\box153
-\pcol@tempboxa=\box154
-\pcol@tempboxb=\box155
+\pcol@topfnotes=\box172
+\pcol@prespan=\box173
+\pcol@rightpage=\box174
+\pcol@colorstack@saved=\box175
+\pcol@tempboxa=\box176
+\pcol@tempboxb=\box177
 \pcol@colorins=\insert252
 \pcol@everyvbox=\toks58
 )
@@ -1423,44 +1497,44 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 101.
+Package hyperref Info: Option `colorlinks' set `true' on input line 103.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightpurple
 , linecolor=darkpurple, rightline=false, topline=false, bottomline=false, linew
 idth=2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftm
-argin=-2pt, skipbelow=2pt, nobreak ')
+argin=-2pt, skipbelow=2pt, ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=purplebox' on input line 143.
+(thmtools)             that uses `style=purplebox' on input line 144.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightgreen,
  linecolor=darkgreen, rightline=false, topline=false, bottomline=false, linewid
 th=2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftmar
-gin=-2pt, skipbelow=2pt, nobreak ')
+gin=-2pt, skipbelow=2pt, ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
 (thmtools)             that uses `style=greenbox' on input line 162.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightyellow
 , linecolor=darkyellow, rightline=false, topline=false, bottomline=false, linew
 idth=2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftm
-argin=-2pt, skipbelow=2pt, nobreak ')
+argin=-2pt, skipbelow=2pt, ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=yellowbox' on input line 181.
+(thmtools)             that uses `style=yellowbox' on input line 180.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightblue, 
 linecolor=darkblue, rightline=false, topline=false, bottomline=false, linewidth
 =2pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftmargi
-n=-2pt, skipbelow=2pt, nobreak ')
+n=-2pt, skipbelow=2pt, ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=bluebox' on input line 200.
+(thmtools)             that uses `style=bluebox' on input line 198.
 Package thmtools Info: Key `mdframed' (with value ` backgroundcolor=lightred, l
 inecolor=darkred, rightline=false, topline=false, bottomline=false, linewidth=2
 pt, innertopmargin=8pt, innerbottommargin=8pt, innerleftmargin=8pt, leftmargin=
--2pt, skipbelow=2pt, nobreak ')
+-2pt, skipbelow=2pt, ')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=redbox' on input line 219.
+(thmtools)             that uses `style=redbox' on input line 216.
 Package thmtools Info: Automatically pulling in `thmdef-mdframed' on input line
- 225.
+ 222.
 
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/thmtools\thmdef-mdfra
 med.sty
@@ -1487,8 +1561,8 @@ atures
 Package: ocgbase 2022/08/04 v0.22 support package for ocgx2.sty
 \g_ocgbase_nd_int=\count425
 )
-\@anim@box=\box156
-\@anim@measbox=\box157
+\@anim@box=\box178
+\@anim@measbox=\box179
 \@anim@tmpdima=\dimen351
 \@anim@tmpdimb=\dimen352
 \@anim@num=\count426
@@ -1508,14 +1582,6 @@ Package: ocgbase 2022/08/04 v0.22 support package for ocgx2.sty
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.def
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 )
-(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
-ikz/libraries\tikzlibraryshapes.geometric.code.tex
-File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
-
-(C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shape
-s\pgflibraryshapes.geometric.code.tex
-File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
-))
 (C:\Users\Michael\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/t
 ikz/libraries\tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
@@ -1569,7 +1635,7 @@ mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count440
 \scratchdimen=\dimen353
-\scratchbox=\box158
+\scratchbox=\box180
 \nofMPsegments=\count441
 \nofMParguments=\count442
 \everyMPshowfont=\toks60
@@ -2714,7 +2780,10 @@ Package mdframed Info: mdframed detected package amsthm
 
 
 (_minted-d100notes/511B0A5E082C890B5A737AEDCE4DFD04B4FB211F1D642C6EBFACD6C12E44
-192C.pygtex) [35]
+192C.pygtex)
+Package mdframed Info: Not enough space on this page on input line 1508.
+ [35]
+Package mdframed Info: Not enough space on this page on input line 1508.
 Package mdframed Info: mdframed works in twoside mode on input line 1511.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2805,11 +2874,28 @@ Package mdframed Info: mdframed works in twoside mode on input line 1787.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1787.
+
+
+Package mdframed Warning: You got a bad break
+(mdframed)                because the last box will be empty
+(mdframed)                you have to change it manually
+(mdframed)                by changing the text, the space
+(mdframed)                or something else on input line 1794.
+
+Package mdframed Info: You first box width is to small
+ mdframed fixed it
+(mdframed)              on input line 1794.
+[40]
+
+Package mdframed Warning: You got a bad break
+(mdframed)                because the last split box is empty
+(mdframed)                You have to change the settings on input line 1794.
+
 Package mdframed Info: mdframed works in twoside mode on input line 1796.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1796.
- [40] [41]
+[41]
 Chapter 5.
 Package mdframed Info: mdframed works in twoside mode on input line 1820.
 Package mdframed Info: mdframed detected package amsthm 
@@ -2860,11 +2946,18 @@ Package mdframed Info: mdframed works in twoside mode on input line 1938.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1938.
+Package mdframed Info: Not enough space on this page on input line 1940.
+ [44]
+Package mdframed Info: Not enough space on this page on input line 1940.
 Package mdframed Info: mdframed works in twoside mode on input line 1942.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1942.
- [44]
+
+
+LaTeX Warning: Reference `mdf@pagelabel-46' on page 45 undefined on input line 
+1944.
+
 \openout5 = `d100notes.pyg'.
 
 
@@ -2877,45 +2970,25 @@ F1D5.pygtex)
 F1D5.pygtex)
 \openout5 = `d100notes.pyg'.
 
-runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
-stripnl="False" -o _minted-d100notes/EF62592E87A2BD34E4D65AEB7B09F18FDE6CF45835
-DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
-
 
 (_minted-d100notes/EF62592E87A2BD34E4D65AEB7B09F18FDE6CF45835DDEA3168CDE3472913
 F1D5.pygtex)
 \openout5 = `d100notes.pyg'.
-
-runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
-stripnl="False" -o _minted-d100notes/1333F3BD775453D01BF12780858F70F9DE6CF45835
-DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
 
 
 (_minted-d100notes/1333F3BD775453D01BF12780858F70F9DE6CF45835DDEA3168CDE3472913
 F1D5.pygtex)
 \openout5 = `d100notes.pyg'.
 
-runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
-stripnl="False" -o _minted-d100notes/A759F684E27357CA4BAC1C1FECF39802DE6CF45835
-DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
-
 
 (_minted-d100notes/A759F684E27357CA4BAC1C1FECF39802DE6CF45835DDEA3168CDE3472913
 F1D5.pygtex)
 \openout8 = `d100notes.listing'.
 
-runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
-stripnl="False" -o _minted-d100notes/5D532A435D1D5E14D6735D1A628CAA57EB179E35E6
-90FB31A676F2B2CE8A838B.pygtex d100notes.listing)...executed.
-
 
 (_minted-d100notes/5D532A435D1D5E14D6735D1A628CAA57EB179E35E690FB31A676F2B2CE8A
 838B.pygtex)
 \openout5 = `d100notes.pyg'.
-
-runsystem(pygmentize -l "mysql" -f latex -P commandprefix=PYG -F tokenmerge -P 
-stripnl="False" -o _minted-d100notes/FEC3656842638FAF4D3668A0FB4D442BDE6CF45835
-DDEA3168CDE3472913F1D5.pygtex d100notes.pyg)...executed.
 
 
 (_minted-d100notes/FEC3656842638FAF4D3668A0FB4D442BDE6CF45835DDEA3168CDE3472913
@@ -2928,16 +3001,22 @@ L3 programming layer <2024-01-22>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `d100notes.out' has not changed.
 (rerunfilecheck)             Checksum: 4A16E38FD292338F877E718835520142;12282.
 runsystem(del d100notes.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 42745 strings out of 474541
- 933066 string characters out of 5743481
+ 44190 strings out of 474541
+ 978448 string characters out of 5743481
  1970978 words of memory out of 5000000
- 63640 multiletter control sequences out of 15000+600000
+ 65049 multiletter control sequences out of 15000+600000
  600762 words of font info for 120 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,17n,145p,575b,1799s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2967,7 +3046,7 @@ Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam1
 0.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/symbols/msam7.pfb><C:/Users/Michael/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb>
-Output written on d100notes.pdf (45 pages, 1596944 bytes).
+Output written on d100notes.pdf (45 pages, 1597067 bytes).
 PDF statistics:
  1061 PDF objects out of 1200 (max. 8388607)
  220 named destinations out of 1000 (max. 500000)

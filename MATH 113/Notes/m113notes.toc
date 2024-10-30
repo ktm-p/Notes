@@ -71,3 +71,19 @@
 \contentsline {section}{\numberline {6.1}Lecture -- 9/30/2024}{38}{section.6.1}%
 \contentsline {subsection}{\numberline {6.1.1}Internal Direct Products}{39}{subsection.6.1.1}%
 \contentsline {section}{\numberline {6.2}Lecture -- 10/2/2024}{39}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Lecture -- 10/4/2024}{40}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Voting}{40}{subsection.6.3.1}%
+\contentsline {chapter}{\numberline {7}Got Eight Up By the Exam}{41}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Lecture -- 10/16/2024}{41}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Warm-Up}{41}{subsection.7.1.1}%
+\contentsline {section}{\numberline {7.2}Lecture -- 10/18/2024}{42}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Warmup}{42}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Burnside's Lemma}{42}{subsection.7.2.2}%
+\contentsline {chapter}{\numberline {8}Ninth Week of Getting Nailed}{44}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Lecture -- 10/21/2024}{44}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Warm-Up}{44}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Rings and Fields}{44}{subsection.8.1.2}%
+\contentsline {section}{\numberline {8.2}Lecture -- 10/23/2024}{45}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Lecture -- 10/25/2024}{46}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Warm-Up}{46}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Units and Zero Divisors}{46}{subsection.8.3.2}%

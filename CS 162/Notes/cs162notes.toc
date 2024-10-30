@@ -111,3 +111,12 @@
 \contentsline {subsection}{\numberline {5.1.1}Mutual Exclusion}{35}{subsection.5.1.1}%
 \contentsline {subsubsection}{Locks}{35}{section*.16}%
 \contentsline {subsubsection}{Semaphore}{35}{section*.16}%
+\contentsline {subsection}{\numberline {5.1.2}Atomic Operations}{36}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Condition Variable}{36}{subsection.5.1.3}%
+\contentsline {chapter}{\numberline {6}Seventh Week of Hell}{38}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Discussion -- 10/8/2024}{38}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Algorithms}{38}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Round Robin T/F}{39}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Life Ain't Fair}{39}{subsection.6.1.3}%
+\contentsline {chapter}{\numberline {7}Idk}{41}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Discussion -- 10/29/2024}{41}{section.7.1}%
