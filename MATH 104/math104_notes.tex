@@ -1,0 +1,868 @@
+\documentclass[openany]{book}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+\usepackage{macros}
+\usepackage{notes}
+
+%% PICTURES DIRECTORY %%
+\graphicspath{{C:/Users/Michael/Pictures/}}
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+
+% REDEFINING CHAPTER FORMATTING %
+\newif\iftoc\titleformat{\chapter}[display]{\cabin}{}{2in}{
+	\raggedleft
+	\iftoc
+	\vspace{2in}
+	\else
+	{\LARGE\textsc{Week}~{\cantarell\thechapter}} \\
+	\fi
+	\Huge\scshape\bfseries
+}[\vspace{-20pt}\rule{\textwidth}{0.1pt}\vspace{0.0in}]
+\titlespacing{\chapter}{0pt}{
+	\iftoc
+	-100pt+1in
+	\else
+	-130pt+1in
+	\fi
+}{0pt}
+
+\begin{document}
+\mytitle{Math 104: Real Analysis}{Spring 2025}
+
+\chapter{An Introduction}
+\section{Lecture -- 1/22/2025}
+\subsection{Administrivia}
+\begin{miscbox}{Basic Information}
+	\begin{itemize}
+		\item \textbf{Office Hours}: Evans 1067, MWF after class.
+		\item \textbf{Textbook}: Elementary Analysis by Ross.
+		\begin{itemize}
+			\item Accompanying Textbook: Principles of Mathematical Analysis by Rudin.
+		\end{itemize}
+		\item \textbf{Homework}: Assigned each Friday, and due Sunday of the next week on Gradescope.
+		\item \textbf{Exam}: Two exams.
+		\begin{itemize}
+			\item Midterm: March 10th, in class.
+			\item Final: May 13th, 3-6pm.
+		\end{itemize}
+		\item \textbf{Score}: The breakdown is as follows:
+		\begin{itemize}
+			\item Homework: 25\%
+			\item Midterm: 25\%
+			\item Final: 50\%
+		\end{itemize}
+	\end{itemize}
+\end{miscbox}
+
+\subsection{Notation}
+\begin{defn}[Sets and Elements]
+	We define a set $S$ to be a collection of elements.
+	
+	We denote elements $x$ of $S$ to be $x \in S$. Similarly, for elements $y$ not in $S$, we write $y \not\in S$.
+\end{defn}
+\begin{defn}[Set Operations]
+	We use $S_1 \subseteq S_2$ to denote $S_1$ to be a subset of $S_2$.
+	
+	We say that $S_1 \cap S_2$ is the intersection of the two sets; that is, it is the set of elements that are contained in both $S_1$ and $S_2$.
+	
+	Similarly, $S_1 \cup S_2$ is the union.
+\end{defn}
+
+\begin{example}[Common Sets]
+	We denote the following:
+	\begin{itemize}
+		\item $\NN = \brc{1, 2, \ldots}$.
+		\item $\ZZ = \brc{\ldots, -2, -1, 0, 1, 2, \ldots}$.
+		\item $\QQ = \brc{\frac{p}{q} : p, q \in \ZZ, q \neq 0}$.
+		\item $\RR$ is the real numbers.
+	\end{itemize}
+	
+	Note that we use $\NN$ to denote the positive integers in this class.
+\end{example}
+
+\subsection{Visualizing the Reals}
+There are two ways we can think of real numbers:
+\begin{itemize}
+	\item To begin with, we can think of $\RR$ as a line:
+	% INSERT NUMBER LINE HERE
+	\item Alternatively, we can think of them as decimal expansions: $\pi = 3.14\ldots$.
+\end{itemize}
+
+\subsection{A Basic Proof}
+\begin{example}[Irrationality of $\sqrt{2}$]
+	Suppose we want to prove the following: Show that $\sqrt{2}$ isn't rational.
+	
+	One approach is to use contradiction:
+	
+	\begin{proof}
+		We first suppose that $\sqrt{2}$ is rational. Then, there exists $p, q \in \ZZ$ where $q \neq 0$ such that $\sqrt{2} = \frac{p}{q}$. Note that we assume that we can't further reduce this fraction.
+		
+		Then, we note that $\frac{p^{2}}{q^{2}} = 2$. Then, we have that $p^{2} = 2q^{2}$.
+		
+		We note that if $p, q$ have a common factor, we can cancel it out, leading to a contradiction.
+		
+		So, it must be that $p, q$ have no common factors. Then, we know that $p^{2} = 2q^{2}$ implies that $p$ is even. In other words, $p = 2m$ for some $m \in \ZZ$.
+		
+		So, we have that $4m^{2} = 2q^{2} \implies 2m^{2} = q$. But then, we note that $q$ is also even. But if $q, p$ are both even, then there exists a common factor. There is thus a contradiction here.
+		
+		Therefore, we conclude that $\sqrt{2}$ cannot be rational.
+	\end{proof}
+\end{example}
+
+\subsection{Definitions and Examples}
+\begin{defn}[Absolute Value]
+	We define the absolute value $\lvert \cdot \rvert$ on $\RR$ as follows:
+	\begin{equation*}
+		\forall a \in \RR, \quad \lvert a \rvert = \begin{cases}
+			a & a \geq 0 \\
+			-a & a < 0
+			\end{cases}
+	\end{equation*}
+\end{defn}
+
+\begin{thm}[Properties of Absolute Value]
+	We have the following:
+	\begin{itemize}
+		\item $\lvert a \rvert \geq 0$.
+		\item $\lvert ab \rvert = \lvert a \rvert\lvert b \rvert$
+		\item $\lvert a + b \rvert \leq \lvert a \rvert + \lvert b \rvert$.
+	\end{itemize}
+\end{thm}
+
+\begin{defn}[Intervals]
+	The following are closed intervals:
+	\begin{itemize}
+		\item $\br{a,b}$.
+		\item $[a, \infty)$.
+		\item $(-\infty, b]$
+	\end{itemize}
+	
+	And the following are open intervals:
+	\begin{itemize}
+		\item $(a,b)$
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[Min and Max]
+	Let $S \subseteq \RR$. Then, we say that:
+	\begin{itemize}
+		\item $x \in S$ is the maximum in $S$ if $\forall y \in S$, $x \geq y$.
+		\item $y \in S$ is the minimum in $S$ if $\forall x \in S$, $y \leq x$
+	\end{itemize}
+\end{defn}
+
+\begin{rmk}[Existence of Min/Max]
+	We note that for any $S \subseteq \RR$, the maximum or minimum may not exist necessarily. For example, consider the open interval $(a,b)$ -- it has neither a minimum nor maximum.
+	
+	On the other hand, some half-closed or half-opened interval may have a minimum or maximum.
+\end{rmk}
+
+\begin{rmk}[Uniqueness of Min/Max]
+	We note that for a set, if a minimum or maximum exists, it must be unique.
+\end{rmk}
+
+\begin{defn}[Upper and Lower Bounds]
+	Let $S \subseteq \RR$. Then, we say the following:
+	\begin{itemize}
+		\item We call $M \in \RR$ an upper-bound if for all $x \in S$, $M \geq x$. If such an $M$ exists, then we call $S$ bounded from above.
+		\item We call $m \in \RR$ a lower-bound of $S$ if $\forall x \in S$, $m \leq x$. Then, if such an $m$ exists, we say that $S$ is bounded from below.
+	\end{itemize}
+\end{defn}
+
+\begin{example}[Boundedness]
+	Suppose we have the following intervals:
+	\begin{itemize}
+		\item $\pr{a,b}$.
+		\item $\br{a,b}$.
+		\item $(a,b]$.
+	\end{itemize}
+	
+	Then, $a$ is the lower bound of all of these intervals, and $b$ is the upper bound of all of these intervals.
+	
+	On the other hand, suppose we have the interval $\pr{a, \infty}$. Then, $a$ is the lower-bound, but the interval isn't bounded from above.
+\end{example}
+
+\begin{defn}[Supremum and Infimum]
+	We define the supremum of a set $S$, denoted by $\sup S$, to be the least upper bound of $S$.
+	
+	Similarly, we define the infimum of a set $S$, denoted by $\inf S$, to be the greatest lower bound of $S$.
+\end{defn}
+
+\begin{thm}[Completeness Theorem]
+	We note that $\RR$ is complete. That is, for any $S \subseteq \RR$, if it is bounded from above, then $\sup S$ exists.
+\end{thm}
+\begin{cor}
+	If $S \subseteq \RR$ is bounded below, then $\inf S$ exists.
+\end{cor}
+
+\begin{rmk}
+	We note that the Completeness Theorem doesn't hold on $\QQ$. That is, for any $S \subseteq \QQ$, if $S$ is bounded above, it doesn't necessarily mean that $\sup S \in \QQ$ exists.
+	
+	A straightforward counterexample is $S \subseteq \QQ$ such that $S = \brc{\frac{p}{q} : p, q \in \NN, p^{2} < 2q^{2}}$. We note then that this set is equivalent to $\pr{0, \sqrt{2}} \cap \QQ$; then, $\sup S = \sqrt{2} \not\in \QQ$. 
+\end{rmk}
+
+\section{Lecture -- 1/24/2025}
+Recall previously that we stated that if $S \subseteq \RR$ is bounded above, then $\sup S$ exists. And as a corollary, we say that if $S \subseteq \RR$ is bounded below, then $\inf S$ exists.
+
+In this lecture, we will be proving the Completeness Theorem. To do this, we must first define what $\RR$ actually is.
+
+\subsection{The Real Numbers}
+To define $\RR$, we must first introduce the following notion of cuts:
+\begin{defn}[Cut]
+	Let us define a ``cut" to be a subset $A \subseteq \QQ$ such that it satisfies the following conditions:
+	\begin{enumerate}
+		\item $A \neq \emptyset$ and $A \neq \QQ$.
+		\item If $r \in A, t \in \QQ, t < r$, then $t \in A$.
+		\item $A$ has no maximum.
+	\end{enumerate}
+\end{defn}
+
+Then, we define $\RR$ as follows:
+\begin{defn}[$\RR$]
+	We define $\RR$ to be all cuts in $\QQ$. 
+\end{defn}
+
+\begin{rmk}
+	Recall from before, $A_{\sqrt{2}} = \brc{t \in \QQ : t < \sqrt{2}}$ corresponds to $\sqrt{2}$. Then, we can think of $A$ as being a cut, with the supremum being $\sqrt{2}$.
+	
+	In general, we note that $t \leftrightarrow A_t = \brc{x \in \QQ : x < t}$.
+	
+	A way to visualize this is with a number line as follows:
+	% INSERT NUMBER LINE WITH DOT LABELED T, THEN LEFT OF IT IS CURLY BRACES LABELED "RATIONAL"
+\end{rmk}
+
+Now, for two cuts $A_{t_1}, A_{t_2}$, we say that $A_{t_1} \leq A_{t_2}$ if $A_{t_1} \subseteq A_{t_2}$.
+
+% INSERT NUMBER LINE WITH AT1 AND AT2
+
+Now, let us make the following claim:
+\begin{prop}
+	If $S \subseteq \RR$ is bounded above, then $\bigcup_{x \in S} A_x = \brc{t \in \QQ : \exists x \in S, t \in A_x}$ is a cut.
+	
+	We claim then that such a set is a cut.
+\end{prop}
+
+A way to think about this is that since $S$ is a set of real numbers, then for every $x \in S$, $A_x$ is just cuts. Then, we just have the union of all the cuts. Then, by taking the union of each of these cuts, we are approaching $\sup S$.
+
+Now, let us prove this claim.
+\begin{proof}
+	We want to check that the union is in fact a cut.
+	
+	To begin with, we know that $S \neq \emptyset$; then, it follows that $\bigcup_{x \in S} A_x \neq \emptyset$ as well.
+	
+	Next, since $S$ is bounded above, there exists a cut $A_y$ such that for every $x \in S$, $A_x \subseteq A_y$. In other words, $x \leq y$. Then, it follows that the union $\bigcup_{x \in S} A_x \subseteq A_y \neq \QQ$. Thus, we know that it isn't equal to $\QQ$ either. Thus, we have satisfied the first condition.
+	
+	Next, let $r \in \bigcup_{x \in S} A_x$. Then, let $t \in \QQ$ such that $t < r$. We want to show that $t \in \bigcup_{x \in S} A_x$. To do this, we note that there exists some $x_0 \in S$ such that $r \in A_{x_0}$. Then, because $t < r$, we note then that $t \in A_{x_0}$ as well; in other words, it's in the union $\bigcup_{x \in S} A_x$.
+	
+	Finally, we want to show that the union doesn't contain a maximum. To do this, we proceed by contradiction: suppose that $t_0$ is a maximum. Then, there exists some $x_0 \in S$ such that $t_0 \in A_{x_0}$.
+	
+	Then, we note that $t_0$ is a maximum of $A_{x_0}$. However, note that $A_{x_0}$ is a cut; it has no maximum. In other words, this is a contradiction. Therefore, we see that the union has no maximum.
+	
+	Thus, with all three conditions satisfied, we have shown that the union is in fact a cut.
+\end{proof}
+
+Now, we make another claim:
+\begin{prop}
+	We claim that $\bigcup_{x \in S} A_x$ is, in fact, $\sup S$.
+\end{prop}
+\begin{proof}
+	We observe that for all $x \in S$, we have that $A_x \subseteq \bigcup_{x \in S} A_x$. In other words, we note that $A_x \leq \bigcup_{x \in S} A_x$ is an upper bound.
+	
+	Now, let us suppose that $A_y$ is an upper bound of $S$. Then, $A_x \subseteq A_y$ for all $x \in S$. We conclude then that $\bigcup_{x \in S} A_x \subseteq A_y$. Thus, we see that $\bigcup_{x \in S} A_x \leq A_y$, meaning that it is, in fact, $\sup S$.
+\end{proof}
+
+\begin{rmk}
+	We note that for cuts $A_{t_1}, A_{t_2}$, we can define operations on these two sets (which correspond to real numbers!).
+\end{rmk}
+
+\begin{thm}[Real Numbers are finite]
+	Assume $b \in \RR$. Then, there exists an $n \in \NN$ such that $n > b$.
+\end{thm}
+\begin{proof}
+	Suppose for contradiction that for any $n \in \NN$, $n \leq b$. Then, we note that $\NN$ is bounded above by $b$.
+	
+	However, we note that if $\NN$ is bounded above, $\sup \NN = x_0 \in \RR$. Then, $x_0 - 1$ isn't an upper bound of $\NN$ (since $x_0$ is the least upper bound).
+	
+	Then, it must be that $\exists n_0 \in \NN$ such that $x_0 - 1 < n_0$; in other words, we have that $x_0 < n_0 + 1 \in \NN$. However, this contradicts $x_0$ being the upper bound of $\NN$.
+	
+	Thus, our theorem is true.
+\end{proof}
+
+\begin{thm}[$\QQ$ is Dense in $\RR$]
+	For all $a,b \in \RR$ such that $a < b$, then there exists an $r \in \QQ$ such that $a < r < b$.
+\end{thm}
+\begin{proof}
+	By the previous theorem, we can find an $n \in \NN$ such that $\frac{1}{b-a} < n$. Then, this means that $1 < nb - na$. In other words, $na + 1 < nb$; since the distance between $na, nb$ is greater than $1$, it must be then that there exists some $m \in \ZZ$ such that $na < m < nb \implies a < \frac{m}{n} < b$.
+	
+	Note then that $\frac{m}{n} = r \in \QQ$. Thus, we have proved our claim as desired.
+\end{proof}
+
+\chapter{The Second Week}
+\section{Lecture -- 1/27/2025}
+\subsection{Infimum and Supremum Recap}
+Recall from last lecture that we introduced the Completeness Theorem and its corollary.
+
+Last time, we proved this using cuts. However, this time, we will be using the idea of infimums and supremums. First, we will prove the corollary:
+\begin{cor}
+	If $S \subseteq \RR$ is bounded below, then $\inf S$ exists.
+\end{cor}
+\begin{proof}
+	Suppose we have a set $S$ which is bounded below. Now, let us define the set $-S = \brc{-x : x \in S}$.
+	
+	Then, we know that since $S$ is bounded below, then there exists some $y \in \RR$ such that for all $x \in S$, $y \leq x$. But this means then that $-x \leq -y$. In other words, $-y$ is an upper bound of $-S$.
+	
+	Then, by our theorem, we know then that $\sup (-S) = y_0$ exists. Now, we claim that $\inf S = -y_0$. To do this, we note that since $\sup (-S) = y_0$, then $\forall -x \in -S$, we have that $-x \leq y_0 \implies -y_0 \leq x$ for all $x \in S$.
+	
+	Then, we see that it is indeed a lower bound. Now, to show that $-y_0$ is in fact the infimum, we first suppose there exists some lower bound $t > -y_0$ for $S$. Then, this means that for every $x \in S$, we have $t \leq x \implies -x \leq -t$. This means then that $t$ is an upper bound of $-S$. However, since we know that $-y_0$ is the supremum of $-S$, we must have that $-y_0 \leq -t \implies t \leq y_0$.
+	
+	Thus, we have a contradiction and conclude that, indeed, $-y_0$ is the greatest lower bound of $S$. That is, $\inf S = -y_0$.
+\end{proof}
+
+\begin{hw}
+	Assume $A, B \subseteq \RR$ are bounded above. Then, let us define $C = \brc{a + b : a \in A, b \in B}$.
+	
+	Then, we want to show that it is bounded above, and that $\sup C = \sup A + \sup B$.
+\end{hw}
+\begin{solution}
+	First, by construction of $C$, we note that every element in $C$ consists of a sum of elements in $a, b$.
+	
+	By definition of supremum, we observe then that for every element $a \in A$, we have that $a \leq \sup A$. Similarly, we have $b \leq \sup B$ for all $b \in B$.
+	
+	Then, with that in mind, we observe that for all $a \in A$ and $b \in B$, we have that $a + b \leq \sup A + \sup B$. That is, we see that $\sup A + \sup B$ is in fact an upper bound of $C$.
+	
+	Now, we want to show that this is in fact the least upper bound of $C$. To do this, we claim that $\sup A + \sup B - \varepsilon$ for any $\varepsilon > 0$ isn't an upper bound of $C$.
+	
+	Then, we observe that since $\sup A - \frac{1}{2} \varepsilon$ isn't a supremum of $A$ by definition of supremum, there exists some $a_0 \in A$ such that $a_0 > \sup A - \frac{1}{2}\varepsilon$.
+	
+	Similarly, since $\sup B - \frac{1}{2}\varepsilon$ isn't a supremum of $B$, it follows then that there exists some $b_0 \in B$ such that $b_0 > \sup B - \frac{1}{2} \varepsilon$.
+	
+	Then, it follows that there exists an $a_0 + b_0 > (\sup A - \frac{1}{2}\varepsilon) _ (\sup B - \frac{1}{2} \varepsilon) = \sup A + \sup B - \varepsilon$, where $a_0 + b_0 \in C$. Thus, we see that, indeed, $\sup A + \sup B - \varepsilon$ can't be a supremum for any $\varepsilon > 0$.
+	
+	Thus, we can conclude that, indeed, $\sup A + \sup B$ is the supremum of $C$.
+\end{solution}
+
+\begin{rmk}
+	Let $y_0$ be an upper bound of some set $S$. To show that $y_0$ is the supremum, we can proceed in two ways:
+	\begin{enumerate}
+		\item For any upper bound $t$, if $t \geq y_0$, then $y_0$ must be the smallest upper bound.
+		\item For any $\varepsilon > 0$, we show that $y_0 - \varepsilon$ isn't an upper bound.
+	\end{enumerate}
+\end{rmk}
+
+\subsection{Sequence and Limit}
+\begin{defn}[Sequence]
+	We define a real number sequence to be a function $s : \NN \rightarrow \RR$. Usually, we denote this as $\pr{S_1, S_2, \ldots}$ or $\pr{S_n}$
+\end{defn}
+\begin{rmk}
+	The initial subscript can be any $m \in \ZZ$, including negative numbers.
+\end{rmk}
+
+\begin{example}[Different Sequences]
+	Let $S_n = \frac{1}{n^{2}}$ for $n \in \NN$. Then, we have $\pr{1, \frac{1}{4}, \frac{1}{9}, \ldots}$.
+	
+	Let $S_n = \pr{-1}^{n}$ for $n \in \NN$. Then, we have $\pr{-1, 1, \ldots}$.
+\end{example}
+
+\begin{defn}[Limit of Sequence]
+	We say that $\pr{S_n}$ converges to $r \in \RR$ if $\forall \varepsilon > 0, \exists N$ such that $\forall n > N$, we have $\lvert S_n - S \rvert < \varepsilon$.
+	
+	We denote the limit as: $\lim\limits_{n \rightarrow \infty} S_n = S$, or $S_n \rightarrow S$, or simply $\lim S_n = S$.
+	
+	% INSERT n->\infty above of the right arrow for second one
+\end{defn}
+\begin{rmk}
+	If $\pr{S_n}$ has no limit, then we say that it diverges.
+\end{rmk}
+
+% INSERT NUMBER LINE WITH S_1, S_2, S_3, ... LABELLED ON IT, WITH LIMIT S AND INTERVAL OF +-EPSILON AROUND.
+% THEN FOR ALL n > N, S_n INSIDE OF THE INTERVAL.
+
+\begin{rmk}
+	We say that $S$ is not the limit of $\pr{S_n}$ iff $\exists \varepsilon > 0$ such that $\forall N > 0, \exists n > N$, $\lvert S_n - S \rvert \geq \varepsilon$.
+	
+	In other words, there exists some interval size around $S_n$ such that for any value of $N$ we pick, we can always find some $n > N$ such that $S_n$ lies outside of our interval.
+\end{rmk}
+
+\begin{example}[Proving Limits]
+	Prove that $\lim \frac{1}{n^{2}} = 0$.
+\end{example}
+To show that $\lim \frac{1}{n^{2}} = 0$, we want to show that for any $\varepsilon > 0$ we pick, we want to find some $N$ such that for any $n > N$, $\lvert \frac{1}{n^{2}} - 0 \rvert = \frac{1}{n^{2}} < \varepsilon$.
+
+Now, with that in mind, we observe that since $n > N$, we have that $\frac{1}{n^{2}} < \frac{1}{N^{2}}$. Then, let $N = \frac{1}{\sqrt{\varepsilon}}$. 
+
+Then, we have:
+\begin{align*}
+	\frac{1}{n^{2}} &< \frac{1}{N^{2}} \\
+	&= \frac{1}{\pr{\frac 1 {\sqrt\varepsilon}}^{2}} \\
+	&= \varepsilon
+\end{align*}
+
+Now, we will formally prove it:
+\begin{proof}
+	For all $\varepsilon > 0$, we let $N = \frac{1}{\sqrt{\varepsilon}}$.  Then, for all $n > N = \frac{1}{\sqrt{\varepsilon}}$, we have that:
+	\begin{align*}
+		\lvert \frac{1}{n^{2}} - 0 \rvert &= \frac {1}{n^{2}} \\
+		&< \frac{1}{N^{2}} \\
+		&= \varepsilon
+	\end{align*}
+	
+	Thus, $\lim \frac{1}{n^{2}} = 0$.
+\end{proof}
+\begin{rmk}
+	Note, we can also take something like $N = \frac{2}{\sqrt{\varepsilon}}$, since $\frac{1}{n^{2}} < \frac{\varepsilon}{4} < \varepsilon$.
+	
+	Typically, our choice of $N$ isn't unique.
+\end{rmk}
+
+\section{Lecture -- 1/29/2025}
+Recall previously that we defined what a convergent sequence is:
+\begin{defn}[Convergence of a Sequence]
+	We say that a sequence $S_n$ converges to some number $S$ if for all $\varepsilon > 0$, there exists some $N$ such that for all $n > N$, we have that $\lvert S_n - S \rvert < \varepsilon$.
+\end{defn}
+
+Now, we look at some further examples:
+\begin{example}
+	We want to prove that $\lim \frac{3n+1}{7n-4} = \frac{3}{7}$.
+	
+	Now, the basic idea is that we can divide the top and bottom by $n$, and thus we have $\frac{3 + \frac{1}{n}}{7 - \frac{4}{n}}$; as $n \rightarrow \infty$, we see that it approaches $\frac{3}{7}$.
+	
+	So, right now, we want to find some $N$ such that for all $n > N$, we have:
+	\begin{equation*}
+		\lvert \frac{3n+1}{7n-4} - \frac{3}{7} \rvert < \varepsilon
+	\end{equation*}
+	
+	Then, we can find the common denominator to get:
+	\begin{align*}
+		\lvert \frac{3n+1}{7n-4} - \frac{3}{7} \rvert &= \lvert \frac{7(3n+1) - 3(7n-4)}{7(7n-4)} \rvert \\
+		&= \lvert \frac{19}{7(7n-4)} \rvert
+	\end{align*}
+	
+	Now, because we assume that $n \geq 1$, we can remove the absolute value to get:
+	\begin{equation*}
+		\lvert \frac{19}{7(7n-4)} \rvert = \frac{19}{7(7n-4)}.
+	\end{equation*}
+	
+	Now, we want to solve:
+	\begin{align*}
+		\frac{19}{7(7n-4)} &< \varepsilon \\
+		\frac{19}{7\varepsilon} &< 7n-4 \\
+		n &> \frac{\frac{19}{7\varepsilon} + 4}{7}
+	\end{align*}
+	
+	Thus, if we let $N = \frac{\frac{19}{7\varepsilon} + 4}{7}$, we have proven the claim as desired.
+	
+	Thus, for the formal proof, we have:
+	\begin{proof}
+		For all $\varepsilon > 0$, we take $N = \frac{\frac{19}{7\varepsilon} + 4}{7}$. Then, for all $n > N$, we have that $\lvert S_n - S \rvert = \lvert \frac{19}{7(7n-4)} \rvert < \varepsilon$.
+	\end{proof}
+\end{example}
+
+Now, how do we prove if a sequence doesn't have a limit?
+\begin{example}
+	We want to show that $a_n = \pr{-1}^{n}$ has no limit.
+	
+	The idea then is to use some kind of contradiction argument. So, let us suppose that $\lim \pr{-1}^{n} = a$, for some $a$.
+	
+	We can now visualize this sequence:
+	% INSERT number line with -1 and 1 labelled, with some $a$ in-between ig
+	
+	Here, we see that the distance $\mathrm{dis}(a, -1) + \mathrm{dis}(a, 1) \geq \mathrm{dis}(-1, 1) = 2$.
+	
+	Then, at least one of $\mathrm{dis}(a, -1), \mathrm{dis}(a, 1) \geq 1$.
+	
+	Now, let us suppose for the sake of contradiction that $\lim a_n = \lim \pr{-1}^{n} = a$.
+	
+	By our assumption, take $\varepsilon = 1$. Then, there exists $N > 0$ such that for all $n > N$, $\lvert a_n - a \rvert < 1$.
+	
+	Then, take an even number $n > N$, we see that $\lvert 1 - a \rvert < 1$. For an odd number $n + 1$, we see that $\lvert a_{n+1} - a \rvert = \lvert -1 - a \rvert = \lvert 1 + a \rvert < 1$.
+	
+	Then, we have:
+	\begin{align*}
+		\lvert 1+a \rvert + \lvert 1 - a \rvert &< 2
+	\end{align*}
+	
+	Then, using the Triangle Inequality, we have:
+	\begin{align*}
+		 \\
+		\lvert 1 + a + 1 - a \rvert &\leq \lvert 1 + a \rvert + \lvert 1 - a \rvert < 2 \\
+		2 &\leq \lvert 1 + a \rvert + \lvert 1 - a \rvert < 2 \\
+		2 &< 2
+	\end{align*}
+	
+	Thus, we have a contradiction.
+\end{example}
+
+\begin{example}
+	We want to prove that:
+	\begin{equation*}
+		\lim \frac{4n^{3} + 3n}{n^{3} - 6} = 4
+	\end{equation*}
+	
+	Then, for all $\varepsilon > 0$, the idea then is to find some $N$ such that for all $n > N$, we have:
+	\begin{equation*}
+		\lvert \frac{4n^{3} + 3n}{n^{3} - 6} - 4 \rvert < \varepsilon
+	\end{equation*}
+	
+	Then, we observe that:
+	\begin{align*}
+		\lvert \frac{4n^{3} + 3n}{n^{3} - 6} - \frac{4(n^{3} - 6)}{n^{3} - 6} \rvert &= \lvert \frac{3n+24}{n^{3} - 6} \rvert
+	\end{align*}
+	
+	Now, the issue is our denominator has a $n^{3}$ term. Then, when rewriting, we'll run into some issues.
+	
+	So, instead, we want to find some $a_n > 0$ such that $\lvert \frac{3n+24}{n^{3} - 6} \rvert < a_n$; then, it'll be easy to solve for $a_n < \varepsilon$.
+	
+	So, looking at this sequence, we see that since $n \geq 1$, we have that $3n + 24 \leq 3n + 24n = 27n$.
+	
+	Then, if $\frac{1}{2}n^{3} > 6$, then we have that $n^{3} - 6 > \frac{1}{2}n^{3}$. But, we have that $\frac{1}{2}n^{3} > 6 \iff n^{3} > 12 \iff n > 3$.
+	
+	So, when $n > 3$, we will always have:
+	\begin{align*}
+		\lvert \frac{3n+24}{n^{3} - 6} \rvert &< \frac{27n}{\frac{1}{2}n^{3}} \\
+		&= \frac{54}{n^{2}} \\
+		&< \varepsilon
+	\end{align*}
+	
+	So, we have:
+	\begin{equation*}
+		n > \sqrt{\frac{54}{\varepsilon}}
+	\end{equation*}
+	
+	Now, because we have $n > 3$ here, we need $N$ to be at least $3$. Then, we set $N = \max\brc{3, \sqrt{\frac{54}{\varepsilon}}}$.
+	
+	Now, for a formal proof, we can proceed as such:
+	\begin{proof}
+		For all $\varepsilon > 0$, take $N = \max\brc{3, \sqrt{\frac{54}{\varepsilon}}}$.
+		
+		Then, we observe that for all $n > N$, we have that:
+		\begin{align*}
+			\lvert \frac{4n^{3} + 3n}{n^{3} - 6} - 4 \rvert &= \lvert \frac{3n+24}{n^{3} - 6} \rvert \\
+			&< \frac{27n}{\frac{1}{2}n^{3}} \\
+			\frac{54}{n^{2}} &< 54 \cdot \frac{\varepsilon}{54} \\
+			&= \varepsilon
+		\end{align*}
+	\end{proof}
+\end{example}
+
+Finally, we will show the following theorem:
+\begin{thm}
+	If $\pr{S_n}$ converges, then the limit is unique.
+\end{thm}
+\begin{proof}
+	We will proceed by contradiction. Then, $\pr{S_n}$ converges but has two limits, $s, t$ such that $s \neq t$.
+	
+	Now, we take $\varepsilon = \frac{1}{2}\lvert t - s \rvert$. Since we have two limits, there exists $N_1$ and $N_2$ such that for every $n > N_1$ we have $\lvert S_n - S \rvert < \varepsilon$, and $n > N_2$ we have $\lvert S_n - T \rvert < \varepsilon$.
+	
+	Now, if we take $N = \max\brc{N_1, N_2}$. Then, we have for every $n > N$, we have $\lvert S_n - S \rvert < \varepsilon$ and $\lvert S_n - T \rvert < \varepsilon$.
+	
+	Now, we see that:
+	\begin{align*}
+		\lvert S_n - S \rvert &< \varepsilon \\
+		\lvert S_n - T \rvert &< \varepsilon \\
+		\lvert S_n - S \rvert + \lvert T - S_n \rvert &< 2\varepsilon \\
+		\lvert S_n - S + T - S_n \rvert &\leq \lvert T - S_n \rvert + \lvert S_n - S \rvert < 2\varepsilon \\
+		2\varepsilon = \lvert T-S \rvert &< 2\varepsilon 
+	\end{align*}
+	
+	Thus, we have a contradiction.
+\end{proof}
+
+\section{Lecture -- 1/31/2025}
+Recall the definition of limits:
+\begin{defn}[Convergence of a Limit]
+	We say that $\lim S_n = S$ if $\forall \varepsilon > 0, \exists N$ such that $\forall n > N$, we have $\lvert S_n - S \rvert < \varepsilon$.
+\end{defn}
+
+Now, we look at the following example:
+\begin{example}
+	Assume $\forall n \in \NN$, $S_n > 0$ and $\lim S_n = S > 0$. Then, we claim that $\lim \sqrt{S_n} = \sqrt{S}$. Then, for all $\varepsilon > 0$, we want to find $N$ such that for all $n > N$, we have that $\lvert \sqrt{S_n} - \sqrt{S} \rvert < \varepsilon$.
+	
+	To do this, we first observe that $\pr{\sqrt{S_n} - \sqrt{S}}\pr{\sqrt{S_n} + \sqrt{S}} = S_n - S$. Then, we observe that:
+	\begin{equation*}
+		\sqrt{S_n} - \sqrt{S} = \frac{S_n - S}{\sqrt{S_n} + \sqrt{S}}.
+	\end{equation*}
+	
+	Now, since $\sqrt{S_n} > 0$, we observe that $\sqrt{S_n} + \sqrt{S} > \sqrt{S}$. So, this means that:
+	\begin{align*}
+		\abs{\sqrt{S_n} - \sqrt{S}} &= \abs{\frac{S_n - S}{\sqrt{S_n} + \sqrt{S}}} \\
+		&= \frac{\abs{S_n - S}}{\abs{\sqrt{S_n} + \sqrt{S}}} \\
+		&< \frac{\abs{S_n - S}}{\sqrt{S}} \\
+		&< \varepsilon
+	\end{align*}
+	
+	Then, we see that $\lvert S_n - S \rvert < \sqrt{S} \cdot \varepsilon$.
+	
+	Then we use the assumption that $\lim S_n = S$ to find $N$. As a proper proof, we have:
+	\begin{innerproof}
+		$\forall \varepsilon > 0$, we let $\varepsilon' = \sqrt{S} \cdot \varepsilon$. Then, there exists an $N$ such that for all $n > N$, we have $\lvert S_n - S \rvert < \varepsilon' = \sqrt{S} \cdot \varepsilon$.
+		
+		Then, we have:
+		\begin{align*}
+			\abs{\sqrt{S_n} - \sqrt{S}} &= \frac{\abs{S_n - S}}{\abs{\sqrt{S_n} + \sqrt{S}}} \\
+			&< \frac{\abs{S_n - S}}{\sqrt{S}} \\
+			&< \frac{\sqrt{S}\varepsilon}{\sqrt{S}} \\
+			&= \varepsilon
+		\end{align*}
+	\end{innerproof}
+\end{example}
+
+\begin{thm}[Squeeze Theorem]
+	Assume $a_n \leq s_n \leq b_n$, for all $n \in \NN$, and $\lim a_n = \lim b_n = S$, then we have that $\lim s_n = S$. 
+\end{thm}
+\begin{proof}
+	For all $\varepsilon > 0$, there exists some $N_1$ such that for all $n > N_1$, we have $\lvert a_n - S \rvert < \varepsilon$.
+	
+	Similarly, there exists some $N_2$ such that $n > N_2$, we have that $\lvert b_n - S \rvert < \varepsilon$.
+	
+	Then, if we take $N = \max\brc{N_1, N_2}$, we have that for all $n > N$, we have $\lvert a_n - S \rvert < \varepsilon$ and $\lvert b_n - S \rvert < \varepsilon$.
+	
+	Recall from homework that we have the following property:
+	\begin{lem}
+		If $\lvert a - b \rvert \leq c$, then we have that $b - c \leq a \leq b + c$.
+	\end{lem}
+	
+	Using this lemma, we see then that:
+	\begin{align*}
+		s - \varepsilon < a_n < s + \varepsilon \\
+		s - \varepsilon < b_n < s + \varepsilon
+	\end{align*}
+	
+	Next, we note that:
+	\begin{align*}
+		s_n \leq b_n < s + \varepsilon \\
+		s_n \geq a_n > s-\varepsilon
+	\end{align*}
+	
+	So, we have $s - \varepsilon < s_n < s + \varepsilon \implies \lvert s_n - s \rvert < \varepsilon$. In other words, $\lim s_n = S$.
+\end{proof}
+
+And from this theorem, we have the following corollary:
+\begin{cor}
+	If for all $n \in \NN$, we have $\lvert s_n \rvert \leq t_n$, and $\lim t_n = 0$, then ew have that $\lim s_n = 0$.
+\end{cor}
+\begin{proof}
+	Since $\lvert s_n \rvert \leq t_n$, we have that $-t_n \leq s_n \leq t_n$, and since $\lim t_n = 0$, we have $0 \leq s_n \leq 0$. 
+\end{proof}
+
+\subsection{Properties of Limits}
+\begin{thm}
+	Assume that $\lim s_n = s$, and $\lim t_n = t$. Then, we have:
+	\begin{itemize}
+		\item $\forall k \in \RR$, we have $\lim ks_n = ks$.
+		\item $\lim(s_n + t_n) = s + t$.
+		\item $\lim (s_n \cdot t_n) = s \cdot t$.
+		\item If $\forall n \in \NN, s_n \neq 0$, we have $\lim \frac{t_n}{s_n} = \frac{t}{s}$.
+	\end{itemize}
+\end{thm}
+\begin{proof}
+	For the first property, we proceed as such:
+	\begin{innerproof}
+		We note that for all $\varepsilon > 0$, we let $\varepsilon' = \frac{\varepsilon}{\abs{k}}$.
+		
+		Then, since $\lim s_n = s$, we have that there exists $N$ such that for all $n > N$, we have $\lvert s_n - s \rvert < \varepsilon' = \frac{\varepsilon}{\abs{k}}$.
+		
+		Then, we note that $\lvert ks_n - ks \rvert = \abs{k}\lvert s_n - s \rvert < \frac{\varepsilon}{\abs{k}}$. Thus, we have $\lvert s_n - s \rvert < \varepsilon$ as desired.
+	\end{innerproof}
+	
+	For the second property, we prove it as follows:
+	\begin{innerproof}
+		For all $\varepsilon > 0$, we set $\varepsilon' = \frac{\varepsilon}{2}$.
+		
+		Then, since $\lim s_n = s, \lim t_n = t$, we note that there exists $N_1, N_2$ such that for all $n > N_1$, and $n > N_2$, we have:
+		\begin{itemize}
+			\item $\lvert s_n - s \rvert < \varepsilon' = \frac{\varepsilon}{2}$.
+			\item $\lvert t_n - t \rvert < \varepsilon' = \frac{\varepsilon}{2}$.
+		\end{itemize}
+		
+		Then, we can simply take $N = \max\brc{N_1, N_2}$, we have:
+		\begin{itemize}
+			\item $\lvert s_n - s \rvert < \varepsilon' = \frac{\varepsilon}{2}$.
+			\item $\lvert t_n - t \rvert < \varepsilon' = \frac{\varepsilon}{2}$.
+		\end{itemize}
+		
+		Then, we observe that:
+		\begin{align*}
+			\lvert (s_n + t_n) - (s + t) \rvert &= \lvert (s_n - s) + (t_n - t) \rvert \\
+			&\leq \lvert s_n - s \rvert + \lvert t_n - t \rvert \\
+			&< \varepsilon' + \varepsilon' \\
+			&= \frac{\varepsilon}{2} + \frac{\varepsilon}{2} \\
+			&= \varepsilon
+		\end{align*}
+	\end{innerproof}
+\end{proof}
+
+\begin{defn}[Bounded Sequences]
+	We say that a sequence $s_n$ is bounded if there exists some $M > 0$ such that for all $n \in \NN$, we have $\lvert s_n \rvert \leq M$.
+\end{defn}
+
+\begin{thm}
+	If a sequence $s_n$ is convergent -- that is, $\lim s_n = s$ -- then it is bounded.
+\end{thm}
+\begin{proof}
+	The intuition here is that convergence tells us that our sequence, after a certain point $N$, will converge to within some interval around our limit $s$. So, we can take the maximum of this interval.
+	
+	However, it says nothing for $n < N$. To solve this issue, we can take the maximum value of $S_n$ for all of these $n$ before, along with the maximum of our interval at the end. 
+	
+	Suppose that $s_n$ is convergent. Then, this means that there exists some $N$ such that for all $n > N$, we have $\lvert S_n - S \rvert < 1$. Then, this implies that $S - 1 \leq S_n \leq S + 1$.
+	
+	Take, we can simply take $M = \max\brc{\lvert S_1 \rvert, \lvert S_2 \rvert, \ldots, \lvert S_k \rvert}$, where $k$ is the largest natural number less than or equal to $N$.
+	
+	Then, we see that for all $n \leq N$, we have $\lvert S_n \rvert \leq M$ by definition of $M$. Meanwhile, for any $n > N$, we have $\lvert S_n \rvert = \lvert S_n - S + S \rvert \leq \lvert S_n - S \rvert + \lvert S \rvert$.
+	
+	And we see that that since $\lvert S_n - S \rvert < 1$, we have that $\lvert S_n \rvert < 1 + \lvert S \rvert < M$.
+\end{proof}
+
+\chapter{On the Third Week of Hell}
+\section{Lecture -- 2/3/2025}
+Once more, we recall that we say that $\lim s_n = s$ if for all $\varepsilon > 0$, there exists some $N$ such that for all $n > N$, we have $\abs{s_n - s} < \varepsilon$.
+
+Furthermore, we recall by the Squeeze Theorem that if $a_n \leq s_n \leq b_n$, and we have that $\lim a_n = \lim b_n = s$, then $\lim s_n = s$.
+
+And there is also a corollary that if $\abs{s_n} \leq t_n$, and $\lim t_n = 0$, then $\lim s_n = 0$.
+
+Finally, we note the Binomial Expansion:
+\begin{thm}[Binomial Theorem]
+	We say that:
+	\begin{equation*}
+		\binom n k = \frac{n!}{k!(n-k)!}
+	\end{equation*}
+	
+	Then, the Binomial Theorem tells us that $(1+x)^{n}$ is equal to:
+	\begin{equation*}
+		(1+x)^{n} = \sum_{k=0}^{n} \binom n k x^{k}
+	\end{equation*}
+\end{thm}
+
+For example, let $n \geq 2$, then we see that $(1+x)^{n}$ is equal to:
+\begin{equation*}
+	(1+x)^{n} = 1 + nx + \frac{n(n-1)}{2}x^{2} + \cdots
+\end{equation*}
+
+Now, we introduce the following claims:
+\begin{itemize}
+	\item $\lim \frac{1}{n^{p}} = 0$, for all $p > 0$.
+	\item $\lim a^{n} = 0$ if $\abs{a} < 1$.
+	\item $\lim n^{\frac{1}{n}} = 1$.
+	\item $\lim a^{\frac{1}{n}} = 1$ for all $a > 0$.
+\end{itemize}
+
+\begin{example}
+	Suppose we want to prove that $\lim \frac{1}{n^{p}} = 0$. 
+	
+	Recall from before that we've already done this for the case of $p = 2$. Then, for any $\varepsilon > 0$, we can take $N = \sqrt[p]{\frac{1}{\varepsilon}}$. Then, we observe that:
+	\begin{equation*}
+		\abs{\frac 1 {n^{p}}} = \frac{1}{n^{p}} < \frac{1}{N^{p}} = \frac{1}{\frac{1}{\varepsilon}} = \varepsilon
+	\end{equation*}
+	
+	Thus, we observe that, indeed, the limit is equal to $0$.
+\end{example}
+
+\begin{example}
+	Let us prove the second claim.
+	
+	Let $a = 0$, then we see that $a^{n} = 0^{n} = 0$. So, trivially, we see that $\lim 0 = 0$.
+	
+	Now, in the case where $0 < \abs{a} < 1$. So, we can let $b = \frac{1}{\abs{a}} - 1$. Now, note that since $\abs{a} < 1$, we see then that $b > 0$. Next, note that:
+	\begin{align*}
+		\frac 1 {\abs{a}} &= b + 1 \\
+		\abs{a} &= \frac 1 {b+1}
+	\end{align*}
+	
+	Now, we look at $\abs{a^{n}} = \pr{\frac{1}{b+1}}^{n}$. Then, by the binomial expansion, we note that $(b+1)^{n} \geq 1 + bn > bn$. So, we have then that:
+	\begin{align*}
+		\abs{a^{n}} < \frac{1}{bn}.
+	\end{align*}
+	
+	Note that $b$ is a constant, then we see that $\lim \frac{1}{bn} = 0$. Now, because $\abs{a^{n}} < \frac{1}{bn}$, and $\lim \frac{1}{bn} = 0$, it follows then that $\lim a^{n} = 0$ by the Squeeze Theorem's corollary.
+\end{example}
+
+\begin{example}
+	For our third claim, we observe that $s_n = n^{\frac{1}{n}} - 1$. Then, we see that $n^{\frac{1}{n}} = s_n + 1 \implies n = \pr{s_n + 1}^{n}$.
+	
+	Now, if $n \geq 2$, we observe that:
+	\begin{equation*}
+		n = (1+s_n)^{n} \geq 1 + ns_n + \frac{n(n-1)}{2}s_n^{2}
+	\end{equation*}
+	
+	Now, we can drop the first two terms to see then that:
+	\begin{align*}
+		n &> \frac{n(n-1)}{2}s_n^{2} \\
+		1 &> \frac{n-1}{2}s_n^{2} \\
+		s_n^{2} &< \frac{2}{n-1}
+	\end{align*}
+	
+	So, we have:
+	\begin{equation*}
+		0 < s_n < \sqrt{\frac{2}{n-1}} = 0
+	\end{equation*}
+	
+	Then, by the Squeeze Theorem, we see then that since $0 < s_n < 0$, it follows then that $\lim s_n = 0$.
+\end{example}
+\begin{rmk}
+	Note here that we originally wanted to prove $\lim n^{\frac{1}{n}} = 1$. However, note that $\lim s_n = c \implies \lim s_n + k = c + k$. So, in this case, we simply added $k = -1$.
+\end{rmk}
+
+\begin{example}
+	Now, we prove that last claim.
+	
+	If $a \geq 1$, we note then that if $n > a$, we have $a^{\frac{1}{n}} \leq n^{\frac{1}{n}}$.
+	
+	Then, since $a \geq 1$, we have then that $1 \leq a^{\frac{1}{n}} \leq n^{\frac{1}{n}}$. And we know that $\lim n^{\frac{1}{n}} = 1$ from the previous claim. Thus, we can apply the Squeeze Theorem and see that, indeed, $\lim a^{\frac{1}{n}} = 1$ for $a \geq 1$.
+	
+	On the other hand, if $0 < a < 1$, we note then that $\frac{1}{a} \geq 1$. Then, with that in mind, we observe that:
+	\begin{equation*}
+		\lim \pr{\frac 1 a}^{n} = 1.
+	\end{equation*}
+	
+	Then, with that in mind, we observe that $\lim a^{n} = \lim \frac{1}{\pr{\frac{1}{a}}^{n}} = 1$.
+\end{example}
+
+\begin{example}
+	Let $s_n = \frac{n^{3} + 6n + 7}{4n^{3} + 3n + 4}$. Now, we want to show that $\lim s_n = \frac{1}{4}$.
+	
+	To do this, we first observe that we can divide the top and bottom by $n^{3}$ to get:
+	\begin{align*}
+		s_n &= \frac{1+ \frac 6 n + \frac 7{n^{3}}} {4 + \frac 3 {n^{2}} - \frac 4{n^{3}}} \\
+		\lim s_n &= \frac 1 4
+	\end{align*}
+\end{example}
+
+Now, we discuss infinities. First, recall that $\pm \infty$ are not real numbers. Furthermore, note that while $(a, \infty)$ is an open interval, note that $[a, \infty)$ is a closed interval.
+
+We can think of $\infty$ as being both open and closed. Namely, if we consider $(-\infty, \infty) = \RR$, note that this is both open and closed.
+
+Now, we introduce the definition of a sequence's limit being infinity:
+\begin{defn}[Divergence to Infinity]
+	We say that if $\lim s_n = \infty$, then for all $M > 0$, there exists some $N$ such that for all $n > N$, we have that $s_n > M$.
+	
+	Then, we say that $s_n$ diverges to $\infty$.
+\end{defn}
+
+\begin{defn}[Divergence to Negative Infinity]
+	We say that $\lim s_n = -\infty$ if for all $M > 0$, we there exists some $N$ such that for all $n > N$, we have that $s_n < -M$.
+	
+	We say then that $s_n$ diverges to $-\infty$.
+\end{defn}
+
+\begin{rmk}
+	Note that limit theorems may not hold for $\pm \infty$. For example, $(\infty) + (-\infty)$ may not be defined.
+	
+	More concretely, let us consider $s_n = n$ and $t_n = \sqrt{n}$. Then, we observe that $\lim s_n - t_n = \infty$.
+	
+	However, if we let $s_n = n$ and $t_n = \begin{cases}
+	\sqrt{n} & n = 2k \\ n^{2} & n = 2k+1 \end{cases}$. Then, while $\lim s_n - t_n$ isn't defined.
+	
+	Furthermore, we note that $\frac{\infty}{\infty}$ may not be defined.
+	
+	On the other hand, $\infty + \infty = \infty$, and $\pr{\infty}\pr{\infty} = \infty$.
+\end{rmk}
+\end{document}

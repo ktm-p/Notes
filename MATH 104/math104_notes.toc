@@ -1,0 +1,19 @@
+\contentsline {chapter}{Contents}{2}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}An Introduction}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Lecture -- 1/22/2025}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Administrivia}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Notation}{3}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Visualizing the Reals}{4}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}A Basic Proof}{4}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Definitions and Examples}{4}{subsection.1.1.5}%
+\contentsline {section}{\numberline {1.2}Lecture -- 1/24/2025}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}The Real Numbers}{6}{subsection.1.2.1}%
+\contentsline {chapter}{\numberline {2}The Second Week}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Lecture -- 1/27/2025}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Infimum and Supremum Recap}{9}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Sequence and Limit}{10}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Lecture -- 1/29/2025}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Lecture -- 1/31/2025}{14}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Properties of Limits}{16}{subsection.2.3.1}%
+\contentsline {chapter}{\numberline {3}On the Third Week of Hell}{18}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Lecture -- 2/3/2025}{18}{section.3.1}%

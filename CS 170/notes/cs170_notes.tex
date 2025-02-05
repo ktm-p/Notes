@@ -1,0 +1,165 @@
+\documentclass[openany]{book}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+\usepackage{macros}
+\usepackage{notes}
+
+%% PICTURES DIRECTORY %%
+\graphicspath{{C:/Users/Michael/Pictures/}}
+
+%% RENEW TITLE PAGE %%
+\renewcommand{\mytitle}[2]{%
+	\title{#1}
+	\author{Michael Pham}
+	\date{#2}
+	\maketitle
+	\newpage
+	\mytoc
+	\newpage
+}
+
+\begin{document}
+\mytitle{CS170: Efficient Algorithms and Intractable Problems}{Spring 2025}
+
+\chapter{Second Week Woes}
+\section{Discussion -- 1/29/2025}
+Recall that $f(n) = O(g(n))$ means that there exists some constant $c > 0$ such that $f(n) \leq cg(n)$ for large enough $n$.
+
+\begin{thm}[Master's Theorem]
+	The Master's Theorem states that $f(n) = af\pr{\frac{n}{b}} + O(n^{d})$.
+\end{thm}
+
+\subsection{Asymptotics and Limits}
+\begin{hw}
+	Prove that $n^{3} = O(n^{4})$.
+\end{hw}
+\begin{solution}
+	We want to first show that $\lim\limits_{n\rightarrow\infty} \frac{f(n)}{g(n)} < \infty$ for $f(n) = n^{3}$ and $g(n) = n^{4}$. In this case, we observe the following:
+	\begin{align*}
+		\lim_{n\rightarrow\infty} \frac{f(n)}{g(n)} &= \lim_{n\rightarrow\infty} \frac{n^{3}}{n^{4}} \\
+		&= \lim_{n\rightarrow\infty} \frac{1}{n} \\
+		&= 0 \\
+		&< \infty
+	\end{align*}
+	
+	Thus, we see that, indeed, we have that $n^{3} = O(n^{4})$.
+\end{solution}
+
+\begin{hw}
+	Find an $f(n), g(n) \geq 0$ such that $f(n) = O(g(n))$, yet $\lim\limits_{n\rightarrow\infty} \frac{f(n)}{g(n)} \neq 0$.
+\end{hw}
+\begin{solution}
+	We could just set $f(n), g(n)$ to be any constants $c_1, c_2 \geq 1$ for this to work.
+\end{solution}
+
+\begin{hw}
+	Prove that for any $c > 0$, we have that $\log n = O(n^{c})$.
+\end{hw}
+\begin{solution}
+	Let $f(n) = \log n$ and $g(n) = n^{c}$. Then, we want to show that:
+	\begin{equation*}
+		\lim_{n\rightarrow\infty} \frac{f(n)}{g(n)} < \infty
+	\end{equation*}
+	
+	Then, we can proceed as follows:
+	\begin{align*}
+		\lim_{n\rightarrow\infty} \frac{\log n}{n^{c}} &= \frac{\infty}{\infty}
+	\end{align*}
+	
+	Then, we can apply L'Hopital's Rule to see that:
+	\begin{align*}
+		\lim_{n\rightarrow\infty} \frac{\log n}{n^{c}} &= \lim_{n\rightarrow\infty} \frac{\frac{1}{n}}{cn^{c-1}} \\
+		&= \lim_{n\rightarrow\infty} \frac{n}{cn^{c+1}} \\
+		&= \lim_{n\rightarrow\infty} \frac{1}{cn^{c}} \\
+		&= 0 \\
+		&< \infty
+	\end{align*}
+	
+	Thus, we see that, indeed, we have that $\log n = O(n^{c})$ as desired.
+\end{solution}
+
+\begin{hw}
+	Find $f(n), g(n) \geq 0$ such that $f(n) = O(g(n))$, yet $\lim\limits_{n\rightarrow\infty} \frac{f(n)}{g(n)}$ doesn't exist. In this case, we would be unable to use limits to prove $f(n) = O(g(n))$.
+\end{hw}
+\begin{solution}
+	The idea behind this is consider how if $f_1(n) = n$ and $g(n) = n$, we have that $f_1(n) = O(g(n))$, and the limit exists.
+	
+	Similarly, let $f_2(n) = 2n$, then again, $f_2(n) = O(g(n))$.
+	
+	The idea then is to combine these two such that half the time, we have $f_1(n)$ and $f_2(n)$ the other half.
+\end{solution}
+
+\subsection{Asymptotic Complexity Comparisons}
+\begin{hw}
+	Order the following functions so that for all $i, j$, if $f_i$ comes before $f_j$ in the order then $f_i = O(f_j)$.
+	\begin{itemize}
+		\item $f_1(n) = 3^{n}$
+		\item $f_2(n) = n^{\frac{1}{3}}$
+		\item $f_3(n) = 12$
+		\item $f_4(n) = 2^{\log_2(n)}$
+		\item $f_5(n) = \sqrt{n}$
+		\item $f_6(n) = 2^{n}$
+		\item $f_7(n) = \log_2(n)$
+		\item $f_8(n) = 2^{\sqrt{n}}$
+		\item $f_9(n) = n^{3}$
+	\end{itemize}
+\end{hw}
+\begin{solution}
+	First, let us simplify some of these expressions. namely, we note that $2^{\log_2(n)} = n$.
+	
+	Then, we see that we have: $f_3, f_7, f_2, f_5, f_4, f_9, f_8, f_6, f_1$.
+\end{solution}
+
+\begin{hw}
+	Too lazy.
+\end{hw}
+\begin{solution}
+	Re: above
+\end{solution}
+
+\subsection{Recurrence Relations}
+Solve the following recurrence relations, assuming base cases $T(0) = T(1) = 1$.
+\begin{hw}
+	\begin{equation*}
+		T(n) = 2 T(n/2) + O(n)
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	Using Master's Theorem, we observe that $a = b = 2$, and $d = 1$.
+	
+	Then, we obaserve that $\log_2(2) = 1 = d$. So, by the Master's Theorem, we see that $T(n) = O(n\log n)$. 
+\end{solution}
+
+\begin{hw}
+	\begin{equation*}
+		T(n) = T(n-1) + n
+	\end{equation*}
+\end{hw}
+\begin{solution}
+	Here, we observe that we can try unravelling the recurrence relation. That is, we can start as such:
+	\begin{align*}
+		T(n) &= T(n-1) + n \\
+		&= (T(n-2) + n-1) + n \\
+		&\quad\vdots \\
+		&= T(1) + 1 + 2 + \cdots + n \\
+		&= 1 + 2 + \cdots + n \\
+		&= \frac{n(n-1)}{2}
+	\end{align*}
+	
+	Thus, we see that this is equal to $O(n^{2})$.
+\end{solution}
+
+\begin{hw}
+	\begin{equation*}
+		
+	\end{equation*}
+\end{hw}
+
+\begin{rmk}
+	In the case where we have some recurrence where $f(n) = f(n-c)$ for some constant $c$, it'll always end up being asymptotically equal to $a^{n}$.
+\end{rmk}
+
+For 3d, use tree-drawing technique:
+		f(n) = nlog(n)
+			f(n/2) -- f(n/2)
+f(n/4) - f(n/4) -- f(n/4) - f(n/4)
+\end{document}

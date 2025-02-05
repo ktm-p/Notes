@@ -1,0 +1,54 @@
+import numpy as np
+import cvxpy as cp
+import random
+import matplotlib.pyplot as plt
+n = 1000
+a = np.random.uniform(0, 1, n)
+b = np.random.uniform(0, 1, n)
+max_iter = 2000
+x_k = []
+
+def global_min():
+	x = cp.Variable(n)
+	objective = cp.Minimize(
+		cp.sum(x**4) + cp.sum(cp.multiply(a, x))**2 + cp.sum(cp.multiply(b, x))
+	)
+	
+	problem = cp.Problem(objective)
+	problem.solve()
+	
+	return x.value
+
+def newton_algorithm_backtracking(s=10, alpha=0.5):
+	def objective(x, a, b):
+		return np.sum(x**4) + (np.dot(a, x))**2 + np.dot(b, x)
+	
+	def gradient(x, a, b):
+		return 4 * x**3 + 2 * a * np.dot(a, x) + b
+	
+	def hessian(x, a):
+		return np.diag(12 * x**2) + 2 * np.outer(a, a)
+	
+	x = np.ones(n)
+	for i in range(max_iter):
+		x_k.append(x)
+		grad = gradient(x, a, b)
+		hess = hessian(x, a)
+		
+		if np.linalg.norm(grad) < 0.0001:
+			return i+1
+		
+		step_dir = np.linalg.solve(hess, grad)
+		step_size = s
+		
+		while objective(x - step_size * step_dir, a, b) >= objective(x, a, b):
+			step_size *= alpha
+		x = x - step_size * step_dir
+	return max_iter
+
+num_iters = newton_algorithm_backtracking()
+print(f"Backtracking converged in {num_iters} iterations")
+x_star = global_min()
+x_diff = [np.linalg.norm(x_star - i) for i in x_k]
+plt.semilogy(range(len(x_diff)), x_diff)
+plt.show()
